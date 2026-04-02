@@ -19,18 +19,72 @@ import {
   Instagram,
   ChevronDown,
   ChevronUp,
-  HelpCircle
+  HelpCircle,
+  ShieldCheck,
+  Award,
+  Zap,
+  MapPin
 } from 'lucide-react';
+import { animate, useMotionValue, useTransform, useInView } from 'motion/react';
+import { useRef } from 'react';
+
+function AnimatedNumber({ value, duration = 2 }: { value: number; duration?: number }) {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const [displayValue, setDisplayValue] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(count, value, { 
+        duration,
+        ease: "easeOut",
+      });
+      return controls.stop;
+    }
+  }, [count, value, duration, isInView]);
+
+  useEffect(() => {
+    return rounded.on("change", (v) => setDisplayValue(v));
+  }, [rounded]);
+
+  return <span ref={ref}>{displayValue}</span>;
+}
 
 const NAV_LINKS = [
   { name: 'Inicio', href: '#inicio' },
   { name: 'Servicios', href: '#servicios' },
+  { name: 'Por qué elegirnos', href: '#beneficios' },
   { name: 'Proceso', href: '#proceso' },
   { name: 'Galería', href: '#galeria' },
   { name: 'Testimonios', href: '#testimonios' },
   { name: 'FAQ', href: '#faq' },
   { name: 'Doctor', href: '#doctor' },
   { name: 'Contacto', href: '#contacto' },
+];
+
+const WHY_CHOOSE_US = [
+  {
+    title: 'Tecnología de punta',
+    description: 'Equipos avanzados para diagnósticos precisos y detallados.',
+    icon: Zap,
+  },
+  {
+    title: 'Atención personalizada',
+    description: 'Cada paciente recibe el tiempo y la dedicación que su salud visual merece.',
+    icon: ShieldCheck,
+  },
+  {
+    title: 'Experiencia clínica',
+    description: <>Más de <span className="text-[rgb(122,24,35)] font-bold"><AnimatedNumber value={15} /></span> años de trayectoria profesional y formación académica constante.</>,
+    icon: Award,
+  },
+  {
+    title: 'Enfoque preventivo',
+    description: 'Detectamos problemas antes de que afecten tu calidad de vida.',
+    icon: Eye,
+  },
 ];
 
 const FAQS = [
@@ -240,46 +294,71 @@ export default function App() {
 
                 <div className="grid md:grid-cols-[1.1fr_0.9fr] h-full relative z-10">
                   <div className="px-5 sm:px-8 md:px-10 py-12 md:py-14 flex flex-col justify-center items-center md:items-start text-center md:text-left">
-                    <div className="inline-flex items-center h-7 px-3 rounded-full bg-white text-[9px] sm:text-[10px] uppercase tracking-[0.12em] text-[#6A6E79] w-fit shadow-sm">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                      className="inline-flex items-center h-7 px-3 rounded-full bg-white text-[9px] sm:text-[10px] uppercase tracking-[0.12em] text-[#6A6E79] w-fit shadow-sm"
+                    >
                       Exámenes visuales integrales
-                    </div>
+                    </motion.div>
 
-                    <h1 className="mt-5 md:mt-6 max-w-[18ch] sm:max-w-[22ch] text-[34px] sm:text-[42px] md:text-[56px] lg:text-[68px] leading-[0.96] md:leading-[0.93] tracking-tight font-bold text-[#13151A]">
-                      Agendá tu <span className="text-[rgb(122,24,35)]">examen visual</span> antes de que el problema avance
-                    </h1>
+                    <motion.h1 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                      className="mt-5 md:mt-6 max-w-[18ch] sm:max-w-[22ch] text-[34px] sm:text-[42px] md:text-[56px] lg:text-[68px] leading-[0.96] md:leading-[0.93] tracking-tight font-bold text-[#13151A]"
+                    >
+                      Ópticas Popular: Agendá tu <span className="text-[rgb(122,24,35)]">examen visual</span> con el Dr. Fabio Mora
+                    </motion.h1>
 
-                    <p className="mt-4 md:mt-5 max-w-[42ch] sm:max-w-[60ch] text-[13px] sm:text-[14px] md:text-[13px] lg:text-[14px] leading-[1.68] text-[#5E616B]">
+                    <motion.p 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                      className="mt-4 md:mt-5 max-w-[42ch] sm:max-w-[60ch] text-[13px] sm:text-[14px] md:text-[13px] lg:text-[14px] leading-[1.68] text-[#5E616B]"
+                    >
                       Si notás visión borrosa, molestias, cansancio ocular o tus lentes ya no responden como antes, este es el momento de revisarte con atención profesional y resultados claros.
-                    </p>
+                    </motion.p>
 
-                  <div className="mt-6 flex flex-col sm:flex-row sm:flex-wrap gap-3 w-full sm:w-auto max-w-[440px] justify-center md:justify-start">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    className="mt-6 flex flex-col sm:flex-row sm:flex-wrap gap-3 w-full sm:w-auto max-w-[440px] justify-center md:justify-start"
+                  >
                     <a
                       href="https://wa.me/50672760215"
-                      className="inline-flex items-center justify-center h-11 sm:h-10 px-6 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[11px] md:text-[10px] font-medium cta-primary w-full sm:w-auto"
+                      className="inline-flex items-center justify-center h-11 sm:h-10 px-6 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[11px] md:text-[10px] font-medium cta-primary w-full sm:w-auto transition-transform hover:scale-[1.02] active:scale-[0.98]"
                     >
                       Agendar por WhatsApp
                     </a>
 
                     <a
                       href="tel:+50672760215"
-                      className="inline-flex items-center justify-center h-11 sm:h-10 px-5 rounded-[8px] bg-white text-[#15171C] text-[11px] md:text-[10px] font-medium border border-[#E3E5EC] cta-secondary w-full sm:w-auto"
+                      className="inline-flex items-center justify-center h-11 sm:h-10 px-5 rounded-[8px] bg-white text-[#15171C] text-[11px] md:text-[10px] font-medium border border-[#E3E5EC] cta-secondary w-full sm:w-auto transition-transform hover:scale-[1.02] active:scale-[0.98]"
                     >
                       Llamar ahora
                     </a>
-                  </div>
+                  </motion.div>
 
-                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 w-full max-w-[580px]">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 w-full max-w-[580px]"
+                  >
                     {[
                       { label: 'Frecuencia', value: '1 vez al año recomendado' },
                       { label: 'Atención', value: 'Para niños, adultos y mayores' },
                       { label: 'Reserva', value: 'WhatsApp o llamada directa' },
                     ].map((item, i) => (
-                      <div key={i} className="bg-white/90 backdrop-blur-[2px] rounded-[10px] px-3 py-3 pro-card shadow-sm border border-white/50">
+                      <div key={i} className="bg-white/90 backdrop-blur-[2px] rounded-[10px] px-3 py-3 pro-card shadow-sm border border-white/50 transition-all hover:shadow-md hover:-translate-y-0.5">
                         <p className="text-[9px] uppercase tracking-[0.10em] text-[#7A7F8A]">{item.label}</p>
                         <p className="mt-1 text-[11px] sm:text-[12px] leading-[1.45] text-[#15171C] font-medium">{item.value}</p>
                       </div>
                     ))}
-                  </div>
+                  </motion.div>
                 </div>
 
                 <div className="relative min-h-[150px] md:min-h-full hidden md:block">
@@ -317,7 +396,7 @@ export default function App() {
           <section className="px-4 md:px-6 pt-3">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
               {[
-                { title: '+11', desc: 'años de trayectoria' },
+                { title: <><span className="text-[rgb(122,24,35)]">+</span><AnimatedNumber value={15} /></>, desc: 'años de trayectoria' },
                 { title: 'Integral', desc: 'evaluación completa y clara' },
                 { title: 'Familia', desc: 'atención para todas las edades' },
                 { title: 'Directo', desc: 'contacto por llamada o WhatsApp' },
@@ -379,14 +458,49 @@ export default function App() {
             </motion.div>
           </section>
 
+          {/* Why Choose Us Section */}
+          <section id="beneficios" className="px-4 md:px-6 pt-10">
+            <div className="flex justify-center">
+              <span className="inline-flex items-center justify-center h-5 px-3 rounded-full bg-white text-[7px] uppercase tracking-[0.14em] text-[#767A84] shadow-sm">
+                Nuestros diferenciales
+              </span>
+            </div>
+
+            <h2 className="mt-5 max-w-[20ch] sm:max-w-[24ch] md:max-w-[18ch] lg:max-w-[22ch] mx-auto text-center text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] leading-tight tracking-tight font-bold text-[#14161B]">
+              ¿Por qué confiar en <span className="text-[rgb(122,24,35)]">nuestra atención</span> visual?
+            </h2>
+
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {WHY_CHOOSE_US.map((item, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-[14px] p-6 pro-card shadow-sm border border-gray-50 flex flex-col items-center text-center hover:shadow-md transition-shadow"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-[#F3F4F7] flex items-center justify-center text-[rgb(122,24,35)] mb-4">
+                    <item.icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-[16px] font-bold text-[#15171C] mb-2">{item.title}</h3>
+                  <p className="text-[12px] leading-[1.6] text-[#6D727D]">
+                    {item.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+
           {/* Process & Brands */}
           <section className="px-4 md:px-6 pt-6">
             <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-3">
               <motion.div 
                 id="proceso" 
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-100px" }}
                 className="bg-white rounded-[14px] p-5 md:p-6 shadow-sm"
               >
                 <span className="inline-flex items-center justify-center h-5 px-3 rounded-full bg-[#F2F3F7] text-[7px] uppercase tracking-[0.14em] text-[#7C808B]">
@@ -403,22 +517,27 @@ export default function App() {
                     { step: 'Paso 2', title: 'Recibís evaluación visual integral', desc: 'Se revisa tu visión y se explican los hallazgos con claridad.' },
                     { step: 'Paso 3', title: 'Salís con una recomendación clara', desc: 'Entendés qué necesitás y cuál es el siguiente paso recomendado.', dark: true },
                   ].map((item, i) => (
-                    <article 
+                    <motion.article 
                       key={i} 
-                      className={`rounded-[12px] p-4 pro-card shadow-sm ${item.dark ? 'bg-[rgb(122,24,35)] text-white' : 'bg-[#F3F4F7] text-[#15171C]'}`}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.15 + 0.3 }}
+                      viewport={{ once: true }}
+                      className={`rounded-[12px] p-4 pro-card shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 ${item.dark ? 'bg-[rgb(122,24,35)] text-white' : 'bg-[#F3F4F7] text-[#15171C]'}`}
                     >
                       <p className={`text-[9px] uppercase tracking-[0.10em] ${item.dark ? 'text-white/80' : 'text-[#7A7F8A]'}`}>{item.step}</p>
                       <h3 className="mt-2 text-[14px] md:text-[15px] leading-[1.2] font-bold">{item.title}</h3>
                       <p className={`mt-2 text-[11px] md:text-[10px] lg:text-[11px] leading-[1.6] ${item.dark ? 'text-white/85' : 'text-[#6D727D]'}`}>{item.desc}</p>
-                    </article>
+                    </motion.article>
                   ))}
                 </div>
               </motion.div>
 
               <motion.div 
-                initial={{ opacity: 0, x: 20 }}
+                initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-100px" }}
                 className="bg-white rounded-[14px] px-5 md:px-6 py-6 md:py-7 overflow-hidden shadow-sm"
               >
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
@@ -433,7 +552,7 @@ export default function App() {
 
                   <a
                     href="https://wa.me/50672760215"
-                    className="inline-flex items-center justify-center h-10 px-5 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[10px] sm:text-[11px] md:text-[10px] font-medium whitespace-nowrap cta-primary"
+                    className="inline-flex items-center justify-center h-10 px-5 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[10px] sm:text-[11px] md:text-[10px] font-medium whitespace-nowrap cta-primary transition-transform hover:scale-105 active:scale-95"
                   >
                     Consultar disponibilidad
                   </a>
@@ -441,9 +560,17 @@ export default function App() {
 
                 <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-3">
                   {BRANDS.map((brand, i) => (
-                    <div key={i} className="bg-[#F3F4F7] rounded-[12px] h-[86px] px-4 flex items-center justify-center text-center pro-card shadow-sm">
+                    <motion.div 
+                      key={i} 
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: i * 0.1 + 0.4 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+                      className="bg-[#F3F4F7] rounded-[12px] h-[86px] px-4 flex items-center justify-center text-center pro-card shadow-sm border border-transparent hover:border-gray-200 transition-colors"
+                    >
                       <span className="text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] leading-none tracking-tight font-bold text-[#15171C]">{brand}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
 
@@ -472,10 +599,12 @@ export default function App() {
               {SERVICES.map((service, i) => (
                 <motion.article 
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-white rounded-[14px] p-5 min-h-[148px] pro-card shadow-sm flex flex-col"
+                  transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  className="bg-white rounded-[14px] p-5 min-h-[148px] pro-card shadow-sm flex flex-col border border-transparent hover:border-gray-100 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 rounded-lg bg-[#F3F4F7] flex items-center justify-center text-[rgb(122,24,35)]">
@@ -486,8 +615,8 @@ export default function App() {
                   <p className="text-[12px] sm:text-[13px] md:text-[11px] lg:text-[12px] leading-[1.65] text-[#6A6D77] flex-grow">
                     {service.description}
                   </p>
-                  <a href="https://wa.me/50672760215" className="inline-flex items-center gap-2 mt-4 text-[11px] md:text-[10px] font-bold text-[#15171C] hover:text-[rgb(122,24,35)] transition-colors">
-                    Reservar cita <ArrowUpRight className="w-3 h-3" />
+                  <a href="https://wa.me/50672760215" className="inline-flex items-center gap-2 mt-4 text-[11px] md:text-[10px] font-bold text-[#15171C] hover:text-[rgb(122,24,35)] transition-colors group/link">
+                    Reservar cita <ArrowUpRight className="w-3 h-3 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                   </a>
                 </motion.article>
               ))}
@@ -521,15 +650,21 @@ export default function App() {
               </div>
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-[1.08fr_0.92fr] gap-3">
-                <article className="group relative rounded-[14px] overflow-hidden min-h-[320px] md:min-h-[360px] pro-card shadow-md">
+                <motion.article 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="group relative rounded-[14px] overflow-hidden min-h-[320px] md:min-h-[360px] pro-card shadow-md"
+                >
                   <img
                     src="https://content.pancake.vn/web-media-262/0a/72/2c/cd/859ae20a5707f68e7b103f3d02920717fdcd8ed948237733db5ab183-w:700-h:467-l:39011-t:image/jpeg.jpeg"
                     alt="Evaluación visual profesional"
-                    className="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                    className="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-[1.05]"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <div className="absolute left-0 right-0 bottom-0 p-5 md:p-6">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
+                  <div className="absolute left-0 right-0 bottom-0 p-5 md:p-6 transform transition-transform duration-500 group-hover:-translate-y-1">
                     <div className="inline-flex items-center h-5 px-2 rounded-full bg-white/90 text-[7px] uppercase tracking-[0.14em] text-[#6A6E79] font-bold">
                       Atención visual
                     </div>
@@ -537,54 +672,72 @@ export default function App() {
                       Evaluación visual integral con acompañamiento profesional
                     </h3>
                   </div>
-                </article>
+                </motion.article>
 
                 <div className="grid grid-cols-1 gap-3">
-                  <article className="group relative rounded-[14px] overflow-hidden min-h-[173px] pro-card shadow-md">
+                  <motion.article 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    viewport={{ once: true }}
+                    className="group relative rounded-[14px] overflow-hidden min-h-[173px] pro-card shadow-md"
+                  >
                     <img
                       src="https://content.pancake.vn/web-media-262/3d/24/a3/d4/3a74f769e1ca5261250f65e2e9911c8164ad0022ef125ae3dd451852-w:1200-h:675-l:106469-t:image/jpeg.jpeg"
                       alt="Tecnología para diagnóstico visual"
-                      className="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                      className="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-[1.05]"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                    <div className="absolute left-0 right-0 bottom-0 p-4">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
+                    <div className="absolute left-0 right-0 bottom-0 p-4 transform transition-transform duration-500 group-hover:-translate-y-1">
                       <h3 className="max-w-[20ch] text-[16px] sm:text-[17px] md:text-[18px] leading-[1.15] tracking-tight font-bold text-white">
                         Tecnología para una valoración precisa
                       </h3>
                     </div>
-                  </article>
+                  </motion.article>
 
                   <div className="grid grid-cols-2 gap-3">
-                    <article className="group relative rounded-[14px] overflow-hidden min-h-[173px] pro-card shadow-md">
+                    <motion.article 
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                      viewport={{ once: true }}
+                      className="group relative rounded-[14px] overflow-hidden min-h-[173px] pro-card shadow-md"
+                    >
                       <img
                         src="https://content.pancake.vn/web-media-262/2f/b0/37/cd/56114753eecc12cb63eefa879704d4bf40e014559f4c14139c87d036-w:297-h:400-l:19848-t:image/jpeg.jpeg"
                         alt="Atención profesional personalizada"
-                        className="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                        className="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-[1.05]"
                         referrerPolicy="no-referrer"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                      <div className="absolute left-0 right-0 bottom-0 p-4">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
+                      <div className="absolute left-0 right-0 bottom-0 p-4 transform transition-transform duration-500 group-hover:-translate-y-1">
                         <h3 className="max-w-[12ch] text-[14px] sm:text-[15px] md:text-[16px] leading-[1.15] tracking-tight font-bold text-white">
                           Atención cercana
                         </h3>
                       </div>
-                    </article>
+                    </motion.article>
 
-                    <article className="group relative rounded-[14px] overflow-hidden min-h-[173px] pro-card shadow-md">
+                    <motion.article 
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 0.4 }}
+                      viewport={{ once: true }}
+                      className="group relative rounded-[14px] overflow-hidden min-h-[173px] pro-card shadow-md"
+                    >
                       <img
                         src="https://content.pancake.vn/web-media-262/4f/26/e9/07/5c5601a47c49055462953a64179c907190bdb5f17135f2be2b99eb10-w:297-h:400-l:16706-t:image/jpeg.jpeg"
                         alt="Recomendación de soluciones visuales"
-                        className="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                        className="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-[1.05]"
                         referrerPolicy="no-referrer"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                      <div className="absolute left-0 right-0 bottom-0 p-4">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
+                      <div className="absolute left-0 right-0 bottom-0 p-4 transform transition-transform duration-500 group-hover:-translate-y-1">
                         <h3 className="max-w-[12ch] text-[14px] sm:text-[15px] md:text-[16px] leading-[1.15] tracking-tight font-bold text-white">
                           Soluciones a tu medida
                         </h3>
                       </div>
-                    </article>
+                    </motion.article>
                   </div>
                 </div>
               </div>
@@ -625,7 +778,15 @@ export default function App() {
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3">
                 {TESTIMONIALS.map((t, i) => (
-                  <article key={i} className="bg-[#F3F4F7] rounded-[14px] p-5 pro-card shadow-sm border border-gray-100">
+                  <motion.article 
+                    key={i} 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.15 + 0.3 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                    className="bg-[#F3F4F7] rounded-[14px] p-5 pro-card shadow-sm border border-gray-100 transition-all hover:shadow-md hover:border-gray-200"
+                  >
                     <div className="text-[20px] leading-none text-[rgb(122,24,35)] font-bold">“</div>
                     <p className="mt-3 text-[12px] sm:text-[13px] md:text-[12px] leading-[1.72] text-[#5E616B]">
                       {t.content}
@@ -634,12 +795,18 @@ export default function App() {
                       <h3 className="text-[12px] sm:text-[13px] font-bold text-[#15171C]">{t.name}</h3>
                       <p className="mt-1 text-[10px] sm:text-[11px] text-[#7A7F8A]">{t.role}</p>
                     </div>
-                  </article>
+                  </motion.article>
                 ))}
               </div>
 
               <div className="mt-5 grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-3">
-                <article className="bg-[#F3F4F7] rounded-[14px] p-5 pro-card shadow-sm border border-gray-100">
+                <motion.article 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="bg-[#F3F4F7] rounded-[14px] p-5 pro-card shadow-sm border border-gray-100"
+                >
                   <span className="inline-flex items-center justify-center h-5 px-2 rounded-full bg-white text-[7px] uppercase tracking-[0.14em] text-[#7C808B] shadow-sm">
                     Experiencia del paciente
                   </span>
@@ -649,9 +816,15 @@ export default function App() {
                   <p className="mt-3 max-w-[40ch] text-[11px] sm:text-[12px] md:text-[11px] leading-[1.7] text-[#6D727D]">
                     La meta no es solo revisar tu visión, sino ayudarte a entender qué necesitás y qué solución se adapta mejor a vos.
                   </p>
-                </article>
+                </motion.article>
 
-                <article className="bg-[rgb(122,24,35)] rounded-[14px] p-6 md:p-8 text-white pro-card shadow-lg flex flex-col justify-between">
+                <motion.article 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  viewport={{ once: true }}
+                  className="bg-[rgb(122,24,35)] rounded-[14px] p-6 md:p-8 text-white pro-card shadow-lg flex flex-col justify-between"
+                >
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4">
                     {[
                       { label: 'Atención', desc: 'Cercana y profesional' },
@@ -675,7 +848,7 @@ export default function App() {
                       Quiero agendar mi cita
                     </a>
                   </div>
-                </article>
+                </motion.article>
               </div>
             </motion.div>
           </section>
@@ -699,13 +872,23 @@ export default function App() {
               </div>
 
               <div className="relative z-10 flex flex-col md:flex-row items-stretch">
-                <div className="w-full md:w-[38%] lg:w-[32%] min-h-[340px] md:min-h-[480px] relative overflow-hidden">
+                <div className="w-full md:w-[38%] lg:w-[32%] min-h-[340px] md:min-h-[480px] relative overflow-hidden group/doctor cursor-help">
                   <img 
                     src="https://content.pancake.vn/web-media-262/f8/7a/8c/db/28a595fabedd02a19921777a0ab62c9a2d54e3e34ae3176dbb60cc55-w:1760-h:2370-l:7142028-t:image/png.png" 
                     alt="Dr. Fabio Mora Medina"
-                    className="absolute inset-0 w-full h-full object-cover object-top"
+                    className="absolute inset-0 w-full h-full object-cover object-top transition-[filter,transform] duration-[1200ms] ease-in-out blur-0 md:blur-0 md:group-hover/doctor:blur-[12px] md:scale-100 md:group-hover/doctor:scale-110"
                     referrerPolicy="no-referrer"
                   />
+                  <div className="absolute inset-x-0 bottom-6 p-5 flex justify-center transition-all duration-500 opacity-100 translate-y-0 md:opacity-0 md:translate-y-4 md:group-hover/doctor:opacity-100 md:group-hover/doctor:translate-y-0 pointer-events-none">
+                    <div className="bg-white px-5 py-4 rounded-[12px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-gray-100 w-full max-w-[240px] relative z-20">
+                      <p className="text-[15px] font-black text-[rgb(122,24,35)] text-center leading-tight uppercase tracking-wider">
+                        ¿Me ves borroso?
+                      </p>
+                      <p className="mt-2 text-[11px] font-bold text-[#1F2937] text-center leading-tight">
+                        Es momento de agendar tu revisión visual profesional
+                      </p>
+                    </div>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-[#F3F4F7] via-transparent to-transparent md:hidden"></div>
                 </div>
 
@@ -723,15 +906,23 @@ export default function App() {
                   <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3 gap-3 max-w-[760px] md:mx-0">
                     {[
                       { title: 'Formación', desc: 'Licenciado en Optometría y Máster en Atención Optométrica en Patología Ocular.' },
-                      { title: 'Experiencia', desc: 'Más de 11 años dedicados al cuidado visual de familias y experiencia clínica comprobada.' },
+                      { title: 'Experiencia', desc: <>Más de <span className="text-[rgb(122,24,35)] font-bold"><AnimatedNumber value={15} /></span> años dedicados al cuidado visual de familias y experiencia clínica comprobada.</> },
                       { title: 'Respaldo', desc: 'Miembro de Canadian Vision Care y trayectoria académica y humanitaria internacional.' },
                     ].map((item, i) => (
-                      <article key={i} className="bg-white rounded-[12px] px-4 py-5 text-left pro-card shadow-sm border border-gray-100">
+                      <motion.article 
+                        key={i} 
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: i * 0.1 + 0.3 }}
+                        viewport={{ once: true }}
+                        whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                        className="bg-white rounded-[12px] px-4 py-5 text-left pro-card shadow-sm border border-gray-100 transition-all hover:shadow-md"
+                      >
                         <h3 className="text-[12px] sm:text-[13px] font-bold text-[#15171C]">{item.title}</h3>
                         <p className="mt-2 text-[10px] md:text-[9px] lg:text-[10px] leading-[1.5] text-[#6D727D]">
                           {item.desc}
                         </p>
-                      </article>
+                      </motion.article>
                     ))}
                   </div>
 
@@ -943,13 +1134,30 @@ export default function App() {
               </div>
 
               <div className="mt-4 grid sm:grid-cols-3 gap-3">
-                <a href="#" aria-label="Visitar nuestra página de Facebook" className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[10px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2">
-                  <Facebook className="w-3 h-3" /> Facebook
+                <a 
+                  href="https://www.facebook.com/opticaspopularcr" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visitar nuestra página de Facebook" 
+                  className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[10px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2 transition-all hover:bg-[#1877F2] hover:text-white hover:shadow-lg hover:shadow-[#1877F2]/20"
+                >
+                  <Facebook className="w-3.5 h-3.5" /> Facebook
                 </a>
-                <a href="#" aria-label="Visitar nuestro perfil de Instagram" className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[10px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2">
-                  <Instagram className="w-3 h-3" /> Instagram
+                <a 
+                  href="https://www.instagram.com/opticaspopularcr" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visitar nuestro perfil de Instagram" 
+                  className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[10px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2 transition-all hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:text-white hover:shadow-lg hover:shadow-[#ee2a7b]/20"
+                >
+                  <Instagram className="w-3.5 h-3.5" /> Instagram
                 </a>
-                <a href="#" aria-label="Visitar nuestro perfil de TikTok" className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[10px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2">
+                <a 
+                  href="#" 
+                  aria-label="Visitar nuestro perfil de TikTok" 
+                  className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[10px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2 transition-all hover:bg-black hover:text-white hover:shadow-lg hover:shadow-black/20"
+                >
+                  <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.31-.75.42-1.24 1.25-1.33 2.1-.1.7.1 1.41.53 1.96.44.53 1.11.85 1.79.9.69.05 1.4-.16 1.97-.55.62-.43 1-1.14 1.05-1.89.01-3.22-.01-6.43.01-9.64z"/></svg>
                   TikTok
                 </a>
               </div>
@@ -958,32 +1166,63 @@ export default function App() {
 
           {/* Footer */}
           <footer className="px-4 md:px-6 py-12 bg-white mt-10 rounded-[14px] shadow-sm border border-gray-100">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-              <div>
-                <h4 className="text-[12px] font-bold text-[#15171C] uppercase tracking-wider">Ópticas Popular Dr. Fabio Mora Medina</h4>
-                <p className="mt-4 text-[12px] leading-relaxed text-[#6D727D]">
-                  Especialistas en salud visual integral en San Rafael Abajo de Desamparados. Ofrecemos exámenes de la vista avanzados, adaptación de lentes y soluciones personalizadas para toda la familia.
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-left">
+              <div className="md:col-span-1">
+                <a href="#inicio" className="flex items-center gap-2 shrink-0 group mb-6">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-[rgb(122,24,35)] text-white shadow-lg group-hover:scale-105 transition-transform duration-300">
+                    <Eye size={20} strokeWidth={2.5} />
+                  </div>
+                  <div className="flex flex-col leading-none">
+                    <span className="text-[14px] font-bold tracking-tight text-[#13151A]">Ópticas Popular</span>
+                    <span className="text-[9px] font-medium text-[rgb(122,24,35)] uppercase tracking-wider mt-0.5">Dr. Fabio Mora Medina</span>
+                  </div>
+                </a>
+                <p className="text-[12px] leading-relaxed text-[#6D727D]">
+                  Especialistas en salud visual integral en San Rafael Abajo de Desamparados. Ofrecemos exámenes de la vista avanzados y soluciones personalizadas.
                 </p>
               </div>
+              
               <div>
-                <h4 className="text-[12px] font-bold text-[#15171C] uppercase tracking-wider">Servicios Principales</h4>
+                <h4 className="text-[12px] font-bold text-[#15171C] uppercase tracking-wider">Navegación</h4>
                 <ul className="mt-4 space-y-2 text-[12px] text-[#6D727D]">
-                  <li>Examen de la vista integral</li>
-                  <li>Fotografía de retina</li>
-                  <li>Toma de presión ocular</li>
-                  <li>Adaptación de lentes de contacto</li>
+                  <li><a href="#inicio" className="hover:text-[rgb(122,24,35)] transition-colors">Inicio</a></li>
+                  <li><a href="#servicios" className="hover:text-[rgb(122,24,35)] transition-colors">Servicios</a></li>
+                  <li><a href="#doctor" className="hover:text-[rgb(122,24,35)] transition-colors">Doctor</a></li>
+                  <li><a href="#faq" className="hover:text-[rgb(122,24,35)] transition-colors">Preguntas</a></li>
+                  <li><a href="#contacto" className="hover:text-[rgb(122,24,35)] transition-colors">Contacto</a></li>
                 </ul>
               </div>
+
               <div>
-                <h4 className="text-[12px] font-bold text-[#15171C] uppercase tracking-wider">Ubicación y Horario</h4>
-                <p className="mt-4 text-[12px] text-[#6D727D]">
+                <h4 className="text-[12px] font-bold text-[#15171C] uppercase tracking-wider">Servicios</h4>
+                <ul className="mt-4 space-y-2 text-[12px] text-[#6D727D]">
+                  <li><a href="#servicios" className="hover:text-[rgb(122,24,35)] transition-colors">Examen de la vista</a></li>
+                  <li><a href="#servicios" className="hover:text-[rgb(122,24,35)] transition-colors">Fotografía de retina</a></li>
+                  <li><a href="#servicios" className="hover:text-[rgb(122,24,35)] transition-colors">Presión ocular</a></li>
+                  <li><a href="#servicios" className="hover:text-[rgb(122,24,35)] transition-colors">Lentes de contacto</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="text-[12px] font-bold text-[#15171C] uppercase tracking-wider">Ubicación</h4>
+                <p className="mt-4 text-[12px] text-[#6D727D] leading-relaxed">
                   Plaza Higuerones, San Rafael Abajo de Desamparados, Local 23.<br />
-                  Lunes a Sábado: Atención bajo cita previa.
+                  <span className="block mt-2 font-bold text-[#15171C]">Lunes a Sábado</span>
+                  9:00 AM - 6:00 PM
                 </p>
               </div>
             </div>
-            <div className="mt-12 pt-8 border-t border-gray-100 text-center text-[10px] text-gray-500 uppercase tracking-widest">
-              © {new Date().getFullYear()} Ópticas Popular Dr. Fabio Mora Medina. Todos los derechos reservados.
+            <div className="mt-12 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-gray-500 uppercase tracking-widest">
+              <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                <span>© {new Date().getFullYear()} Ópticas Popular Dr. Fabio Mora Medina. Todos los derechos reservados.</span>
+                <div className="flex items-center gap-6">
+                  <a href="#" className="hover:text-[rgb(122,24,35)] transition-colors">Política de Privacidad</a>
+                  <a href="#" className="hover:text-[rgb(122,24,35)] transition-colors">Términos del Servicio</a>
+                </div>
+              </div>
+              <a href="https://localrank.com.co" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-[rgb(122,24,35)] transition-colors group">
+                Hechas <span className="text-[rgb(122,24,35)] group-hover:scale-125 transition-transform">❤</span> localrank.com.co
+              </a>
             </div>
           </footer>
 
@@ -1006,6 +1245,25 @@ export default function App() {
           </div>
 
         </div>
+ 
+        {/* Floating WhatsApp Button */}
+        <motion.a
+          href="https://wa.me/50672760215"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="hidden md:flex fixed bottom-6 right-6 z-[999] w-14 h-14 bg-[#25D366] text-white rounded-full items-center justify-center shadow-2xl hover:bg-[#20ba5a] transition-colors"
+          aria-label="Contactar por WhatsApp"
+        >
+          <MessageCircle className="w-8 h-8 fill-white text-[#25D366]" />
+          <span className="absolute -top-2 -right-1 flex h-4 w-4">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-4 w-4 bg-[#25D366] border-2 border-white"></span>
+          </span>
+        </motion.a>
       </main>
     </div>
   );
