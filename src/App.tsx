@@ -32,7 +32,13 @@ import {
   Navigation,
   CreditCard,
   Smartphone,
-  Receipt
+  Receipt,
+  Baby,
+  Smile,
+  Glasses,
+  HeartHandshake,
+  BookOpen,
+  Monitor
 } from 'lucide-react';
 import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring } from 'motion/react';
 import { useRef } from 'react';
@@ -97,6 +103,7 @@ const NAVIGATION_MENU: NavCategory[] = [
         title: 'Exámenes y Diagnóstico',
         items: [
           { name: 'Evaluación Visual Integral', href: '#servicios', desc: 'Graduación precisa y fondo de ojo', icon: Eye },
+          { name: 'Para Toda la Familia', href: '#edades', desc: 'Niños, adultos y personas mayores', icon: Users },
           { name: 'Fotografía de Retina', href: '#servicios', desc: 'Diagnóstico digital de retina', icon: Camera },
           { name: 'Toma de Presión Ocular', href: '#servicios', desc: 'Control preventivo de glaucoma', icon: Activity },
         ],
@@ -253,6 +260,105 @@ const TESTIMONIALS = [
   },
 ];
 
+const AGE_GROUPS = [
+  {
+    id: 'ninos',
+    ageRange: '4 a 17 años',
+    title: 'Niños y Adolescentes',
+    roleTag: 'Salud Visual Infantil',
+    badge: 'Desarrollo y Rendimiento Escolar',
+    badgeColor: 'bg-sky-50 text-sky-800 border-sky-200',
+    borderColor: 'border-sky-200 hover:border-sky-400',
+    iconBg: 'bg-sky-600 text-white shadow-sky-600/25',
+    icon: Baby,
+    description: 'El 80% del aprendizaje en la infancia entra por los ojos. Detectar a tiempo problemas de refracción previene dificultades escolares, falta de concentración y dolores de cabeza.',
+    highlights: [
+      {
+        title: 'Evaluación Lúdica y Sin Miedo',
+        desc: 'Consulta cercana, paciente y sin dolor donde los niños se sienten cómodos y tranquilos.'
+      },
+      {
+        title: 'Detección Temprana y Ojo Vago',
+        desc: 'Diagnóstico precoz de miopía, astigmatismo y ambliopía antes de que afecten su desarrollo.'
+      },
+      {
+        title: 'Control de Fatiga por Pantallas',
+        desc: 'Protección visual frente a celulares, tablets y computadoras de estudio.'
+      },
+      {
+        title: 'Monturas Flexibles y Seguras',
+        desc: 'Armazones ligeros, hipoalergénicos e irrompibles diseñados para jugar sin riesgos.'
+      }
+    ],
+    waMessage: 'Hola Dr. Fabio, deseo agendar una valoración visual para mi hijo(a).',
+    buttonText: 'Agendar para mi hijo(a)'
+  },
+  {
+    id: 'adultos',
+    ageRange: '18 a 59 años',
+    title: 'Jóvenes y Adultos',
+    roleTag: 'Vida Digital y Laboral',
+    badge: 'Cero Fatiga Visual y Máximo Enfoque',
+    badgeColor: 'bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] border-[rgb(122,24,35)]/20',
+    borderColor: 'border-[rgb(122,24,35)]/20 hover:border-[rgb(122,24,35)]/50',
+    iconBg: 'bg-[rgb(122,24,35)] text-white shadow-[rgb(122,24,35)]/25',
+    icon: Monitor,
+    description: 'Especialmente diseñado para profesionales y estudiantes con alta exigencia visual, jornadas extensas frente a computadoras y necesidad de nitidez en la conducción.',
+    highlights: [
+      {
+        title: 'Filtro Blue Defense y Antirreflejo',
+        desc: 'Alivio instantáneo contra ojos rojos, ardor, visión borrosa y cefaleas por pantallas.'
+      },
+      {
+        title: 'Conducción Nocturna Segura',
+        desc: 'Tecnología de lentes que neutraliza destellos molestos de faros vehiculares y lluvia.'
+      },
+      {
+        title: 'Graduación Milimétrica Exacta',
+        desc: 'Refracción clínica computarizada para fórmulas monofocales, antirreflejo o lentes de contacto.'
+      },
+      {
+        title: 'Evaluación Preventiva Ocular',
+        desc: 'Revisión periódica de la salud corneal y descarte de espasmos de acomodación.'
+      }
+    ],
+    waMessage: 'Hola Dr. Fabio, paso muchas horas en pantallas/trabajo y deseo agendar mi examen visual.',
+    buttonText: 'Agendar mi examen de la vista'
+  },
+  {
+    id: 'mayores',
+    ageRange: '60 años en adelante',
+    title: 'Adultos Mayores',
+    roleTag: 'Cuidado Ocular Integral y Tercera Edad',
+    badge: 'Claridad Progresiva y Salud Preventiva',
+    badgeColor: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+    borderColor: 'border-emerald-200/80 hover:border-emerald-400',
+    iconBg: 'bg-emerald-600 text-white shadow-emerald-600/25',
+    icon: HeartHandshake,
+    description: 'Atención médica con calidez humana, paciencia y tiempo necesario para evaluar presbicia, cambios en el cristalino y descartar afecciones silenciosas de la vista.',
+    highlights: [
+      {
+        title: 'Adaptación a Lentes Progresivos',
+        desc: 'Visión nítida a corta, media y larga distancia respaldada por 30 días de Garantía de Adaptación.'
+      },
+      {
+        title: 'Descarte de Cataratas y Glaucoma',
+        desc: 'Medición digital de presión intraocular y evaluación preventiva del fondo de ojo.'
+      },
+      {
+        title: 'Consulta Cálida, Pausada y Humana',
+        desc: 'Explicación detallada sin prisas, con letra grande y acompañamiento a familiares.'
+      },
+      {
+        title: 'Armazones Ultraligeros y Cómodos',
+        desc: 'Monturas suaves con plaquetas anatómicas que no dejan marcas ni presionan la nariz.'
+      }
+    ],
+    waMessage: 'Hola Dr. Fabio, deseo agendar una valoración visual para un adulto mayor (revisión de multifocales y salud ocular).',
+    buttonText: 'Agendar para un adulto mayor'
+  }
+];
+
 const BRANDS = ['Ray-Ban', 'Oakley', 'Persol', 'Vogue', 'Arnette', 'Transitions'];
 
 export default function App() {
@@ -269,6 +375,7 @@ export default function App() {
   const [desktopDropdown, setDesktopDropdown] = useState<string | null>(null);
   const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>('servicios');
   const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState<'all' | 'ninos' | 'adultos' | 'mayores'>('all');
   const [showDiagnosticModal, setShowDiagnosticModal] = useState(false);
   const [diagnosticStep, setDiagnosticStep] = useState<'question' | 'scanning' | 'result'>('question');
   const [selectedSymptom, setSelectedSymptom] = useState<string | null>(null);
@@ -699,14 +806,30 @@ export default function App() {
                     className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 w-full max-w-[580px]"
                   >
                     {[
-                      { label: 'Frecuencia', value: '1 vez al año recomendado' },
-                      { label: 'Atención', value: 'Para niños, adultos y mayores' },
-                      { label: 'Reserva', value: 'WhatsApp o llamada directa' },
+                      { label: 'Frecuencia', value: '1 vez al año recomendado', href: '#servicios' },
+                      { 
+                        label: 'Atención Integral', 
+                        value: 'Niños, adultos y mayores', 
+                        href: '#edades',
+                        tag: 'Todas las edades'
+                      },
+                      { label: 'Reserva', value: 'WhatsApp o llamada directa', href: 'https://wa.me/50672760215' },
                     ].map((item, i) => (
-                      <div key={i} className="bg-white/90 backdrop-blur-[2px] rounded-[10px] px-3 py-3 pro-card shadow-sm border border-white/50 transition-all hover:shadow-md hover:-translate-y-0.5">
-                        <p className="text-[11px] uppercase tracking-wider font-semibold text-gray-500">{item.label}</p>
-                        <p className="mt-1 text-[13px] sm:text-[14px] leading-[1.45] text-[#14161B] font-bold">{item.value}</p>
-                      </div>
+                      <a 
+                        key={i} 
+                        href={item.href}
+                        className="bg-white/90 backdrop-blur-[2px] rounded-[10px] px-3 py-3 pro-card shadow-sm border border-white/50 transition-all hover:shadow-md hover:-translate-y-0.5 group block text-left"
+                      >
+                        <div className="flex items-center justify-between">
+                          <p className="text-[11px] uppercase tracking-wider font-semibold text-gray-500">{item.label}</p>
+                          {'tag' in item && (
+                            <span className="text-[9px] font-bold text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10 px-1.5 py-0.2 rounded-full">
+                              {item.tag}
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-1 text-[13px] sm:text-[14px] leading-[1.45] text-[#14161B] font-bold group-hover:text-[rgb(122,24,35)] transition-colors">{item.value}</p>
+                      </a>
                     ))}
                   </motion.div>
                 </div>
@@ -1032,6 +1155,184 @@ export default function App() {
                 </motion.article>
               ))}
             </div>
+            </div>
+          </section>
+
+          {/* Cuidado Visual Multigeneracional - Niños, Adultos y Personas Mayores */}
+          <section id="edades" className="w-full py-10 md:py-16 bg-gradient-to-b from-slate-50/70 via-white to-slate-50/70 border-y border-gray-100 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Encabezado */}
+              <div className="text-center max-w-3xl mx-auto">
+                <motion.div 
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="inline-flex items-center gap-2 h-7 px-3.5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold shadow-2xs border border-[rgb(122,24,35)]/20"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[rgb(122,24,35)] animate-pulse" />
+                  <span>Atención Integral para Toda la Familia</span>
+                </motion.div>
+
+                <motion.h2 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="mt-4 text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] leading-tight tracking-tight font-bold text-[#14161B]"
+                >
+                  Cuidado visual especializado para <span className="text-[rgb(122,24,35)]">cada etapa de tu vida</span>
+                </motion.h2>
+
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="mt-3.5 text-[15px] sm:text-[16px] text-[#555963] leading-relaxed"
+                >
+                  Las necesidades de los ojos cambian con los años. El Dr. Fabio Mora adapta cada examen con tecnología de vanguardia, paciencia y un enfoque clínico cercano: desde el desarrollo escolar en la infancia, hasta el confort digital en adultos y la salud ocular preventiva en personas mayores.
+                </motion.p>
+              </div>
+
+              {/* Selector interactivo de etapas de la vida */}
+              <motion.div 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.25 }}
+                className="mt-7 flex flex-wrap items-center justify-center gap-2"
+              >
+                {[
+                  { id: 'all', label: 'Ver Todas las Edades', icon: Users },
+                  { id: 'ninos', label: '👶 Niños y Jóvenes (4-17)', icon: Baby },
+                  { id: 'adultos', label: '💼 Jóvenes y Adultos (18-59)', icon: Monitor },
+                  { id: 'mayores', label: '👴 Adultos Mayores (60+)', icon: HeartHandshake },
+                ].map((tab) => {
+                  const isSelected = selectedAgeGroup === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setSelectedAgeGroup(tab.id as any)}
+                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-bold transition-all cursor-pointer ${
+                        isSelected
+                          ? 'bg-[rgb(122,24,35)] text-white shadow-md shadow-[rgb(122,24,35)]/20 scale-105 border border-[rgb(122,24,35)]'
+                          : 'bg-white text-gray-700 border border-gray-200 hover:border-[rgb(122,24,35)] hover:text-[rgb(122,24,35)] hover:shadow-xs'
+                      }`}
+                    >
+                      <tab.icon className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-[rgb(122,24,35)]'}`} />
+                      <span>{tab.label}</span>
+                    </button>
+                  );
+                })}
+              </motion.div>
+
+              {/* Grid de Tarjetas Animadas de Edades */}
+              <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+                {AGE_GROUPS.filter((g) => selectedAgeGroup === 'all' || g.id === selectedAgeGroup).map((group, idx) => {
+                  const GroupIcon = group.icon;
+                  return (
+                    <motion.article
+                      key={group.id}
+                      initial={{ opacity: 0, y: 25 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.45, delay: idx * 0.1 }}
+                      whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                      className={`group bg-white rounded-3xl p-6 sm:p-7 border ${group.borderColor} shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden`}
+                    >
+                      {/* Fondo con brillo sutil superior */}
+                      <div className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${group.id === 'ninos' ? 'from-sky-400 to-indigo-500' : group.id === 'adultos' ? 'from-[rgb(122,24,35)] to-amber-600' : 'from-emerald-500 to-teal-600'}`}></div>
+
+                      <div>
+                        {/* Header de la Tarjeta */}
+                        <div className="flex items-center justify-between gap-3 mb-4">
+                          <div className={`w-12 h-12 rounded-2xl ${group.iconBg} flex items-center justify-center shadow-md transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+                            <GroupIcon className="w-6 h-6" />
+                          </div>
+                          <div className="flex flex-col items-end">
+                            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Rango de edad</span>
+                            <span className="text-[13px] font-bold text-[#15171C] bg-gray-100 px-2.5 py-0.5 rounded-full">{group.ageRange}</span>
+                          </div>
+                        </div>
+
+                        {/* Título y Badge */}
+                        <div className="mb-3">
+                          <span className={`inline-block text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full border ${group.badgeColor} mb-2`}>
+                            {group.roleTag}
+                          </span>
+                          <h3 className="text-[21px] sm:text-[22px] font-bold text-[#15171C] group-hover:text-[rgb(122,24,35)] transition-colors leading-tight">
+                            {group.title}
+                          </h3>
+                        </div>
+
+                        <p className="text-[13.5px] leading-relaxed text-[#555963] mb-5">
+                          {group.description}
+                        </p>
+
+                        {/* Puntos destacados con micro-animaciones */}
+                        <div className="space-y-3 pt-4 border-t border-gray-100">
+                          {group.highlights.map((item, hIdx) => (
+                            <div key={hIdx} className="flex items-start gap-2.5 group/item">
+                              <div className={`w-5 h-5 rounded-full ${group.id === 'ninos' ? 'bg-sky-100 text-sky-700' : group.id === 'adultos' ? 'bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)]' : 'bg-emerald-100 text-emerald-700'} flex items-center justify-center shrink-0 mt-0.5 transition-transform duration-200 group-hover/item:scale-110`}>
+                                <CheckCircle2 className="w-3.5 h-3.5" />
+                              </div>
+                              <div className="text-[13px] leading-snug">
+                                <span className="font-bold text-[#15171C]">{item.title}: </span>
+                                <span className="text-[#555963]">{item.desc}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Botón de Acción Directo */}
+                      <div className="mt-6 pt-5 border-t border-gray-100 flex flex-col gap-2">
+                        <a
+                          href={`https://wa.me/50672760215?text=${encodeURIComponent(group.waMessage)}`}
+                          className={`w-full inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl ${group.id === 'ninos' ? 'bg-sky-600 hover:bg-sky-700 shadow-sky-600/20' : group.id === 'adultos' ? 'bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] shadow-[rgb(122,24,35)]/20' : 'bg-emerald-700 hover:bg-emerald-800 shadow-emerald-700/20'} text-white text-[13px] sm:text-[14px] font-bold shadow-md transition-all duration-200 active:scale-95 btn-shimmer`}
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                          <span>{group.buttonText}</span>
+                          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </a>
+                      </div>
+                    </motion.article>
+                  );
+                })}
+              </div>
+
+              {/* Banner de Consulta Familiar Coordinada */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="mt-8 rounded-2xl bg-gradient-to-r from-gray-900 via-[rgb(90,14,23)] to-gray-900 p-5 sm:p-6 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-4 border border-white/10"
+              >
+                <div className="flex items-center gap-4 text-center md:text-left">
+                  <div className="w-12 h-12 rounded-2xl bg-white/10 text-white flex items-center justify-center shrink-0 shadow-inner">
+                    <Users className="w-6 h-6 text-amber-300" />
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-center md:justify-start gap-2 flex-wrap">
+                      <span className="text-[15px] sm:text-[16px] font-bold text-white">¿Desean venir en familia el mismo día?</span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-400 text-gray-900 px-2.5 py-0.5 rounded-full">
+                        Atención Coordinada
+                      </span>
+                    </div>
+                    <p className="text-[13px] text-white/80 mt-1 leading-snug">
+                      Agendamos citas consecutivas para que niños, padres y abuelos se revisen en una sola visita a Plaza Higuerones con parqueo cómodo y sin esperas.
+                    </p>
+                  </div>
+                </div>
+
+                <a
+                  href="https://wa.me/50672760215?text=Hola%20Dr.%20Fabio,%20deseo%20coordinar%20una%20cita%20familiar%20para%20revisarnos%20juntos."
+                  className="inline-flex items-center justify-center h-10 px-6 rounded-xl bg-white text-[rgb(122,24,35)] hover:bg-gray-100 text-[13px] font-bold whitespace-nowrap shadow-md transition-all active:scale-95 shrink-0 btn-shimmer"
+                >
+                  Coordinar cita familiar
+                </a>
+              </motion.div>
             </div>
           </section>
 
