@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Phone, 
@@ -262,13 +262,11 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen font-sans selection:bg-[rgb(122,24,35)] selection:text-white">
-      <main className="max-w-[1380px] mx-auto p-3 md:p-5 xl:p-6">
-        <div className="bg-[#F3F4F7] rounded-[2px] overflow-hidden shadow-sm">
+    <div className="min-h-screen bg-white text-[#15171C] font-sans selection:bg-[rgb(122,24,35)] selection:text-white overflow-x-hidden">
           
           {/* Navigation */}
-          <header className={`sticky top-0 z-50 px-4 md:px-6 py-4 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : ''}`}>
-            <div className="flex items-center justify-between gap-4">
+          <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-xs border-b border-gray-100' : 'bg-white/80 backdrop-blur-sm border-b border-gray-100/60'}`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
               <a href="#inicio" className="flex items-center gap-2 shrink-0 group">
                 <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl bg-[rgb(122,24,35)] text-white shadow-lg group-hover:scale-105 transition-transform duration-300">
                   <Eye size={24} strokeWidth={2.5} />
@@ -572,7 +570,8 @@ export default function App() {
           </header>
 
           {/* Hero Section */}
-          <section id="inicio" className="px-4 md:px-6 pt-3">
+          <section id="inicio" className="w-full bg-gradient-to-b from-slate-50/80 via-white to-white py-6 md:py-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -688,11 +687,13 @@ export default function App() {
                 </div>
               </div>
             </motion.div>
+            </div>
           </section>
 
           {/* Social Proof */}
-          <section className="px-4 md:px-6 pt-3">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
+          <section className="w-full py-8 md:py-12 bg-white border-y border-gray-100">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {[
                 { title: <><span className="text-[rgb(122,24,35)]">+</span><AnimatedNumber value={15} /></>, desc: 'años de trayectoria' },
                 { title: 'Integral', desc: 'evaluación completa y clara' },
@@ -704,22 +705,24 @@ export default function App() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-white rounded-[12px] px-4 py-4 text-center pro-card shadow-sm"
+                  className="bg-slate-50/60 hover:bg-white rounded-2xl p-5 md:p-6 text-center pro-card shadow-xs border border-gray-100/80 transition-all hover:shadow-md"
                 >
                   <div className="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[34px] leading-none tracking-tight font-bold text-[#14161B]">{item.title}</div>
                   <p className="mt-2 text-[10px] sm:text-[11px] leading-[1.45] text-[#666A74]">{item.desc}</p>
                 </motion.article>
               ))}
             </div>
+            </div>
           </section>
 
           {/* Urgency Section */}
-          <section className="px-4 md:px-6 pt-6">
+          <section className="w-full py-12 md:py-20 bg-slate-50/60">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white rounded-[14px] overflow-hidden shadow-sm"
+              className="bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-sm border border-gray-100"
             >
               <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
                 <div className="p-5 md:p-6 border-b lg:border-b-0 lg:border-r border-[#E7EAF1]">
@@ -754,10 +757,12 @@ export default function App() {
                 </div>
               </div>
             </motion.div>
+            </div>
           </section>
 
           {/* Why Choose Us Section */}
-          <section id="beneficios" className="px-4 md:px-6 pt-10">
+          <section id="beneficios" className="w-full py-14 md:py-24 bg-white border-t border-gray-100">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center">
               <span className="inline-flex items-center justify-center h-5 px-3 rounded-full bg-white text-[7px] uppercase tracking-[0.14em] text-[#767A84] shadow-sm">
                 Nuestros diferenciales
@@ -788,10 +793,12 @@ export default function App() {
                 </motion.div>
               ))}
             </div>
+            </div>
           </section>
 
           {/* Process & Brands */}
-          <section className="px-4 md:px-6 pt-6">
+          <section className="w-full py-14 md:py-24 bg-slate-50/60 border-y border-gray-100">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-3">
               <motion.div 
                 id="proceso" 
@@ -799,7 +806,7 @@ export default function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
                 viewport={{ once: true, margin: "-100px" }}
-                className="bg-white rounded-[14px] p-5 md:p-6 shadow-sm"
+                className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100"
               >
                 <span className="inline-flex items-center justify-center h-5 px-3 rounded-full bg-[#F2F3F7] text-[7px] uppercase tracking-[0.14em] text-[#7C808B]">
                   Proceso simple
@@ -836,7 +843,7 @@ export default function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
                 viewport={{ once: true, margin: "-100px" }}
-                className="bg-white rounded-[14px] px-5 md:px-6 py-6 md:py-7 overflow-hidden shadow-sm"
+                className="bg-white rounded-2xl md:rounded-3xl px-6 md:px-8 py-8 md:py-10 overflow-hidden shadow-sm border border-gray-100"
               >
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
                   <div>
@@ -879,10 +886,12 @@ export default function App() {
                 </div>
               </motion.div>
             </div>
+            </div>
           </section>
 
           {/* Services Section */}
-          <section id="servicios" className="px-4 md:px-6 pt-10">
+          <section id="servicios" className="w-full py-14 md:py-24 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center">
               <span className="inline-flex items-center justify-center h-5 px-3 rounded-full bg-white text-[7px] uppercase tracking-[0.14em] text-[#767A84] shadow-sm">
                 Nuestros servicios
@@ -957,10 +966,12 @@ export default function App() {
                 </motion.article>
               ))}
             </div>
+            </div>
           </section>
 
           {/* Gallery */}
-          <section id="galeria" className="px-4 md:px-6 pt-10">
+          <section id="galeria" className="w-full py-14 md:py-24 bg-slate-50/60 border-y border-gray-100">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1084,10 +1095,12 @@ export default function App() {
                 </p>
               </div>
             </motion.div>
+            </div>
           </section>
 
           {/* Testimonials */}
-          <section id="testimonios" className="px-4 md:px-6 pt-10">
+          <section id="testimonios" className="w-full py-14 md:py-24 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1187,10 +1200,12 @@ export default function App() {
                 </motion.article>
               </div>
             </motion.div>
+            </div>
           </section>
 
           {/* Doctor Section */}
-          <section id="doctor" className="px-4 md:px-6 pt-10">
+          <section id="doctor" className="w-full py-14 md:py-24 bg-slate-50/60 border-y border-gray-100">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -1270,10 +1285,12 @@ export default function App() {
                 </div>
               </div>
             </motion.div>
+            </div>
           </section>
 
           {/* Final CTA */}
-          <section className="px-4 md:px-6 pt-10">
+          <section className="w-full py-10 md:py-16 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1292,11 +1309,13 @@ export default function App() {
                 Agendá por WhatsApp
               </a>
             </motion.div>
+            </div>
           </section>
 
           {/* Contact Section */}
           {/* FAQ Section */}
-          <section id="faq" className="px-4 md:px-6 pt-10">
+          <section id="faq" className="w-full py-14 md:py-24 bg-slate-50/60 border-y border-gray-100">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1352,9 +1371,12 @@ export default function App() {
                 ))}
               </div>
             </motion.div>
+            </div>
           </section>
 
-          <section id="contacto" className="px-4 md:px-6 pt-10 pb-20 md:pb-6">
+          {/* Contact Section */}
+          <section id="contacto" className="w-full py-14 md:py-24 bg-white pb-24 md:pb-24">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1498,10 +1520,12 @@ export default function App() {
                 </a>
               </div>
             </motion.div>
+            </div>
           </section>
 
           {/* Footer */}
-          <footer className="px-4 md:px-6 py-12 bg-white mt-10 rounded-[14px] shadow-sm border border-gray-100">
+          <footer className="w-full bg-[#111317] text-white pt-16 pb-12 border-t border-gray-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-left">
               <div className="md:col-span-1">
                 <a href="#inicio" className="flex items-center gap-2 shrink-0 group mb-6">
@@ -1509,7 +1533,7 @@ export default function App() {
                     <Eye size={20} strokeWidth={2.5} />
                   </div>
                   <div className="flex flex-col leading-none">
-                    <span className="text-[14px] font-bold tracking-tight text-[#13151A]">Ópticas Popular</span>
+                    <span className="text-[14px] font-bold tracking-tight text-white">Ópticas Popular</span>
                     <span className="text-[9px] font-medium text-[rgb(122,24,35)] uppercase tracking-wider mt-0.5">Dr. Fabio Mora Medina</span>
                   </div>
                 </a>
@@ -1519,7 +1543,7 @@ export default function App() {
               </div>
               
               <div>
-                <h4 className="text-[12px] font-bold text-[#15171C] uppercase tracking-wider">Navegación</h4>
+                <h4 className="text-[12px] font-bold text-white uppercase tracking-wider">Navegación</h4>
                 <ul className="mt-4 space-y-2 text-[12px] text-[#6D727D]">
                   <li><a href="#inicio" className="hover:text-[rgb(122,24,35)] transition-colors">Inicio</a></li>
                   <li><a href="#servicios" className="hover:text-[rgb(122,24,35)] transition-colors">Servicios</a></li>
@@ -1530,7 +1554,7 @@ export default function App() {
               </div>
 
               <div>
-                <h4 className="text-[12px] font-bold text-[#15171C] uppercase tracking-wider">Servicios</h4>
+                <h4 className="text-[12px] font-bold text-white uppercase tracking-wider">Servicios</h4>
                 <ul className="mt-4 space-y-2 text-[12px] text-[#6D727D]">
                   <li><a href="#servicios" className="hover:text-[rgb(122,24,35)] transition-colors">Examen de la vista</a></li>
                   <li><a href="#servicios" className="hover:text-[rgb(122,24,35)] transition-colors">Fotografía de retina</a></li>
@@ -1540,15 +1564,15 @@ export default function App() {
               </div>
 
               <div>
-                <h4 className="text-[12px] font-bold text-[#15171C] uppercase tracking-wider">Ubicación</h4>
+                <h4 className="text-[12px] font-bold text-white uppercase tracking-wider">Ubicación</h4>
                 <p className="mt-4 text-[12px] text-[#6D727D] leading-relaxed">
                   Plaza Higuerones, San Rafael Abajo de Desamparados, Local 23.<br />
-                  <span className="block mt-2 font-bold text-[#15171C]">Lunes a Sábado</span>
+                  <span className="block mt-2 font-bold text-white">Lunes a Sábado</span>
                   9:00 AM - 6:00 PM
                 </p>
               </div>
             </div>
-            <div className="mt-12 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-gray-500 uppercase tracking-widest">
+            <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-gray-400 uppercase tracking-widest">
               <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
                 <span>© {new Date().getFullYear()} Ópticas Popular Dr. Fabio Mora Medina. Todos los derechos reservados.</span>
                 <div className="flex items-center gap-6">
@@ -1560,6 +1584,7 @@ export default function App() {
                 Hechas <span className="text-[rgb(122,24,35)] group-hover:scale-125 transition-transform">❤</span> localrank.com.co
               </a>
             </div>
+          </div>
           </footer>
 
           {/* Barra de Navegación Rápida Inferior para Móviles */}
@@ -1589,8 +1614,6 @@ export default function App() {
             </div>
           </div>
 
-        </div>
- 
         {/* Floating WhatsApp Button */}
         <motion.a
           href="https://wa.me/50672760215"
@@ -1609,7 +1632,6 @@ export default function App() {
             <span className="relative inline-flex rounded-full h-4 w-4 bg-[#25D366] border-2 border-white"></span>
           </span>
         </motion.a>
-      </main>
     </div>
   );
 }
