@@ -72,7 +72,7 @@ interface SubItem {
   name: string;
   href: string;
   desc: string;
-  icon: any;
+  icon?: any;
 }
 
 interface SubGroup {
@@ -142,15 +142,10 @@ const NAVIGATION_MENU: NavCategory[] = [
         items: [
           { name: 'Instalaciones y Equipos', href: '#galeria', desc: 'Conoce nuestro consultorio', icon: Camera },
           { name: 'Testimonios de Pacientes', href: '#testimonios', desc: 'Experiencias de quienes nos visitan', icon: Users },
-          { name: 'Calificar Experiencia', href: '#calificar', desc: 'Tu opinión nos ayuda a mejorar', icon: Star },
+          { name: 'Calificar Experiencia', href: '#calificar', desc: 'Tu opinión nos ayuda a mejorar' },
         ],
       },
     ],
-  },
-  {
-    id: 'calificar',
-    name: 'Calificar',
-    href: '#calificar',
   },
   {
     id: 'faq',
@@ -531,12 +526,21 @@ export default function App() {
                                         <a
                                           key={iIdx}
                                           href={item.href}
-                                          onClick={() => setDesktopDropdown(null)}
-                                          className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#F3F4F7] transition-all"
+                                          onClick={(e) => {
+                                            if (item.href === '#calificar') {
+                                              e.preventDefault();
+                                              setCurrentView('calificar');
+                                              window.location.hash = '#calificar';
+                                            }
+                                            setDesktopDropdown(null);
+                                          }}
+                                          className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#F3F4F7] transition-all cursor-pointer"
                                         >
-                                          <div className="w-8 h-8 rounded-lg bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-[rgb(122,24,35)] group-hover/item:text-white transition-colors">
-                                            <ItemIcon className="w-4 h-4" />
-                                          </div>
+                                          {ItemIcon ? (
+                                            <div className="w-8 h-8 rounded-lg bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-[rgb(122,24,35)] group-hover/item:text-white transition-colors">
+                                              <ItemIcon className="w-4 h-4" />
+                                            </div>
+                                          ) : null}
                                           <div className="flex-1 min-w-0">
                                             <p className="text-[12px] font-semibold text-[#15171C] group-hover/item:text-[rgb(122,24,35)] transition-colors">
                                               {item.name}
@@ -575,15 +579,6 @@ export default function App() {
                 >
                   <MessageCircle className="w-3.5 h-3.5 mr-2" />
                   Agendar
-                </a>
-
-                <a
-                  href="#calificar"
-                  onClick={() => setCurrentView('calificar')}
-                  className="hidden xl:inline-flex items-center gap-1.5 h-9 px-3 rounded-[8px] bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200/90 text-[11px] font-bold transition-all shadow-2xs cursor-pointer"
-                >
-                  <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
-                  <span>Calificar visita</span>
                 </a>
 
                 {/* Botón Menú Hamburguesa para Móviles */}
@@ -707,12 +702,21 @@ export default function App() {
                                             <a
                                               key={iIdx}
                                               href={item.href}
-                                              onClick={() => setIsMenuOpen(false)}
-                                              className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#F3F4F7] active:bg-gray-200 transition-all"
+                                              onClick={(e) => {
+                                                if (item.href === '#calificar') {
+                                                  e.preventDefault();
+                                                  setCurrentView('calificar');
+                                                  window.location.hash = '#calificar';
+                                                }
+                                                setIsMenuOpen(false);
+                                              }}
+                                              className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#F3F4F7] active:bg-gray-200 transition-all cursor-pointer"
                                             >
-                                              <div className="w-8 h-8 rounded-lg bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0">
-                                                <ItemIcon className="w-4 h-4" />
-                                              </div>
+                                              {ItemIcon ? (
+                                                <div className="w-8 h-8 rounded-lg bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0">
+                                                  <ItemIcon className="w-4 h-4" />
+                                                </div>
+                                              ) : null}
                                               <div className="flex-1 min-w-0">
                                                 <p className="text-[12px] font-semibold text-[#15171C] leading-snug">{item.name}</p>
                                                 <p className="text-[10px] text-gray-500 truncate">{item.desc}</p>
@@ -741,29 +745,6 @@ export default function App() {
                           <Clock className="w-3 h-3 text-[rgb(122,24,35)]" />
                           <span>Lun a Sáb: 9:00 AM - 6:00 PM</span>
                         </div>
-                      </div>
-
-                      {/* Acceso a Calificar Experiencia en Menú Móvil */}
-                      <div className="mt-3">
-                        <a
-                          href="#calificar"
-                          onClick={() => {
-                            setIsMenuOpen(false);
-                            setCurrentView('calificar');
-                          }}
-                          className="flex items-center justify-between p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 text-[13px] font-bold active:scale-[0.99] transition-all"
-                        >
-                          <div className="flex items-center gap-2.5">
-                            <div className="w-8 h-8 rounded-lg bg-amber-200/70 flex items-center justify-center text-amber-800 shrink-0">
-                              <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
-                            </div>
-                            <div className="text-left">
-                              <div className="leading-tight">Calificar Experiencia</div>
-                              <div className="text-[10px] text-amber-700 font-normal">Tu opinión nos ayuda a mejorar</div>
-                            </div>
-                          </div>
-                          <ChevronRight className="w-4 h-4 text-amber-600" />
-                        </a>
                       </div>
                     </div>
 
@@ -1553,10 +1534,12 @@ export default function App() {
                 <div className="flex flex-wrap items-center gap-2.5 shrink-0 self-start md:self-center">
                   <a 
                     href="#calificar" 
-                    onClick={() => setCurrentView('calificar')}
-                    className="inline-flex items-center justify-center gap-1.5 h-11 px-5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-[13px] font-bold shadow-2xs transition-all active:scale-95 cursor-pointer"
+                    onClick={() => {
+                      setCurrentView('calificar');
+                      window.location.hash = '#calificar';
+                    }}
+                    className="inline-flex items-center justify-center h-11 px-5 rounded-xl bg-white border border-gray-200 hover:border-[rgb(122,24,35)] text-[#15171C] hover:text-[rgb(122,24,35)] text-[13px] font-bold shadow-2xs transition-all active:scale-95 cursor-pointer"
                   >
-                    <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
                     <span>Calificar experiencia</span>
                   </a>
                   <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 btn-shimmer">Agendar valoración</a>
