@@ -652,16 +652,12 @@ export default function App() {
           {/* Navigation */}
           <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-xs border-b border-gray-100' : 'bg-white/80 backdrop-blur-sm border-b border-gray-100/60'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
-              <a href="#inicio" className="flex items-center gap-3 shrink-0 group py-0.5">
+              <a href="#inicio" className="flex items-center shrink-0 group py-0.5" aria-label="Ópticas Popular - Inicio">
                 <img 
                   src="/images/logo-opticas-popular.png" 
                   alt="Logo Oficial Ópticas Popular" 
                   className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
                 />
-                <div className="hidden xl:flex flex-col leading-tight pl-3 border-l border-gray-200">
-                  <span className="text-[12px] font-bold text-[#13151A] uppercase tracking-wider">Dr. Fabio Mora Medina</span>
-                  <span className="text-[10px] font-semibold text-[rgb(122,24,35)] uppercase tracking-wider">Optometrista Clínico · C.O.C.R.</span>
-                </div>
               </a>
 
               {/* Desktop Nav categorizado */}
@@ -1443,35 +1439,7 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Garantía de Adaptación */}
-                  <div className="mt-6 rounded-2xl bg-gradient-to-r from-emerald-50/90 via-slate-50 to-emerald-50/90 border border-emerald-200/80 p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-2xs">
-                    <div className="flex items-center gap-3.5">
-                      <div className="w-11 h-11 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md">
-                        <ShieldCheck className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-[14px] sm:text-[15px] font-bold text-[#15171C] whitespace-nowrap">
-                            {lang === 'es' ? 'Garantía de Adaptación Visual (30 días)' : 'Visual Adaptation Guarantee (30 days)'}
-                          </span>
-                          <span className="text-[10px] uppercase font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full whitespace-nowrap">
-                            {lang === 'es' ? '100% Tranquilidad' : '100% Peace of Mind'}
-                          </span>
-                        </div>
-                        <p className="text-[12.5px] text-[#555963] mt-1 leading-snug">
-                          {lang === 'es' 
-                            ? 'Si en los primeros 30 días sentís cualquier dificultad de enfoque o adaptación con tu nueva graduación, te reevaluamos y reajustamos tus lentes sin costo adicional.'
-                            : 'If during the first 30 days you experience any focus or adaptation difficulty with your new prescription, we re-evaluate and adjust your lenses at no extra cost.'}
-                        </p>
-                      </div>
-                    </div>
-                    <a
-                      href="https://wa.me/50672760215?text=Hola%20Dr.%20Fabio,%20deseo%20consultar%20sobre%20la%20garantía%20de%20adaptación%20y%20agendar%20mi%20cita."
-                      className="inline-flex items-center justify-center h-10 px-5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-[12.5px] font-bold whitespace-nowrap shadow-sm hover:shadow-md transition-all shrink-0 active:scale-95"
-                    >
-                      <span>{lang === 'es' ? 'Consultar garantía' : 'Ask about guarantee'}</span>
-                    </a>
-                  </div>
+
                 </motion.div>
               </div>
             </div>
