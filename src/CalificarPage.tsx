@@ -3,19 +3,18 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowLeft, 
   MessageCircle, 
-  Star, 
   CheckCircle2, 
   Eye, 
-  Sparkles,
   ArrowRight,
-  ExternalLink
+  ExternalLink,
+  HeartHandshake
 } from 'lucide-react';
 
 interface CalificarPageProps {
   onBack: () => void;
 }
 
-// Icono estilizado de Lentes Oftálmicos para calificación (inspirado en emblemas de lujo)
+// Emblema de Lentes Oftálmicos para calificación con colores corporativos oficiales
 function GlassesRatingEmblem({ active, hovered }: { active: boolean; hovered: boolean }) {
   const isFilled = active || hovered;
   
@@ -25,7 +24,7 @@ function GlassesRatingEmblem({ active, hovered }: { active: boolean; hovered: bo
         viewBox="0 0 64 38"
         className={`w-12 h-8 sm:w-14 sm:h-9 transition-all duration-300 ${
           isFilled
-            ? 'text-[#C59B27] drop-shadow-[0_2px_8px_rgba(197,155,39,0.35)] scale-105'
+            ? 'text-[rgb(122,24,35)] drop-shadow-[0_4px_12px_rgba(122,24,35,0.25)] scale-105'
             : 'text-gray-300 hover:text-gray-400'
         }`}
         fill={isFilled ? 'currentColor' : 'none'}
@@ -39,7 +38,7 @@ function GlassesRatingEmblem({ active, hovered }: { active: boolean; hovered: bo
           width="24"
           height="22"
           rx="7"
-          fill={isFilled ? '#FEF3C7' : 'none'}
+          fill={isFilled ? 'rgba(122, 24, 35, 0.1)' : 'none'}
           stroke="currentColor"
           strokeWidth="2.2"
         />
@@ -50,7 +49,7 @@ function GlassesRatingEmblem({ active, hovered }: { active: boolean; hovered: bo
           width="24"
           height="22"
           rx="7"
-          fill={isFilled ? '#FEF3C7' : 'none'}
+          fill={isFilled ? 'rgba(122, 24, 35, 0.1)' : 'none'}
           stroke="currentColor"
           strokeWidth="2.2"
         />
@@ -69,8 +68,8 @@ function GlassesRatingEmblem({ active, hovered }: { active: boolean; hovered: bo
         {/* Reflejos sutiles en los cristales cuando está activo */}
         {isFilled && (
           <>
-            <path d="M7 11 L14 11" stroke="#C59B27" strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
-            <path d="M41 11 L48 11" stroke="#C59B27" strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
+            <path d="M7 11 L14 11" stroke="rgb(122, 24, 35)" strokeWidth="1.5" strokeLinecap="round" opacity="0.7" />
+            <path d="M41 11 L48 11" stroke="rgb(122, 24, 35)" strokeWidth="1.5" strokeLinecap="round" opacity="0.7" />
           </>
         )}
       </svg>
@@ -95,7 +94,7 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
 
   const handleSendFeedbackWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
-    const textoMensaje = `Hola Dr. Fabio Mora, califiqué mi visita en Ópticas Popular con *${rating} de 5 estrellas*.%0A%0A*Nombre:* ${nombre ? encodeURIComponent(nombre) : 'Anónimo'}%0A*¿Qué podemos mejorar?*%0A${encodeURIComponent(comentario || 'Deseo dejar constancia para su retroalimentación.')}`;
+    const textoMensaje = `Hola Dr. Fabio Mora, califiqué mi visita en Ópticas Popular con *${rating} de 5*.%0A%0A*Nombre:* ${nombre ? encodeURIComponent(nombre) : 'Anónimo'}%0A*¿Qué podemos mejorar?*%0A${encodeURIComponent(comentario || 'Deseo dejar constancia para su retroalimentación.')}`;
     window.open(`https://wa.me/50672760215?text=${textoMensaje}`, '_blank');
     setEnviado(true);
   };
@@ -103,7 +102,7 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
   const currentActive = hoveredRating ?? rating;
 
   return (
-    <div className="min-h-screen bg-[#FCFCFD] text-[#15171C] flex flex-col justify-between selection:bg-[#C59B27] selection:text-white">
+    <div className="min-h-screen bg-[#FCFCFD] text-[#15171C] flex flex-col justify-between selection:bg-[rgb(122,24,35)] selection:text-white">
       {/* Barra Superior con botón para volver */}
       <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 py-3.5 px-4 sm:px-6 lg:px-8 shadow-2xs">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
@@ -126,15 +125,15 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
 
       {/* Contenedor Principal de Calificación */}
       <main className="flex-1 max-w-2xl w-full mx-auto px-4 sm:px-6 py-10 md:py-16 text-center flex flex-col justify-center">
-        {/* Eyebrow de Experiencia */}
+        {/* Eyebrow de Experiencia con color corporativo */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
           className="flex items-center justify-center gap-2 mb-4"
         >
-          <div className="w-6 h-[2px] bg-[#C59B27]"></div>
-          <span className="text-[11px] sm:text-[12px] uppercase tracking-[0.2em] font-bold text-[#C59B27]">
+          <div className="w-6 h-[2px] bg-[rgb(122,24,35)]"></div>
+          <span className="text-[11px] sm:text-[12px] uppercase tracking-[0.2em] font-bold text-[rgb(122,24,35)]">
             TU EXPERIENCIA
           </span>
         </motion.div>
@@ -159,7 +158,7 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
           En Ópticas Popular cada consulta busca ser una experiencia cercana, profesional y de máxima claridad visual. ¿Cómo fue tu experiencia hoy con el Dr. Fabio Mora? Califica con nuestros lentes:
         </motion.p>
 
-        {/* Emblemas de Lentes 1 a 5 */}
+        {/* Emblemas de Lentes 1 a 5 con colores corporativos */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -175,13 +174,13 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
                 onClick={() => setRating(val)}
                 onMouseEnter={() => setHoveredRating(val)}
                 onMouseLeave={() => setHoveredRating(null)}
-                className="group flex flex-col items-center gap-2 p-2 rounded-2xl hover:bg-gray-50/80 transition-all duration-200 cursor-pointer focus:outline-none"
+                className="group flex flex-col items-center gap-2 p-2 rounded-2xl hover:bg-[rgb(122,24,35)]/5 transition-all duration-200 cursor-pointer focus:outline-none"
                 aria-label={`Calificar con ${val} lentes de 5`}
               >
-                <GlassesRatingEmblem active={rating !== null && val <= rating} hovered={hoveredRating !== null && val <= hoveredRating} />
+                <GlassesRatingEmblem active={rating !== null && val <= rating} hovered={hoveredRating !== null && val <= (hoveredRating ?? 0)} />
                 <span
                   className={`text-[12px] sm:text-[13px] font-bold transition-colors ${
-                    isFilled ? 'text-[#B45309]' : 'text-gray-400 group-hover:text-gray-600'
+                    isFilled ? 'text-[rgb(122,24,35)] font-extrabold scale-110' : 'text-gray-400 group-hover:text-gray-600'
                   }`}
                 >
                   {val}
@@ -198,7 +197,7 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
               key={rating}
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-[11px] sm:text-[12px] uppercase tracking-[0.16em] font-bold text-[#B45309]"
+              className="text-[11px] sm:text-[12px] uppercase tracking-[0.16em] font-bold text-[rgb(122,24,35)]"
             >
               {RATING_LABELS[rating]}
             </motion.p>
@@ -219,11 +218,14 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.35 }}
-              className="mt-8 text-left bg-white rounded-2xl border border-gray-200/90 shadow-sm p-6 sm:p-8"
+              className="mt-8 text-left bg-white rounded-2xl border border-gray-200/90 shadow-md p-6 sm:p-8 relative overflow-hidden"
             >
+              {/* Línea superior corporativa */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-[rgb(122,24,35)]"></div>
+
               <div className="flex items-start gap-3.5 mb-4">
-                <div className="w-10 h-10 rounded-full bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 border border-amber-200/60 shadow-2xs">
-                  <MessageCircle className="w-5 h-5 text-[#B45309]" />
+                <div className="w-10 h-10 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0 border border-[rgb(122,24,35)]/20 shadow-2xs">
+                  <MessageCircle className="w-5 h-5 text-[rgb(122,24,35)]" />
                 </div>
                 <div>
                   <h3 className="text-[17px] sm:text-[18px] font-serif font-bold text-[#14161B] leading-tight">
@@ -251,7 +253,7 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                     placeholder="Ej. María Gómez"
-                    className="w-full h-11 px-3.5 rounded-xl border border-gray-200 focus:border-[#B45309] focus:ring-2 focus:ring-[#B45309]/15 text-[14px] text-[#15171C] outline-none transition-all placeholder:text-gray-400 bg-white"
+                    className="w-full h-11 px-3.5 rounded-xl border border-gray-200 focus:border-[rgb(122,24,35)] focus:ring-2 focus:ring-[rgb(122,24,35)]/15 text-[14px] text-[#15171C] outline-none transition-all placeholder:text-gray-400 bg-white"
                   />
                 </div>
 
@@ -265,13 +267,13 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
                     value={comentario}
                     onChange={(e) => setComentario(e.target.value)}
                     placeholder="Cuéntanos qué sucedió con total confianza (atención médica, tiempo de espera, entrega de lentes, receta)..."
-                    className="w-full p-3.5 rounded-xl border border-gray-200 focus:border-[#B45309] focus:ring-2 focus:ring-[#B45309]/15 text-[14px] text-[#15171C] outline-none transition-all placeholder:text-gray-400 bg-white resize-none"
+                    className="w-full p-3.5 rounded-xl border border-gray-200 focus:border-[rgb(122,24,35)] focus:ring-2 focus:ring-[rgb(122,24,35)]/15 text-[14px] text-[#15171C] outline-none transition-all placeholder:text-gray-400 bg-white resize-none"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl border-2 border-[#B45309] text-[#92400E] hover:bg-[#B45309] hover:text-white transition-all font-bold text-[12px] sm:text-[13px] uppercase tracking-wider shadow-xs hover:shadow-md active:scale-98 cursor-pointer mt-2 group"
+                  className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white transition-all font-bold text-[12px] sm:text-[13px] uppercase tracking-wider shadow-md hover:shadow-lg active:scale-98 cursor-pointer mt-2 group btn-shimmer"
                 >
                   <MessageCircle className="w-4 h-4 text-inherit" />
                   <span>ENVIAR SUGERENCIA A NUESTRO WHATSAPP PRIVADO</span>
@@ -296,11 +298,14 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.35 }}
-              className="mt-8 text-left bg-gradient-to-b from-white via-white to-amber-50/20 rounded-2xl border border-amber-200/80 shadow-md p-6 sm:p-8"
+              className="mt-8 text-left bg-white rounded-2xl border border-gray-200/90 shadow-md p-6 sm:p-8 relative overflow-hidden"
             >
+              {/* Línea superior corporativa */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-[rgb(122,24,35)]"></div>
+
               <div className="flex items-start gap-3.5 mb-4">
-                <div className="w-10 h-10 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 border border-amber-300/80 shadow-2xs">
-                  <Star className="w-5 h-5 fill-amber-500 text-amber-500" />
+                <div className="w-10 h-10 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0 border border-[rgb(122,24,35)]/20 shadow-2xs">
+                  <HeartHandshake className="w-5 h-5 text-[rgb(122,24,35)]" />
                 </div>
                 <div>
                   <h3 className="text-[18px] sm:text-[19px] font-serif font-bold text-[#14161B] leading-tight">
@@ -319,14 +324,14 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
               </p>
 
               <div className="space-y-3">
-                {/* Botón Principal: Google My Business */}
+                {/* Botón Principal Corporativo: Google My Business */}
                 <a
                   href="https://maps.google.com/?q=Ópticas+Popular+Plaza+Higuerones+San+Rafael+Abajo+Desamparados"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-xl bg-[#1A73E8] hover:bg-[#1557b0] text-white font-bold text-[13px] sm:text-[14px] shadow-md hover:shadow-lg transition-all active:scale-98 cursor-pointer btn-shimmer group"
+                  className="w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white font-bold text-[13px] sm:text-[14px] shadow-md hover:shadow-lg transition-all active:scale-98 cursor-pointer btn-shimmer group"
                 >
-                  <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24">
                     <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
                   </svg>
                   <span>CALIFICAR EN GOOGLE (5 ESTRELLAS)</span>
@@ -336,11 +341,11 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
                 {/* Botón Secundario: WhatsApp */}
                 <a
                   href={`https://wa.me/50672760215?text=${encodeURIComponent(
-                    `Hola Dr. Fabio Mora, califiqué mi visita en Ópticas Popular con ${rating} de 5 estrellas. ¡Muchísimas gracias por la excelente atención!`
+                    `Hola Dr. Fabio Mora, califiqué mi visita en Ópticas Popular con ${rating} de 5. ¡Muchísimas gracias por la excelente atención!`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl border border-gray-200 text-[#555963] hover:text-[rgb(122,24,35)] hover:border-[rgb(122,24,35)]/30 hover:bg-gray-50/70 text-[12.5px] font-semibold transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl border border-gray-200 text-[#555963] hover:text-[rgb(122,24,35)] hover:border-[rgb(122,24,35)]/40 hover:bg-gray-50/70 text-[12.5px] font-semibold transition-all"
                 >
                   <MessageCircle className="w-4 h-4 text-emerald-600" />
                   <span>O envíanos un saludo a nuestro WhatsApp privado</span>
