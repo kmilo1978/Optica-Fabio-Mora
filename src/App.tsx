@@ -734,6 +734,7 @@ export default function App() {
             </AnimatePresence>
           </header>
 
+          <main id="main-content" role="main">
           {/* Hero Section */}
           <section id="inicio" className="w-full bg-gradient-to-b from-slate-50/80 via-white to-white py-4 md:py-7">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -2064,6 +2065,7 @@ export default function App() {
             </motion.div>
             </div>
           </section>
+          </main>
 
           {/* Footer */}
           <footer className="w-full bg-[#111317] text-white pt-10 pb-8 border-t border-gray-800">
