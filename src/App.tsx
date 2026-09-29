@@ -149,7 +149,7 @@ const NAVIGATION_MENU: NavCategory[] = [
   },
   {
     id: 'calificar',
-    name: '⭐ Calificar',
+    name: 'Calificar',
     href: '#calificar',
   },
   {
@@ -282,9 +282,6 @@ const AGE_GROUPS = [
     title: 'Niños y Adolescentes',
     roleTag: 'Salud Visual Infantil',
     badge: 'Desarrollo y Rendimiento Escolar',
-    badgeColor: 'bg-sky-50 text-sky-800 border-sky-200',
-    borderColor: 'border-sky-200 hover:border-sky-400',
-    iconBg: 'bg-sky-600 text-white shadow-sky-600/25',
     icon: Baby,
     description: 'El 80% del aprendizaje en la infancia entra por los ojos. Detectar a tiempo problemas de refracción previene dificultades escolares, falta de concentración y dolores de cabeza.',
     highlights: [
@@ -314,9 +311,6 @@ const AGE_GROUPS = [
     title: 'Jóvenes y Adultos',
     roleTag: 'Vida Digital y Laboral',
     badge: 'Cero Fatiga Visual y Máximo Enfoque',
-    badgeColor: 'bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] border-[rgb(122,24,35)]/20',
-    borderColor: 'border-[rgb(122,24,35)]/20 hover:border-[rgb(122,24,35)]/50',
-    iconBg: 'bg-[rgb(122,24,35)] text-white shadow-[rgb(122,24,35)]/25',
     icon: Monitor,
     description: 'Especialmente diseñado para profesionales y estudiantes con alta exigencia visual, jornadas extensas frente a computadoras y necesidad de nitidez en la conducción.',
     highlights: [
@@ -346,9 +340,6 @@ const AGE_GROUPS = [
     title: 'Adultos Mayores',
     roleTag: 'Cuidado Ocular Integral y Tercera Edad',
     badge: 'Claridad Progresiva y Salud Preventiva',
-    badgeColor: 'bg-emerald-50 text-emerald-800 border-emerald-200',
-    borderColor: 'border-emerald-200/80 hover:border-emerald-400',
-    iconBg: 'bg-emerald-600 text-white shadow-emerald-600/25',
     icon: HeartHandshake,
     description: 'Atención médica con calidez humana, paciencia y tiempo necesario para evaluar presbicia, cambios en el cristalino y descartar afecciones silenciosas de la vista.',
     highlights: [
@@ -1280,9 +1271,9 @@ export default function App() {
               >
                 {[
                   { id: 'all', label: 'Ver Todas las Edades', icon: Users },
-                  { id: 'ninos', label: '👶 Niños y Jóvenes (4-17)', icon: Baby },
-                  { id: 'adultos', label: '💼 Jóvenes y Adultos (18-59)', icon: Monitor },
-                  { id: 'mayores', label: '👴 Adultos Mayores (60+)', icon: HeartHandshake },
+                  { id: 'ninos', label: 'Niños y Jóvenes (4-17)', icon: Baby },
+                  { id: 'adultos', label: 'Jóvenes y Adultos (18-59)', icon: Monitor },
+                  { id: 'mayores', label: 'Adultos Mayores (60+)', icon: HeartHandshake },
                 ].map((tab) => {
                   const isSelected = selectedAgeGroup === tab.id;
                   return (
@@ -1302,7 +1293,7 @@ export default function App() {
                 })}
               </motion.div>
 
-              {/* Grid de Tarjetas Animadas de Edades */}
+              {/* Grid de Tarjetas Animadas de Edades con Colores Corporativos y Letra Blanca en Hover */}
               <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
                 {AGE_GROUPS.filter((g) => selectedAgeGroup === 'all' || g.id === selectedAgeGroup).map((group, idx) => {
                   const GroupIcon = group.icon;
@@ -1314,47 +1305,51 @@ export default function App() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.45, delay: idx * 0.1 }}
                       whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                      className={`group bg-white rounded-3xl p-6 sm:p-7 border ${group.borderColor} shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden`}
+                      className="group bg-white hover:bg-[rgb(122,24,35)] rounded-3xl p-6 sm:p-7 border border-gray-200/90 hover:border-[rgb(122,24,35)] shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden cursor-pointer"
                     >
-                      {/* Fondo con brillo sutil superior */}
-                      <div className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${group.id === 'ninos' ? 'from-sky-400 to-indigo-500' : group.id === 'adultos' ? 'from-[rgb(122,24,35)] to-amber-600' : 'from-emerald-500 to-teal-600'}`}></div>
+                      {/* Línea superior corporativa */}
+                      <div className="absolute top-0 left-0 right-0 h-1.5 bg-[rgb(122,24,35)] group-hover:bg-white transition-colors duration-300"></div>
 
                       <div>
                         {/* Header de la Tarjeta */}
                         <div className="flex items-center justify-between gap-3 mb-4">
-                          <div className={`w-12 h-12 rounded-2xl ${group.iconBg} flex items-center justify-center shadow-md transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+                          <div className="w-12 h-12 rounded-2xl bg-[rgb(122,24,35)] text-white group-hover:bg-white group-hover:text-[rgb(122,24,35)] flex items-center justify-center shadow-md transform transition-all duration-300 group-hover:scale-110">
                             <GroupIcon className="w-6 h-6" />
                           </div>
                           <div className="flex flex-col items-end">
-                            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Rango de edad</span>
-                            <span className="text-[13px] font-bold text-[#15171C] bg-gray-100 px-2.5 py-0.5 rounded-full">{group.ageRange}</span>
+                            <span className="text-[11px] font-bold text-gray-400 group-hover:text-white/70 uppercase tracking-wider transition-colors">
+                              Rango de edad
+                            </span>
+                            <span className="text-[13px] font-bold text-[#15171C] group-hover:text-white bg-gray-100 group-hover:bg-white/20 px-2.5 py-0.5 rounded-full transition-colors">
+                              {group.ageRange}
+                            </span>
                           </div>
                         </div>
 
                         {/* Título y Badge */}
                         <div className="mb-3">
-                          <span className={`inline-block text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full border ${group.badgeColor} mb-2`}>
+                          <span className="inline-block text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full border border-[rgb(122,24,35)]/20 bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] group-hover:bg-white/20 group-hover:text-white group-hover:border-white/30 transition-colors mb-2">
                             {group.roleTag}
                           </span>
-                          <h3 className="text-[21px] sm:text-[22px] font-bold text-[#15171C] group-hover:text-[rgb(122,24,35)] transition-colors leading-tight">
+                          <h3 className="text-[21px] sm:text-[22px] font-bold text-[#15171C] group-hover:text-white transition-colors leading-tight">
                             {group.title}
                           </h3>
                         </div>
 
-                        <p className="text-[13.5px] leading-relaxed text-[#555963] mb-5">
+                        <p className="text-[13.5px] leading-relaxed text-[#555963] group-hover:text-white/90 transition-colors mb-5">
                           {group.description}
                         </p>
 
-                        {/* Puntos destacados con micro-animaciones */}
-                        <div className="space-y-3 pt-4 border-t border-gray-100">
+                        {/* Puntos destacados con cambio de letra a blanco en hover */}
+                        <div className="space-y-3 pt-4 border-t border-gray-100 group-hover:border-white/20 transition-colors">
                           {group.highlights.map((item, hIdx) => (
-                            <div key={hIdx} className="flex items-start gap-2.5 group/item">
-                              <div className={`w-5 h-5 rounded-full ${group.id === 'ninos' ? 'bg-sky-100 text-sky-700' : group.id === 'adultos' ? 'bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)]' : 'bg-emerald-100 text-emerald-700'} flex items-center justify-center shrink-0 mt-0.5 transition-transform duration-200 group-hover/item:scale-110`}>
+                            <div key={hIdx} className="flex items-start gap-2.5">
+                              <div className="w-5 h-5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] group-hover:bg-white/20 group-hover:text-white flex items-center justify-center shrink-0 mt-0.5 transition-colors">
                                 <CheckCircle2 className="w-3.5 h-3.5" />
                               </div>
                               <div className="text-[13px] leading-snug">
-                                <span className="font-bold text-[#15171C]">{item.title}: </span>
-                                <span className="text-[#555963]">{item.desc}</span>
+                                <span className="font-bold text-[#15171C] group-hover:text-white transition-colors">{item.title}: </span>
+                                <span className="text-[#555963] group-hover:text-white/85 transition-colors">{item.desc}</span>
                               </div>
                             </div>
                           ))}
@@ -1362,10 +1357,10 @@ export default function App() {
                       </div>
 
                       {/* Botón de Acción Directo */}
-                      <div className="mt-6 pt-5 border-t border-gray-100 flex flex-col gap-2">
+                      <div className="mt-6 pt-5 border-t border-gray-100 group-hover:border-white/20 flex flex-col gap-2 transition-colors">
                         <a
                           href={`https://wa.me/50672760215?text=${encodeURIComponent(group.waMessage)}`}
-                          className={`w-full inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl ${group.id === 'ninos' ? 'bg-sky-600 hover:bg-sky-700 shadow-sky-600/20' : group.id === 'adultos' ? 'bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] shadow-[rgb(122,24,35)]/20' : 'bg-emerald-700 hover:bg-emerald-800 shadow-emerald-700/20'} text-white text-[13px] sm:text-[14px] font-bold shadow-md transition-all duration-200 active:scale-95 btn-shimmer`}
+                          className="w-full inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[rgb(122,24,35)] text-white group-hover:bg-white group-hover:text-[rgb(122,24,35)] text-[13px] sm:text-[14px] font-bold shadow-md group-hover:shadow-lg transition-all duration-200 active:scale-95"
                         >
                           <MessageCircle className="w-4 h-4" />
                           <span>{group.buttonText}</span>
@@ -2202,7 +2197,7 @@ export default function App() {
                 </div>
               </div>
               <a href="https://web.localrank.com.co/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-[rgb(122,24,35)] transition-colors group">
-                Hechas <span className="text-[rgb(122,24,35)] group-hover:scale-125 transition-transform">❤</span> localrank.com.co
+                Desarrollado por localrank.com.co
               </a>
             </div>
           </div>
