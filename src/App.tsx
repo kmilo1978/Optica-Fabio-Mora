@@ -1463,12 +1463,12 @@ export default function App() {
 
             {/* Selector de Categorías de Servicios con texto blanco asegurado */}
             <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-              {SERVICE_CATEGORIES.map((catName) => {
-                const isSelected = selectedCategory === catName;
+              {serviceCategories.map((cat) => {
+                const isSelected = selectedCategory === cat.id;
                 return (
                   <button
-                    key={catName}
-                    onClick={() => setSelectedCategory(catName)}
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
                     style={{
                       color: isSelected ? '#ffffff' : '#374151',
                       backgroundColor: isSelected ? 'rgb(122, 24, 35)' : '#ffffff',
@@ -1483,7 +1483,7 @@ export default function App() {
                       style={{ color: isSelected ? '#ffffff' : 'inherit' }}
                       className={isSelected ? '!text-white text-white font-bold' : ''}
                     >
-                      {catName}
+                      {cat.label}
                     </span>
                   </button>
                 );
