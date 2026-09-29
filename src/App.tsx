@@ -28,7 +28,11 @@ import {
   Star,
   Sparkles,
   RotateCcw,
-  AlertCircle
+  AlertCircle,
+  Navigation,
+  CreditCard,
+  Smartphone,
+  Receipt
 } from 'lucide-react';
 import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring } from 'motion/react';
 import { useRef } from 'react';
@@ -260,6 +264,7 @@ export default function App() {
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [desktopDropdown, setDesktopDropdown] = useState<string | null>(null);
   const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>('servicios');
@@ -297,7 +302,10 @@ export default function App() {
   };
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+      setShowScrollTop(window.scrollY > 400);
+    };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -928,10 +936,31 @@ export default function App() {
                   ))}
                 </div>
 
-                <div className="mt-5 rounded-[12px] bg-[#F3F4F7] px-4 py-4 pro-card shadow-sm border border-gray-100">
-                  <p className="text-[13px] sm:text-[14px] md:text-[15px] font-medium leading-normal text-[#555963] text-center whitespace-normal md:whitespace-nowrap">
-                    La recomendación final depende de tu examen visual, tu graduación y el tipo de uso diario que necesités.
-                  </p>
+                <div className="mt-5 rounded-2xl bg-gradient-to-r from-emerald-50/90 via-slate-50 to-emerald-50/90 border border-emerald-200/80 p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-2xs">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md">
+                      <ShieldCheck className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-[15px] sm:text-[16px] font-bold text-[#15171C]">
+                          Garantía de Adaptación Visual (30 días)
+                        </span>
+                        <span className="text-[10px] uppercase font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">
+                          100% Tranquilidad
+                        </span>
+                      </div>
+                      <p className="text-[13px] text-[#555963] mt-1 leading-snug">
+                        Si en los primeros 30 días sentís cualquier dificultad de enfoque o adaptación con tu nueva graduación, te reevaluamos y reajustamos tus lentes sin costo adicional.
+                      </p>
+                    </div>
+                  </div>
+                  <a
+                    href="https://wa.me/50672760215?text=Hola%20Dr.%20Fabio,%20deseo%20consultar%20sobre%20la%20garantía%20de%20adaptación%20y%20agendar%20mi%20cita."
+                    className="inline-flex items-center justify-center h-10 px-5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-[13px] font-bold whitespace-nowrap shadow-sm hover:shadow-md transition-all shrink-0 active:scale-95"
+                  >
+                    Consultar garantía
+                  </a>
                 </div>
               </motion.div>
             </div>
@@ -1535,22 +1564,46 @@ export default function App() {
 
               <div className="mt-6 grid lg:grid-cols-[1fr_340px] gap-5">
                 {/* Left: Expanded Map */}
-                <div className="h-[350px] lg:h-auto min-h-[400px] rounded-[16px] overflow-hidden border border-[#E3E5EC] shadow-sm relative group">
-                  <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15722.057649214696!2d-84.081993!3d9.8910441!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e3edbed430b5%3A0x4e83f4dbd6b649b2!2s%C3%93pticas%20Popular%20Plaza%20Higuerones%3A%20Aros%20I%20Lentes%20I%20Servicios%20Oft%C3%A1lmicos%20I%20Ex%C3%A1menes%20de%20Vista!5e0!3m2!1ses!2sco!4v1707761517794!5m2!1ses!2sco" 
-                    width="100%" 
-                    height="100%" 
-                    style={{ border: 0 }} 
-                    allowFullScreen 
-                    loading="lazy" 
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Ubicación de Ópticas Popular"
-                    className="grayscale-[0.2] contrast-[1.1] transition-all duration-700 group-hover:grayscale-0"
-                  ></iframe>
-                  <div className="absolute top-4 left-4 pointer-events-none">
-                    <span className="inline-flex items-center h-6 px-3 rounded-full bg-white/90 backdrop-blur-sm text-[9px] font-bold uppercase tracking-wider text-[#15171C] shadow-md border border-white">
-                      <ArrowUpRight className="w-3 h-3 mr-1.5 text-[rgb(122,24,35)]" /> Ver en grande
-                    </span>
+                <div className="flex flex-col h-full">
+                  <div className="flex-1 min-h-[340px] rounded-[16px] overflow-hidden border border-[#E3E5EC] shadow-sm relative group">
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15722.057649214696!2d-84.081993!3d9.8910441!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e3edbed430b5%3A0x4e83f4dbd6b649b2!2s%C3%93pticas%20Popular%20Plaza%20Higuerones%3A%20Aros%20I%20Lentes%20I%20Servicios%20Oft%C3%A1lmicos%20I%20Ex%C3%A1menes%20de%20Vista!5e0!3m2!1ses!2sco!4v1707761517794!5m2!1ses!2sco" 
+                      width="100%" 
+                      height="100%" 
+                      style={{ border: 0 }} 
+                      allowFullScreen 
+                      loading="lazy" 
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Ubicación de Ópticas Popular"
+                      className="grayscale-[0.2] contrast-[1.1] transition-all duration-700 group-hover:grayscale-0 w-full h-full min-h-[300px]"
+                    ></iframe>
+                    <div className="absolute top-4 left-4 pointer-events-none">
+                      <span className="inline-flex items-center h-6 px-3 rounded-full bg-white/90 backdrop-blur-sm text-[10px] font-bold uppercase tracking-wider text-[#15171C] shadow-md border border-white">
+                        <MapPin className="w-3 h-3 mr-1.5 text-[rgb(122,24,35)]" /> Plaza Higuerones
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Botones directos de Waze y Google Maps (Costa Rica) */}
+                  <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <a
+                      href="https://waze.com/ul?ll=9.8910441,-84.081993&navigate=yes"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 h-11 px-4 rounded-xl bg-[#33CCFF] hover:bg-[#28b8e6] text-[#0b3340] font-bold text-[13px] shadow-sm hover:shadow-md transition-all active:scale-95"
+                    >
+                      <Navigation className="w-4 h-4 text-[#0b3340]" />
+                      <span>Abrir ruta en Waze</span>
+                    </a>
+                    <a
+                      href="https://maps.google.com/?q=Ópticas+Popular+Plaza+Higuerones+San+Rafael+Abajo+Desamparados"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 h-11 px-4 rounded-xl bg-white hover:bg-gray-50 border border-gray-200 text-[#15171C] font-bold text-[13px] shadow-sm hover:shadow-md transition-all active:scale-95"
+                    >
+                      <MapPin className="w-4 h-4 text-[rgb(122,24,35)]" />
+                      <span>Abrir en Google Maps</span>
+                    </a>
                   </div>
                 </div>
 
@@ -1658,6 +1711,59 @@ export default function App() {
                   <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.31-.75.42-1.24 1.25-1.33 2.1-.1.7.1 1.41.53 1.96.44.53 1.11.85 1.79.9.69.05 1.4-.16 1.97-.55.62-.43 1-1.14 1.05-1.89.01-3.22-.01-6.43.01-9.64z"/></svg>
                   TikTok
                 </a>
+              </div>
+
+              {/* Barra de Facilidades y Métodos de Pago aceptados en Costa Rica */}
+              <div className="mt-5 rounded-2xl bg-[#F8F9FA] border border-gray-200/80 p-4 sm:p-5">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-gray-200/70">
+                  <div className="flex items-center gap-2">
+                    <CreditCard className="w-4 h-4 text-[rgb(122,24,35)]" />
+                    <span className="text-[13.5px] font-bold text-[#15171C]">Facilidades y Métodos de Pago</span>
+                  </div>
+                  <span className="text-[11.5px] text-gray-500 font-medium">Comodidad y transparencia en tu consulta</span>
+                </div>
+
+                <div className="mt-3.5 grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+                  <div className="bg-white rounded-xl p-3 border border-gray-200/60 shadow-2xs flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                      <Smartphone className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-[12.5px] font-bold text-[#15171C]">SINPE Móvil</div>
+                      <div className="text-[10.5px] text-gray-500">Transferencia al 7276-0215</div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-xl p-3 border border-gray-200/60 shadow-2xs flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                      <CreditCard className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-[12.5px] font-bold text-[#15171C]">Tarjetas</div>
+                      <div className="text-[10.5px] text-gray-500">Débito y Crédito en datáfono</div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-xl p-3 border border-gray-200/60 shadow-2xs flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                      <Award className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-[12.5px] font-bold text-[#15171C]">Tasa Cero</div>
+                      <div className="text-[10.5px] text-gray-500">Planes en cuotas autorizadas</div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-xl p-3 border border-gray-200/60 shadow-2xs flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                      <Receipt className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-[12.5px] font-bold text-[#15171C]">Factura Electrónica</div>
+                      <div className="text-[10.5px] text-gray-500">Para seguros médicos o INS</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
             </div>
@@ -2021,6 +2127,25 @@ export default function App() {
                 </div>
               </motion.div>
             </div>
+          )}
+        </AnimatePresence>
+
+        
+        {/* Botón Flotante Volver Arriba */}
+        <AnimatePresence>
+          {showScrollTop && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 15 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              aria-label="Volver arriba"
+              className="fixed bottom-20 md:bottom-6 left-4 md:left-6 z-40 w-11 h-11 rounded-full bg-white/95 hover:bg-white text-[#15171C] hover:text-[rgb(122,24,35)] border border-gray-200 shadow-lg backdrop-blur-md flex items-center justify-center transition-colors cursor-pointer group"
+            >
+              <ChevronUp className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
+            </motion.button>
           )}
         </AnimatePresence>
 
