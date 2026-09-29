@@ -337,19 +337,6 @@ export default function CalificarPage({ onBack }: CalificarPageProps) {
                   <span>CALIFICAR EN GOOGLE (5 ESTRELLAS)</span>
                   <ExternalLink className="w-4 h-4 opacity-80 group-hover:translate-x-0.5" />
                 </a>
-
-                {/* Botón Secundario: WhatsApp */}
-                <a
-                  href={`https://wa.me/50672760215?text=${encodeURIComponent(
-                    `Hola Dr. Fabio Mora, califiqué mi visita en Ópticas Popular con ${rating} de 5. ¡Muchísimas gracias por la excelente atención!`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl border border-gray-200 text-[#555963] hover:text-[rgb(122,24,35)] hover:border-[rgb(122,24,35)]/40 hover:bg-gray-50/70 text-[12.5px] font-semibold transition-all"
-                >
-                  <MessageCircle className="w-4 h-4 text-emerald-600" />
-                  <span>O envíanos un saludo a nuestro WhatsApp privado</span>
-                </a>
               </div>
             </motion.div>
           )}
