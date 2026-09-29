@@ -1314,63 +1314,86 @@ export default function App() {
 
           {/* Contact Section */}
           {/* FAQ Section */}
-          <section id="faq" className="w-full py-14 md:py-24 bg-slate-50/60 border-y border-gray-100">
+          <section id="faq" className="w-full py-16 md:py-24 bg-slate-50/70 border-y border-gray-100">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-[14px] p-5 md:p-8 shadow-sm border border-gray-100"
-            >
-              <div className="flex justify-start">
-                <span className="inline-flex items-center h-5 px-2 rounded-full bg-[#F2F3F7] text-[7px] uppercase tracking-[0.14em] text-[#7C808B] shadow-sm">
-                  <HelpCircle className="w-3 h-3 mr-1.5 text-[rgb(122,24,35)]" /> Preguntas frecuentes
+              <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
+                <span className="inline-flex items-center gap-1.5 h-6 px-3.5 rounded-full bg-white text-[9px] uppercase tracking-[0.14em] font-semibold text-[#767A84] shadow-xs border border-gray-200/60 mb-4">
+                  <HelpCircle className="w-3.5 h-3.5 text-[rgb(122,24,35)]" /> Preguntas frecuentes
                 </span>
+                <h2 className="text-[28px] sm:text-[34px] md:text-[40px] leading-tight tracking-tight font-bold text-[#14161B]">
+                  Resolvé tus <span className="text-[rgb(122,24,35)]">dudas</span>
+                </h2>
+                <p className="mt-3 text-[14px] sm:text-[16px] leading-relaxed text-[#6D727D]">
+                  Aquí encontrarás respuestas claras a las consultas más comunes sobre nuestros servicios y el cuidado de tu visión.
+                </p>
               </div>
-              <h2 className="mt-4 text-[24px] sm:text-[28px] md:text-[30px] leading-[1.08] tracking-tight font-bold text-[#15171C]">
-                Resolvé tus <span className="text-[rgb(122,24,35)]">dudas</span>
-              </h2>
-              <p className="mt-3 max-w-[42ch] text-[12px] sm:text-[13px] md:text-[12px] leading-[1.68] text-[#6D727D]">
-                Aquí encontrarás respuestas a las consultas más comunes sobre nuestros servicios y el cuidado de tu salud visual.
-              </p>
 
-              <div className="mt-8 space-y-3">
-                {FAQS.map((faq, index) => (
-                  <div 
-                    key={index}
-                    className="border border-[#E3E5EC] rounded-[12px] overflow-hidden transition-all duration-300"
-                  >
-                    <button
-                      onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
-                      className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-[#F9FAFB] transition-colors"
+              <div className="space-y-3.5 md:space-y-4">
+                {FAQS.map((faq, index) => {
+                  const isOpen = openFaqIndex === index;
+                  return (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      viewport={{ once: true }}
+                      className={`rounded-2xl transition-all duration-200 border ${
+                        isOpen 
+                          ? 'bg-white border-[rgb(122,24,35)]/30 shadow-md ring-2 ring-[rgb(122,24,35)]/5' 
+                          : 'bg-white border-gray-200/70 hover:border-gray-300 shadow-xs hover:shadow-sm'
+                      }`}
                     >
-                      <span className="text-[13px] sm:text-[14px] font-bold text-[#15171C] pr-4">
-                        {faq.question}
-                      </span>
-                      {openFaqIndex === index ? (
-                        <ChevronUp className="w-4 h-4 text-[rgb(122,24,35)] flex-shrink-0" />
-                      ) : (
-                        <ChevronDown className="w-4 h-4 text-[#7C808B] flex-shrink-0" />
-                      )}
-                    </button>
-                    <AnimatePresence>
-                      {openFaqIndex === index && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        >
-                          <div className="px-5 pb-4 text-[12px] sm:text-[13px] leading-[1.6] text-[#6D727D] border-t border-[#F3F4F7] pt-3">
-                            {faq.answer}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ))}
+                      <button
+                        onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                        className="w-full px-5 sm:px-6 py-4 sm:py-5 flex items-center justify-between text-left gap-4 cursor-pointer"
+                      >
+                        <span className={`text-[15px] sm:text-[17px] md:text-[18px] font-semibold transition-colors ${
+                          isOpen ? 'text-[rgb(122,24,35)]' : 'text-[#14161B]'
+                        }`}>
+                          {faq.question}
+                        </span>
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                          isOpen ? 'bg-[rgb(122,24,35)] text-white' : 'bg-gray-100 text-gray-500'
+                        }`}>
+                          <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+                        </div>
+                      </button>
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.25, ease: 'easeInOut' }}
+                            className="overflow-hidden"
+                          >
+                            <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-2 text-[14px] sm:text-[15px] md:text-[16px] leading-[1.7] text-[#555A65] border-t border-gray-100">
+                              {faq.answer}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  );
+                })}
               </div>
-            </motion.div>
+
+              {/* Botón de ayuda extra */}
+              <div className="mt-10 text-center">
+                <p className="text-[13px] sm:text-[14px] text-gray-600 mb-3">
+                  ¿Tenés otra consulta que no encontrás aquí?
+                </p>
+                <a
+                  href="https://wa.me/50672760215"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-gray-200 text-[#15171C] text-[12px] sm:text-[13px] font-semibold shadow-xs hover:border-[rgb(122,24,35)] hover:text-[rgb(122,24,35)] hover:shadow-sm transition-all"
+                >
+                  <MessageCircle className="w-4 h-4 text-[rgb(122,24,35)]" />
+                  Preguntanos por WhatsApp
+                </a>
+              </div>
             </div>
           </section>
 
