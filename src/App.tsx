@@ -2140,7 +2140,7 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        {/* Floating WhatsApp Button */}
+        {/* Floating WhatsApp Button (solo visible en pantallas de escritorio / oculto en móviles) */}
         <motion.a
           href="https://wa.me/50672760215"
           target="_blank"
@@ -2149,7 +2149,7 @@ export default function App() {
           animate={{ scale: 1, opacity: 1 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="flex fixed bottom-20 md:bottom-6 right-4 md:right-6 z-[45] w-14 h-14 bg-[#25D366] text-white rounded-full items-center justify-center shadow-2xl hover:bg-[#20ba5a] transition-all group"
+          className="hidden md:flex fixed bottom-6 right-6 z-[45] w-14 h-14 bg-[#25D366] text-white rounded-full items-center justify-center shadow-2xl hover:bg-[#20ba5a] transition-all group"
           aria-label="Contactar por WhatsApp"
         >
           <span className="hidden md:inline-flex items-center gap-1.5 absolute right-16 bg-[#15171C]/95 backdrop-blur-md text-white text-[12px] font-semibold py-1.5 px-3.5 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-300 -translate-x-2 group-hover:translate-x-0 whitespace-nowrap shadow-xl border border-white/10">
