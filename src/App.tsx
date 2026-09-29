@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Phone, 
@@ -1556,7 +1556,7 @@ export default function App() {
                   <a href="#" className="hover:text-[rgb(122,24,35)] transition-colors">Términos del Servicio</a>
                 </div>
               </div>
-              <a href="https://localrank.com.co" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-[rgb(122,24,35)] transition-colors group">
+              <a href="https://web.localrank.com.co/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-[rgb(122,24,35)] transition-colors group">
                 Hechas <span className="text-[rgb(122,24,35)] group-hover:scale-125 transition-transform">❤</span> localrank.com.co
               </a>
             </div>
@@ -1613,3 +1613,4 @@ export default function App() {
     </div>
   );
 }
+
