@@ -127,11 +127,12 @@ export default function CalificarPage({ onBack, lang = 'es' }: CalificarPageProp
             <span>{isEn ? 'Return to main site' : 'Volver al sitio principal'}</span>
           </button>
 
-          <a href="#inicio" onClick={onBack} className="flex items-center gap-2">
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[rgb(122,24,35)] text-white shadow-sm">
-              <Eye size={18} strokeWidth={2.5} />
-            </div>
-            <span className="text-[15px] font-bold tracking-tight text-[#13151A]">Ópticas Popular</span>
+          <a href="#inicio" onClick={onBack} className="flex items-center gap-2 group py-0.5">
+            <img 
+              src="/images/logo-opticas-popular.png" 
+              alt="Logo Oficial Ópticas Popular" 
+              className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105" 
+            />
           </a>
         </div>
       </header>

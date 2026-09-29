@@ -651,13 +651,15 @@ export default function App() {
           {/* Navigation */}
           <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-xs border-b border-gray-100' : 'bg-white/80 backdrop-blur-sm border-b border-gray-100/60'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
-              <a href="#inicio" className="flex items-center gap-2 shrink-0 group">
-                <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl bg-[rgb(122,24,35)] text-white shadow-lg group-hover:scale-105 transition-transform duration-300">
-                  <Eye size={24} strokeWidth={2.5} />
-                </div>
-                <div className="flex flex-col leading-none">
-                  <span className="text-[18px] md:text-[21px] font-bold tracking-tight text-[#13151A]">Ópticas Popular</span>
-                  <span className="text-[11px] md:text-[12px] font-bold text-[rgb(122,24,35)] uppercase tracking-wider mt-0.5">Dr. Fabio Mora Medina</span>
+              <a href="#inicio" className="flex items-center gap-3 shrink-0 group py-0.5">
+                <img 
+                  src="/images/logo-opticas-popular.png" 
+                  alt="Logo Oficial Ópticas Popular" 
+                  className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+                />
+                <div className="hidden xl:flex flex-col leading-tight pl-3 border-l border-gray-200">
+                  <span className="text-[12px] font-bold text-[#13151A] uppercase tracking-wider">Dr. Fabio Mora Medina</span>
+                  <span className="text-[10px] font-semibold text-[rgb(122,24,35)] uppercase tracking-wider">Optometrista Clínico · C.O.C.R.</span>
                 </div>
               </a>
 
@@ -862,13 +864,11 @@ export default function App() {
                     {/* Encabezado del Menú Hamburguesa */}
                     <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-[#F8F9FB]">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)] text-white flex items-center justify-center shadow-md">
-                          <Eye size={22} strokeWidth={2.5} />
-                        </div>
-                        <div className="flex flex-col leading-none">
-                          <span className="text-[15px] font-bold tracking-tight text-[#13151A]">Ópticas Popular</span>
-                          <span className="text-[9px] font-medium text-[rgb(122,24,35)] uppercase tracking-wider mt-1">Dr. Fabio Mora Medina</span>
-                        </div>
+                        <img 
+                          src="/images/logo-opticas-popular.png" 
+                          alt="Logo Oficial Ópticas Popular" 
+                          className="h-10 w-auto object-contain" 
+                        />
                       </div>
                       <button
                         onClick={() => setIsMenuOpen(false)}
@@ -2454,15 +2454,19 @@ export default function App() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-left">
                 {/* Columna 1: Identidad Clínica & Aval */}
                 <div>
-                  <a href="#inicio" className="flex items-center gap-3 shrink-0 group mb-4">
-                    <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-[rgb(122,24,35)] text-white shadow-lg shadow-[rgb(122,24,35)]/25 group-hover:scale-105 transition-transform duration-300">
-                      <Eye size={22} strokeWidth={2.3} />
-                    </div>
-                    <div className="flex flex-col leading-tight">
-                      <span className="text-[17px] font-serif font-bold tracking-tight text-white">{t.footer.clinicName}</span>
-                      <span className="text-[10px] font-bold text-rose-300 uppercase tracking-wider mt-0.5">{t.footer.doctorTitle}</span>
+                  <a href="#inicio" className="inline-block mb-4 group">
+                    <div className="bg-white px-3.5 py-2 rounded-xl border border-white/20 shadow-md inline-flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                      <img 
+                        src="/images/logo-opticas-popular.png" 
+                        alt="Logo Oficial Ópticas Popular" 
+                        className="h-9 w-auto object-contain" 
+                      />
                     </div>
                   </a>
+                  <div className="leading-tight mb-2">
+                    <span className="text-[14px] font-bold text-white block">{t.footer.doctorName}</span>
+                    <span className="text-[10.5px] font-bold text-rose-300 uppercase tracking-wider">{t.footer.doctorTitle}</span>
+                  </div>
                   <p className="text-[13.5px] leading-relaxed text-gray-300">
                     {t.footer.description}
                   </p>
