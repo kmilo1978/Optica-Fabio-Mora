@@ -38,11 +38,15 @@ import {
   Glasses,
   HeartHandshake,
   BookOpen,
-  Monitor
+  Monitor,
+  ZoomIn,
+  Globe
 } from 'lucide-react';
 import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring } from 'motion/react';
 import { useRef } from 'react';
 import CalificarPage from './CalificarPage';
+import MagnifierLens from './MagnifierLens';
+import { TRANSLATIONS, Language } from './translations';
 
 function AnimatedNumber({ value, duration = 2 }: { value: number; duration?: number }) {
   const count = useMotionValue(0);
@@ -87,282 +91,416 @@ interface NavCategory {
   groups?: SubGroup[];
 }
 
-const SERVICE_CATEGORIES = ['Todos', 'Diagnóstico y Exámenes', 'Especialidades Oculares', 'Lentes y Contactología'] as const;
+function getNavigationMenu(lang: Language): NavCategory[] {
+  const t = TRANSLATIONS[lang].nav;
+  return [
+    {
+      id: 'inicio',
+      name: t.home,
+      href: '#inicio',
+    },
+    {
+      id: 'servicios',
+      name: t.services,
+      href: '#servicios',
+      groups: [
+        {
+          title: t.diagnostics,
+          items: [
+            { name: lang === 'es' ? 'Evaluación Visual Integral' : 'Comprehensive Visual Exam', href: '#servicios', desc: lang === 'es' ? 'Graduación precisa y fondo de ojo' : 'Accurate refraction & fundus exam', icon: Eye },
+            { name: lang === 'es' ? 'Para Toda la Familia' : 'For the Whole Family', href: '#edades', desc: lang === 'es' ? 'Niños, adultos y personas mayores' : 'Kids, adults, and seniors', icon: Users },
+            { name: lang === 'es' ? 'Fotografía de Retina' : 'Retinal Photography', href: '#servicios', desc: lang === 'es' ? 'Diagnóstico digital de retina' : 'Digital retinal imaging', icon: Camera },
+            { name: lang === 'es' ? 'Toma de Presión Ocular' : 'Eye Pressure Test', href: '#servicios', desc: lang === 'es' ? 'Control preventivo de glaucoma' : 'Glaucoma screening', icon: Activity },
+          ],
+        },
+        {
+          title: t.specialties,
+          items: [
+            { name: lang === 'es' ? 'Valoración de Cataratas' : 'Cataract Assessment', href: '#servicios', desc: lang === 'es' ? 'Evaluación y orientación médica' : 'Evaluation & medical guidance', icon: Stethoscope },
+            { name: lang === 'es' ? 'Evaluación de Ojo Seco' : 'Dry Eye Evaluation', href: '#servicios', desc: lang === 'es' ? 'Alivio de resequedad e irritación' : 'Relief for irritation and dryness', icon: Droplets },
+            { name: lang === 'es' ? 'Lentes de Contacto' : 'Contact Lenses', href: '#servicios', desc: lang === 'es' ? 'Adaptación personalizada y cómoda' : 'Custom, comfortable lens fitting', icon: Contact },
+          ],
+        },
+        {
+          title: t.methodology,
+          items: [
+            { name: lang === 'es' ? 'Proceso de Consulta' : 'Exam Step-by-Step', href: '#proceso', desc: lang === 'es' ? 'Paso a paso de tu cita médica' : 'What to expect at your appointment', icon: CheckCircle2 },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'nosotros',
+      name: t.about,
+      href: '#doctor',
+      groups: [
+        {
+          title: lang === 'es' ? 'La Clínica' : 'Our Practice',
+          items: [
+            { name: t.drName, href: '#doctor', desc: t.drDesc, icon: Award },
+            { name: t.whyUs, href: '#beneficios', desc: t.whyUsDesc, icon: ShieldCheck },
+          ],
+        },
+        {
+          title: lang === 'es' ? 'Experiencia y Espacio' : 'Experience & Clinic',
+          items: [
+            { name: t.facilities, href: '#galeria', desc: t.facilitiesDesc, icon: Camera },
+            { name: t.testimonials, href: '#testimonios', desc: t.testimonialsDesc, icon: Users },
+            { name: t.rate, href: '#calificar', desc: t.rateDesc },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'faq',
+      name: t.faq,
+      href: '#faq',
+    },
+    {
+      id: 'contacto',
+      name: t.contact,
+      href: '#contacto',
+    },
+  ];
+}
 
-const NAVIGATION_MENU: NavCategory[] = [
-  {
-    id: 'inicio',
-    name: 'Inicio',
-    href: '#inicio',
-  },
-  {
-    id: 'servicios',
-    name: 'Servicios',
-    href: '#servicios',
-    groups: [
+function getWhyChooseUs(lang: Language) {
+  if (lang === 'en') {
+    return [
       {
-        title: 'Exámenes y Diagnóstico',
-        items: [
-          { name: 'Evaluación Visual Integral', href: '#servicios', desc: 'Graduación precisa y fondo de ojo', icon: Eye },
-          { name: 'Para Toda la Familia', href: '#edades', desc: 'Niños, adultos y personas mayores', icon: Users },
-          { name: 'Fotografía de Retina', href: '#servicios', desc: 'Diagnóstico digital de retina', icon: Camera },
-          { name: 'Toma de Presión Ocular', href: '#servicios', desc: 'Control preventivo de glaucoma', icon: Activity },
-        ],
+        title: 'Cutting-Edge Technology',
+        description: 'Advanced computerized equipment for accurate, detailed, and comfortable diagnoses.',
+        icon: Zap,
       },
       {
-        title: 'Especialidades Oculares',
-        items: [
-          { name: 'Valoración de Cataratas', href: '#servicios', desc: 'Evaluación y orientación médica', icon: Stethoscope },
-          { name: 'Evaluación de Ojo Seco', href: '#servicios', desc: 'Alivio de resequedad e irritación', icon: Droplets },
-          { name: 'Lentes de Contacto', href: '#servicios', desc: 'Adaptación personalizada y cómoda', icon: Contact },
-        ],
+        title: 'Personalized Clinical Care',
+        description: 'Each patient receives the dedicated time, focus, and explanation their eye health deserves.',
+        icon: ShieldCheck,
       },
       {
-        title: 'Metodología',
-        items: [
-          { name: 'Proceso de Consulta', href: '#proceso', desc: 'Paso a paso de tu cita médica', icon: CheckCircle2 },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'nosotros',
-    name: 'Conócenos',
-    href: '#doctor',
-    groups: [
-      {
-        title: 'La Clínica',
-        items: [
-          { name: 'Dr. Fabio Mora Medina', href: '#doctor', desc: 'Trayectoria y formación profesional', icon: Award },
-          { name: '¿Por qué elegirnos?', href: '#beneficios', desc: 'Tecnología y atención personalizada', icon: ShieldCheck },
-        ],
+        title: 'Clinical Experience',
+        description: <>Over <span className="text-[rgb(122,24,35)] font-bold"><AnimatedNumber value={18} /></span> years of clinical expertise and continuous medical education.</>,
+        icon: Award,
       },
       {
-        title: 'Experiencia y Espacio',
-        items: [
-          { name: 'Instalaciones y Equipos', href: '#galeria', desc: 'Conoce nuestro consultorio', icon: Camera },
-          { name: 'Testimonios de Pacientes', href: '#testimonios', desc: 'Experiencias de quienes nos visitan', icon: Users },
-          { name: 'Calificar Experiencia', href: '#calificar', desc: 'Tu opinión nos ayuda a mejorar' },
-        ],
+        title: 'Preventive Approach',
+        description: 'We detect visual and retinal changes early, before they affect your quality of life.',
+        icon: Eye,
       },
-    ],
-  },
-  {
-    id: 'faq',
-    name: 'Preguntas',
-    href: '#faq',
-  },
-  {
-    id: 'contacto',
-    name: 'Contacto',
-    href: '#contacto',
-  },
-];
-
-const WHY_CHOOSE_US = [
-  {
-    title: 'Tecnología de punta',
-    description: 'Equipos avanzados para diagnósticos precisos y detallados.',
-    icon: Zap,
-  },
-  {
-    title: 'Atención personalizada',
-    description: 'Cada paciente recibe el tiempo y la dedicación que su salud visual merece.',
-    icon: ShieldCheck,
-  },
-  {
-    title: 'Experiencia clínica',
-    description: <>Más de <span className="text-[rgb(122,24,35)] font-bold"><AnimatedNumber value={18} /></span> años de trayectoria profesional y formación académica constante.</>,
-    icon: Award,
-  },
-  {
-    title: 'Enfoque preventivo',
-    description: 'Detectamos problemas antes de que afecten tu calidad de vida.',
-    icon: Eye,
-  },
-];
-
-const FAQS = [
-  {
-    question: '¿Cada cuánto debo hacerme un examen de la vista?',
-    answer: 'Se recomienda realizar un examen visual completo al menos una vez al año, especialmente si usas lentes, trabajas mucho frente a pantallas o tienes antecedentes familiares de problemas oculares.'
-  },
-  {
-    question: '¿Qué incluye la evaluación visual integral?',
-    answer: 'Incluye la medición de tu agudeza visual, refracción para determinar tu graduación, examen de fondo de ojo, toma de presión ocular y evaluación de la salud externa del ojo.'
-  },
-  {
-    question: '¿Atienden a niños y adultos mayores?',
-    answer: 'Sí, brindamos atención personalizada para todas las edades. Adaptamos nuestras pruebas según las necesidades de niños, jóvenes, adultos y personas de la tercera edad.'
-  },
-  {
-    question: '¿Necesito cita previa para atenderme?',
-    answer: 'Sí, trabajamos bajo un sistema de citas para garantizarte el tiempo y la atención de calidad que tu salud visual merece. Podés agendar fácilmente por WhatsApp o llamada.'
-  },
-  {
-    question: '¿Cuánto tiempo dura la consulta?',
-    answer: 'Una evaluación integral suele durar entre 30 y 45 minutos, dependiendo de las pruebas adicionales que tu caso específico pueda requerir.'
-  },
-  {
-    question: '¿Qué pasa si no me adapto a mis nuevos lentes o graduación?',
-    answer: 'Contamos con una Garantía de Adaptación Visual de 30 días. Si durante el primer mes sientes cualquier incomodidad o dificultad de enfoque con tus nuevos lentes (especialmente en multifocales o progresivos), el Dr. Fabio Mora te realiza una reevaluación completa y el reajuste de tus lentes sin costo adicional.'
-  },
-  {
-    question: '¿Cuáles métodos de pago aceptan y puedo usar mis propios aros?',
-    answer: 'Aceptamos pagos en efectivo, SINPE Móvil, tarjetas de crédito y débito, y facilidades con Tasa Cero. Además, emitimos factura electrónica para reintegros con seguros o asociaciones. Y sí, si tienes una montura favorita en buen estado, podemos adaptarle únicamente tus nuevos cristales.'
+    ];
   }
-];
+  return [
+    {
+      title: 'Tecnología de punta',
+      description: 'Equipos avanzados para diagnósticos precisos y detallados.',
+      icon: Zap,
+    },
+    {
+      title: 'Atención personalizada',
+      description: 'Cada paciente recibe el tiempo y la dedicación que su salud visual merece.',
+      icon: ShieldCheck,
+    },
+    {
+      title: 'Experiencia clínica',
+      description: <>Más de <span className="text-[rgb(122,24,35)] font-bold"><AnimatedNumber value={18} /></span> años de trayectoria profesional y formación académica constante.</>,
+      icon: Award,
+    },
+    {
+      title: 'Enfoque preventivo',
+      description: 'Detectamos problemas antes de que afecten tu calidad de vida.',
+      icon: Eye,
+    },
+  ];
+}
 
-const SERVICES = [
-  {
-    title: 'Evaluación visual integral',
-    category: 'Diagnóstico y Exámenes',
-    description: 'Examen completo para conocer con precisión tu estado visual y orientar la mejor solución.',
-    icon: Eye,
-  },
-  {
-    title: 'Fotografía de retina',
-    category: 'Especialidades Oculares',
-    description: 'Valoración de la salud ocular mediante imágenes que ayudan a detectar alteraciones a tiempo.',
-    icon: Camera,
-  },
-  {
-    title: 'Toma de presión ocular',
-    category: 'Diagnóstico y Exámenes',
-    description: 'Medición orientada a detectar factores de riesgo relacionados con glaucoma y control ocular.',
-    icon: Activity,
-  },
-  {
-    title: 'Valoración de cataratas',
-    category: 'Especialidades Oculares',
-    description: 'Diagnóstico y orientación para entender el estado de tu visión y el manejo recomendado.',
-    icon: Stethoscope,
-  },
-  {
-    title: 'Evaluación de ojo seco',
-    category: 'Especialidades Oculares',
-    description: 'Revisión de molestias o resequedad para proponerte una solución más cómoda y efectiva.',
-    icon: Droplets,
-  },
-  {
-    title: 'Lentes de contacto',
-    category: 'Lentes y Contactología',
-    description: 'Adaptación personalizada para opciones esféricas, astigmatismo y multifocal según tu caso.',
-    icon: Contact,
-  },
-];
-
-const TESTIMONIALS = [
-  {
-    name: 'María G.',
-    role: 'Paciente',
-    content: 'Me explicaron todo con mucha claridad y sentí seguridad durante toda la evaluación. La atención fue muy profesional y cercana.',
-  },
-  {
-    name: 'Carlos R.',
-    role: 'Paciente',
-    content: 'Tenía molestias visuales desde hacía tiempo y salí con una orientación clara. El proceso fue ordenado, rápido y muy completo.',
-  },
-  {
-    name: 'Andrea M.',
-    role: 'Paciente',
-    content: 'Excelente trato y mucha confianza. Me ayudaron a entender cuál era la mejor solución para mi visión y mis lentes.',
-  },
-];
-
-const AGE_GROUPS = [
-  {
-    id: 'ninos',
-    ageRange: '4 a 17 años',
-    title: 'Niños y Adolescentes',
-    roleTag: 'Salud Visual Infantil',
-    badge: 'Desarrollo y Rendimiento Escolar',
-    icon: Baby,
-    description: 'El 80% del aprendizaje en la infancia entra por los ojos. Detectar a tiempo problemas de refracción previene dificultades escolares, falta de concentración y dolores de cabeza.',
-    highlights: [
+function getFaqs(lang: Language) {
+  if (lang === 'en') {
+    return [
       {
-        title: 'Evaluación Lúdica y Sin Miedo',
-        desc: 'Consulta cercana, paciente y sin dolor donde los niños se sienten cómodos y tranquilos.'
+        question: 'How often should I have an eye exam?',
+        answer: 'A comprehensive eye exam is recommended at least once a year, especially if you wear corrective lenses, spend long hours on screens, or have a family history of eye conditions.'
       },
       {
-        title: 'Detección Temprana y Ojo Vago',
-        desc: 'Diagnóstico precoz de miopía, astigmatismo y ambliopía antes de que afecten su desarrollo.'
+        question: 'What is included in the comprehensive visual evaluation?',
+        answer: 'It includes visual acuity testing, digital refraction to determine your precise prescription, fundus examination, intraocular pressure measurement, and external ocular health assessment.'
       },
       {
-        title: 'Control de Fatiga por Pantallas',
-        desc: 'Protección visual frente a celulares, tablets y computadoras de estudio.'
+        question: 'Do you treat children and seniors?',
+        answer: 'Yes, we provide personalized care for all age groups. We adapt our clinical tests to the needs of children, adults, and seniors with patience and warmth.'
       },
       {
-        title: 'Monturas Flexibles y Seguras',
-        desc: 'Armazones ligeros, hipoalergénicos e irrompibles diseñados para jugar sin riesgos.'
+        question: 'Do I need an appointment beforehand?',
+        answer: 'Yes, we work by appointment to ensure the dedicated time and clinical quality your visual health deserves. You can easily schedule via WhatsApp or phone call.'
+      },
+      {
+        question: 'How long does the consultation take?',
+        answer: 'A comprehensive evaluation typically takes 30 to 45 minutes, depending on the specific tests your clinical case requires.'
+      },
+      {
+        question: 'What if I do not adapt to my new lenses or prescription?',
+        answer: 'We provide a 30-Day Visual Adaptation Guarantee. If during the first month you experience any discomfort or focusing issue with your new lenses (especially progressives), Dr. Fabio Mora performs a full re-evaluation and lens adjustment at no extra charge.'
+      },
+      {
+        question: 'What payment methods do you accept and can I bring my own frames?',
+        answer: 'We accept cash, local bank transfers (SINPE Movil), credit and debit cards. We also provide electronic invoices for medical insurance reimbursement. And yes, if you already have a favorite frame in good condition, we can fit only your new prescription lenses.'
       }
-    ],
-    waMessage: 'Hola Dr. Fabio, deseo agendar una valoración visual para mi hijo(a).',
-    buttonText: 'Agendar para mi hijo(a)'
-  },
-  {
-    id: 'adultos',
-    ageRange: '18 a 59 años',
-    title: 'Jóvenes y Adultos',
-    roleTag: 'Vida Digital y Laboral',
-    badge: 'Cero Fatiga Visual y Máximo Enfoque',
-    icon: Monitor,
-    description: 'Especialmente diseñado para profesionales y estudiantes con alta exigencia visual, jornadas extensas frente a computadoras y necesidad de nitidez en la conducción.',
-    highlights: [
-      {
-        title: 'Filtro Blue Defense y Antirreflejo',
-        desc: 'Alivio instantáneo contra ojos rojos, ardor, visión borrosa y cefaleas por pantallas.'
-      },
-      {
-        title: 'Conducción Nocturna Segura',
-        desc: 'Tecnología de lentes que neutraliza destellos molestos de faros vehiculares y lluvia.'
-      },
-      {
-        title: 'Graduación Milimétrica Exacta',
-        desc: 'Refracción clínica computarizada para fórmulas monofocales, antirreflejo o lentes de contacto.'
-      },
-      {
-        title: 'Evaluación Preventiva Ocular',
-        desc: 'Revisión periódica de la salud corneal y descarte de espasmos de acomodación.'
-      }
-    ],
-    waMessage: 'Hola Dr. Fabio, paso muchas horas en pantallas/trabajo y deseo agendar mi examen visual.',
-    buttonText: 'Agendar mi examen de la vista'
-  },
-  {
-    id: 'mayores',
-    ageRange: '60 años en adelante',
-    title: 'Adultos Mayores',
-    roleTag: 'Cuidado Ocular Integral y Tercera Edad',
-    badge: 'Claridad Progresiva y Salud Preventiva',
-    icon: HeartHandshake,
-    description: 'Atención médica con calidez humana, paciencia y tiempo necesario para evaluar presbicia, cambios en el cristalino y descartar afecciones silenciosas de la vista.',
-    highlights: [
-      {
-        title: 'Adaptación a Lentes Progresivos',
-        desc: 'Visión nítida a corta, media y larga distancia respaldada por 30 días de Garantía de Adaptación.'
-      },
-      {
-        title: 'Descarte de Cataratas y Glaucoma',
-        desc: 'Medición digital de presión intraocular y evaluación preventiva del fondo de ojo.'
-      },
-      {
-        title: 'Consulta Cálida, Pausada y Humana',
-        desc: 'Explicación detallada sin prisas, con letra grande y acompañamiento a familiares.'
-      },
-      {
-        title: 'Armazones Ultraligeros y Cómodos',
-        desc: 'Monturas suaves con plaquetas anatómicas que no dejan marcas ni presionan la nariz.'
-      }
-    ],
-    waMessage: 'Hola Dr. Fabio, deseo agendar una valoración visual para un adulto mayor (revisión de multifocales y salud ocular).',
-    buttonText: 'Agendar para un adulto mayor'
+    ];
   }
-];
+  return [
+    {
+      question: '¿Cada cuánto debo hacerme un examen de la vista?',
+      answer: 'Se recomienda realizar un examen visual completo al menos una vez al año, especialmente si usas lentes, trabajas mucho frente a pantallas o tienes antecedentes familiares de problemas oculares.'
+    },
+    {
+      question: '¿Qué incluye la evaluación visual integral?',
+      answer: 'Incluye la medición de tu agudeza visual, refracción para determinar tu graduación, examen de fondo de ojo, toma de presión ocular y evaluación de la salud externa del ojo.'
+    },
+    {
+      question: '¿Atienden a niños y adultos mayores?',
+      answer: 'Sí, brindamos atención personalizada para todas las edades. Adaptamos nuestras pruebas según las necesidades de niños, jóvenes, adultos y personas de la tercera edad.'
+    },
+    {
+      question: '¿Necesito cita previa para atenderme?',
+      answer: 'Sí, trabajamos bajo un sistema de citas para garantizarte el tiempo y la atención de calidad que tu salud visual merece. Podés agendar fácilmente por WhatsApp o llamada.'
+    },
+    {
+      question: '¿Cuánto tiempo dura la consulta?',
+      answer: 'Una evaluación integral suele durar entre 30 y 45 minutos, dependiendo de las pruebas adicionales que tu caso específico pueda requerir.'
+    },
+    {
+      question: '¿Qué pasa si no me adapto a mis nuevos lentes o graduación?',
+      answer: 'Contamos con una Garantía de Adaptación Visual de 30 días. Si durante el primer mes sientes cualquier incomodidad o dificultad de enfoque con tus nuevos lentes (especialmente en multifocales o progresivos), el Dr. Fabio Mora te realiza una reevaluación completa y el reajuste de tus lentes sin costo adicional.'
+    },
+    {
+      question: '¿Cuáles métodos de pago aceptan y puedo usar mis propios aros?',
+      answer: 'Aceptamos pagos en efectivo, SINPE Móvil, tarjetas de crédito y débito, y facilidades con Tasa Cero. Además, emitimos factura electrónica para reintegros con seguros o asociaciones. Y sí, si tienes una montura favorita en buen estado, podemos adaptarle únicamente tus nuevos cristales.'
+    }
+  ];
+}
+
+function getServices(lang: Language) {
+  if (lang === 'en') {
+    return [
+      {
+        title: 'Comprehensive Visual Evaluation',
+        category: 'Diagnostics & Exams',
+        categoryId: 'diag',
+        description: 'Complete examination to accurately evaluate your eye health and prescribe the optimal visual solution.',
+        icon: Eye,
+      },
+      {
+        title: 'Retinal Photography',
+        category: 'Eye Specialties',
+        categoryId: 'spec',
+        description: 'High-resolution digital imaging of the retina to detect and monitor eye conditions early.',
+        icon: Camera,
+      },
+      {
+        title: 'Intraocular Pressure Test',
+        category: 'Diagnostics & Exams',
+        categoryId: 'diag',
+        description: 'Targeted measurement to detect risk factors related to glaucoma and maintain ocular health.',
+        icon: Activity,
+      },
+      {
+        title: 'Cataract Assessment',
+        category: 'Eye Specialties',
+        categoryId: 'spec',
+        description: 'Diagnosis and medical orientation to understand your lens clarity and recommended management.',
+        icon: Stethoscope,
+      },
+      {
+        title: 'Dry Eye Evaluation',
+        category: 'Eye Specialties',
+        categoryId: 'spec',
+        description: 'Assessment of ocular discomfort, redness, and dryness to recommend comfortable and effective therapy.',
+        icon: Droplets,
+      },
+      {
+        title: 'Contact Lenses Fitting',
+        category: 'Eyeglasses & Contacts',
+        categoryId: 'lens',
+        description: 'Personalized adaptation for spherical, astigmatism, and multifocal lenses tailored to your lifestyle.',
+        icon: Contact,
+      },
+    ];
+  }
+  return [
+    {
+      title: 'Evaluación visual integral',
+      category: 'Diagnóstico y Exámenes',
+      categoryId: 'diag',
+      description: 'Examen completo para conocer con precisión tu estado visual y orientar la mejor solución.',
+      icon: Eye,
+    },
+    {
+      title: 'Fotografía de retina',
+      category: 'Especialidades Oculares',
+      categoryId: 'spec',
+      description: 'Valoración de la salud ocular mediante imágenes que ayudan a detectar alteraciones a tiempo.',
+      icon: Camera,
+    },
+    {
+      title: 'Toma de presión ocular',
+      category: 'Diagnóstico y Exámenes',
+      categoryId: 'diag',
+      description: 'Medición orientada a detectar factores de riesgo relacionados con glaucoma y control ocular.',
+      icon: Activity,
+    },
+    {
+      title: 'Valoración de cataratas',
+      category: 'Especialidades Oculares',
+      categoryId: 'spec',
+      description: 'Diagnóstico y orientación para entender el estado de tu visión y el manejo recomendado.',
+      icon: Stethoscope,
+    },
+    {
+      title: 'Evaluación de ojo seco',
+      category: 'Especialidades Oculares',
+      categoryId: 'spec',
+      description: 'Revisión de molestias o resequedad para proponerte una solución más cómoda y efectiva.',
+      icon: Droplets,
+    },
+    {
+      title: 'Lentes de contacto',
+      category: 'Lentes y Contactología',
+      categoryId: 'lens',
+      description: 'Adaptación personalizada para opciones esféricas, astigmatismo y multifocal según tu caso.',
+      icon: Contact,
+    },
+  ];
+}
+
+function getTestimonials(lang: Language) {
+  if (lang === 'en') {
+    return [
+      {
+        name: 'Maria G.',
+        role: 'Patient',
+        content: 'Everything was explained with great clarity and I felt confident throughout the exam. The care was very professional and warm.',
+      },
+      {
+        name: 'Carlos R.',
+        role: 'Patient',
+        content: 'I had been experiencing eye fatigue for a while and left with clear guidance. The process was organized, fast, and very thorough.',
+      },
+      {
+        name: 'Andrea M.',
+        role: 'Patient',
+        content: 'Excellent treatment and high trust. They helped me understand the best solution for my vision and my glasses.',
+      },
+    ];
+  }
+  return [
+    {
+      name: 'María G.',
+      role: 'Paciente',
+      content: 'Me explicaron todo con mucha claridad y sentí seguridad durante toda la evaluación. La atención fue muy profesional y cercana.',
+    },
+    {
+      name: 'Carlos R.',
+      role: 'Paciente',
+      content: 'Tenía molestias visuales desde hacía tiempo y salí con una orientación clara. El proceso fue ordenado, rápido y muy completo.',
+    },
+    {
+      name: 'Andrea M.',
+      role: 'Paciente',
+      content: 'Excelente trato y mucha confianza. Me ayudaron a entender cuál era la mejor solución para mi visión y mis lentes.',
+    },
+  ];
+}
+
+function getAgeGroups(lang: Language) {
+  const e = TRANSLATIONS[lang].edades;
+  return [
+    {
+      id: 'ninos',
+      ageRange: e.ninosAge,
+      title: e.ninosTitle,
+      roleTag: e.ninosTag,
+      icon: Baby,
+      description: e.ninosDesc,
+      highlights: [
+        { title: e.ninosH1Title, desc: e.ninosH1Desc },
+        { title: e.ninosH2Title, desc: e.ninosH2Desc },
+        { title: e.ninosH3Title, desc: e.ninosH3Desc },
+      ],
+      waMessage: lang === 'es' ? 'Hola Dr. Fabio, deseo agendar una valoración visual para mi hijo(a).' : 'Hello Dr. Fabio, I would like to book a pediatric eye exam for my child.',
+      buttonText: e.ninosBtn,
+    },
+    {
+      id: 'adultos',
+      ageRange: e.adultosAge,
+      title: e.adultosTitle,
+      roleTag: e.adultosTag,
+      icon: Monitor,
+      description: e.adultosDesc,
+      highlights: [
+        { title: e.adultosH1Title, desc: e.adultosH1Desc },
+        { title: e.adultosH2Title, desc: e.adultosH2Desc },
+        { title: e.adultosH3Title, desc: e.adultosH3Desc },
+      ],
+      waMessage: lang === 'es' ? 'Hola Dr. Fabio, paso muchas horas en pantallas/trabajo y deseo agendar mi examen visual.' : 'Hello Dr. Fabio, I spend long hours on screens and would like to schedule an eye exam.',
+      buttonText: e.adultosBtn,
+    },
+    {
+      id: 'mayores',
+      ageRange: e.mayoresAge,
+      title: e.mayoresTitle,
+      roleTag: e.mayoresTag,
+      icon: HeartHandshake,
+      description: e.mayoresDesc,
+      highlights: [
+        { title: e.mayoresH1Title, desc: e.mayoresH1Desc },
+        { title: e.mayoresH2Title, desc: e.mayoresH2Desc },
+        { title: e.mayoresH3Title, desc: e.mayoresH3Desc },
+      ],
+      waMessage: lang === 'es' ? 'Hola Dr. Fabio, deseo agendar una consulta de salud visual para adulto mayor.' : 'Hello Dr. Fabio, I would like to book a comprehensive senior eye care consultation.',
+      buttonText: e.mayoresBtn,
+    },
+  ];
+}
 
 const BRANDS = ['Ray-Ban', 'Oakley', 'Persol', 'Vogue', 'Arnette', 'Transitions'];
 
 export default function App() {
+  const [lang, setLang] = useState<Language>(() => {
+    try {
+      return (localStorage.getItem('optica_lang') as Language) || 'es';
+    } catch (e) {
+      return 'es';
+    }
+  });
+
+  const [magnifierActive, setMagnifierActive] = useState<boolean>(false);
+
+  const changeLanguage = (newLang: Language) => {
+    setLang(newLang);
+    try {
+      localStorage.setItem('optica_lang', newLang);
+    } catch (e) {}
+  };
+
+  const t = TRANSLATIONS[lang];
+  const navigationMenu = getNavigationMenu(lang);
+  const whyChooseUs = getWhyChooseUs(lang);
+  const faqs = getFaqs(lang);
+  const services = getServices(lang);
+  const testimonials = getTestimonials(lang);
+  const ageGroups = getAgeGroups(lang);
+
+  const serviceCategories = lang === 'es' ? [
+    { id: 'all', label: 'Todos los servicios' },
+    { id: 'diag', label: 'Diagnóstico y Exámenes' },
+    { id: 'spec', label: 'Especialidades Oculares' },
+    { id: 'lens', label: 'Lentes y Contactología' },
+  ] : [
+    { id: 'all', label: 'All Services' },
+    { id: 'diag', label: 'Diagnostics & Exams' },
+    { id: 'spec', label: 'Eye Specialties' },
+    { id: 'lens', label: 'Eyeglasses & Contacts' },
+  ];
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -375,7 +513,7 @@ export default function App() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [desktopDropdown, setDesktopDropdown] = useState<string | null>(null);
   const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>('servicios');
-  const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<'all' | 'ninos' | 'adultos' | 'mayores'>('all');
   const [showDiagnosticModal, setShowDiagnosticModal] = useState(false);
   const [diagnosticStep, setDiagnosticStep] = useState<'question' | 'scanning' | 'result'>('question');
@@ -432,13 +570,17 @@ export default function App() {
 
   if (currentView === 'calificar') {
     return (
-      <CalificarPage 
-        onBack={() => {
-          window.location.hash = '';
-          setCurrentView('home');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }} 
-      />
+      <>
+        <CalificarPage 
+          onBack={() => {
+            window.location.hash = '';
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }} 
+          lang={lang}
+        />
+        <MagnifierLens active={magnifierActive} onToggle={setMagnifierActive} lang={lang} />
+      </>
     );
   }
 
@@ -465,7 +607,7 @@ export default function App() {
 
               {/* Desktop Nav categorizado */}
               <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-                {NAVIGATION_MENU.map((cat) => {
+                {navigationMenu.map((cat) => {
                   const hasSub = Boolean(cat.groups && cat.groups.length > 0);
                   const isOpen = desktopDropdown === cat.id;
 
@@ -565,6 +707,51 @@ export default function App() {
               </nav>
 
               <div className="flex items-center gap-2">
+                {/* Switch de Idioma Español (CR) / English */}
+                <div className="flex items-center bg-gray-100 p-0.5 rounded-[9px] border border-gray-200" role="group" aria-label="Selector de idioma">
+                  <button
+                    type="button"
+                    onClick={() => changeLanguage('es')}
+                    className={`px-2 py-1 rounded-[7px] text-[10.5px] font-bold transition-all cursor-pointer ${
+                      lang === 'es'
+                        ? 'bg-[rgb(122,24,35)] text-white shadow-2xs'
+                        : 'text-gray-600 hover:text-black'
+                    }`}
+                    title="Español (Costa Rica)"
+                  >
+                    ES (CR)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => changeLanguage('en')}
+                    className={`px-2 py-1 rounded-[7px] text-[10.5px] font-bold transition-all cursor-pointer ${
+                      lang === 'en'
+                        ? 'bg-[rgb(122,24,35)] text-white shadow-2xs'
+                        : 'text-gray-600 hover:text-black'
+                    }`}
+                    title="English"
+                  >
+                    EN
+                  </button>
+                </div>
+
+                {/* Botón Lupa de Aumento Visual */}
+                <button
+                  type="button"
+                  id="magnifier-toggle-btn"
+                  onClick={() => setMagnifierActive(!magnifierActive)}
+                  className={`inline-flex items-center gap-1.5 h-9 px-2.5 sm:px-3 rounded-[8px] text-[11px] font-bold transition-all border cursor-pointer ${
+                    magnifierActive
+                      ? 'bg-[rgb(122,24,35)] text-white border-[rgb(122,24,35)] shadow-xs'
+                      : 'bg-white hover:bg-gray-50 text-[#15171C] border-[#E3E5EC]'
+                  }`}
+                  title={lang === 'es' ? 'Activar/desactivar lupa oftálmica de lectura' : 'Toggle reading magnifier lens'}
+                >
+                  <ZoomIn className={`w-3.5 h-3.5 ${magnifierActive ? 'text-white' : 'text-[rgb(122,24,35)]'}`} />
+                  <span className="hidden sm:inline">{t.nav.magnifier}</span>
+                  {magnifierActive && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>}
+                </button>
+
                 <a
                   href="tel:+50672760215"
                   className="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-[8px] bg-white border border-[#E3E5EC] text-[#15171C] text-[11px] font-bold hover:bg-gray-50 transition-colors shadow-sm"
@@ -638,12 +825,52 @@ export default function App() {
 
                     {/* Contenido con Scroll de Categorías y Subcategorías */}
                     <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+                      <div className="p-3 bg-gray-50 rounded-xl border border-gray-100 flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-1">
+                          <Globe className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
+                          <span className="text-[11px] font-bold text-gray-700">{lang === 'es' ? 'Idioma:' : 'Language:'}</span>
+                        </div>
+                        <div className="flex items-center bg-white p-0.5 rounded-lg border border-gray-200">
+                          <button
+                            type="button"
+                            onClick={() => changeLanguage('es')}
+                            className={`px-2 py-1 rounded text-[10.5px] font-bold ${lang === 'es' ? 'bg-[rgb(122,24,35)] text-white' : 'text-gray-600'}`}
+                          >
+                            ES (CR)
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => changeLanguage('en')}
+                            className={`px-2 py-1 rounded text-[10.5px] font-bold ${lang === 'en' ? 'bg-[rgb(122,24,35)] text-white' : 'text-gray-600'}`}
+                          >
+                            EN
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="p-3 bg-gray-50 rounded-xl border border-gray-100 flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2">
+                          <ZoomIn className="w-4 h-4 text-[rgb(122,24,35)]" />
+                          <div>
+                            <div className="text-[12px] font-bold text-[#15171C]">{lang === 'es' ? 'Lupa Oftálmica' : 'Optical Lens'}</div>
+                            <div className="text-[10px] text-gray-500">{magnifierActive ? (lang === 'es' ? 'Modo activo' : 'Active mode') : (lang === 'es' ? 'Aumenta el texto al tocar' : 'Enlarge text on tap')}</div>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setMagnifierActive(!magnifierActive)}
+                          className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ${magnifierActive ? 'bg-[rgb(122,24,35)] text-white' : 'bg-white border border-gray-200 text-gray-700'}`}
+                        >
+                          {magnifierActive ? (lang === 'es' ? 'ON' : 'ON') : (lang === 'es' ? 'OFF' : 'OFF')}
+                        </button>
+                      </div>
+
                       <p className="text-[11px] font-bold uppercase tracking-widest text-[#767A84] px-1">
                         Navegación por categorías
                       </p>
 
                       <div className="space-y-2">
-                        {NAVIGATION_MENU.map((cat) => {
+                        {navigationMenu.map((cat) => {
                           const hasSub = Boolean(cat.groups && cat.groups.length > 0);
                           const isExpanded = mobileExpandedCat === cat.id;
 
@@ -805,7 +1032,7 @@ export default function App() {
                       transition={{ duration: 0.5, delay: 0.1 }}
                       className="inline-flex items-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#6A6E79] w-fit shadow-xs border border-gray-100"
                     >
-                      Exámenes visuales integrales
+                      {lang === 'es' ? 'Exámenes visuales integrales' : 'Comprehensive Visual Care'}
                     </motion.div>
 
                     <motion.h1 
@@ -814,7 +1041,7 @@ export default function App() {
                       transition={{ duration: 0.6, delay: 0.2 }}
                       className="mt-4 md:mt-5 max-w-xl lg:max-w-2xl text-[28px] sm:text-[34px] md:text-[40px] lg:text-[46px] leading-[1.14] tracking-tight font-bold text-[#13151A]"
                     >
-                      Ópticas Popular: Agendá tu <span className="text-[rgb(122,24,35)]">examen visual</span> con el Dr. Fabio Mora
+                      {lang === 'es' ? <>Ópticas Popular: Agendá tu <span className="text-[rgb(122,24,35)]">examen visual</span> con el Dr. Fabio Mora</> : <>Opticas Popular: Book your <span className="text-[rgb(122,24,35)]">eye exam</span> with Dr. Fabio Mora</>}
                     </motion.h1>
 
                     <motion.p 
@@ -823,7 +1050,7 @@ export default function App() {
                       transition={{ duration: 0.6, delay: 0.3 }}
                       className="mt-3.5 md:mt-4 max-w-xl text-[15px] sm:text-[16px] md:text-[16.5px] leading-relaxed text-[#555963]"
                     >
-                      Si notás visión borrosa, molestias, cansancio ocular o tus lentes ya no responden como antes, este es el momento de revisarte con atención profesional y resultados claros.
+                      {lang === 'es' ? 'Si notás visión borrosa, molestias, cansancio ocular o tus lentes ya no responden como antes, este es el momento de revisarte con atención profesional y resultados claros.' : 'If you experience blurry vision, eye fatigue, headaches, or your lenses are outdated, now is the ideal time for a thorough exam with clear guidance.'}
                     </motion.p>
 
                   <motion.div 
@@ -836,14 +1063,14 @@ export default function App() {
                       href="https://wa.me/50672760215"
                       className="inline-flex items-center justify-center h-12 px-7 rounded-xl bg-[rgb(122,24,35)] text-white text-[14px] font-bold cta-primary btn-shimmer w-full sm:w-auto transition-transform hover:scale-[1.02] active:scale-[0.98]"
                     >
-                      Agendar por WhatsApp
+                      {lang === 'es' ? 'Agendar por WhatsApp' : 'Book via WhatsApp'}
                     </a>
 
                     <a
                       href="tel:+50672760215"
                       className="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-white text-[#15171C] text-[14px] font-bold border border-[#E3E5EC] cta-secondary w-full sm:w-auto transition-transform hover:scale-[1.02] active:scale-[0.98]"
                     >
-                      Llamar ahora
+                      {lang === 'es' ? 'Llamar ahora' : 'Call now'}
                     </a>
                   </motion.div>
 
@@ -854,14 +1081,14 @@ export default function App() {
                     className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 w-full max-w-[580px]"
                   >
                     {[
-                      { label: 'Frecuencia', value: '1 vez al año recomendado', href: '#servicios' },
+                      { label: lang === 'es' ? 'Frecuencia' : 'Frequency', value: lang === 'es' ? '1 vez al año recomendado' : 'Once a year recommended', href: '#servicios' },
                       { 
-                        label: 'Atención Integral', 
-                        value: 'Niños, adultos y mayores', 
+                        label: lang === 'es' ? 'Atención Integral' : 'Care for All Ages', 
+                        value: lang === 'es' ? 'Niños, adultos y mayores' : 'Kids, adults, and seniors', 
                         href: '#edades',
-                        tag: 'Todas las edades'
+                        tag: lang === 'es' ? 'Todas las edades' : 'All ages'
                       },
-                      { label: 'Reserva', value: 'WhatsApp o llamada directa', href: 'https://wa.me/50672760215' },
+                      { label: lang === 'es' ? 'Reserva' : 'Appointments', value: lang === 'es' ? 'WhatsApp o llamada directa' : 'WhatsApp or direct call', href: 'https://wa.me/50672760215' },
                     ].map((item, i) => (
                       <a 
                         key={i} 
@@ -954,10 +1181,10 @@ export default function App() {
                     Urgencia
                   </span>
                   <h2 className="mt-4 max-w-xl text-[28px] sm:text-[32px] md:text-[36px] leading-tight tracking-tight font-bold text-[#15171C]">
-                    Esperar demasiado puede hacer que el problema afecte más <span className="text-[rgb(122,24,35)]">tu rutina</span>
+                    {lang === 'es' ? <>Esperar demasiado puede hacer que el problema afecte más <span className="text-[rgb(122,24,35)]">tu rutina</span></> : <>Waiting too long can allow vision issues to disrupt <span className="text-[rgb(122,24,35)]">your daily routine</span></>}
                   </h2>
                   <p className="mt-3 max-w-xl text-[15px] sm:text-[16px] leading-relaxed text-[#555963]">
-                    Cuando la visión cambia, aparecen molestias al leer, manejar, usar pantallas o trabajar. Revisarte a tiempo ayuda a detectar qué está pasando y decidir la mejor solución.
+                    {lang === 'es' ? 'Cuando la visión cambia, aparecen molestias al leer, manejar, usar pantallas o trabajar. Revisarte a tiempo ayuda a detectar qué está pasando y decidir la mejor solución.' : 'When your vision changes, reading, driving, and computer work become challenging. Timely evaluations identify the root cause and provide clear solutions.'}
                   </p>
                 </div>
 
@@ -994,11 +1221,11 @@ export default function App() {
             </div>
 
             <h2 className="mt-5 max-w-2xl mx-auto text-center text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] leading-tight tracking-tight font-bold text-[#14161B]">
-              ¿Por qué confiar en <span className="text-[rgb(122,24,35)]">nuestra atención</span> visual?
+              {lang === 'es' ? <>¿Por qué confiar en <span className="text-[rgb(122,24,35)]">nuestra atención</span> visual?</> : <>Why families trust <span className="text-[rgb(122,24,35)]">our clinical care</span></>}
             </h2>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {WHY_CHOOSE_US.map((item, i) => (
+              {whyChooseUs.map((item, i) => (
                 <motion.div 
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
@@ -1168,7 +1395,7 @@ export default function App() {
             </div>
 
             <div className="mt-6 relative grid md:grid-cols-2 xl:grid-cols-3 gap-3">
-              {SERVICES.filter((s) => selectedCategory === 'Todos' || s.category === selectedCategory).map((service, i) => (
+              {services.filter((s) => selectedCategory === 'all' || s.categoryId === selectedCategory).map((service, i) => (
                 <motion.article 
                   key={service.title}
                   initial={{ opacity: 0, y: 20 }}
@@ -1276,7 +1503,7 @@ export default function App() {
 
               {/* Grid de Tarjetas Animadas de Edades con Colores Corporativos y Letra Blanca en Hover */}
               <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
-                {AGE_GROUPS.filter((g) => selectedAgeGroup === 'all' || g.id === selectedAgeGroup).map((group, idx) => {
+                {ageGroups.filter((g) => selectedAgeGroup === 'all' || g.id === selectedAgeGroup).map((group, idx) => {
                   const GroupIcon = group.icon;
                   return (
                     <motion.article
@@ -1367,13 +1594,13 @@ export default function App() {
                   </div>
                   <div>
                     <div className="flex items-center justify-center md:justify-start gap-2 flex-wrap">
-                      <span className="text-[15px] sm:text-[16px] font-bold text-white">¿Desean venir en familia el mismo día?</span>
+                      <span className="text-[15px] sm:text-[16px] font-bold text-white">{lang === 'es' ? '¿Desean venir en familia el mismo día?' : 'Would you like to visit as a family on the same day?'}</span>
                       <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-400 text-gray-900 px-2.5 py-0.5 rounded-full">
                         Atención Coordinada
                       </span>
                     </div>
                     <p className="text-[13px] text-white/80 mt-1 leading-snug">
-                      Agendamos citas consecutivas para que niños, padres y abuelos se revisen en una sola visita a Plaza Higuerones con parqueo cómodo y sin esperas.
+                      {lang === 'es' ? 'Agendamos citas consecutivas para que niños, padres y abuelos se revisen en una sola visita a Plaza Higuerones con parqueo cómodo y sin esperas.' : 'We schedule back-to-back appointments so children, parents, and grandparents can all be seen in a single convenient visit with ample parking.'}
                     </p>
                   </div>
                 </div>
@@ -1407,7 +1634,7 @@ export default function App() {
                   </h2>
                 </div>
 
-                <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center btn-shimmer">Agendar valoración</a>
+                <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center btn-shimmer">{lang === 'es' ? 'Agendar valoración' : 'Book appointment'}</a>
               </div>
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-[1.08fr_0.92fr] gap-3">
@@ -1527,7 +1754,7 @@ export default function App() {
                     Testimonios
                   </span>
                   <h2 className="mt-3 text-[26px] sm:text-[30px] md:text-[34px] leading-[1.2] tracking-tight font-bold text-[#15171C]">
-                    La <span className="text-[rgb(122,24,35)]">confianza se gana</span> con atención clara, cercana y resultados bien explicados
+                    {lang === 'es' ? <>La <span className="text-[rgb(122,24,35)]">confianza se gana</span> con atención clara, cercana y resultados bien explicados</> : <>Trust is earned through <span className="text-[rgb(122,24,35)]">clear, honest care</span> and well-explained results</>}
                   </h2>
                 </div>
 
@@ -1540,14 +1767,14 @@ export default function App() {
                     }}
                     className="inline-flex items-center justify-center h-11 px-5 rounded-xl bg-white border border-gray-200 hover:border-[rgb(122,24,35)] text-[#15171C] hover:text-[rgb(122,24,35)] text-[13px] font-bold shadow-2xs transition-all active:scale-95 cursor-pointer"
                   >
-                    <span>Calificar experiencia</span>
+                    <span>{lang === 'es' ? 'Calificar experiencia' : 'Rate experience'}</span>
                   </a>
                   <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 btn-shimmer">Agendar valoración</a>
                 </div>
               </div>
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3">
-                {TESTIMONIALS.map((t, i) => (
+                {testimonials.map((t, i) => (
                   <motion.article 
                     key={i} 
                     initial={{ opacity: 0, y: 20 }}
@@ -1827,7 +2054,7 @@ export default function App() {
               </div>
 
               <div className="space-y-3.5 md:space-y-4">
-                {FAQS.map((faq, index) => {
+                {faqs.map((faq, index) => {
                   const isOpen = openFaqIndex === index;
                   return (
                     <motion.div
@@ -2201,14 +2428,14 @@ export default function App() {
                 className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-white border border-[#E3E5EC] text-[#15171C] text-[11px] font-bold active:scale-95 transition-transform shadow-xs"
               >
                 <Phone className="w-4 h-4 text-[rgb(122,24,35)] mb-0.5" />
-                <span>Llamar</span>
+                <span>{lang === 'es' ? 'Llamar' : 'Call'}</span>
               </a>
               <a
                 href="https://wa.me/50672760215"
                 className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[rgb(122,24,35)] text-white text-[11px] font-bold active:scale-95 transition-transform shadow-md"
               >
                 <MessageCircle className="w-4 h-4 mb-0.5" />
-                <span>Cita</span>
+                <span>{lang === 'es' ? 'Cita' : 'Book'}</span>
               </a>
             </div>
           </div>
@@ -2502,7 +2729,10 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        {/* Floating WhatsApp Button (solo visible en pantallas de escritorio / oculto en móviles) */}
+        {/* Lupa Oftálmica Accesible y Magnificador de Lectura */}
+      <MagnifierLens active={magnifierActive} onToggle={setMagnifierActive} lang={lang} />
+
+      {/* Floating WhatsApp Button (solo visible en pantallas de escritorio / oculto en móviles) */}
         <motion.a
           href="https://wa.me/50672760215"
           target="_blank"
