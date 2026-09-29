@@ -39,14 +39,11 @@ import {
   HeartHandshake,
   BookOpen,
   Monitor,
-  ZoomIn,
-  ZoomOut,
   Globe
 } from 'lucide-react';
 import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring } from 'motion/react';
 import { useRef } from 'react';
 import CalificarPage from './CalificarPage';
-import MagnifierLens from './MagnifierLens';
 import { TRANSLATIONS, Language } from './translations';
 
 function AnimatedNumber({ value, duration = 2 }: { value: number; duration?: number }) {
@@ -528,8 +525,6 @@ export default function App() {
     }
   });
 
-  const [magnifierActive, setMagnifierActive] = useState<boolean>(false);
-
   const changeLanguage = (newLang: Language) => {
     setLang(newLang);
     try {
@@ -636,7 +631,6 @@ export default function App() {
           }} 
           lang={lang}
         />
-        <MagnifierLens active={magnifierActive} onToggle={setMagnifierActive} lang={lang} />
       </>
     );
   }
@@ -799,25 +793,7 @@ export default function App() {
                   </button>
                 </div>
 
-                {/* Botón Lupa: Solo un icono elegante que no satura el menú */}
-                <button
-                  type="button"
-                  id="magnifier-toggle-btn"
-                  onClick={() => setMagnifierActive(!magnifierActive)}
-                  className={`w-7.5 h-7.5 rounded-full flex items-center justify-center transition-all cursor-pointer border ${
-                    magnifierActive
-                      ? 'bg-[rgb(122,24,35)] text-white border-[rgb(122,24,35)] shadow-xs scale-105 ring-2 ring-[rgb(122,24,35)]/20'
-                      : 'bg-white hover:bg-gray-100 text-[rgb(122,24,35)] border-gray-200/90 shadow-2xs hover:scale-105'
-                  }`}
-                  title={lang === 'es' ? (magnifierActive ? 'Desactivar modo lectura aumentada (Esc)' : 'Activar modo lectura aumentada') : (magnifierActive ? 'Turn off large print mode (Esc)' : 'Turn on large print mode')}
-                  aria-label="Lupa de aumento"
-                >
-                  {magnifierActive ? (
-                    <ZoomOut className="w-3.5 h-3.5" />
-                  ) : (
-                    <ZoomIn className="w-3.5 h-3.5" />
-                  )}
-                </button>
+
 
                 <a
                   href="tel:+50672760215"
@@ -926,23 +902,6 @@ export default function App() {
                               EN
                             </button>
                           </div>
-                        </div>
-
-                        {/* Botón Lupa Icono Mobile */}
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-[11.5px] font-bold text-gray-700">{lang === 'es' ? 'Lupa' : 'Lens'}:</span>
-                          <button
-                            type="button"
-                            onClick={() => setMagnifierActive(!magnifierActive)}
-                            className={`w-7 h-7 rounded-full flex items-center justify-center transition-all cursor-pointer border ${
-                              magnifierActive
-                                ? 'bg-[rgb(122,24,35)] text-white border-[rgb(122,24,35)] shadow-xs'
-                                : 'bg-white text-[rgb(122,24,35)] border-gray-200 shadow-2xs'
-                            }`}
-                            title={lang === 'es' ? 'Lupa de lectura' : 'Reading lens'}
-                          >
-                            {magnifierActive ? <ZoomOut className="w-3.5 h-3.5" /> : <ZoomIn className="w-3.5 h-3.5" />}
-                          </button>
                         </div>
                       </div>
 
@@ -1641,38 +1600,7 @@ export default function App() {
                 })}
               </div>
 
-              {/* Banner de Consulta Familiar Coordinada */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="mt-8 rounded-2xl bg-gradient-to-r from-gray-900 via-[rgb(90,14,23)] to-gray-900 p-5 sm:p-6 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-4 border border-white/10"
-              >
-                <div className="flex items-center gap-4 text-center md:text-left">
-                  <div className="w-12 h-12 rounded-2xl bg-white/10 text-white flex items-center justify-center shrink-0 shadow-inner">
-                    <Users className="w-6 h-6 text-amber-300" />
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-center md:justify-start gap-2 flex-wrap">
-                      <span className="text-[15px] sm:text-[16px] font-bold text-white">{lang === 'es' ? '¿Desean venir en familia el mismo día?' : 'Would you like to visit as a family on the same day?'}</span>
-                      <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-400 text-gray-900 px-2.5 py-0.5 rounded-full">
-                        Atención Coordinada
-                      </span>
-                    </div>
-                    <p className="text-[13px] text-white/80 mt-1 leading-snug">
-                      {lang === 'es' ? 'Agendamos citas consecutivas para que niños, padres y abuelos se revisen en una sola visita a Plaza Higuerones con parqueo cómodo y sin esperas.' : 'We schedule back-to-back appointments so children, parents, and grandparents can all be seen in a single convenient visit with ample parking.'}
-                    </p>
-                  </div>
-                </div>
 
-                <a
-                  href="https://wa.me/50672760215?text=Hola%20Dr.%20Fabio,%20deseo%20coordinar%20una%20cita%20familiar%20para%20revisarnos%20juntos."
-                  className="inline-flex items-center justify-center h-10 px-6 rounded-xl bg-white text-[rgb(122,24,35)] hover:bg-gray-100 text-[13px] font-bold whitespace-nowrap shadow-md transition-all active:scale-95 shrink-0 btn-shimmer"
-                >
-                  Coordinar cita familiar
-                </a>
-              </motion.div>
             </div>
           </section>
 
@@ -2967,8 +2895,7 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        {/* Lupa Oftálmica Accesible y Magnificador de Lectura */}
-      <MagnifierLens active={magnifierActive} onToggle={setMagnifierActive} lang={lang} />
+
 
       {/* Floating WhatsApp Button (solo visible en pantallas de escritorio / oculto en móviles) */}
         <motion.a
