@@ -1155,39 +1155,7 @@ export default function App() {
                     </a>
                   </motion.div>
 
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
-                    className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 w-full max-w-[580px]"
-                  >
-                    {[
-                      { label: lang === 'es' ? 'Frecuencia' : 'Frequency', value: lang === 'es' ? '1 vez al año recomendado' : 'Once a year recommended', href: '#servicios' },
-                      { 
-                        label: lang === 'es' ? 'Atención Integral' : 'Care for All Ages', 
-                        value: lang === 'es' ? 'Niños, adultos y mayores' : 'Kids, adults, and seniors', 
-                        href: '#edades',
-                        tag: lang === 'es' ? 'Todas las edades' : 'All ages'
-                      },
-                      { label: lang === 'es' ? 'Reserva' : 'Appointments', value: lang === 'es' ? 'WhatsApp o llamada directa' : 'WhatsApp or direct call', href: 'https://wa.me/50672760215' },
-                    ].map((item, i) => (
-                      <a 
-                        key={i} 
-                        href={item.href}
-                        className="bg-white/90 backdrop-blur-[2px] rounded-[10px] px-3 py-3 pro-card shadow-sm border border-white/50 transition-all hover:shadow-md hover:-translate-y-0.5 group block text-left"
-                      >
-                        <div className="flex items-center justify-between">
-                          <p className="text-[11px] uppercase tracking-wider font-semibold text-gray-500">{item.label}</p>
-                          {'tag' in item && (
-                            <span className="text-[9px] font-bold text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10 px-1.5 py-0.2 rounded-full">
-                              {item.tag}
-                            </span>
-                          )}
-                        </div>
-                        <p className="mt-1 text-[13px] sm:text-[14px] leading-[1.45] text-[#14161B] font-bold group-hover:text-[rgb(122,24,35)] transition-colors">{item.value}</p>
-                      </a>
-                    ))}
-                  </motion.div>
+
                 </div>
 
                 <div className="relative min-h-[150px] md:min-h-full hidden md:block">
