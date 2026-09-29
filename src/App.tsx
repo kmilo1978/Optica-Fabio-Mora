@@ -595,7 +595,7 @@ export default function App() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.1 }}
-                      className="inline-flex items-center h-7 px-3 rounded-full bg-white text-[9px] sm:text-[10px] uppercase tracking-[0.12em] text-[#6A6E79] w-fit shadow-sm"
+                      className="inline-flex items-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#6A6E79] w-fit shadow-xs border border-gray-100"
                     >
                       Exámenes visuales integrales
                     </motion.div>
@@ -604,7 +604,7 @@ export default function App() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
-                      className="mt-5 md:mt-6 max-w-[18ch] sm:max-w-[22ch] text-[34px] sm:text-[42px] md:text-[56px] lg:text-[68px] leading-[0.96] md:leading-[0.93] tracking-tight font-bold text-[#13151A]"
+                      className="mt-4 md:mt-5 max-w-xl lg:max-w-2xl text-[28px] sm:text-[34px] md:text-[40px] lg:text-[46px] leading-[1.14] tracking-tight font-bold text-[#13151A]"
                     >
                       Ópticas Popular: Agendá tu <span className="text-[rgb(122,24,35)]">examen visual</span> con el Dr. Fabio Mora
                     </motion.h1>
@@ -613,7 +613,7 @@ export default function App() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 }}
-                      className="mt-4 md:mt-5 max-w-[42ch] sm:max-w-[60ch] text-[16px] sm:text-[17px] md:text-[17px] lg:text-[18px] leading-[1.7] text-[#555963]"
+                      className="mt-3.5 md:mt-4 max-w-xl text-[15px] sm:text-[16px] md:text-[16.5px] leading-relaxed text-[#555963]"
                     >
                       Si notás visión borrosa, molestias, cansancio ocular o tus lentes ya no responden como antes, este es el momento de revisarte con atención profesional y resultados claros.
                     </motion.p>
