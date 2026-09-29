@@ -1089,8 +1089,8 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="mt-5 rounded-[12px] bg-[#F3F4F7] px-4 py-4 pro-card shadow-sm border border-gray-100">
-                <p className="max-w-[68ch] text-[11px] sm:text-[12px] md:text-[11px] leading-[1.65] text-[#6D727D]">
+              <div className="mt-6 rounded-2xl bg-slate-50 border border-gray-200/70 px-6 py-4 shadow-xs">
+                <p className="text-[14px] sm:text-[15px] md:text-[16px] text-[#555963] font-medium leading-relaxed whitespace-normal lg:whitespace-nowrap text-center sm:text-left">
                   Cada consulta busca que salgas con una respuesta clara sobre tu visión y el siguiente paso recomendado.
                 </p>
               </div>
@@ -1301,7 +1301,7 @@ export default function App() {
                 <h3 className="text-[20px] sm:text-[22px] md:text-[22px] tracking-tight leading-[1.1] font-bold text-[#15171C]">
                   No esperés a notar un problema mayor
                 </h3>
-                <p className="mt-2 max-w-[38ch] text-[12px] sm:text-[13px] md:text-[11px] lg:text-[12px] leading-[1.65] text-[#6A6D77]">
+                <p className="mt-2 text-[15px] sm:text-[16px] md:text-[17px] leading-relaxed text-[#555963] max-w-3xl">
                   Si sentís molestias, cambios en tu visión o tus lentes ya no responden como antes, este es un buen momento para revisarte.
                 </p>
               </div>
