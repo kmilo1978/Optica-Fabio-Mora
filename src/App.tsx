@@ -24,9 +24,10 @@ import {
   ShieldCheck,
   Award,
   Zap,
-  MapPin
+  MapPin,
+  Star
 } from 'lucide-react';
-import { animate, useMotionValue, useTransform, useInView } from 'motion/react';
+import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring } from 'motion/react';
 import { useRef } from 'react';
 
 function AnimatedNumber({ value, duration = 2 }: { value: number; duration?: number }) {
@@ -248,6 +249,12 @@ const TESTIMONIALS = [
 const BRANDS = ['Ray-Ban', 'Oakley', 'Persol', 'Vogue', 'Arnette', 'Transitions'];
 
 export default function App() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -263,6 +270,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white text-[#15171C] font-sans selection:bg-[rgb(122,24,35)] selection:text-white overflow-x-hidden">
+      {/* Barra sutil de progreso de lectura superior */}
+      <motion.div
+        style={{ scaleX }}
+        className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[rgb(122,24,35)] via-[rgb(180,40,55)] to-[rgb(122,24,35)] origin-left z-[9999] pointer-events-none"
+      />
           
           {/* Navigation */}
           <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-xs border-b border-gray-100' : 'bg-white/80 backdrop-blur-sm border-b border-gray-100/60'}`}>
@@ -380,7 +392,7 @@ export default function App() {
 
                 <a
                   href="https://wa.me/50672760215"
-                  className="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[11px] font-bold whitespace-nowrap hover:bg-[rgb(142,30,42)] shadow-md transition-colors"
+                  className="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[11px] font-bold whitespace-nowrap hover:bg-[rgb(142,30,42)] shadow-md transition-all btn-shimmer"
                 >
                   <MessageCircle className="w-3.5 h-3.5 mr-2" />
                   Agendar
@@ -626,7 +638,7 @@ export default function App() {
                   >
                     <a
                       href="https://wa.me/50672760215"
-                      className="inline-flex items-center justify-center h-12 px-7 rounded-xl bg-[rgb(122,24,35)] text-white text-[14px] font-bold cta-primary w-full sm:w-auto transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                      className="inline-flex items-center justify-center h-12 px-7 rounded-xl bg-[rgb(122,24,35)] text-white text-[14px] font-bold cta-primary btn-shimmer w-full sm:w-auto transition-transform hover:scale-[1.02] active:scale-[0.98]"
                     >
                       Agendar por WhatsApp
                     </a>
@@ -781,12 +793,12 @@ export default function App() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-[14px] p-6 pro-card shadow-sm border border-gray-50 flex flex-col items-center text-center hover:shadow-md transition-shadow"
+                  className="bg-white rounded-2xl p-6 pro-card-interactive shadow-xs border border-gray-100 flex flex-col items-center text-center group cursor-default"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#F3F4F7] flex items-center justify-center text-[rgb(122,24,35)] mb-4">
-                    <item.icon className="w-6 h-6" />
+                  <div className="w-14 h-14 rounded-2xl bg-[#F6F7FA] text-[rgb(122,24,35)] flex items-center justify-center mb-4 shadow-2xs group-hover:scale-110 group-hover:bg-[rgb(122,24,35)] group-hover:text-white transition-all duration-300">
+                    <item.icon className="w-7 h-7 transition-transform duration-300" />
                   </div>
-                  <h3 className="text-[18px] sm:text-[19px] font-bold text-[#15171C] mb-2">{item.title}</h3>
+                  <h3 className="text-[18px] sm:text-[19px] font-bold text-[#15171C] mb-2 group-hover:text-[rgb(122,24,35)] transition-colors">{item.title}</h3>
                   <p className="text-[14px] sm:text-[15px] leading-[1.65] text-[#555963]">
                     {item.description}
                   </p>
@@ -857,7 +869,7 @@ export default function App() {
 
                   <a
                     href="https://wa.me/50672760215"
-                    className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center"
+                    className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center btn-shimmer"
                   >
                     Consultar disponibilidad
                   </a>
@@ -939,19 +951,19 @@ export default function App() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: i * 0.05, ease: "easeOut" }}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                  className="bg-white rounded-[14px] p-5 min-h-[160px] pro-card shadow-sm flex flex-col border border-transparent hover:border-gray-100 hover:shadow-md transition-shadow"
+                  className="group bg-white rounded-2xl p-5 min-h-[160px] pro-card-interactive shadow-xs flex flex-col border border-gray-100 hover:border-[rgb(122,24,35)]/20 hover:shadow-lg transition-all"
                 >
                   <div className="flex items-center justify-between gap-3 mb-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-[#F3F4F7] flex items-center justify-center text-[rgb(122,24,35)] shadow-xs">
-                        <service.icon className="w-4 h-4" />
+                      <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] group-hover:bg-[rgb(122,24,35)] group-hover:text-white transition-colors duration-300 flex items-center justify-center shadow-2xs">
+                        <service.icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
                       </div>
-                      <h3 className="text-[19px] sm:text-[20px] md:text-[21px] leading-[1.25] tracking-tight font-bold text-[#15171C]">{service.title}</h3>
+                      <h3 className="text-[19px] sm:text-[20px] md:text-[21px] leading-[1.25] tracking-tight font-bold text-[#15171C] group-hover:text-[rgb(122,24,35)] transition-colors">{service.title}</h3>
                     </div>
                   </div>
 
                   <div className="mb-2">
-                    <span className="text-[9px] uppercase tracking-wider font-bold text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10 px-2 py-0.5 rounded-md">
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10 px-2.5 py-0.5 rounded-full">
                       {service.category}
                     </span>
                   </div>
@@ -960,8 +972,9 @@ export default function App() {
                     {service.description}
                   </p>
 
-                  <a href="https://wa.me/50672760215" className="inline-flex items-center gap-2 mt-4 text-[13px] sm:text-[14px] font-bold text-[#15171C] hover:text-[rgb(122,24,35)] transition-colors group/link">
-                    Reservar cita <ArrowUpRight className="w-3 h-3 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                  <a href="https://wa.me/50672760215" className="inline-flex items-center gap-2 mt-4 text-[13px] sm:text-[14px] font-bold text-[#15171C] group-hover/link:text-[rgb(122,24,35)] hover:text-[rgb(122,24,35)] transition-colors group/link">
+                    <span>Reservar cita</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
                   </a>
                 </motion.article>
               ))}
@@ -988,7 +1001,7 @@ export default function App() {
                   </h2>
                 </div>
 
-                <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center">Agendar valoración</a>
+                <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center btn-shimmer">Agendar valoración</a>
               </div>
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-[1.08fr_0.92fr] gap-3">
@@ -1112,7 +1125,7 @@ export default function App() {
                   </h2>
                 </div>
 
-                <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center">Agendar valoración</a>
+                <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center btn-shimmer">Agendar valoración</a>
               </div>
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -1124,15 +1137,26 @@ export default function App() {
                     transition={{ duration: 0.5, delay: i * 0.15 + 0.3 }}
                     viewport={{ once: true }}
                     whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                    className="bg-[#F3F4F7] rounded-[14px] p-5 pro-card shadow-sm border border-gray-100 transition-all hover:shadow-md hover:border-gray-200"
+                    className="bg-[#F8F9FA] rounded-2xl p-5 md:p-6 pro-card-interactive shadow-xs border border-gray-100/90 hover:border-[rgb(122,24,35)]/20 hover:bg-white transition-all duration-300 flex flex-col justify-between"
                   >
-                    <div className="text-[20px] leading-none text-[rgb(122,24,35)] font-bold">“</div>
-                    <p className="mt-3 text-[12px] sm:text-[13px] md:text-[12px] leading-[1.72] text-[#5E616B]">
-                      {t.content}
-                    </p>
-                    <div className="mt-5 pt-4 border-t border-[#E3E5EC]">
-                      <h3 className="text-[15px] sm:text-[16px] font-bold text-[#15171C]">{t.name}</h3>
-                      <p className="mt-1 text-[10px] sm:text-[11px] text-[#7A7F8A]">{t.role}</p>
+                    <div>
+                      <div className="flex items-center gap-1 text-amber-500 mb-3">
+                        {[...Array(5)].map((_, sIdx) => (
+                          <Star key={sIdx} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                      <p className="text-[13.5px] sm:text-[14px] leading-relaxed text-[#555963] italic">
+                        "{t.content}"
+                      </p>
+                    </div>
+                    <div className="mt-5 pt-4 border-t border-gray-200/70 flex items-center justify-between">
+                      <div>
+                        <h3 className="text-[15px] sm:text-[16px] font-bold text-[#15171C]">{t.name}</h3>
+                        <p className="text-[11px] sm:text-[12px] text-[#7A7F8A]">{t.role}</p>
+                      </div>
+                      <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-medium">
+                        <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Verificado
+                      </span>
                     </div>
                   </motion.article>
                 ))}
@@ -1268,7 +1292,7 @@ export default function App() {
                   </div>
 
                   <div className="mt-8 flex justify-center md:justify-start">
-                    <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold cta-primary shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0">
+                    <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold cta-primary btn-shimmer shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0">
                       Agendá tu examen hoy
                     </a>
                   </div>
@@ -1639,10 +1663,13 @@ export default function App() {
           animate={{ scale: 1, opacity: 1 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="flex fixed bottom-20 md:bottom-6 right-4 md:right-6 z-[45] w-14 h-14 bg-[#25D366] text-white rounded-full items-center justify-center shadow-2xl hover:bg-[#20ba5a] transition-colors"
+          className="flex fixed bottom-20 md:bottom-6 right-4 md:right-6 z-[45] w-14 h-14 bg-[#25D366] text-white rounded-full items-center justify-center shadow-2xl hover:bg-[#20ba5a] transition-all group"
           aria-label="Contactar por WhatsApp"
         >
-          <MessageCircle className="w-8 h-8 fill-white text-[#25D366]" />
+          <span className="hidden md:inline-flex items-center gap-1.5 absolute right-16 bg-[#15171C]/95 backdrop-blur-md text-white text-[12px] font-semibold py-1.5 px-3.5 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-300 -translate-x-2 group-hover:translate-x-0 whitespace-nowrap shadow-xl border border-white/10">
+            <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" /> ¿Tenés dudas? Escribinos
+          </span>
+          <MessageCircle className="w-7 h-7 fill-white text-[#25D366]" />
           <span className="absolute -top-2 -right-1 flex h-4 w-4">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-4 w-4 bg-[#25D366] border-2 border-white"></span>
