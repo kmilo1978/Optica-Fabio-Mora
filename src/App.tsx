@@ -40,6 +40,7 @@ import {
   BookOpen,
   Monitor,
   ZoomIn,
+  ZoomOut,
   Globe
 } from 'lucide-react';
 import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring } from 'motion/react';
@@ -764,28 +765,37 @@ export default function App() {
                 })}
               </nav>
 
-              <div className="flex items-center gap-2">
-                {/* Switch de Idioma Español (CR) / English */}
-                <div className="flex items-center bg-gray-100 p-0.5 rounded-[9px] border border-gray-200" role="group" aria-label="Selector de idioma">
+              <div className="flex items-center gap-2 sm:gap-2.5">
+                {/* Switch Bilingüe Tipo Píldora (Estilo Minimalista en Colores Corporativos) */}
+                <div 
+                  className="relative inline-flex items-center h-7.5 w-[76px] p-0.5 rounded-full bg-[#F4F4F6] border border-gray-200/90 shadow-2xs select-none"
+                  role="group" 
+                  aria-label="Selector de idioma"
+                >
+                  {/* Deslizador animado con color corporativo */}
+                  <motion.div
+                    className="absolute top-0.5 bottom-0.5 w-[35px] rounded-full bg-[rgb(122,24,35)] shadow-xs pointer-events-none"
+                    animate={{
+                      left: lang === 'es' ? '2px' : '37px'
+                    }}
+                    transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                  />
+
                   <button
                     type="button"
                     onClick={() => changeLanguage('es')}
-                    className={`px-2 py-1 rounded-[7px] text-[10.5px] font-bold transition-all cursor-pointer ${
-                      lang === 'es'
-                        ? 'bg-[rgb(122,24,35)] text-white shadow-2xs'
-                        : 'text-gray-600 hover:text-black'
+                    className={`relative z-10 flex-1 h-full text-[11px] font-bold rounded-full transition-colors flex items-center justify-center cursor-pointer ${
+                      lang === 'es' ? 'text-white' : 'text-gray-600 hover:text-black'
                     }`}
-                    title="Español (Costa Rica)"
+                    title="Español"
                   >
-                    ES (CR)
+                    ES
                   </button>
                   <button
                     type="button"
                     onClick={() => changeLanguage('en')}
-                    className={`px-2 py-1 rounded-[7px] text-[10.5px] font-bold transition-all cursor-pointer ${
-                      lang === 'en'
-                        ? 'bg-[rgb(122,24,35)] text-white shadow-2xs'
-                        : 'text-gray-600 hover:text-black'
+                    className={`relative z-10 flex-1 h-full text-[11px] font-bold rounded-full transition-colors flex items-center justify-center cursor-pointer ${
+                      lang === 'en' ? 'text-white' : 'text-gray-600 hover:text-black'
                     }`}
                     title="English"
                   >
@@ -793,21 +803,24 @@ export default function App() {
                   </button>
                 </div>
 
-                {/* Botón Lupa de Aumento Visual */}
+                {/* Botón Lupa: Solo un icono elegante que no satura el menú */}
                 <button
                   type="button"
                   id="magnifier-toggle-btn"
                   onClick={() => setMagnifierActive(!magnifierActive)}
-                  className={`inline-flex items-center gap-1.5 h-9 px-2.5 sm:px-3 rounded-[8px] text-[11px] font-bold transition-all border cursor-pointer ${
+                  className={`w-7.5 h-7.5 rounded-full flex items-center justify-center transition-all cursor-pointer border ${
                     magnifierActive
-                      ? 'bg-[rgb(122,24,35)] text-white border-[rgb(122,24,35)] shadow-xs'
-                      : 'bg-white hover:bg-gray-50 text-[#15171C] border-[#E3E5EC]'
+                      ? 'bg-[rgb(122,24,35)] text-white border-[rgb(122,24,35)] shadow-xs scale-105 ring-2 ring-[rgb(122,24,35)]/20'
+                      : 'bg-white hover:bg-gray-100 text-[rgb(122,24,35)] border-gray-200/90 shadow-2xs hover:scale-105'
                   }`}
-                  title={lang === 'es' ? 'Activar/desactivar lupa oftálmica de lectura' : 'Toggle reading magnifier lens'}
+                  title={lang === 'es' ? (magnifierActive ? 'Desactivar modo lectura aumentada (Esc)' : 'Activar modo lectura aumentada') : (magnifierActive ? 'Turn off large print mode (Esc)' : 'Turn on large print mode')}
+                  aria-label="Lupa de aumento"
                 >
-                  <ZoomIn className={`w-3.5 h-3.5 ${magnifierActive ? 'text-white' : 'text-[rgb(122,24,35)]'}`} />
-                  <span className="hidden sm:inline">{t.nav.magnifier}</span>
-                  {magnifierActive && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>}
+                  {magnifierActive ? (
+                    <ZoomOut className="w-3.5 h-3.5" />
+                  ) : (
+                    <ZoomIn className="w-3.5 h-3.5" />
+                  )}
                 </button>
 
                 <a
@@ -881,44 +894,60 @@ export default function App() {
 
                     {/* Contenido con Scroll de Categorías y Subcategorías */}
                     <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-                      <div className="p-3 bg-gray-50 rounded-xl border border-gray-100 flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-1">
-                          <Globe className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
-                          <span className="text-[11px] font-bold text-gray-700">{lang === 'es' ? 'Idioma:' : 'Language:'}</span>
-                        </div>
-                        <div className="flex items-center bg-white p-0.5 rounded-lg border border-gray-200">
-                          <button
-                            type="button"
-                            onClick={() => changeLanguage('es')}
-                            className={`px-2 py-1 rounded text-[10.5px] font-bold ${lang === 'es' ? 'bg-[rgb(122,24,35)] text-white' : 'text-gray-600'}`}
-                          >
-                            ES (CR)
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => changeLanguage('en')}
-                            className={`px-2 py-1 rounded text-[10.5px] font-bold ${lang === 'en' ? 'bg-[rgb(122,24,35)] text-white' : 'text-gray-600'}`}
-                          >
-                            EN
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="p-3 bg-gray-50 rounded-xl border border-gray-100 flex items-center justify-between gap-2">
+                      {/* Controles Compactos de Idioma y Lupa en Drawer */}
+                      <div className="p-3 bg-gray-50/90 rounded-xl border border-gray-100 flex items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
-                          <ZoomIn className="w-4 h-4 text-[rgb(122,24,35)]" />
-                          <div>
-                            <div className="text-[12px] font-bold text-[#15171C]">{lang === 'es' ? 'Lupa Oftálmica' : 'Optical Lens'}</div>
-                            <div className="text-[10px] text-gray-500">{magnifierActive ? (lang === 'es' ? 'Modo activo' : 'Active mode') : (lang === 'es' ? 'Aumenta el texto al tocar' : 'Enlarge text on tap')}</div>
+                          <span className="text-[11.5px] font-bold text-gray-700">{lang === 'es' ? 'Idioma' : 'Language'}:</span>
+                          {/* Switch Píldora Mobile */}
+                          <div 
+                            className="relative inline-flex items-center h-7 w-[72px] p-0.5 rounded-full bg-[#EAEBEF] border border-gray-200/80 shadow-2xs select-none"
+                            role="group" 
+                            aria-label="Selector de idioma"
+                          >
+                            <motion.div
+                              className="absolute top-0.5 bottom-0.5 w-[34px] rounded-full bg-[rgb(122,24,35)] shadow-xs pointer-events-none"
+                              animate={{
+                                left: lang === 'es' ? '2px' : '34px'
+                              }}
+                              transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => changeLanguage('es')}
+                              className={`relative z-10 flex-1 h-full text-[10.5px] font-bold rounded-full transition-colors flex items-center justify-center cursor-pointer ${
+                                lang === 'es' ? 'text-white' : 'text-gray-600'
+                              }`}
+                            >
+                              ES
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => changeLanguage('en')}
+                              className={`relative z-10 flex-1 h-full text-[10.5px] font-bold rounded-full transition-colors flex items-center justify-center cursor-pointer ${
+                                lang === 'en' ? 'text-white' : 'text-gray-600'
+                              }`}
+                            >
+                              EN
+                            </button>
                           </div>
                         </div>
-                        <button
-                          type="button"
-                          onClick={() => setMagnifierActive(!magnifierActive)}
-                          className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ${magnifierActive ? 'bg-[rgb(122,24,35)] text-white' : 'bg-white border border-gray-200 text-gray-700'}`}
-                        >
-                          {magnifierActive ? (lang === 'es' ? 'ON' : 'ON') : (lang === 'es' ? 'OFF' : 'OFF')}
-                        </button>
+
+                        {/* Botón Lupa Icono Mobile */}
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[11.5px] font-bold text-gray-700">{lang === 'es' ? 'Lupa' : 'Lens'}:</span>
+                          <button
+                            type="button"
+                            onClick={() => setMagnifierActive(!magnifierActive)}
+                            className={`w-7 h-7 rounded-full flex items-center justify-center transition-all cursor-pointer border ${
+                              magnifierActive
+                                ? 'bg-[rgb(122,24,35)] text-white border-[rgb(122,24,35)] shadow-xs'
+                                : 'bg-white text-[rgb(122,24,35)] border-gray-200 shadow-2xs'
+                            }`}
+                            title={lang === 'es' ? 'Lupa de lectura' : 'Reading lens'}
+                          >
+                            {magnifierActive ? <ZoomOut className="w-3.5 h-3.5" /> : <ZoomIn className="w-3.5 h-3.5" />}
+                          </button>
+                        </div>
                       </div>
 
                       <p className="text-[11px] font-bold uppercase tracking-widest text-[#767A84] px-1">
