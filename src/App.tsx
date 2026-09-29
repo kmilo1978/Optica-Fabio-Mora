@@ -274,18 +274,14 @@ export default function App() {
   const [selectedSymptom, setSelectedSymptom] = useState<string | null>(null);
 
   useEffect(() => {
-    const dismissed = sessionStorage.getItem('optica_diagnostic_dismissed');
-    if (!dismissed) {
-      const timer = setTimeout(() => {
-        setShowDiagnosticModal(true);
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => {
+      setShowDiagnosticModal(true);
+    }, 5000);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleCloseDiagnostic = () => {
     setShowDiagnosticModal(false);
-    sessionStorage.setItem('optica_diagnostic_dismissed', 'true');
   };
 
   const handleSelectSymptom = (symptomId: string) => {
