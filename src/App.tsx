@@ -729,10 +729,10 @@ export default function App() {
                   <span className="inline-flex items-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
                     Urgencia
                   </span>
-                  <h2 className="mt-4 max-w-[20ch] text-[28px] sm:text-[32px] md:text-[36px] leading-[1.15] tracking-tight font-bold text-[#15171C]">
+                  <h2 className="mt-4 max-w-xl text-[28px] sm:text-[32px] md:text-[36px] leading-tight tracking-tight font-bold text-[#15171C]">
                     Esperar demasiado puede hacer que el problema afecte más <span className="text-[rgb(122,24,35)]">tu rutina</span>
                   </h2>
-                  <p className="mt-3 max-w-[38ch] text-[15px] sm:text-[16px] leading-[1.7] text-[#555963]">
+                  <p className="mt-3 max-w-xl text-[15px] sm:text-[16px] leading-relaxed text-[#555963]">
                     Cuando la visión cambia, aparecen molestias al leer, manejar, usar pantallas o trabajar. Revisarte a tiempo ayuda a detectar qué está pasando y decidir la mejor solución.
                   </p>
                 </div>
@@ -769,7 +769,7 @@ export default function App() {
               </span>
             </div>
 
-            <h2 className="mt-5 max-w-[20ch] sm:max-w-[24ch] md:max-w-[18ch] lg:max-w-[22ch] mx-auto text-center text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] leading-tight tracking-tight font-bold text-[#14161B]">
+            <h2 className="mt-5 max-w-2xl mx-auto text-center text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] leading-tight tracking-tight font-bold text-[#14161B]">
               ¿Por qué confiar en <span className="text-[rgb(122,24,35)]">nuestra atención</span> visual?
             </h2>
 
@@ -812,7 +812,7 @@ export default function App() {
                   Proceso simple
                 </span>
 
-                <h2 className="mt-4 max-w-[18ch] text-[28px] sm:text-[32px] md:text-[36px] leading-[1.15] tracking-tight font-bold text-[#15171C]">
+                <h2 className="mt-4 max-w-xl text-[28px] sm:text-[32px] md:text-[36px] leading-tight tracking-tight font-bold text-[#15171C]">
                   Una estructura pensada para tu comodidad
                 </h2>
 
@@ -845,19 +845,19 @@ export default function App() {
                 viewport={{ once: true, margin: "-100px" }}
                 className="bg-white rounded-2xl md:rounded-3xl px-6 md:px-8 py-8 md:py-10 overflow-hidden shadow-sm border border-gray-100"
               >
-                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                  <div>
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                  <div className="max-w-2xl lg:max-w-3xl">
                     <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
                       Marcas reconocidas
                     </span>
-                    <h2 className="mt-4 max-w-[28ch] text-[28px] sm:text-[34px] md:text-[38px] leading-tight tracking-tight font-bold text-[#15171C]">
+                    <h2 className="mt-3 text-[26px] sm:text-[32px] md:text-[36px] leading-[1.2] tracking-tight font-bold text-[#15171C]">
                       Opciones populares en <span className="text-[rgb(122,24,35)]">lentes y soluciones visuales</span> según tu necesidad
                     </h2>
                   </div>
 
                   <a
                     href="https://wa.me/50672760215"
-                    className="inline-flex items-center justify-center h-10 px-5 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[10px] sm:text-[11px] md:text-[10px] font-medium whitespace-nowrap cta-primary transition-transform hover:scale-105 active:scale-95"
+                    className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center"
                   >
                     Consultar disponibilidad
                   </a>
@@ -880,7 +880,7 @@ export default function App() {
                 </div>
 
                 <div className="mt-5 rounded-[12px] bg-[#F3F4F7] px-4 py-4 pro-card shadow-sm border border-gray-100">
-                  <p className="max-w-[68ch] text-[14px] sm:text-[15px] leading-[1.7] text-[#555963]">
+                  <p className="text-[13px] sm:text-[14px] md:text-[15px] font-medium leading-normal text-[#555963] text-center whitespace-normal md:whitespace-nowrap">
                     La recomendación final depende de tu examen visual, tu graduación y el tipo de uso diario que necesités.
                   </p>
                 </div>
@@ -898,7 +898,7 @@ export default function App() {
               </span>
             </div>
 
-            <h2 className="mt-5 max-w-[20ch] sm:max-w-[24ch] md:max-w-[18ch] lg:max-w-[22ch] mx-auto text-center text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] leading-tight tracking-tight font-bold text-[#14161B]">
+            <h2 className="mt-5 max-w-3xl mx-auto text-center text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] leading-tight tracking-tight font-bold text-[#14161B]">
               Evaluaciones completas y <span className="text-[rgb(122,24,35)]">soluciones visuales</span> adaptadas a cada paciente
             </h2>
 
@@ -978,22 +978,17 @@ export default function App() {
               viewport={{ once: true }}
               className="bg-white rounded-[14px] px-5 md:px-6 py-6 md:py-7 overflow-hidden shadow-sm"
             >
-              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                <div>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div className="max-w-2xl lg:max-w-3xl">
                   <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
                     Galería
                   </span>
-                  <h2 className="mt-4 max-w-[24ch] text-[28px] sm:text-[34px] md:text-[38px] leading-tight tracking-tight font-bold text-[#15171C]">
+                  <h2 className="mt-3 text-[26px] sm:text-[32px] md:text-[36px] leading-[1.2] tracking-tight font-bold text-[#15171C]">
                     Un espacio pensado para una revisión visual <span className="text-[rgb(122,24,35)]">cómoda, clara y profesional</span>
                   </h2>
                 </div>
 
-                <a
-                  href="https://wa.me/50672760215"
-                  className="inline-flex items-center justify-center h-10 px-5 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[10px] sm:text-[11px] md:text-[10px] font-medium whitespace-nowrap cta-primary"
-                >
-                  Agendar valoración
-                </a>
+                <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center">Agendar valoración</a>
               </div>
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-[1.08fr_0.92fr] gap-3">
@@ -1089,8 +1084,8 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="mt-6 rounded-2xl bg-slate-50 border border-gray-200/70 px-6 py-4 shadow-xs">
-                <p className="text-[14px] sm:text-[15px] md:text-[16px] text-[#555963] font-medium leading-relaxed whitespace-normal lg:whitespace-nowrap text-center sm:text-left">
+              <div className="mt-5 rounded-xl bg-slate-50 border border-gray-200/80 px-4 sm:px-6 py-3.5 flex items-center justify-center text-center">
+                <p className="text-[13px] sm:text-[14px] md:text-[15px] font-medium text-[#474B54] leading-normal tracking-tight text-center whitespace-normal sm:whitespace-nowrap break-normal">
                   Cada consulta busca que salgas con una respuesta clara sobre tu visión y el siguiente paso recomendado.
                 </p>
               </div>
@@ -1107,22 +1102,17 @@ export default function App() {
               viewport={{ once: true }}
               className="bg-white rounded-[14px] px-5 md:px-6 py-6 md:py-7 overflow-hidden shadow-sm"
             >
-              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                <div>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div className="max-w-2xl lg:max-w-3xl">
                   <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
                     Testimonios
                   </span>
-                  <h2 className="mt-4 max-w-[26ch] text-[24px] sm:text-[28px] md:text-[30px] leading-[1.08] tracking-tight font-bold text-[#15171C]">
+                  <h2 className="mt-3 text-[26px] sm:text-[30px] md:text-[34px] leading-[1.2] tracking-tight font-bold text-[#15171C]">
                     La <span className="text-[rgb(122,24,35)]">confianza se gana</span> con atención clara, cercana y resultados bien explicados
                   </h2>
                 </div>
 
-                <a
-                  href="https://wa.me/50672760215"
-                  className="inline-flex items-center justify-center h-10 px-5 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[10px] sm:text-[11px] md:text-[10px] font-medium whitespace-nowrap cta-primary"
-                >
-                  Agendar valoración
-                </a>
+                <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center">Agendar valoración</a>
               </div>
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -1270,7 +1260,7 @@ export default function App() {
                         className="bg-white rounded-[12px] px-4 py-5 text-left pro-card shadow-sm border border-gray-100 transition-all hover:shadow-md"
                       >
                         <h3 className="text-[15px] sm:text-[16px] font-bold text-[#15171C]">{item.title}</h3>
-                        <p className="mt-2 text-[10px] md:text-[9px] lg:text-[10px] leading-[1.5] text-[#6D727D]">
+                        <p className="mt-2 text-[13px] sm:text-[13.5px] leading-[1.55] text-[#555963]">
                           {item.desc}
                         </p>
                       </motion.article>
@@ -1278,7 +1268,7 @@ export default function App() {
                   </div>
 
                   <div className="mt-8 flex justify-center md:justify-start">
-                    <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[11px] font-medium cta-primary shadow-lg shadow-[rgb(122,24,35)]/20">
+                    <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold cta-primary shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0">
                       Agendá tu examen hoy
                     </a>
                   </div>
@@ -1289,23 +1279,26 @@ export default function App() {
           </section>
 
           {/* Final CTA */}
-          <section className="w-full py-6 md:py-8 bg-white">
+          <section className="w-full py-5 md:py-7 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white rounded-[14px] px-5 md:px-6 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4 pro-card shadow-sm"
+              className="bg-white rounded-2xl border border-gray-200/80 px-6 md:px-8 py-5 md:py-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 shadow-xs"
             >
-              <div>
-                <h3 className="text-[20px] sm:text-[22px] md:text-[22px] tracking-tight leading-[1.1] font-bold text-[#15171C]">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-[20px] sm:text-[22px] md:text-[24px] tracking-tight leading-snug font-bold text-[#15171C]">
                   No esperés a notar un problema mayor
                 </h3>
-                <p className="mt-2 text-[15px] sm:text-[16px] md:text-[17px] leading-relaxed text-[#555963] max-w-3xl">
+                <p className="mt-1.5 text-[14px] sm:text-[15px] md:text-[15.5px] text-[#555963] font-normal leading-relaxed whitespace-normal lg:whitespace-nowrap break-normal">
                   Si sentís molestias, cambios en tu visión o tus lentes ya no responden como antes, este es un buen momento para revisarte.
                 </p>
               </div>
-              <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-10 px-5 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[10px] sm:text-[11px] md:text-[10px] font-medium whitespace-nowrap cta-primary">
+              <a 
+                href="https://wa.me/50672760215" 
+                className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start lg:self-center"
+              >
                 Agendá por WhatsApp
               </a>
             </motion.div>
