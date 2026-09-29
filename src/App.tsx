@@ -1010,17 +1010,17 @@ export default function App() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6 }}
                   viewport={{ once: true }}
-                  className="group relative rounded-[14px] overflow-hidden min-h-[320px] md:min-h-[360px] pro-card shadow-md"
+                  className="group relative rounded-2xl overflow-hidden min-h-[320px] md:min-h-[360px] pro-card shadow-md cursor-pointer"
                 >
                   <img
                     src="https://content.pancake.vn/web-media-262/0a/72/2c/cd/859ae20a5707f68e7b103f3d02920717fdcd8ed948237733db5ab183-w:700-h:467-l:39011-t:image/jpeg.jpeg"
                     alt="Evaluación visual profesional"
-                    className="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-[1.05]"
+                    className="absolute inset-0 w-full h-full object-cover blur-[2px] md:blur-[2.5px] scale-[1.02] group-hover:blur-none group-hover:scale-[1.06] transition-[filter,transform] duration-700 ease-out"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
                   <div className="absolute left-0 right-0 bottom-0 p-5 md:p-6 transform transition-transform duration-500 group-hover:-translate-y-1">
-                    <div className="inline-flex items-center h-7 px-3.5 rounded-full bg-white/90 text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#6A6E79] font-bold">
+                    <div className="inline-flex items-center h-7 px-3.5 rounded-full bg-white/90 text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#6A6E79]">
                       Atención visual
                     </div>
                     <h3 className="mt-3 max-w-[24ch] text-[20px] sm:text-[22px] md:text-[24px] leading-[1.1] tracking-tight font-bold text-white">
@@ -1035,12 +1035,12 @@ export default function App() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                     viewport={{ once: true }}
-                    className="group relative rounded-[14px] overflow-hidden min-h-[173px] pro-card shadow-md"
+                    className="group relative rounded-2xl overflow-hidden min-h-[173px] pro-card shadow-md cursor-pointer"
                   >
                     <img
                       src="https://content.pancake.vn/web-media-262/3d/24/a3/d4/3a74f769e1ca5261250f65e2e9911c8164ad0022ef125ae3dd451852-w:1200-h:675-l:106469-t:image/jpeg.jpeg"
                       alt="Tecnología para diagnóstico visual"
-                      className="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-[1.05]"
+                      className="absolute inset-0 w-full h-full object-cover blur-[2px] md:blur-[2.5px] scale-[1.02] group-hover:blur-none group-hover:scale-[1.06] transition-[filter,transform] duration-700 ease-out"
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
@@ -1057,12 +1057,12 @@ export default function App() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.6, delay: 0.3 }}
                       viewport={{ once: true }}
-                      className="group relative rounded-[14px] overflow-hidden min-h-[173px] pro-card shadow-md"
+                      className="group relative rounded-2xl overflow-hidden min-h-[173px] pro-card shadow-md cursor-pointer"
                     >
                       <img
                         src="https://content.pancake.vn/web-media-262/2f/b0/37/cd/56114753eecc12cb63eefa879704d4bf40e014559f4c14139c87d036-w:297-h:400-l:19848-t:image/jpeg.jpeg"
                         alt="Atención profesional personalizada"
-                        className="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-[1.05]"
+                        className="absolute inset-0 w-full h-full object-cover blur-[2px] md:blur-[2.5px] scale-[1.02] group-hover:blur-none group-hover:scale-[1.06] transition-[filter,transform] duration-700 ease-out"
                         referrerPolicy="no-referrer"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
@@ -1078,12 +1078,12 @@ export default function App() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.6, delay: 0.4 }}
                       viewport={{ once: true }}
-                      className="group relative rounded-[14px] overflow-hidden min-h-[173px] pro-card shadow-md"
+                      className="group relative rounded-2xl overflow-hidden min-h-[173px] pro-card shadow-md cursor-pointer"
                     >
                       <img
                         src="https://content.pancake.vn/web-media-262/4f/26/e9/07/5c5601a47c49055462953a64179c907190bdb5f17135f2be2b99eb10-w:297-h:400-l:16706-t:image/jpeg.jpeg"
                         alt="Recomendación de soluciones visuales"
-                        className="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-[1.05]"
+                        className="absolute inset-0 w-full h-full object-cover blur-[2px] md:blur-[2.5px] scale-[1.02] group-hover:blur-none group-hover:scale-[1.06] transition-[filter,transform] duration-700 ease-out"
                         referrerPolicy="no-referrer"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
