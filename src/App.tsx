@@ -591,8 +591,11 @@ export default function App() {
               className="relative overflow-hidden rounded-[14px] min-h-[500px] md:min-h-[600px] bg-gray-200"
             >
               {/* Background Image */}
-                <div className="absolute inset-0 z-0">
-                  <img 
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                  <motion.img 
+                    initial={{ filter: 'blur(8px)', scale: 1.06 }}
+                    animate={{ filter: 'blur(0px)', scale: 1 }}
+                    transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
                     src="https://content.pancake.vn/web-media-262/5c/03/26/a7/7e1e233b9f04b56292c21db5debf9fc7fe2a4f04ec99bf461b126061-w:1200-h:618-l:28899-t:image/jpeg.jpeg" 
                     alt="Examen visual profesional con tecnología avanzada" 
                     className="w-full h-full object-cover object-right md:object-center"
@@ -1162,23 +1165,44 @@ export default function App() {
                 ))}
               </div>
 
-              <div className="mt-5 grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-3">
+              <div className="mt-6 grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-4">
                 <motion.article 
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="bg-[#F3F4F7] rounded-[14px] p-5 pro-card shadow-sm border border-gray-100"
+                  className="bg-[#F8F9FB] rounded-2xl p-6 md:p-7 pro-card shadow-xs border border-gray-100 flex flex-col justify-between"
                 >
-                  <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B] shadow-sm">
-                    Experiencia del paciente
-                  </span>
-                  <h3 className="mt-4 max-w-[24ch] text-[20px] sm:text-[22px] md:text-[24px] leading-[1.1] tracking-tight font-bold text-[#15171C]">
-                    Una consulta diseñada para entender, decidir y actuar con claridad
-                  </h3>
-                  <p className="mt-3 max-w-[40ch] text-[11px] sm:text-[12px] md:text-[11px] leading-[1.7] text-[#6D727D]">
-                    La meta no es solo revisar tu visión, sino ayudarte a entender qué necesitás y qué solución se adapta mejor a vos.
-                  </p>
+                  <div>
+                    <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B] shadow-2xs border border-gray-200/70 w-fit">
+                      Experiencia del paciente
+                    </span>
+                    <h3 className="mt-4 text-[22px] sm:text-[24px] md:text-[26px] leading-[1.2] tracking-tight font-bold text-[#15171C]">
+                      Una consulta diseñada para entender, decidir y actuar con claridad
+                    </h3>
+                    <p className="mt-3 text-[14px] sm:text-[15px] leading-relaxed text-[#555963]">
+                      La meta no es solo medir tu graduación, sino brindarte una orientación médica transparente sobre la salud de tus ojos y las mejores opciones para tu estilo de vida.
+                    </p>
+
+                    <div className="mt-5 space-y-2.5 pt-4 border-t border-gray-200/70">
+                      {[
+                        'Evaluación visual completa para niños, jóvenes y adultos mayores',
+                        'Detección temprana de fatiga por pantallas y resequedad ocular',
+                        'Asesoría honesta en lentes antirreflejo, fotocromáticos y progresivos',
+                        'Entrega de resultados explicados sin tecnicismos complejos'
+                      ].map((benefit, bIdx) => (
+                        <div key={bIdx} className="flex items-start gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 mt-0.5 text-[rgb(122,24,35)] shrink-0" />
+                          <span className="text-[13px] sm:text-[14px] text-[#424651] font-medium leading-snug">{benefit}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-gray-200/80 flex items-center justify-between text-[#7C808B] text-[12px]">
+                    <span className="font-medium">Duración estimada: 30 a 40 minutos</span>
+                    <span className="text-[rgb(122,24,35)] font-bold">Atención 100% personalizada</span>
+                  </div>
                 </motion.article>
 
                 <motion.article 
@@ -1186,27 +1210,69 @@ export default function App() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                   viewport={{ once: true }}
-                  className="bg-[rgb(122,24,35)] rounded-[14px] p-6 md:p-8 text-white pro-card shadow-lg flex flex-col justify-between"
+                  className="bg-gradient-to-br from-[rgb(122,24,35)] via-[rgb(112,20,30)] to-[rgb(90,14,23)] rounded-2xl p-6 md:p-8 text-white pro-card shadow-xl flex flex-col justify-between relative overflow-hidden"
                 >
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4">
-                    {[
-                      { label: 'Atención', desc: 'Cercana y profesional' },
-                      { label: 'Evaluación', desc: 'Clara y precisa' },
-                      { label: 'Confianza', desc: 'Basada en resultados' },
-                    ].map((item, i) => (
-                      <div key={i} className="flex flex-col">
-                        <div className="text-[24px] sm:text-[22px] md:text-[26px] lg:text-[30px] leading-tight tracking-tight font-bold">{item.label}</div>
-                        <p className="mt-2 text-[11px] sm:text-[10px] md:text-[11px] leading-[1.5] text-white/80 max-w-[15ch]">
-                          {item.desc}
-                        </p>
-                      </div>
-                    ))}
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none -mr-16 -mt-16"></div>
+
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white text-[11px] font-bold uppercase tracking-wider backdrop-blur-xs">
+                        <Award className="w-3.5 h-3.5 text-amber-300" /> Compromiso con tu visión
+                      </span>
+                    </div>
+
+                    <h4 className="text-[20px] sm:text-[22px] md:text-[24px] font-bold text-white leading-snug tracking-tight mb-3">
+                      Atención cercana, evaluación detallada y resultados en los que podés confiar
+                    </h4>
+
+                    <p className="text-[13.5px] sm:text-[14px] leading-relaxed text-white/85 mb-5">
+                      En Ópticas Popular combinamos experiencia clínica comprobada y tecnología de diagnóstico para que salgas con una solución visual cómoda, duradera y ajustada a tu presupuesto.
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-4 border-t border-white/15">
+                      {[
+                        { 
+                          icon: Users,
+                          label: 'Atención', 
+                          title: 'Humana y cercana',
+                          desc: 'Escuchamos tus molestias visuales y resolvemos cada duda sin prisas.' 
+                        },
+                        { 
+                          icon: ShieldCheck,
+                          label: 'Evaluación', 
+                          title: 'Clara y precisa',
+                          desc: 'Exámenes con equipos de última generación para una receta confiable.' 
+                        },
+                        { 
+                          icon: Award,
+                          label: 'Confianza', 
+                          title: '18 años de respaldo',
+                          desc: 'Soluciones reales sin sugerencias innecesarias ni costos ocultos.' 
+                        },
+                      ].map((item, i) => (
+                        <div key={i} className="flex flex-col bg-white/10 backdrop-blur-xs rounded-xl p-3.5 border border-white/10 hover:bg-white/15 transition-colors">
+                          <div className="w-8 h-8 rounded-lg bg-white/20 text-white flex items-center justify-center mb-2">
+                            <item.icon className="w-4 h-4" />
+                          </div>
+                          <div className="text-[16px] sm:text-[17px] font-bold text-white leading-tight">{item.label}</div>
+                          <div className="text-[11.5px] font-semibold text-white/90 mt-0.5">{item.title}</div>
+                          <p className="mt-1.5 text-[12px] leading-[1.45] text-white/80">
+                            {item.desc}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="mt-10 sm:mt-6">
+                  <div className="relative z-10 mt-6 pt-5 border-t border-white/15 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div className="flex items-center gap-2 text-white/90 text-[13px] font-medium">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0" />
+                      <span>Citas organizadas y asesoría transparente</span>
+                    </div>
+
                     <a
                       href="https://wa.me/50672760215"
-                      className="inline-flex items-center justify-center w-full sm:w-auto h-12 sm:h-10 px-8 rounded-[10px] bg-white text-[rgb(122,24,35)] text-[12px] sm:text-[11px] md:text-[11px] font-bold shadow-md hover:bg-gray-100 transition-all active:scale-95"
+                      className="inline-flex items-center justify-center h-11 px-7 rounded-xl bg-white text-[rgb(122,24,35)] text-[13px] sm:text-[14px] font-bold shadow-md hover:bg-gray-100 transition-all active:scale-95 btn-shimmer shrink-0"
                     >
                       Quiero agendar mi cita
                     </a>
