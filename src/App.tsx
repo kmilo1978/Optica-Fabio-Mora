@@ -44,6 +44,7 @@ import {
 import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring } from 'motion/react';
 import { useRef } from 'react';
 import CalificarPage from './CalificarPage';
+import WhatsAppFaqForm from './WhatsAppFaqForm';
 import { TRANSLATIONS, Language } from './translations';
 
 function AnimatedNumber({ value, duration = 2 }: { value: number; duration?: number }) {
@@ -774,8 +775,9 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => changeLanguage('es')}
+                    style={{ color: lang === 'es' ? '#ffffff' : '#4b5563' }}
                     className={`relative z-10 flex-1 h-full text-[11px] font-bold rounded-full transition-colors flex items-center justify-center cursor-pointer ${
-                      lang === 'es' ? 'text-white' : 'text-gray-600 hover:text-black'
+                      lang === 'es' ? '!text-white text-white' : 'text-gray-600 hover:text-black'
                     }`}
                     title="Español"
                   >
@@ -784,8 +786,9 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => changeLanguage('en')}
+                    style={{ color: lang === 'en' ? '#ffffff' : '#4b5563' }}
                     className={`relative z-10 flex-1 h-full text-[11px] font-bold rounded-full transition-colors flex items-center justify-center cursor-pointer ${
-                      lang === 'en' ? 'text-white' : 'text-gray-600 hover:text-black'
+                      lang === 'en' ? '!text-white text-white' : 'text-gray-600 hover:text-black'
                     }`}
                     title="English"
                   >
@@ -886,8 +889,9 @@ export default function App() {
                             <button
                               type="button"
                               onClick={() => changeLanguage('es')}
+                              style={{ color: lang === 'es' ? '#ffffff' : '#4b5563' }}
                               className={`relative z-10 flex-1 h-full text-[10.5px] font-bold rounded-full transition-colors flex items-center justify-center cursor-pointer ${
-                                lang === 'es' ? 'text-white' : 'text-gray-600'
+                                lang === 'es' ? '!text-white text-white' : 'text-gray-600'
                               }`}
                             >
                               ES
@@ -895,8 +899,9 @@ export default function App() {
                             <button
                               type="button"
                               onClick={() => changeLanguage('en')}
+                              style={{ color: lang === 'en' ? '#ffffff' : '#4b5563' }}
                               className={`relative z-10 flex-1 h-full text-[10.5px] font-bold rounded-full transition-colors flex items-center justify-center cursor-pointer ${
-                                lang === 'en' ? 'text-white' : 'text-gray-600'
+                                lang === 'en' ? '!text-white text-white' : 'text-gray-600'
                               }`}
                             >
                               EN
@@ -2067,21 +2072,8 @@ export default function App() {
                 })}
               </div>
 
-              {/* Botón de ayuda extra */}
-              <div className="mt-10 text-center">
-                <p className="text-[13px] sm:text-[14px] text-gray-600 mb-3">
-                  ¿Tenés otra consulta que no encontrás aquí?
-                </p>
-                <a
-                  href="https://wa.me/50672760215"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-gray-200 text-[#15171C] text-[12px] sm:text-[13px] font-semibold shadow-xs hover:border-[rgb(122,24,35)] hover:text-[rgb(122,24,35)] hover:shadow-sm transition-all"
-                >
-                  <MessageCircle className="w-4 h-4 text-[rgb(122,24,35)]" />
-                  Preguntanos por WhatsApp
-                </a>
-              </div>
+              {/* Formulario de Consulta Rápida por WhatsApp */}
+              <WhatsAppFaqForm lang={lang} />
             </div>
           </section>
 
