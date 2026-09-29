@@ -155,7 +155,7 @@ const WHY_CHOOSE_US = [
   },
   {
     title: 'Experiencia clínica',
-    description: <>Más de <span className="text-[rgb(122,24,35)] font-bold"><AnimatedNumber value={15} /></span> años de trayectoria profesional y formación académica constante.</>,
+    description: <>Más de <span className="text-[rgb(122,24,35)] font-bold"><AnimatedNumber value={18} /></span> años de trayectoria profesional y formación académica constante.</>,
     icon: Award,
   },
   {
@@ -695,7 +695,7 @@ export default function App() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {[
-                { title: <><span className="text-[rgb(122,24,35)]">+</span><AnimatedNumber value={15} /></>, desc: 'años de trayectoria' },
+                { title: <><span className="text-[rgb(122,24,35)]">+</span><AnimatedNumber value={18} /></>, desc: 'años de trayectoria' },
                 { title: 'Integral', desc: 'evaluación completa y clara' },
                 { title: 'Familia', desc: 'atención para todas las edades' },
                 { title: 'Directo', desc: 'contacto por llamada o WhatsApp' },
@@ -1247,7 +1247,7 @@ export default function App() {
                   <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3 gap-3 max-w-[760px] md:mx-0">
                     {[
                       { title: 'Formación', desc: 'Licenciado en Optometría y Máster en Atención Optométrica en Patología Ocular.' },
-                      { title: 'Experiencia', desc: <>Más de <span className="text-[rgb(122,24,35)] font-bold"><AnimatedNumber value={15} /></span> años dedicados al cuidado visual de familias y experiencia clínica comprobada.</> },
+                      { title: 'Experiencia', desc: <>Más de <span className="text-[rgb(122,24,35)] font-bold"><AnimatedNumber value={18} /></span> años dedicados al cuidado visual de familias y experiencia clínica comprobada.</> },
                       { title: 'Respaldo', desc: 'Miembro de Canadian Vision Care y trayectoria académica y humanitaria internacional.' },
                     ].map((item, i) => (
                       <motion.article 
