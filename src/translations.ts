@@ -165,8 +165,42 @@ export interface TranslationDictionary {
   footer: {
     clinicName: string;
     doctorName: string;
+    doctorTitle: string;
+    description: string;
+    navTitle: string;
+    navHome: string;
+    navServices: string;
+    navAges: string;
+    navDoctor: string;
+    navWhyUs: string;
+    navTestimonials: string;
+    navFaq: string;
+    navContact: string;
+    navRate: string;
+    navRateBadge: string;
+    servicesTitle: string;
+    srvExam: string;
+    srvRetina: string;
+    srvPressure: string;
+    srvLenses: string;
+    srvContacts: string;
+    srvPediatric: string;
+    locationTitle: string;
     address: string;
+    addressSub: string;
+    hoursTitle: string;
+    hoursDays: string;
+    hoursTime: string;
+    hoursSunday: string;
+    phoneLabel: string;
+    whatsappLabel: string;
+    emergencyBadge: string;
+    googleRatingText: string;
+    googleReviewCta: string;
     allRights: string;
+    professionalLicense: string;
+    privacy: string;
+    terms: string;
     developedBy: string;
   };
 }
@@ -336,9 +370,43 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
     },
     footer: {
       clinicName: 'Ópticas Popular',
-      doctorName: 'Dr. Fabio Mora Medina · Optometrista',
-      address: 'Plaza Higuerones, Local 23 · San Rafael Abajo de Desamparados, San José, Costa Rica',
+      doctorName: 'Dr. Fabio Mora Medina',
+      doctorTitle: 'Optometrista Clínico · C.O.C.R.',
+      description: 'Cuidado visual integral con más de 18 años de trayectoria en San Rafael Abajo de Desamparados. Diagnóstico computarizado avanzado, tecnología retiniana de vanguardia y atención personalizada para toda la familia.',
+      navTitle: 'Navegación Rápida',
+      navHome: 'Inicio',
+      navServices: 'Servicios Clínicos',
+      navAges: 'Atención por Edades',
+      navDoctor: 'Dr. Fabio Mora',
+      navWhyUs: '¿Por qué elegirnos?',
+      navTestimonials: 'Testimonios',
+      navFaq: 'Preguntas Frecuentes',
+      navContact: 'Ubicación & Citas',
+      navRate: 'Calificar Experiencia',
+      navRateBadge: 'Nuevo',
+      servicesTitle: 'Servicios Especializados',
+      srvExam: 'Examen de la Vista Computarizado',
+      srvRetina: 'Fotografía Digital de Retina',
+      srvPressure: 'Tonometría (Presión Ocular)',
+      srvLenses: 'Lentes Progresivos & Antirreflejo',
+      srvContacts: 'Adaptación de Lentes de Contacto',
+      srvPediatric: 'Evaluación Visual Infantil',
+      locationTitle: 'Ubicación & Contacto',
+      address: 'Plaza Higuerones, Local 23',
+      addressSub: 'San Rafael Abajo de Desamparados, San José, Costa Rica',
+      hoursTitle: 'Horario de Atención',
+      hoursDays: 'Lunes a Sábado',
+      hoursTime: '9:00 AM - 6:00 PM',
+      hoursSunday: 'Domingos cerrado',
+      phoneLabel: 'Teléfono directo',
+      whatsappLabel: 'WhatsApp oficial',
+      emergencyBadge: 'Atención personalizada y urgencias visuales',
+      googleRatingText: '4.9 ★★★★★ en Google Reviews',
+      googleReviewCta: 'Ver ubicación en Maps',
       allRights: 'Todos los derechos reservados.',
+      professionalLicense: 'Colegio de Optometristas de Costa Rica',
+      privacy: 'Política de Privacidad',
+      terms: 'Términos del Servicio',
       developedBy: 'Desarrollado por localrank.com.co',
     },
   },
@@ -506,9 +574,43 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
     },
     footer: {
       clinicName: 'Opticas Popular',
-      doctorName: 'Dr. Fabio Mora Medina · Optometrist',
-      address: 'Plaza Higuerones, Unit 23 · San Rafael Abajo de Desamparados, San Jose, Costa Rica',
+      doctorName: 'Dr. Fabio Mora Medina',
+      doctorTitle: 'Clinical Optometrist · C.O.C.R.',
+      description: 'Comprehensive eye care with over 18 years of clinical excellence in San Rafael Abajo de Desamparados. Advanced computerized diagnosis, digital retinal imaging, and human-centered care for the entire family.',
+      navTitle: 'Quick Navigation',
+      navHome: 'Home',
+      navServices: 'Clinical Services',
+      navAges: 'Care by Age',
+      navDoctor: 'Dr. Fabio Mora',
+      navWhyUs: 'Why Choose Us',
+      navTestimonials: 'Patient Reviews',
+      navFaq: 'Frequently Asked Questions',
+      navContact: 'Location & Booking',
+      navRate: 'Rate Experience',
+      navRateBadge: 'New',
+      servicesTitle: 'Specialized Services',
+      srvExam: 'Computerized Eye Exam',
+      srvRetina: 'Digital Retinal Photography',
+      srvPressure: 'Intraocular Pressure (Glaucoma)',
+      srvLenses: 'Custom Progressive Lenses',
+      srvContacts: 'Contact Lens Fitting',
+      srvPediatric: 'Pediatric Vision Screening',
+      locationTitle: 'Location & Contact',
+      address: 'Plaza Higuerones, Unit 23',
+      addressSub: 'San Rafael Abajo de Desamparados, San Jose, Costa Rica',
+      hoursTitle: 'Opening Hours',
+      hoursDays: 'Monday to Saturday',
+      hoursTime: '9:00 AM - 6:00 PM',
+      hoursSunday: 'Closed on Sundays',
+      phoneLabel: 'Direct line',
+      whatsappLabel: 'Official WhatsApp',
+      emergencyBadge: 'Personalized care & urgent visual concerns',
+      googleRatingText: '4.9 ★★★★★ on Google Reviews',
+      googleReviewCta: 'View on Google Maps',
       allRights: 'All rights reserved.',
+      professionalLicense: 'College of Optometrists of Costa Rica',
+      privacy: 'Privacy Policy',
+      terms: 'Terms of Service',
       developedBy: 'Developed by localrank.com.co',
     },
   },

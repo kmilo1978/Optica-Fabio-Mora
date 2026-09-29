@@ -372,16 +372,16 @@ export default function CalificarPage({ onBack, lang = 'es' }: CalificarPageProp
         </AnimatePresence>
       </main>
 
-      {/* Pie de Página Minimalista */}
-      <footer className="py-6 px-4 text-center border-t border-gray-100 bg-white text-[12px] text-gray-500">
-        <p className="font-medium text-[#15171C]">
+      {/* Pie de Página Minimalista de Alto Contraste */}
+      <footer className="py-7 px-4 text-center border-t border-gray-200/80 bg-gray-50/80 text-[12.5px] text-[#555963]">
+        <p className="font-bold text-[#15171C]">
           Ópticas Popular · Dr. Fabio Mora Medina
         </p>
-        <p className="mt-1 text-gray-400">
-          Plaza Higuerones, Local 23 · San Rafael Abajo de Desamparados, San José, Costa Rica
+        <p className="mt-1 text-gray-600">
+          Plaza Higuerones, {isEn ? 'Unit 23 · San Rafael Abajo de Desamparados, San Jose, Costa Rica' : 'Local 23 · San Rafael Abajo de Desamparados, San José, Costa Rica'}
         </p>
-        <p className="mt-2 text-[11px] text-gray-400">
-          © {new Date().getFullYear()} Todos los derechos reservados.
+        <p className="mt-2 text-[11.5px] text-gray-500">
+          © {new Date().getFullYear()} {isEn ? 'All rights reserved.' : 'Todos los derechos reservados.'}
         </p>
       </footer>
     </div>
