@@ -929,11 +929,11 @@ export default function App() {
                       <ShieldCheck className="w-6 h-6" />
                     </div>
                     <div>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-[15px] sm:text-[16px] font-bold text-[#15171C]">
+                      <div className="flex items-center gap-2.5 flex-wrap">
+                        <span className="text-[14px] sm:text-[15px] md:text-[16px] font-bold text-[#15171C] whitespace-nowrap">
                           Garantía de Adaptación Visual (30 días)
                         </span>
-                        <span className="text-[10px] uppercase font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">
+                        <span className="text-[10px] uppercase font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full whitespace-nowrap">
                           100% Tranquilidad
                         </span>
                       </div>
