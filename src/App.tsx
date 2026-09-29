@@ -18,6 +18,7 @@ import {
   Facebook,
   Instagram,
   ChevronDown,
+  ChevronRight,
   ChevronUp,
   HelpCircle,
   ShieldCheck,
@@ -52,16 +53,93 @@ function AnimatedNumber({ value, duration = 2 }: { value: number; duration?: num
   return <span ref={ref}>{displayValue}</span>;
 }
 
-const NAV_LINKS = [
-  { name: 'Inicio', href: '#inicio' },
-  { name: 'Servicios', href: '#servicios' },
-  { name: 'Por qué elegirnos', href: '#beneficios' },
-  { name: 'Proceso', href: '#proceso' },
-  { name: 'Galería', href: '#galeria' },
-  { name: 'Testimonios', href: '#testimonios' },
-  { name: 'FAQ', href: '#faq' },
-  { name: 'Doctor', href: '#doctor' },
-  { name: 'Contacto', href: '#contacto' },
+interface SubItem {
+  name: string;
+  href: string;
+  desc: string;
+  icon: any;
+}
+
+interface SubGroup {
+  title: string;
+  items: SubItem[];
+}
+
+interface NavCategory {
+  id: string;
+  name: string;
+  href?: string;
+  groups?: SubGroup[];
+}
+
+const SERVICE_CATEGORIES = ['Todos', 'Diagnóstico y Exámenes', 'Especialidades Oculares', 'Lentes y Contactología'] as const;
+
+const NAVIGATION_MENU: NavCategory[] = [
+  {
+    id: 'inicio',
+    name: 'Inicio',
+    href: '#inicio',
+  },
+  {
+    id: 'servicios',
+    name: 'Servicios',
+    href: '#servicios',
+    groups: [
+      {
+        title: 'Exámenes y Diagnóstico',
+        items: [
+          { name: 'Evaluación Visual Integral', href: '#servicios', desc: 'Graduación precisa y fondo de ojo', icon: Eye },
+          { name: 'Fotografía de Retina', href: '#servicios', desc: 'Diagnóstico digital de retina', icon: Camera },
+          { name: 'Toma de Presión Ocular', href: '#servicios', desc: 'Control preventivo de glaucoma', icon: Activity },
+        ],
+      },
+      {
+        title: 'Especialidades Oculares',
+        items: [
+          { name: 'Valoración de Cataratas', href: '#servicios', desc: 'Evaluación y orientación médica', icon: Stethoscope },
+          { name: 'Evaluación de Ojo Seco', href: '#servicios', desc: 'Alivio de resequedad e irritación', icon: Droplets },
+          { name: 'Lentes de Contacto', href: '#servicios', desc: 'Adaptación personalizada y cómoda', icon: Contact },
+        ],
+      },
+      {
+        title: 'Metodología',
+        items: [
+          { name: 'Proceso de Consulta', href: '#proceso', desc: 'Paso a paso de tu cita médica', icon: CheckCircle2 },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'nosotros',
+    name: 'Conócenos',
+    href: '#doctor',
+    groups: [
+      {
+        title: 'La Clínica',
+        items: [
+          { name: 'Dr. Fabio Mora Medina', href: '#doctor', desc: 'Trayectoria y formación profesional', icon: Award },
+          { name: '¿Por qué elegirnos?', href: '#beneficios', desc: 'Tecnología y atención personalizada', icon: ShieldCheck },
+        ],
+      },
+      {
+        title: 'Experiencia y Espacio',
+        items: [
+          { name: 'Instalaciones y Equipos', href: '#galeria', desc: 'Conoce nuestro consultorio', icon: Camera },
+          { name: 'Testimonios de Pacientes', href: '#testimonios', desc: 'Experiencias de quienes nos visitan', icon: Users },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'faq',
+    name: 'Preguntas',
+    href: '#faq',
+  },
+  {
+    id: 'contacto',
+    name: 'Contacto',
+    href: '#contacto',
+  },
 ];
 
 const WHY_CHOOSE_US = [
@@ -113,31 +191,37 @@ const FAQS = [
 const SERVICES = [
   {
     title: 'Evaluación visual integral',
+    category: 'Diagnóstico y Exámenes',
     description: 'Examen completo para conocer con precisión tu estado visual y orientar la mejor solución.',
     icon: Eye,
   },
   {
     title: 'Fotografía de retina',
+    category: 'Especialidades Oculares',
     description: 'Valoración de la salud ocular mediante imágenes que ayudan a detectar alteraciones a tiempo.',
     icon: Camera,
   },
   {
     title: 'Toma de presión ocular',
+    category: 'Diagnóstico y Exámenes',
     description: 'Medición orientada a detectar factores de riesgo relacionados con glaucoma y control ocular.',
     icon: Activity,
   },
   {
     title: 'Valoración de cataratas',
+    category: 'Especialidades Oculares',
     description: 'Diagnóstico y orientación para entender el estado de tu visión y el manejo recomendado.',
     icon: Stethoscope,
   },
   {
     title: 'Evaluación de ojo seco',
+    category: 'Especialidades Oculares',
     description: 'Revisión de molestias o resequedad para proponerte una solución más cómoda y efectiva.',
     icon: Droplets,
   },
   {
     title: 'Lentes de contacto',
+    category: 'Lentes y Contactología',
     description: 'Adaptación personalizada para opciones esféricas, astigmatismo y multifocal según tu caso.',
     icon: Contact,
   },
@@ -167,6 +251,9 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [desktopDropdown, setDesktopDropdown] = useState<string | null>(null);
+  const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>('servicios');
+  const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -192,83 +279,294 @@ export default function App() {
                 </div>
               </a>
 
-              {/* Desktop Nav */}
-              <nav className="hidden xl:flex items-center gap-6 text-[10px] lg:text-[11px] uppercase tracking-[0.12em] text-[#1C1D21]">
-                {NAV_LINKS.map((link) => (
-                  <a key={link.name} href={link.href} className="hover:text-[rgb(122,24,35)] transition-colors">
-                    {link.name}
-                  </a>
-                ))}
+              {/* Desktop Nav categorizado */}
+              <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+                {NAVIGATION_MENU.map((cat) => {
+                  const hasSub = Boolean(cat.groups && cat.groups.length > 0);
+                  const isOpen = desktopDropdown === cat.id;
+
+                  if (!hasSub) {
+                    return (
+                      <a
+                        key={cat.id}
+                        href={cat.href}
+                        className="px-3.5 py-2 rounded-xl text-[12px] font-semibold tracking-wide text-[#1C1D21] hover:text-[rgb(122,24,35)] hover:bg-black/5 transition-all"
+                      >
+                        {cat.name}
+                      </a>
+                    );
+                  }
+
+                  return (
+                    <div
+                      key={cat.id}
+                      className="relative group"
+                      onMouseEnter={() => setDesktopDropdown(cat.id)}
+                      onMouseLeave={() => setDesktopDropdown(null)}
+                    >
+                      <button
+                        onClick={() => setDesktopDropdown(isOpen ? null : cat.id)}
+                        className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[12px] font-semibold tracking-wide transition-all ${
+                          isOpen 
+                            ? 'text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10' 
+                            : 'text-[#1C1D21] hover:text-[rgb(122,24,35)] hover:bg-black/5'
+                        }`}
+                      >
+                        <span>{cat.name}</span>
+                        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180 text-[rgb(122,24,35)]' : 'text-gray-400'}`} />
+                      </button>
+
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                            transition={{ duration: 0.18 }}
+                            className={`absolute top-full mt-2 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100 p-5 z-50 ${
+                              cat.id === 'servicios' ? 'w-[640px] -left-28' : 'w-[480px] -left-16'
+                            }`}
+                          >
+                            <div className={`grid gap-6 ${cat.groups!.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                              {cat.groups!.map((group, gIdx) => (
+                                <div key={gIdx} className="space-y-2">
+                                  <div className="pb-1.5 border-b border-gray-100">
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[rgb(122,24,35)]">
+                                      {group.title}
+                                    </span>
+                                  </div>
+                                  <div className="space-y-1">
+                                    {group.items.map((item, iIdx) => {
+                                      const ItemIcon = item.icon;
+                                      return (
+                                        <a
+                                          key={iIdx}
+                                          href={item.href}
+                                          onClick={() => setDesktopDropdown(null)}
+                                          className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#F3F4F7] transition-all"
+                                        >
+                                          <div className="w-8 h-8 rounded-lg bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-[rgb(122,24,35)] group-hover/item:text-white transition-colors">
+                                            <ItemIcon className="w-4 h-4" />
+                                          </div>
+                                          <div className="flex-1 min-w-0">
+                                            <p className="text-[12px] font-semibold text-[#15171C] group-hover/item:text-[rgb(122,24,35)] transition-colors">
+                                              {item.name}
+                                            </p>
+                                            <p className="text-[11px] text-gray-500 line-clamp-1">
+                                              {item.desc}
+                                            </p>
+                                          </div>
+                                        </a>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
               </nav>
 
               <div className="flex items-center gap-2">
                 <a
                   href="tel:+50672760215"
-                  className="hidden xl:inline-flex items-center justify-center h-8 px-4 rounded-[6px] bg-white border border-[#E3E5EC] text-[#15171C] text-[10px] font-medium cta-secondary"
+                  className="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-[8px] bg-white border border-[#E3E5EC] text-[#15171C] text-[11px] font-bold hover:bg-gray-50 transition-colors shadow-sm"
                 >
-                  <Phone className="w-3 h-3 mr-2" />
+                  <Phone className="w-3.5 h-3.5 mr-2 text-[rgb(122,24,35)]" />
                   Llamar
                 </a>
 
                 <a
                   href="https://wa.me/50672760215"
-                  className="hidden xl:inline-flex items-center justify-center h-8 px-4 rounded-[6px] bg-[rgb(122,24,35)] text-white text-[10px] font-medium whitespace-nowrap cta-primary"
+                  className="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[11px] font-bold whitespace-nowrap hover:bg-[rgb(142,30,42)] shadow-md transition-colors"
                 >
-                  <MessageCircle className="w-3 h-3 mr-2" />
+                  <MessageCircle className="w-3.5 h-3.5 mr-2" />
                   Agendar
                 </a>
 
-                {/* Mobile Menu Toggle */}
+                {/* Botón Menú Hamburguesa para Móviles */}
                 <button
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
-                  className="xl:hidden w-11 h-11 rounded-[10px] bg-white border border-[#E3E5EC] flex items-center justify-center text-[#15171C]"
+                  onClick={() => setIsMenuOpen(true)}
+                  aria-label="Abrir menú de navegación"
+                  className="lg:hidden inline-flex items-center gap-2 h-10 px-3.5 rounded-xl bg-white border border-[#E3E5EC] text-[#15171C] font-semibold text-[12px] shadow-sm hover:border-[rgb(122,24,35)] active:scale-95 transition-all"
                 >
-                  {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                  <Menu className="w-5 h-5 text-[rgb(122,24,35)]" />
+                  <span className="text-[11px] font-bold tracking-wider uppercase">Menú</span>
                 </button>
               </div>
             </div>
 
-            {/* Mobile Menu Panel */}
+            {/* Menú Lateral Deslizante tipo Hamburguesa (Mobile Drawer) */}
             <AnimatePresence>
               {isMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className="xl:hidden absolute left-4 right-4 md:left-6 md:right-6 top-[76px] bg-white rounded-[14px] border border-[#E3E5EC] shadow-xl overflow-hidden"
-                >
-                  <div className="p-4 md:p-5">
-                    <nav className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {NAV_LINKS.map((link) => (
-                        <a
-                          key={link.name}
-                          href={link.href}
-                          onClick={() => setIsMenuOpen(false)}
-                          className="h-11 px-4 rounded-[10px] bg-[#F3F4F7] text-[#15171C] text-[11px] uppercase tracking-[0.08em] inline-flex items-center hover:bg-[rgb(122,24,35)] hover:text-white transition-colors"
-                        >
-                          {link.name}
-                        </a>
-                      ))}
-                    </nav>
+                <div className="fixed inset-0 z-[9999] flex justify-end">
+                  {/* Fondo oscuro translúcido con cierre al tocar */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="fixed inset-0 bg-black/60 backdrop-blur-xs"
+                    aria-hidden="true"
+                  />
 
-                    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <a
-                        href="tel:+50672760215"
-                        className="inline-flex items-center justify-center h-11 rounded-[10px] bg-[#F3F4F7] text-[#15171C] text-[11px] font-medium"
+                  {/* Panel Drawer lateral deslizable */}
+                  <motion.div
+                    initial={{ x: '100%' }}
+                    animate={{ x: 0 }}
+                    exit={{ x: '100%' }}
+                    transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+                    className="relative z-10 w-full max-w-[340px] sm:max-w-[380px] h-full bg-white shadow-2xl flex flex-col justify-between overflow-hidden"
+                  >
+                    {/* Encabezado del Menú Hamburguesa */}
+                    <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-[#F8F9FB]">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)] text-white flex items-center justify-center shadow-md">
+                          <Eye size={22} strokeWidth={2.5} />
+                        </div>
+                        <div className="flex flex-col leading-none">
+                          <span className="text-[15px] font-bold tracking-tight text-[#13151A]">Ópticas Popular</span>
+                          <span className="text-[9px] font-medium text-[rgb(122,24,35)] uppercase tracking-wider mt-1">Dr. Fabio Mora Medina</span>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => setIsMenuOpen(false)}
+                        aria-label="Cerrar menú"
+                        className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-black hover:bg-gray-50 transition-colors shadow-xs active:scale-95"
                       >
-                        Llamar ahora
-                      </a>
-
-                      <a
-                        href="https://wa.me/50672760215"
-                        className="inline-flex items-center justify-center h-11 rounded-[10px] bg-[rgb(122,24,35)] text-white text-[11px] font-medium"
-                      >
-                        Agendar por WhatsApp
-                      </a>
+                        <X size={20} />
+                      </button>
                     </div>
-                  </div>
-                </motion.div>
+
+                    {/* Contenido con Scroll de Categorías y Subcategorías */}
+                    <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#767A84] px-1">
+                        Navegación por categorías
+                      </p>
+
+                      <div className="space-y-2">
+                        {NAVIGATION_MENU.map((cat) => {
+                          const hasSub = Boolean(cat.groups && cat.groups.length > 0);
+                          const isExpanded = mobileExpandedCat === cat.id;
+
+                          if (!hasSub) {
+                            return (
+                              <a
+                                key={cat.id}
+                                href={cat.href}
+                                onClick={() => setIsMenuOpen(false)}
+                                className="flex items-center justify-between h-12 px-4 rounded-xl bg-[#F8F9FB] hover:bg-[rgb(122,24,35)] hover:text-white text-[#15171C] text-[13px] font-semibold active:scale-[0.99] transition-all"
+                              >
+                                <span>{cat.name}</span>
+                                <ChevronRight className="w-4 h-4 opacity-40" />
+                              </a>
+                            );
+                          }
+
+                          const totalItems = cat.groups?.reduce((acc, g) => acc + g.items.length, 0) || 0;
+
+                          return (
+                            <div key={cat.id} className="rounded-xl bg-[#F8F9FB] border border-gray-100 overflow-hidden">
+                              <button
+                                onClick={() => setMobileExpandedCat(isExpanded ? null : cat.id)}
+                                style={{
+                                  color: isExpanded ? '#ffffff' : '#15171C',
+                                  backgroundColor: isExpanded ? 'rgb(122, 24, 35)' : undefined,
+                                }}
+                                className={`w-full flex items-center justify-between h-12 px-4 text-[13px] font-semibold transition-colors ${
+                                  isExpanded ? '!text-white text-white bg-[rgb(122,24,35)] hover:!text-white' : 'text-[#15171C] hover:bg-gray-100'
+                                }`}
+                              >
+                                <div className="flex items-center gap-2">
+                                  <span style={{ color: isExpanded ? '#ffffff' : 'inherit' }} className={isExpanded ? '!text-white text-white font-bold' : ''}>
+                                    {cat.name}
+                                  </span>
+                                  <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${
+                                    isExpanded ? 'bg-white/20 text-white !text-white' : 'bg-gray-200 text-gray-700'
+                                  }`}>
+                                    {totalItems} opciones
+                                  </span>
+                                </div>
+                                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180 text-white !text-white' : 'text-gray-400'}`} />
+                              </button>
+
+                              {isExpanded && (
+                                <div className="p-3 space-y-3 bg-white divide-y divide-gray-100">
+                                  {cat.groups!.map((group, gIdx) => (
+                                    <div key={gIdx} className={gIdx > 0 ? 'pt-3' : ''}>
+                                      <p className="text-[10px] font-bold uppercase tracking-wider text-[rgb(122,24,35)] mb-2 px-1">
+                                        {group.title}
+                                      </p>
+                                      <div className="space-y-1">
+                                        {group.items.map((item, iIdx) => {
+                                          const ItemIcon = item.icon;
+                                          return (
+                                            <a
+                                              key={iIdx}
+                                              href={item.href}
+                                              onClick={() => setIsMenuOpen(false)}
+                                              className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#F3F4F7] active:bg-gray-200 transition-all"
+                                            >
+                                              <div className="w-8 h-8 rounded-lg bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0">
+                                                <ItemIcon className="w-4 h-4" />
+                                              </div>
+                                              <div className="flex-1 min-w-0">
+                                                <p className="text-[12px] font-semibold text-[#15171C] leading-snug">{item.name}</p>
+                                                <p className="text-[10px] text-gray-500 truncate">{item.desc}</p>
+                                              </div>
+                                            </a>
+                                          );
+                                        })}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Información de Ubicación y Horarios dentro del Menú */}
+                      <div className="mt-4 p-3.5 rounded-xl bg-gray-50 border border-gray-100 text-left space-y-1.5">
+                        <div className="flex items-center gap-2 text-[11px] font-bold text-[#15171C]">
+                          <MapPin className="w-3.5 h-3.5 text-[rgb(122,24,35)] shrink-0" />
+                          <span>Plaza Higuerones, Local 23</span>
+                        </div>
+                        <p className="text-[10px] text-gray-500 pl-5.5">San Rafael Abajo de Desamparados</p>
+                        <div className="flex items-center gap-2 text-[10px] text-gray-600 pl-5.5 pt-1">
+                          <Clock className="w-3 h-3 text-[rgb(122,24,35)]" />
+                          <span>Lun a Sáb: 9:00 AM - 6:00 PM</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Pie del Menú con Accesos Rápidos */}
+                    <div className="p-4 border-t border-gray-100 bg-[#F8F9FB] space-y-2">
+                      <div className="grid grid-cols-2 gap-2">
+                        <a
+                          href="tel:+50672760215"
+                          className="inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-white border border-[#E3E5EC] text-[#15171C] text-[12px] font-bold shadow-xs active:scale-95 transition-transform"
+                        >
+                          <Phone className="w-4 h-4 text-[rgb(122,24,35)]" />
+                          Llamar
+                        </a>
+                        <a
+                          href="https://wa.me/50672760215"
+                          className="inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-[rgb(122,24,35)] text-white text-[12px] font-bold shadow-md active:scale-95 transition-transform"
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                          WhatsApp
+                        </a>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
               )}
             </AnimatePresence>
           </header>
@@ -595,26 +893,64 @@ export default function App() {
               Evaluaciones completas y <span className="text-[rgb(122,24,35)]">soluciones visuales</span> adaptadas a cada paciente
             </h2>
 
+            {/* Selector de Categorías de Servicios con texto blanco asegurado */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+              {SERVICE_CATEGORIES.map((catName) => {
+                const isSelected = selectedCategory === catName;
+                return (
+                  <button
+                    key={catName}
+                    onClick={() => setSelectedCategory(catName)}
+                    style={{
+                      color: isSelected ? '#ffffff' : '#374151',
+                      backgroundColor: isSelected ? 'rgb(122, 24, 35)' : '#ffffff',
+                    }}
+                    className={`px-4 py-2 rounded-full text-[12px] font-semibold transition-all cursor-pointer ${
+                      isSelected
+                        ? '!text-white text-white bg-[rgb(122,24,35)] shadow-md shadow-[rgb(122,24,35)]/25 scale-105 border border-[rgb(122,24,35)] hover:!text-white hover:text-white hover:bg-[rgb(142,30,42)]'
+                        : 'bg-white text-gray-700 border border-gray-200 hover:border-[rgb(122,24,35)] hover:text-[rgb(122,24,35)]'
+                    }`}
+                  >
+                    <span
+                      style={{ color: isSelected ? '#ffffff' : 'inherit' }}
+                      className={isSelected ? '!text-white text-white font-bold' : ''}
+                    >
+                      {catName}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
             <div className="mt-6 relative grid md:grid-cols-2 xl:grid-cols-3 gap-3">
-              {SERVICES.map((service, i) => (
+              {SERVICES.filter((s) => selectedCategory === 'Todos' || s.category === selectedCategory).map((service, i) => (
                 <motion.article 
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
-                  viewport={{ once: true, margin: "-50px" }}
+                  key={service.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: i * 0.05, ease: "easeOut" }}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                  className="bg-white rounded-[14px] p-5 min-h-[148px] pro-card shadow-sm flex flex-col border border-transparent hover:border-gray-100 hover:shadow-md transition-shadow"
+                  className="bg-white rounded-[14px] p-5 min-h-[160px] pro-card shadow-sm flex flex-col border border-transparent hover:border-gray-100 hover:shadow-md transition-shadow"
                 >
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-lg bg-[#F3F4F7] flex items-center justify-center text-[rgb(122,24,35)]">
-                      <service.icon className="w-4 h-4" />
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-[#F3F4F7] flex items-center justify-center text-[rgb(122,24,35)] shadow-xs">
+                        <service.icon className="w-4 h-4" />
+                      </div>
+                      <h3 className="text-[17px] sm:text-[18px] md:text-[18px] leading-[1.2] tracking-tight font-bold text-[#15171C]">{service.title}</h3>
                     </div>
-                    <h3 className="text-[17px] sm:text-[18px] md:text-[18px] leading-[1.2] tracking-tight font-bold text-[#15171C]">{service.title}</h3>
                   </div>
+
+                  <div className="mb-2">
+                    <span className="text-[9px] uppercase tracking-wider font-bold text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10 px-2 py-0.5 rounded-md">
+                      {service.category}
+                    </span>
+                  </div>
+
                   <p className="text-[12px] sm:text-[13px] md:text-[11px] lg:text-[12px] leading-[1.65] text-[#6A6D77] flex-grow">
                     {service.description}
                   </p>
+
                   <a href="https://wa.me/50672760215" className="inline-flex items-center gap-2 mt-4 text-[11px] md:text-[10px] font-bold text-[#15171C] hover:text-[rgb(122,24,35)] transition-colors group/link">
                     Reservar cita <ArrowUpRight className="w-3 h-3 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                   </a>
@@ -1226,20 +1562,29 @@ export default function App() {
             </div>
           </footer>
 
-          {/* Sticky Mobile CTA */}
-          <div className="md:hidden fixed bottom-0 inset-x-0 z-40 p-3 bg-gradient-to-t from-[#D7DAE5] via-[#D7DAE5]/90 to-transparent">
-            <div className="grid grid-cols-2 gap-3 max-w-[560px] mx-auto">
+          {/* Barra de Navegación Rápida Inferior para Móviles */}
+          <div className="md:hidden fixed bottom-0 inset-x-0 z-40 p-2.5 bg-white/95 backdrop-blur-lg border-t border-gray-200/80 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+            <div className="grid grid-cols-3 gap-2 max-w-[460px] mx-auto">
+              <button
+                onClick={() => setIsMenuOpen(true)}
+                className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[#F3F4F7] text-[#15171C] text-[10px] font-bold active:scale-95 transition-transform"
+              >
+                <Menu className="w-4 h-4 text-[rgb(122,24,35)] mb-0.5" />
+                <span>Menú</span>
+              </button>
               <a
                 href="tel:+50672760215"
-                className="inline-flex items-center justify-center h-11 rounded-[10px] bg-white border border-[#E3E5EC] text-[#15171C] text-[11px] font-bold shadow-sm active:scale-95 transition-transform"
+                className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-white border border-[#E3E5EC] text-[#15171C] text-[10px] font-bold active:scale-95 transition-transform shadow-xs"
               >
-                Llamar
+                <Phone className="w-4 h-4 text-[rgb(122,24,35)] mb-0.5" />
+                <span>Llamar</span>
               </a>
               <a
                 href="https://wa.me/50672760215"
-                className="inline-flex items-center justify-center h-11 rounded-[10px] bg-[rgb(122,24,35)] text-white text-[11px] font-bold shadow-xl active:scale-95 transition-transform"
+                className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[rgb(122,24,35)] text-white text-[10px] font-bold active:scale-95 transition-transform shadow-md"
               >
-                Agendar ahora
+                <MessageCircle className="w-4 h-4 mb-0.5" />
+                <span>Cita</span>
               </a>
             </div>
           </div>
@@ -1255,7 +1600,7 @@ export default function App() {
           animate={{ scale: 1, opacity: 1 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="hidden md:flex fixed bottom-6 right-6 z-[999] w-14 h-14 bg-[#25D366] text-white rounded-full items-center justify-center shadow-2xl hover:bg-[#20ba5a] transition-colors"
+          className="flex fixed bottom-20 md:bottom-6 right-4 md:right-6 z-[45] w-14 h-14 bg-[#25D366] text-white rounded-full items-center justify-center shadow-2xl hover:bg-[#20ba5a] transition-colors"
           aria-label="Contactar por WhatsApp"
         >
           <MessageCircle className="w-8 h-8 fill-white text-[#25D366]" />
