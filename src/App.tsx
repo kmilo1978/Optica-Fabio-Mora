@@ -1482,13 +1482,13 @@ export default function App() {
                     <button
                       key={tab.id}
                       onClick={() => setSelectedAgeGroup(tab.id as any)}
-                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-bold transition-all cursor-pointer ${
+                      className={`inline-flex items-center gap-2 px-4.5 py-2.5 rounded-full text-[13px] sm:text-[13.5px] font-bold transition-all cursor-pointer bg-white ${
                         isSelected
-                          ? 'bg-[rgb(122,24,35)] text-white shadow-md shadow-[rgb(122,24,35)]/20 scale-105 border border-[rgb(122,24,35)]'
-                          : 'bg-white text-gray-700 border border-gray-200 hover:border-[rgb(122,24,35)] hover:text-[rgb(122,24,35)] hover:shadow-xs'
+                          ? 'text-[rgb(122,24,35)] border-2 border-[rgb(122,24,35)] shadow-md scale-105 ring-2 ring-[rgb(122,24,35)]/15'
+                          : 'text-[#374151] border border-gray-200 hover:border-[rgb(122,24,35)] hover:text-[rgb(122,24,35)] hover:shadow-xs'
                       }`}
                     >
-                      <tab.icon className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-[rgb(122,24,35)]'}`} />
+                      <tab.icon className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
                       <span>{tab.label}</span>
                     </button>
                   );
@@ -1507,22 +1507,22 @@ export default function App() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.45, delay: idx * 0.1 }}
                       whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                      className="group bg-white hover:bg-[rgb(122,24,35)] rounded-3xl p-6 sm:p-7 border border-gray-200/90 hover:border-[rgb(122,24,35)] shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden cursor-pointer"
+                      className="group bg-white rounded-3xl p-6 sm:p-7 border border-gray-200/90 hover:border-[rgb(122,24,35)] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
                     >
                       {/* Línea superior corporativa */}
-                      <div className="absolute top-0 left-0 right-0 h-1.5 bg-[rgb(122,24,35)] group-hover:bg-white transition-colors duration-300"></div>
+                      <div className="absolute top-0 left-0 right-0 h-1.5 bg-[rgb(122,24,35)]"></div>
 
                       <div>
                         {/* Header de la Tarjeta */}
                         <div className="flex items-center justify-between gap-3 mb-4">
-                          <div className="w-12 h-12 rounded-2xl bg-[rgb(122,24,35)] text-white group-hover:bg-white group-hover:text-[rgb(122,24,35)] flex items-center justify-center shadow-md transform transition-all duration-300 group-hover:scale-110">
+                          <div className="w-12 h-12 rounded-2xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shadow-xs border border-[rgb(122,24,35)]/15">
                             <GroupIcon className="w-6 h-6" />
                           </div>
                           <div className="flex flex-col items-end">
-                            <span className="text-[11px] font-bold text-gray-400 group-hover:text-white/70 uppercase tracking-wider transition-colors">
+                            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
                               Rango de edad
                             </span>
-                            <span className="text-[13px] font-bold text-[#15171C] group-hover:text-white bg-gray-100 group-hover:bg-white/20 px-2.5 py-0.5 rounded-full transition-colors">
+                            <span className="text-[13px] font-bold text-[#15171C] bg-gray-100 px-2.5 py-0.5 rounded-full mt-0.5">
                               {group.ageRange}
                             </span>
                           </div>
@@ -1530,43 +1530,43 @@ export default function App() {
 
                         {/* Título y Badge */}
                         <div className="mb-3">
-                          <span className="inline-block text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full border border-[rgb(122,24,35)]/20 bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] group-hover:bg-white/20 group-hover:text-white group-hover:border-white/30 transition-colors mb-2">
+                          <span className="inline-block text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full border border-[rgb(122,24,35)]/20 bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] mb-2">
                             {group.roleTag}
                           </span>
-                          <h3 className="text-[21px] sm:text-[22px] font-bold text-[#15171C] group-hover:text-white transition-colors leading-tight">
+                          <h3 className="text-[21px] sm:text-[22px] font-bold text-[#15171C] leading-tight">
                             {group.title}
                           </h3>
                         </div>
 
-                        <p className="text-[13.5px] leading-relaxed text-[#555963] group-hover:text-white/90 transition-colors mb-5">
+                        <p className="text-[13.5px] leading-relaxed text-[#555963] mb-5">
                           {group.description}
                         </p>
 
-                        {/* Puntos destacados con cambio de letra a blanco en hover */}
-                        <div className="space-y-3 pt-4 border-t border-gray-100 group-hover:border-white/20 transition-colors">
+                        {/* Puntos destacados con alta legibilidad */}
+                        <div className="space-y-3 pt-4 border-t border-gray-100">
                           {group.highlights.map((item, hIdx) => (
                             <div key={hIdx} className="flex items-start gap-2.5">
-                              <div className="w-5 h-5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] group-hover:bg-white/20 group-hover:text-white flex items-center justify-center shrink-0 mt-0.5 transition-colors">
+                              <div className="w-5 h-5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0 mt-0.5">
                                 <CheckCircle2 className="w-3.5 h-3.5" />
                               </div>
                               <div className="text-[13px] leading-snug">
-                                <span className="font-bold text-[#15171C] group-hover:text-white transition-colors">{item.title}: </span>
-                                <span className="text-[#555963] group-hover:text-white/85 transition-colors">{item.desc}</span>
+                                <span className="font-bold text-[#15171C]">{item.title}: </span>
+                                <span className="text-[#555963]">{item.desc}</span>
                               </div>
                             </div>
                           ))}
                         </div>
                       </div>
 
-                      {/* Botón de Acción Directo */}
-                      <div className="mt-6 pt-5 border-t border-gray-100 group-hover:border-white/20 flex flex-col gap-2 transition-colors">
+                      {/* Botón de Acción Directo en Blanco con Letra Vino Tinto de Alta Legibilidad */}
+                      <div className="mt-6 pt-5 border-t border-gray-100 flex flex-col gap-2">
                         <a
                           href={`https://wa.me/50672760215?text=${encodeURIComponent(group.waMessage)}`}
-                          className="w-full inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[rgb(122,24,35)] text-white group-hover:bg-white group-hover:text-[rgb(122,24,35)] text-[13px] sm:text-[14px] font-bold shadow-md group-hover:shadow-lg transition-all duration-200 active:scale-95"
+                          className="w-full inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-white text-[rgb(122,24,35)] hover:bg-[rgb(122,24,35)]/5 border-2 border-[rgb(122,24,35)] text-[13.5px] sm:text-[14px] font-bold shadow-xs hover:shadow-md transition-all duration-200 active:scale-95 cursor-pointer"
                         >
-                          <MessageCircle className="w-4 h-4" />
+                          <MessageCircle className="w-4 h-4 text-[rgb(122,24,35)]" />
                           <span>{group.buttonText}</span>
-                          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-[rgb(122,24,35)]" />
                         </a>
                       </div>
                     </motion.article>
