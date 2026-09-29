@@ -570,7 +570,7 @@ export default function App() {
           </header>
 
           {/* Hero Section */}
-          <section id="inicio" className="w-full bg-gradient-to-b from-slate-50/80 via-white to-white py-6 md:py-10">
+          <section id="inicio" className="w-full bg-gradient-to-b from-slate-50/80 via-white to-white py-4 md:py-7">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -590,7 +590,7 @@ export default function App() {
                 </div>
 
                 <div className="grid md:grid-cols-[1.1fr_0.9fr] h-full relative z-10">
-                  <div className="px-5 sm:px-8 md:px-10 py-12 md:py-14 flex flex-col justify-center items-center md:items-start text-center md:text-left">
+                  <div className="px-5 sm:px-8 md:px-10 py-8 md:py-10 flex flex-col justify-center items-center md:items-start text-center md:text-left">
                     <motion.div 
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -691,7 +691,7 @@ export default function App() {
           </section>
 
           {/* Social Proof */}
-          <section className="w-full py-8 md:py-12 bg-white border-y border-gray-100">
+          <section className="w-full py-6 md:py-8 bg-white border-y border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {[
@@ -716,7 +716,7 @@ export default function App() {
           </section>
 
           {/* Urgency Section */}
-          <section className="w-full py-12 md:py-20 bg-slate-50/60">
+          <section className="w-full py-8 md:py-12 bg-slate-50/60">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -761,7 +761,7 @@ export default function App() {
           </section>
 
           {/* Why Choose Us Section */}
-          <section id="beneficios" className="w-full py-14 md:py-24 bg-white border-t border-gray-100">
+          <section id="beneficios" className="w-full py-8 md:py-12 bg-white border-t border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center">
               <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#767A84] shadow-sm">
@@ -797,7 +797,7 @@ export default function App() {
           </section>
 
           {/* Process & Brands */}
-          <section className="w-full py-14 md:py-24 bg-slate-50/60 border-y border-gray-100">
+          <section className="w-full py-8 md:py-12 bg-slate-50/60 border-y border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-3">
               <motion.div 
@@ -890,7 +890,7 @@ export default function App() {
           </section>
 
           {/* Services Section */}
-          <section id="servicios" className="w-full py-14 md:py-24 bg-white">
+          <section id="servicios" className="w-full py-8 md:py-12 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center">
               <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#767A84] shadow-sm">
@@ -970,7 +970,7 @@ export default function App() {
           </section>
 
           {/* Gallery */}
-          <section id="galeria" className="w-full py-14 md:py-24 bg-slate-50/60 border-y border-gray-100">
+          <section id="galeria" className="w-full py-8 md:py-12 bg-slate-50/60 border-y border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -1099,7 +1099,7 @@ export default function App() {
           </section>
 
           {/* Testimonials */}
-          <section id="testimonios" className="w-full py-14 md:py-24 bg-white">
+          <section id="testimonios" className="w-full py-8 md:py-12 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -1204,7 +1204,7 @@ export default function App() {
           </section>
 
           {/* Doctor Section */}
-          <section id="doctor" className="w-full py-14 md:py-24 bg-slate-50/60 border-y border-gray-100">
+          <section id="doctor" className="w-full py-8 md:py-12 bg-slate-50/60 border-y border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, scale: 0.98 }}
@@ -1289,7 +1289,7 @@ export default function App() {
           </section>
 
           {/* Final CTA */}
-          <section className="w-full py-10 md:py-16 bg-white">
+          <section className="w-full py-6 md:py-8 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -1314,9 +1314,9 @@ export default function App() {
 
           {/* Contact Section */}
           {/* FAQ Section */}
-          <section id="faq" className="w-full py-16 md:py-24 bg-slate-50/70 border-y border-gray-100">
+          <section id="faq" className="w-full py-8 md:py-12 bg-slate-50/70 border-y border-gray-100">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
+              <div className="text-center max-w-2xl mx-auto mb-6 md:mb-8">
                 <span className="inline-flex items-center gap-1.5 h-6 px-3.5 rounded-full bg-white text-[9px] uppercase tracking-[0.14em] font-semibold text-[#767A84] shadow-xs border border-gray-200/60 mb-4">
                   <HelpCircle className="w-3.5 h-3.5 text-[rgb(122,24,35)]" /> Preguntas frecuentes
                 </span>
@@ -1398,7 +1398,7 @@ export default function App() {
           </section>
 
           {/* Contact Section */}
-          <section id="contacto" className="w-full py-14 md:py-24 bg-white pb-24 md:pb-24">
+          <section id="contacto" className="w-full py-8 md:py-12 bg-white pb-16 md:pb-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -1547,7 +1547,7 @@ export default function App() {
           </section>
 
           {/* Footer */}
-          <footer className="w-full bg-[#111317] text-white pt-16 pb-12 border-t border-gray-800">
+          <footer className="w-full bg-[#111317] text-white pt-10 pb-8 border-t border-gray-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-left">
               <div className="md:col-span-1">
@@ -1595,7 +1595,7 @@ export default function App() {
                 </p>
               </div>
             </div>
-            <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6 text-[12px] text-gray-400 tracking-wider">
+            <div className="mt-8 pt-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6 text-[12px] text-gray-400 tracking-wider">
               <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
                 <span>© {new Date().getFullYear()} Ópticas Popular Dr. Fabio Mora Medina. Todos los derechos reservados.</span>
                 <div className="flex items-center gap-6">
