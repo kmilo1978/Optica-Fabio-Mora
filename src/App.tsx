@@ -25,7 +25,10 @@ import {
   Award,
   Zap,
   MapPin,
-  Star
+  Star,
+  Sparkles,
+  RotateCcw,
+  AlertCircle
 } from 'lucide-react';
 import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring } from 'motion/react';
 import { useRef } from 'react';
@@ -261,6 +264,37 @@ export default function App() {
   const [desktopDropdown, setDesktopDropdown] = useState<string | null>(null);
   const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>('servicios');
   const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
+  const [showDiagnosticModal, setShowDiagnosticModal] = useState(false);
+  const [diagnosticStep, setDiagnosticStep] = useState<'question' | 'scanning' | 'result'>('question');
+  const [selectedSymptom, setSelectedSymptom] = useState<string | null>(null);
+
+  useEffect(() => {
+    const dismissed = sessionStorage.getItem('optica_diagnostic_dismissed');
+    if (!dismissed) {
+      const timer = setTimeout(() => {
+        setShowDiagnosticModal(true);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleCloseDiagnostic = () => {
+    setShowDiagnosticModal(false);
+    sessionStorage.setItem('optica_diagnostic_dismissed', 'true');
+  };
+
+  const handleSelectSymptom = (symptomId: string) => {
+    setSelectedSymptom(symptomId);
+    setDiagnosticStep('scanning');
+    setTimeout(() => {
+      setDiagnosticStep('result');
+    }, 1300);
+  };
+
+  const handleResetDiagnostic = () => {
+    setDiagnosticStep('question');
+    setSelectedSymptom(null);
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -1719,6 +1753,276 @@ export default function App() {
               </a>
             </div>
           </div>
+
+        
+        {/* Modal Interactivo de Diagnóstico / Test Visual Rápido (a los 5 seg) */}
+        <AnimatePresence>
+          {showDiagnosticModal && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/65 backdrop-blur-xs">
+              {/* Fondo para cerrar al tocar fuera */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={handleCloseDiagnostic}
+                className="absolute inset-0"
+              />
+
+              {/* Contenedor del Modal */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.92, y: 25 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.94, y: 15 }}
+                transition={{ type: 'spring', damping: 26, stiffness: 280 }}
+                className="relative z-10 w-full max-w-[500px] bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 flex flex-col"
+              >
+                {/* Encabezado animado con rayo de luz */}
+                <div className="relative bg-gradient-to-r from-[#171920] via-[rgb(122,24,35)] to-[#171920] px-5 sm:px-6 py-5 text-white overflow-hidden">
+                  <motion.div
+                    animate={{ x: ['-100%', '250%'] }}
+                    transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut' }}
+                    className="absolute inset-y-0 w-32 bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12 pointer-events-none"
+                  />
+
+                  <div className="relative z-10 flex items-start justify-between gap-3">
+                    <div>
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-xs text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-white">
+                        <Sparkles className="w-3 h-3 text-amber-300" /> Test de Confort Visual
+                      </span>
+                      <h3 className="mt-2 text-[20px] sm:text-[22px] font-bold leading-tight">
+                        ¿Cómo sentís tu visión hoy?
+                      </h3>
+                      <p className="mt-1 text-[12px] sm:text-[13px] text-white/80 leading-snug">
+                        Autoevaluación óptica rápida en 15 segundos
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={handleCloseDiagnostic}
+                      aria-label="Cerrar test"
+                      className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/80 hover:text-white flex items-center justify-center transition-colors shrink-0 active:scale-95"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Contenido Dinámico */}
+                <div className="p-5 sm:p-6">
+                  {diagnosticStep === 'question' && (
+                    <motion.div
+                      key="question"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                    >
+                      <p className="text-[13px] sm:text-[14px] font-semibold text-[#15171C] mb-3">
+                        Seleccioná tu molestia o situación más frecuente:
+                      </p>
+
+                      <div className="space-y-2.5">
+                        {[
+                          {
+                            id: 'borroso',
+                            title: 'Visión borrosa o dificultad para enfocar',
+                            desc: 'Me cuesta enfocar de lejos, al manejar o hacia el final del día.',
+                            badge: 'Enfoque'
+                          },
+                          {
+                            id: 'pantallas',
+                            title: 'Fatiga o pesadez por pantallas',
+                            desc: 'Paso muchas horas en computadora o celular y siento ojos cansados o secos.',
+                            badge: 'Digital'
+                          },
+                          {
+                            id: 'lentes',
+                            title: 'Mis lentes ya tienen más de 1 año',
+                            desc: 'Siento que mi graduación cambió o mis aros están rayados y deteriorados.',
+                            badge: 'Actualización'
+                          },
+                          {
+                            id: 'preventivo',
+                            title: 'Solo deseo mi chequeo preventivo anual',
+                            desc: 'Quiero verificar la salud de mis ojos con atención profesional del Dr. Fabio Mora.',
+                            badge: 'Prevención'
+                          }
+                        ].map((opt) => (
+                          <button
+                            key={opt.id}
+                            onClick={() => handleSelectSymptom(opt.id)}
+                            className="w-full text-left p-3.5 rounded-2xl border border-gray-200/80 hover:border-[rgb(122,24,35)] hover:bg-[rgb(122,24,35)]/5 transition-all duration-200 flex items-start gap-3 group cursor-pointer active:scale-[0.99]"
+                          >
+                            <div className="w-8 h-8 rounded-xl bg-slate-100 group-hover:bg-[rgb(122,24,35)] group-hover:text-white text-[rgb(122,24,35)] flex items-center justify-center shrink-0 mt-0.5 transition-colors">
+                              <Eye className="w-4 h-4" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="text-[13.5px] sm:text-[14px] font-bold text-[#15171C] group-hover:text-[rgb(122,24,35)] transition-colors">
+                                  {opt.title}
+                                </span>
+                                <span className="text-[9px] uppercase tracking-wider font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-md shrink-0">
+                                  {opt.badge}
+                                </span>
+                              </div>
+                              <p className="text-[11.5px] sm:text-[12px] text-[#6D727D] mt-0.5 leading-snug">
+                                {opt.desc}
+                              </p>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-400">
+                        <span>Sin costo • Diagnóstico instantáneo</span>
+                        <button
+                          onClick={handleCloseDiagnostic}
+                          className="text-gray-500 hover:text-gray-800 underline font-medium"
+                        >
+                          Continuar navegando
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {diagnosticStep === 'scanning' && (
+                    <motion.div
+                      key="scanning"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="py-10 flex flex-col items-center justify-center text-center"
+                    >
+                      <div className="relative w-24 h-24 mb-5 flex items-center justify-center">
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ repeat: Infinity, duration: 2.5, ease: 'linear' }}
+                          className="absolute inset-0 rounded-full border-2 border-dashed border-[rgb(122,24,35)]/70"
+                        />
+                        <motion.div
+                          animate={{ scale: [0.85, 1.1, 0.85], opacity: [0.4, 0.9, 0.4] }}
+                          transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+                          className="absolute inset-2 rounded-full bg-[rgb(122,24,35)]/10"
+                        />
+                        <Eye className="w-10 h-10 text-[rgb(122,24,35)] relative z-10" />
+                        <motion.div
+                          animate={{ y: [-30, 30, -30] }}
+                          transition={{ repeat: Infinity, duration: 1.4, ease: 'easeInOut' }}
+                          className="absolute inset-x-0 h-0.5 bg-[rgb(122,24,35)] shadow-[0_0_8px_rgb(122,24,35)] z-20"
+                        />
+                      </div>
+
+                      <h4 className="text-[17px] font-bold text-[#15171C]">
+                        Analizando indicadores visuales...
+                      </h4>
+                      <p className="text-[13px] text-[#6D727D] mt-1">
+                        Calculando orientación médica personalizada
+                      </p>
+                    </motion.div>
+                  )}
+
+                  {diagnosticStep === 'result' && (
+                    <motion.div
+                      key="result"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="space-y-4"
+                    >
+                      <div className="rounded-2xl bg-slate-50 border border-gray-200/80 p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)]" />
+                          <span className="text-[11px] uppercase tracking-wider font-bold text-[rgb(122,24,35)]">
+                            Resultado de tu autoevaluación
+                          </span>
+                        </div>
+
+                        {selectedSymptom === 'borroso' && (
+                          <>
+                            <h5 className="text-[15px] font-bold text-[#15171C]">
+                              Posible cambio de graduación o fatiga acomodativa
+                            </h5>
+                            <p className="text-[12.5px] text-[#555963] mt-1 leading-relaxed">
+                              La dificultad para enfocar suele indicar que la graduación actual necesita ajuste o que existe astigmatismo/presbicia no corregidos.
+                            </p>
+                          </>
+                        )}
+
+                        {selectedSymptom === 'pantallas' && (
+                          <>
+                            <h5 className="text-[15px] font-bold text-[#15171C]">
+                              Síndrome de fatiga visual digital
+                            </h5>
+                            <p className="text-[12.5px] text-[#555963] mt-1 leading-relaxed">
+                              El uso prolongado de pantallas causa resequedad y esfuerzo excesivo de los músculos ciliares. Lentes con filtro de luz azul suelen brindar alivio inmediato.
+                            </p>
+                          </>
+                        )}
+
+                        {selectedSymptom === 'lentes' && (
+                          <>
+                            <h5 className="text-[15px] font-bold text-[#15171C]">
+                              Pérdida de claridad óptica por desgaste
+                            </h5>
+                            <p className="text-[12.5px] text-[#555963] mt-1 leading-relaxed">
+                              Los lentes con más de un año acumulan micro-rayaduras que dispersan la luz, generando reflejos y cansancio visual. Es momento de renovar tus cristales.
+                            </p>
+                          </>
+                        )}
+
+                        {selectedSymptom === 'preventivo' && (
+                          <>
+                            <h5 className="text-[15px] font-bold text-[#15171C]">
+                              Excelente hábito preventivo anual
+                            </h5>
+                            <p className="text-[12.5px] text-[#555963] mt-1 leading-relaxed">
+                              El 80% de las alteraciones visuales se previenen o resuelven a tiempo con una revisión al año. Una consulta rápida te da total tranquilidad.
+                            </p>
+                          </>
+                        )}
+
+                        <div className="mt-3 pt-3 border-t border-gray-200/60 flex items-center justify-between text-[11.5px] text-[#7C808B]">
+                          <span>Recomendación: <strong>Examen visual completo</strong></span>
+                          <span className="text-[rgb(122,24,35)] font-bold">Dr. Fabio Mora</span>
+                        </div>
+                      </div>
+
+                      <a
+                        href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                          `Hola Dr. Fabio Mora, realicé el test de confort visual en su web (${
+                            selectedSymptom === 'borroso' ? 'dificultad para enfocar' :
+                            selectedSymptom === 'pantallas' ? 'fatiga por pantallas' :
+                            selectedSymptom === 'lentes' ? 'lentes desactualizados' : 'chequeo preventivo anual'
+                          }) y me gustaría agendar mi examen visual.`
+                        )}`}
+                        className="w-full inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 btn-shimmer"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        <span>Agendar examen con el Dr. Fabio Mora</span>
+                      </a>
+
+                      <div className="flex items-center justify-between pt-1">
+                        <button
+                          onClick={handleResetDiagnostic}
+                          className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-gray-500 hover:text-[rgb(122,24,35)] transition-colors cursor-pointer"
+                        >
+                          <RotateCcw className="w-3.5 h-3.5" />
+                          <span>Repetir test</span>
+                        </button>
+
+                        <button
+                          onClick={handleCloseDiagnostic}
+                          className="text-[12px] text-gray-400 hover:text-gray-700 underline cursor-pointer"
+                        >
+                          Continuar navegando
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
 
         {/* Floating WhatsApp Button */}
         <motion.a
