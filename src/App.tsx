@@ -200,6 +200,14 @@ const FAQS = [
   {
     question: '¿Cuánto tiempo dura la consulta?',
     answer: 'Una evaluación integral suele durar entre 30 y 45 minutos, dependiendo de las pruebas adicionales que tu caso específico pueda requerir.'
+  },
+  {
+    question: '¿Qué pasa si no me adapto a mis nuevos lentes o graduación?',
+    answer: 'Contamos con una Garantía de Adaptación Visual de 30 días. Si durante el primer mes sientes cualquier incomodidad o dificultad de enfoque con tus nuevos lentes (especialmente en multifocales o progresivos), el Dr. Fabio Mora te realiza una reevaluación completa y el reajuste de tus lentes sin costo adicional.'
+  },
+  {
+    question: '¿Cuáles métodos de pago aceptan y puedo usar mis propios aros?',
+    answer: 'Aceptamos pagos en efectivo, SINPE Móvil, tarjetas de crédito y débito, y facilidades con Tasa Cero. Además, emitimos factura electrónica para reintegros con seguros o asociaciones. Y sí, si tienes una montura favorita en buen estado, podemos adaptarle únicamente tus nuevos cristales.'
   }
 ];
 
