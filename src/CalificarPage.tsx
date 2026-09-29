@@ -294,11 +294,14 @@ export default function CalificarPage({ onBack, lang = 'es' }: CalificarPageProp
 
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white transition-all font-bold text-[12px] sm:text-[13px] uppercase tracking-wider shadow-md hover:shadow-lg active:scale-98 cursor-pointer mt-2 group btn-shimmer"
+                  style={{ color: '#ffffff' }}
+                  className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white !text-white transition-all font-bold text-[12px] sm:text-[13px] uppercase tracking-wider shadow-md hover:shadow-lg active:scale-98 cursor-pointer mt-2 group btn-shimmer"
                 >
-                  <MessageCircle className="w-4 h-4 text-inherit" />
-                  <span>{isEn ? 'SEND FEEDBACK TO OUR PRIVATE WHATSAPP' : 'ENVIAR SUGERENCIA A NUESTRO WHATSAPP PRIVADO'}</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  <MessageCircle className="w-4 h-4 text-white !text-white shrink-0" />
+                  <span className="text-white !text-white font-bold" style={{ color: '#ffffff' }}>
+                    {isEn ? 'SEND FEEDBACK TO OUR PRIVATE WHATSAPP' : 'ENVIAR SUGERENCIA A NUESTRO WHATSAPP PRIVADO'}
+                  </span>
+                  <ArrowRight className="w-4 h-4 text-white !text-white shrink-0 transition-transform group-hover:translate-x-1" />
                 </button>
               </form>
 
@@ -352,13 +355,16 @@ export default function CalificarPage({ onBack, lang = 'es' }: CalificarPageProp
                   href="https://maps.google.com/?q=Ópticas+Popular+Plaza+Higuerones+San+Rafael+Abajo+Desamparados"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white font-bold text-[13px] sm:text-[14px] shadow-md hover:shadow-lg transition-all active:scale-98 cursor-pointer btn-shimmer group"
+                  style={{ color: '#ffffff' }}
+                  className="w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white !text-white font-bold text-[13px] sm:text-[14px] shadow-md hover:shadow-lg transition-all active:scale-98 cursor-pointer btn-shimmer group"
                 >
                   <svg className="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24">
                     <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
                   </svg>
-                  <span>{isEn ? 'RATE ON GOOGLE (5 STARS)' : 'CALIFICAR EN GOOGLE (5 ESTRELLAS)'}</span>
-                  <ExternalLink className="w-4 h-4 opacity-80 group-hover:translate-x-0.5" />
+                  <span className="text-white !text-white font-bold" style={{ color: '#ffffff' }}>
+                    {isEn ? 'RATE ON GOOGLE (5 STARS)' : 'CALIFICAR EN GOOGLE (5 ESTRELLAS)'}
+                  </span>
+                  <ExternalLink className="w-4 h-4 text-white !text-white opacity-90 group-hover:translate-x-0.5 shrink-0" />
                 </a>
               </div>
             </motion.div>
