@@ -1117,33 +1117,7 @@ export default function App() {
 
                 </div>
 
-                <div className="relative min-h-[150px] md:min-h-full hidden md:block">
-                  <motion.div 
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="absolute right-[10%] top-[20%] w-[180px] md:w-[220px] lg:w-[260px] bg-white/85 border border-white/70 rounded-[16px] p-4 md:p-5 shadow-lg pro-card backdrop-blur-sm"
-                  >
-                    <p className="text-[9px] uppercase tracking-[0.12em] text-[#7C808B]">Señales de alerta</p>
-                    <ul className="mt-3 space-y-2 text-[11px] md:text-[12px] leading-[1.45] text-[#15171C]">
-                      <li className="flex items-start gap-2"><CheckCircle2 className="w-3 h-3 mt-0.5 text-[rgb(122,24,35)]" /> Visión borrosa o cansancio visual</li>
-                      <li className="flex items-start gap-2"><CheckCircle2 className="w-3 h-3 mt-0.5 text-[rgb(122,24,35)]" /> Molestias con pantallas o lectura</li>
-                      <li className="flex items-start gap-2"><CheckCircle2 className="w-3 h-3 mt-0.5 text-[rgb(122,24,35)]" /> Lentes rayados o desactualizados</li>
-                    </ul>
-                  </motion.div>
-
-                  <motion.div 
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="absolute left-[5%] bottom-[20%] w-[170px] md:w-[210px] bg-[rgb(122,24,35)]/90 text-white rounded-[16px] p-4 shadow-xl pro-card backdrop-blur-sm"
-                  >
-                    <p className="text-[11px] uppercase tracking-wider font-bold text-white/90">Acción recomendada</p>
-                    <p className="mt-2 text-[14px] md:text-[15px] leading-[1.6] font-semibold">
-                      Agendá tu revisión hoy y resolvé tus dudas con orientación profesional.
-                    </p>
-                  </motion.div>
-                </div>
+                <div className="relative min-h-[150px] md:min-h-full hidden md:block" />
               </div>
             </motion.div>
             </div>
