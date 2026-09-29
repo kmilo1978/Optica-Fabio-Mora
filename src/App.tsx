@@ -902,22 +902,13 @@ export default function App() {
                 viewport={{ once: true, margin: "-100px" }}
                 className="bg-white rounded-2xl md:rounded-3xl px-6 md:px-8 py-8 md:py-10 overflow-hidden shadow-sm border border-gray-100"
               >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <div className="max-w-2xl lg:max-w-3xl">
-                    <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
-                      Marcas reconocidas
-                    </span>
-                    <h2 className="mt-3 text-[26px] sm:text-[32px] md:text-[36px] leading-[1.2] tracking-tight font-bold text-[#15171C]">
-                      Opciones populares en <span className="text-[rgb(122,24,35)]">lentes y soluciones visuales</span> según tu necesidad
-                    </h2>
-                  </div>
-
-                  <a
-                    href="https://wa.me/50672760215"
-                    className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center btn-shimmer"
-                  >
-                    Consultar disponibilidad
-                  </a>
+                <div>
+                  <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
+                    Marcas reconocidas
+                  </span>
+                  <h2 className="mt-3 text-[26px] sm:text-[32px] md:text-[36px] leading-[1.2] tracking-tight font-bold text-[#15171C]">
+                    Opciones populares en <span className="text-[rgb(122,24,35)]">lentes y soluciones visuales</span> según tu necesidad
+                  </h2>
                 </div>
 
                 <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-3">
