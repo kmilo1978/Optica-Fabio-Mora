@@ -461,7 +461,62 @@ function getAgeGroups(lang: Language) {
   ];
 }
 
-const BRANDS = ['Ray-Ban', 'Oakley', 'Persol', 'Vogue', 'Arnette', 'Transitions'];
+export interface BrandItem {
+  name: string;
+  logo: string;
+  category: string;
+}
+
+function getBrands(lang: Language): BrandItem[] {
+  const isEn = lang === 'en';
+  return [
+    {
+      name: 'Ray-Ban',
+      logo: '/images/brands/ray-ban.svg',
+      category: isEn ? 'Iconic Frames & Sunwear' : 'Aros & Sol Icónicos'
+    },
+    {
+      name: 'Oakley',
+      logo: '/images/brands/oakley.svg',
+      category: isEn ? 'Sport & High Performance' : 'Deportivo & Alto Rendimiento'
+    },
+    {
+      name: 'Persol',
+      logo: '/images/brands/persol.svg',
+      category: isEn ? 'Italian Luxury Eyewear' : 'Lujo & Artesanía Italiana'
+    },
+    {
+      name: 'Transitions',
+      logo: '/images/brands/transitions.svg',
+      category: isEn ? 'Light-Intelligent Lenses' : 'Lentes Fotosensibles'
+    },
+    {
+      name: 'Carl Zeiss',
+      logo: '/images/brands/zeiss.svg',
+      category: isEn ? 'German Optical Precision' : 'Precisión Óptica Alemana'
+    },
+    {
+      name: 'Silhouette',
+      logo: '/images/brands/silhouette.svg',
+      category: isEn ? 'Titanium Rimless' : 'Aros al Aire de Titanio'
+    },
+    {
+      name: 'Vogue Eyewear',
+      logo: '/images/brands/vogue.svg',
+      category: isEn ? 'Fashion & Trends' : 'Moda & Tendencias'
+    },
+    {
+      name: 'Polaroid',
+      logo: '/images/brands/polaroid.svg',
+      category: isEn ? 'Polarized Sunwear' : 'Lentes Polarizados'
+    },
+    {
+      name: 'Emporio Armani',
+      logo: '/images/brands/armani.svg',
+      category: isEn ? 'Exclusive Design' : 'Diseño Exclusivo'
+    }
+  ];
+}
 
 export default function App() {
   const [lang, setLang] = useState<Language>(() => {
@@ -488,6 +543,7 @@ export default function App() {
   const services = getServices(lang);
   const testimonials = getTestimonials(lang);
   const ageGroups = getAgeGroups(lang);
+  const brands = getBrands(lang);
 
   const serviceCategories = lang === 'es' ? [
     { id: 'all', label: 'Todos los servicios' },
@@ -1248,107 +1304,147 @@ export default function App() {
           </section>
 
           {/* Process & Brands */}
-          <section className="w-full py-8 md:py-12 bg-slate-50/60 border-y border-gray-100">
+          <section className="w-full py-10 md:py-14 bg-slate-50/70 border-y border-gray-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-3">
-              <motion.div 
-                id="proceso" 
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                viewport={{ once: true, margin: "-100px" }}
-                className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100"
-              >
-                <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
-                  Proceso simple
-                </span>
+              <div className="grid lg:grid-cols-[0.92fr_1.08fr] gap-5 items-stretch">
+                {/* Columna Proceso Simple */}
+                <motion.div 
+                  id="proceso" 
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col justify-between"
+                >
+                  <div>
+                    <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
+                      {lang === 'es' ? 'Proceso simple' : 'Simple Process'}
+                    </span>
 
-                <h2 className="mt-4 max-w-xl text-[28px] sm:text-[32px] md:text-[36px] leading-tight tracking-tight font-bold text-[#15171C]">
-                  Una estructura pensada para tu comodidad
-                </h2>
+                    <h2 className="mt-4 max-w-xl text-[26px] sm:text-[30px] md:text-[34px] leading-tight tracking-tight font-bold text-[#15171C]">
+                      {lang === 'es' ? 'Una estructura pensada para tu comodidad' : 'A clinical flow designed for your comfort'}
+                    </h2>
 
-                <div className="mt-5 grid gap-3">
-                  {[
-                    { step: 'Paso 1', title: 'Contactás por WhatsApp o llamada', desc: 'Elegís la vía más rápida para coordinar tu revisión.' },
-                    { step: 'Paso 2', title: 'Recibís evaluación visual integral', desc: 'Se revisa tu visión y se explican los hallazgos con claridad.' },
-                    { step: 'Paso 3', title: 'Salís con una recomendación clara', desc: 'Entendés qué necesitás y cuál es el siguiente paso recomendado.', dark: true },
-                  ].map((item, i) => (
-                    <motion.article 
-                      key={i} 
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.15 + 0.3 }}
-                      viewport={{ once: true }}
-                      className={`rounded-[12px] p-4 pro-card shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 ${item.dark ? 'bg-[rgb(122,24,35)] text-white' : 'bg-[#F3F4F7] text-[#15171C]'}`}
-                    >
-                      <p className={`text-[11px] sm:text-[12px] uppercase tracking-wider font-bold ${item.dark ? 'text-white/80' : 'text-[#7A7F8A]'}`}>{item.step}</p>
-                      <h3 className="mt-2 text-[17px] sm:text-[18px] leading-[1.25] font-bold">{item.title}</h3>
-                      <p className={`mt-2 text-[13px] sm:text-[14px] leading-[1.65] ${item.dark ? 'text-white/85' : 'text-[#6D727D]'}`}>{item.desc}</p>
-                    </motion.article>
-                  ))}
-                </div>
-              </motion.div>
-
-              <motion.div 
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                viewport={{ once: true, margin: "-100px" }}
-                className="bg-white rounded-2xl md:rounded-3xl px-6 md:px-8 py-8 md:py-10 overflow-hidden shadow-sm border border-gray-100"
-              >
-                <div>
-                  <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
-                    Marcas reconocidas
-                  </span>
-                  <h2 className="mt-3 text-[26px] sm:text-[32px] md:text-[36px] leading-[1.2] tracking-tight font-bold text-[#15171C]">
-                    Opciones populares en <span className="text-[rgb(122,24,35)]">lentes y soluciones visuales</span> según tu necesidad
-                  </h2>
-                </div>
-
-                <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {BRANDS.map((brand, i) => (
-                    <motion.div 
-                      key={i} 
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: i * 0.1 + 0.4 }}
-                      viewport={{ once: true }}
-                      whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
-                      className="bg-[#F3F4F7] rounded-[12px] h-[86px] px-4 flex items-center justify-center text-center pro-card shadow-sm border border-transparent hover:border-gray-200 transition-colors"
-                    >
-                      <span className="text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] leading-none tracking-tight font-bold text-[#15171C]">{brand}</span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                <div className="mt-5 rounded-2xl bg-gradient-to-r from-emerald-50/90 via-slate-50 to-emerald-50/90 border border-emerald-200/80 p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-2xs">
-                  <div className="flex items-center gap-3.5">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md">
-                      <ShieldCheck className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2.5 flex-wrap">
-                        <span className="text-[14px] sm:text-[15px] md:text-[16px] font-bold text-[#15171C] whitespace-nowrap">
-                          Garantía de Adaptación Visual (30 días)
-                        </span>
-                        <span className="text-[10px] uppercase font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full whitespace-nowrap">
-                          100% Tranquilidad
-                        </span>
-                      </div>
-                      <p className="text-[13px] text-[#555963] mt-1 leading-snug">
-                        Si en los primeros 30 días sentís cualquier dificultad de enfoque o adaptación con tu nueva graduación, te reevaluamos y reajustamos tus lentes sin costo adicional.
-                      </p>
+                    <div className="mt-5 grid gap-3">
+                      {[
+                        { 
+                          step: lang === 'es' ? 'Paso 1' : 'Step 1', 
+                          title: lang === 'es' ? 'Contactás por WhatsApp o llamada' : 'Reach out via WhatsApp or phone', 
+                          desc: lang === 'es' ? 'Elegís la vía más rápida para coordinar tu cita según tu horario.' : 'Choose the fastest way to arrange your consultation at your convenience.' 
+                        },
+                        { 
+                          step: lang === 'es' ? 'Paso 2' : 'Step 2', 
+                          title: lang === 'es' ? 'Recibís evaluación visual integral' : 'Receive comprehensive visual evaluation', 
+                          desc: lang === 'es' ? 'Se evalúa tu visión, retina y presión ocular, explicando los hallazgos con claridad.' : 'Your vision, retina, and eye pressure are evaluated, explaining all findings clearly.' 
+                        },
+                        { 
+                          step: lang === 'es' ? 'Paso 3' : 'Step 3', 
+                          title: lang === 'es' ? 'Salís con una recomendación clara' : 'Leave with transparent clinical recommendations', 
+                          desc: lang === 'es' ? 'Entendés con exactitud qué necesitás y cuál es la mejor solución para tus ojos.' : 'Understand precisely what you need with honest advice and visual solutions.', 
+                          dark: true 
+                        },
+                      ].map((item, i) => (
+                        <motion.article 
+                          key={i} 
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.15 + 0.3 }}
+                          viewport={{ once: true }}
+                          className={`rounded-xl p-4 pro-card shadow-xs transition-all hover:shadow-md hover:-translate-y-0.5 ${item.dark ? 'bg-[rgb(122,24,35)] text-white' : 'bg-[#F3F4F7] text-[#15171C]'}`}
+                        >
+                          <p className={`text-[11px] sm:text-[12px] uppercase tracking-wider font-bold ${item.dark ? 'text-white/80' : 'text-[#7A7F8A]'}`}>{item.step}</p>
+                          <h3 className="mt-1.5 text-[16px] sm:text-[17px] leading-[1.25] font-bold">{item.title}</h3>
+                          <p className={`mt-1.5 text-[13px] sm:text-[13.5px] leading-[1.6] ${item.dark ? 'text-white/85' : 'text-[#6D727D]'}`}>{item.desc}</p>
+                        </motion.article>
+                      ))}
                     </div>
                   </div>
-                  <a
-                    href="https://wa.me/50672760215?text=Hola%20Dr.%20Fabio,%20deseo%20consultar%20sobre%20la%20garantía%20de%20adaptación%20y%20agendar%20mi%20cita."
-                    className="inline-flex items-center justify-center h-10 px-5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-[13px] font-bold whitespace-nowrap shadow-sm hover:shadow-md transition-all shrink-0 active:scale-95"
-                  >
-                    Consultar garantía
-                  </a>
-                </div>
-              </motion.div>
-            </div>
+                </motion.div>
+
+                {/* Columna Marcas Reconocidas con Logos Reales */}
+                <motion.div 
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col justify-between"
+                >
+                  <div>
+                    <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
+                      {lang === 'es' ? 'Marcas reconocidas' : 'Recognized Brands'}
+                    </span>
+                    <h2 className="mt-3 text-[26px] sm:text-[30px] md:text-[34px] leading-[1.2] tracking-tight font-bold text-[#15171C]">
+                      {lang === 'es' ? (
+                        <>Opciones líderes en <span className="text-[rgb(122,24,35)]">aros y soluciones visuales</span></>
+                      ) : (
+                        <>Leading options in <span className="text-[rgb(122,24,35)]">frames & visual solutions</span></>
+                      )}
+                    </h2>
+
+                    {/* Grid de Marcas con Logos Vectoriales Reales */}
+                    <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                      {brands.map((brand, i) => (
+                        <motion.div 
+                          key={i} 
+                          initial={{ opacity: 0, scale: 0.92 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: i * 0.05 + 0.2 }}
+                          viewport={{ once: true }}
+                          whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                          className="bg-[#FAFAFC] hover:bg-white rounded-xl p-3 sm:p-3.5 flex flex-col items-center justify-between text-center pro-card shadow-2xs border border-gray-200/70 hover:border-[rgb(122,24,35)]/30 hover:shadow-md transition-all group min-h-[98px]"
+                        >
+                          <div className="h-10 w-full flex items-center justify-center px-1">
+                            <img 
+                              src={brand.logo} 
+                              alt={`Logo oficial de ${brand.name}`} 
+                              className="max-h-8 max-w-[110px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                              loading="lazy"
+                            />
+                          </div>
+                          <div className="w-full pt-1.5 border-t border-gray-200/60 mt-1">
+                            <span className="text-[12px] font-bold text-[#15171C] group-hover:text-[rgb(122,24,35)] transition-colors block leading-tight">
+                              {brand.name}
+                            </span>
+                            <span className="text-[9.5px] text-gray-500 font-medium block truncate mt-0.5">
+                              {brand.category}
+                            </span>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Garantía de Adaptación */}
+                  <div className="mt-6 rounded-2xl bg-gradient-to-r from-emerald-50/90 via-slate-50 to-emerald-50/90 border border-emerald-200/80 p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-2xs">
+                    <div className="flex items-center gap-3.5">
+                      <div className="w-11 h-11 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md">
+                        <ShieldCheck className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-[14px] sm:text-[15px] font-bold text-[#15171C] whitespace-nowrap">
+                            {lang === 'es' ? 'Garantía de Adaptación Visual (30 días)' : 'Visual Adaptation Guarantee (30 days)'}
+                          </span>
+                          <span className="text-[10px] uppercase font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full whitespace-nowrap">
+                            {lang === 'es' ? '100% Tranquilidad' : '100% Peace of Mind'}
+                          </span>
+                        </div>
+                        <p className="text-[12.5px] text-[#555963] mt-1 leading-snug">
+                          {lang === 'es' 
+                            ? 'Si en los primeros 30 días sentís cualquier dificultad de enfoque o adaptación con tu nueva graduación, te reevaluamos y reajustamos tus lentes sin costo adicional.'
+                            : 'If during the first 30 days you experience any focus or adaptation difficulty with your new prescription, we re-evaluate and adjust your lenses at no extra cost.'}
+                        </p>
+                      </div>
+                    </div>
+                    <a
+                      href="https://wa.me/50672760215?text=Hola%20Dr.%20Fabio,%20deseo%20consultar%20sobre%20la%20garantía%20de%20adaptación%20y%20agendar%20mi%20cita."
+                      className="inline-flex items-center justify-center h-10 px-5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-[12.5px] font-bold whitespace-nowrap shadow-sm hover:shadow-md transition-all shrink-0 active:scale-95"
+                    >
+                      <span>{lang === 'es' ? 'Consultar garantía' : 'Ask about guarantee'}</span>
+                    </a>
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </section>
 
