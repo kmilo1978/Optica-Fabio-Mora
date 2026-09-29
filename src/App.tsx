@@ -272,8 +272,8 @@ export default function App() {
                   <Eye size={24} strokeWidth={2.5} />
                 </div>
                 <div className="flex flex-col leading-none">
-                  <span className="text-[16px] md:text-[18px] font-bold tracking-tight text-[#13151A]">Ópticas Popular</span>
-                  <span className="text-[10px] md:text-[11px] font-medium text-[rgb(122,24,35)] uppercase tracking-wider mt-0.5">Dr. Fabio Mora Medina</span>
+                  <span className="text-[18px] md:text-[21px] font-bold tracking-tight text-[#13151A]">Ópticas Popular</span>
+                  <span className="text-[11px] md:text-[12px] font-bold text-[rgb(122,24,35)] uppercase tracking-wider mt-0.5">Dr. Fabio Mora Medina</span>
                 </div>
               </a>
 
@@ -288,7 +288,7 @@ export default function App() {
                       <a
                         key={cat.id}
                         href={cat.href}
-                        className="px-3.5 py-2 rounded-xl text-[12px] font-semibold tracking-wide text-[#1C1D21] hover:text-[rgb(122,24,35)] hover:bg-black/5 transition-all"
+                        className="px-3.5 py-2 rounded-xl text-[13px] md:text-[14px] font-semibold text-[#1C1D21] hover:text-[rgb(122,24,35)] hover:bg-black/5 transition-all"
                       >
                         {cat.name}
                       </a>
@@ -304,7 +304,7 @@ export default function App() {
                     >
                       <button
                         onClick={() => setDesktopDropdown(isOpen ? null : cat.id)}
-                        className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[12px] font-semibold tracking-wide transition-all ${
+                        className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[13px] md:text-[14px] font-semibold transition-all ${
                           isOpen 
                             ? 'text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10' 
                             : 'text-[#1C1D21] hover:text-[rgb(122,24,35)] hover:bg-black/5'
@@ -329,7 +329,7 @@ export default function App() {
                               {cat.groups!.map((group, gIdx) => (
                                 <div key={gIdx} className="space-y-2">
                                   <div className="pb-1.5 border-b border-gray-100">
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[rgb(122,24,35)]">
+                                    <span className="text-[11px] font-bold uppercase tracking-wider text-[rgb(122,24,35)]">
                                       {group.title}
                                     </span>
                                   </div>
@@ -443,7 +443,7 @@ export default function App() {
 
                     {/* Contenido con Scroll de Categorías y Subcategorías */}
                     <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#767A84] px-1">
+                      <p className="text-[11px] font-bold uppercase tracking-widest text-[#767A84] px-1">
                         Navegación por categorías
                       </p>
 
@@ -497,7 +497,7 @@ export default function App() {
                                 <div className="p-3 space-y-3 bg-white divide-y divide-gray-100">
                                   {cat.groups!.map((group, gIdx) => (
                                     <div key={gIdx} className={gIdx > 0 ? 'pt-3' : ''}>
-                                      <p className="text-[10px] font-bold uppercase tracking-wider text-[rgb(122,24,35)] mb-2 px-1">
+                                      <p className="text-[11px] font-bold uppercase tracking-wider text-[rgb(122,24,35)] mb-2 px-1">
                                         {group.title}
                                       </p>
                                       <div className="space-y-1">
@@ -613,7 +613,7 @@ export default function App() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 }}
-                      className="mt-4 md:mt-5 max-w-[42ch] sm:max-w-[60ch] text-[13px] sm:text-[14px] md:text-[13px] lg:text-[14px] leading-[1.68] text-[#5E616B]"
+                      className="mt-4 md:mt-5 max-w-[42ch] sm:max-w-[60ch] text-[16px] sm:text-[17px] md:text-[17px] lg:text-[18px] leading-[1.7] text-[#555963]"
                     >
                       Si notás visión borrosa, molestias, cansancio ocular o tus lentes ya no responden como antes, este es el momento de revisarte con atención profesional y resultados claros.
                     </motion.p>
@@ -626,14 +626,14 @@ export default function App() {
                   >
                     <a
                       href="https://wa.me/50672760215"
-                      className="inline-flex items-center justify-center h-11 sm:h-10 px-6 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[11px] md:text-[10px] font-medium cta-primary w-full sm:w-auto transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                      className="inline-flex items-center justify-center h-12 px-7 rounded-xl bg-[rgb(122,24,35)] text-white text-[14px] font-bold cta-primary w-full sm:w-auto transition-transform hover:scale-[1.02] active:scale-[0.98]"
                     >
                       Agendar por WhatsApp
                     </a>
 
                     <a
                       href="tel:+50672760215"
-                      className="inline-flex items-center justify-center h-11 sm:h-10 px-5 rounded-[8px] bg-white text-[#15171C] text-[11px] md:text-[10px] font-medium border border-[#E3E5EC] cta-secondary w-full sm:w-auto transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                      className="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-white text-[#15171C] text-[14px] font-bold border border-[#E3E5EC] cta-secondary w-full sm:w-auto transition-transform hover:scale-[1.02] active:scale-[0.98]"
                     >
                       Llamar ahora
                     </a>
@@ -651,8 +651,8 @@ export default function App() {
                       { label: 'Reserva', value: 'WhatsApp o llamada directa' },
                     ].map((item, i) => (
                       <div key={i} className="bg-white/90 backdrop-blur-[2px] rounded-[10px] px-3 py-3 pro-card shadow-sm border border-white/50 transition-all hover:shadow-md hover:-translate-y-0.5">
-                        <p className="text-[9px] uppercase tracking-[0.10em] text-[#7A7F8A]">{item.label}</p>
-                        <p className="mt-1 text-[11px] sm:text-[12px] leading-[1.45] text-[#15171C] font-medium">{item.value}</p>
+                        <p className="text-[11px] uppercase tracking-wider font-semibold text-gray-500">{item.label}</p>
+                        <p className="mt-1 text-[13px] sm:text-[14px] leading-[1.45] text-[#14161B] font-bold">{item.value}</p>
                       </div>
                     ))}
                   </motion.div>
@@ -679,8 +679,8 @@ export default function App() {
                     transition={{ delay: 0.4 }}
                     className="absolute left-[5%] bottom-[20%] w-[170px] md:w-[210px] bg-[rgb(122,24,35)]/90 text-white rounded-[16px] p-4 shadow-xl pro-card backdrop-blur-sm"
                   >
-                    <p className="text-[9px] uppercase tracking-[0.12em] text-white/80">Acción recomendada</p>
-                    <p className="mt-2 text-[12px] md:text-[13px] leading-[1.5] font-medium">
+                    <p className="text-[11px] uppercase tracking-wider font-bold text-white/90">Acción recomendada</p>
+                    <p className="mt-2 text-[14px] md:text-[15px] leading-[1.6] font-semibold">
                       Agendá tu revisión hoy y resolvé tus dudas con orientación profesional.
                     </p>
                   </motion.div>
@@ -708,7 +708,7 @@ export default function App() {
                   className="bg-slate-50/60 hover:bg-white rounded-2xl p-5 md:p-6 text-center pro-card shadow-xs border border-gray-100/80 transition-all hover:shadow-md"
                 >
                   <div className="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[34px] leading-none tracking-tight font-bold text-[#14161B]">{item.title}</div>
-                  <p className="mt-2 text-[10px] sm:text-[11px] leading-[1.45] text-[#666A74]">{item.desc}</p>
+                  <p className="mt-2 text-[13px] sm:text-[14px] leading-[1.5] text-[#555963] font-medium">{item.desc}</p>
                 </motion.article>
               ))}
             </div>
@@ -726,13 +726,13 @@ export default function App() {
             >
               <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
                 <div className="p-5 md:p-6 border-b lg:border-b-0 lg:border-r border-[#E7EAF1]">
-                  <span className="inline-flex items-center h-5 px-2 rounded-full bg-[#F2F3F7] text-[7px] uppercase tracking-[0.14em] text-[#7C808B]">
+                  <span className="inline-flex items-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
                     Urgencia
                   </span>
-                  <h2 className="mt-4 max-w-[20ch] text-[24px] sm:text-[28px] md:text-[30px] leading-[1.08] tracking-tight font-bold text-[#15171C]">
+                  <h2 className="mt-4 max-w-[20ch] text-[28px] sm:text-[32px] md:text-[36px] leading-[1.15] tracking-tight font-bold text-[#15171C]">
                     Esperar demasiado puede hacer que el problema afecte más <span className="text-[rgb(122,24,35)]">tu rutina</span>
                   </h2>
-                  <p className="mt-3 max-w-[38ch] text-[12px] sm:text-[13px] md:text-[12px] leading-[1.68] text-[#6D727D]">
+                  <p className="mt-3 max-w-[38ch] text-[15px] sm:text-[16px] leading-[1.7] text-[#555963]">
                     Cuando la visión cambia, aparecen molestias al leer, manejar, usar pantallas o trabajar. Revisarte a tiempo ayuda a detectar qué está pasando y decidir la mejor solución.
                   </p>
                 </div>
@@ -748,8 +748,8 @@ export default function App() {
                       className={`rounded-[12px] p-4 pro-card shadow-sm ${item.dark ? 'bg-[rgb(122,24,35)] text-white' : 'bg-[#F3F4F7] text-[#15171C]'}`}
                     >
                       <item.icon className={`w-5 h-5 mb-3 ${item.dark ? 'text-white' : 'text-[rgb(122,24,35)]'}`} />
-                      <h3 className="text-[12px] sm:text-[13px] font-bold">{item.title}</h3>
-                      <p className={`mt-2 text-[11px] md:text-[10px] lg:text-[11px] leading-[1.6] ${item.dark ? 'text-white/85' : 'text-[#6D727D]'}`}>
+                      <h3 className="text-[15px] sm:text-[16px] font-bold">{item.title}</h3>
+                      <p className={`mt-2 text-[13px] sm:text-[14px] leading-[1.65] ${item.dark ? 'text-white/85' : 'text-[#6D727D]'}`}>
                         {item.desc}
                       </p>
                     </article>
@@ -764,7 +764,7 @@ export default function App() {
           <section id="beneficios" className="w-full py-14 md:py-24 bg-white border-t border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center">
-              <span className="inline-flex items-center justify-center h-5 px-3 rounded-full bg-white text-[7px] uppercase tracking-[0.14em] text-[#767A84] shadow-sm">
+              <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#767A84] shadow-sm">
                 Nuestros diferenciales
               </span>
             </div>
@@ -786,8 +786,8 @@ export default function App() {
                   <div className="w-12 h-12 rounded-xl bg-[#F3F4F7] flex items-center justify-center text-[rgb(122,24,35)] mb-4">
                     <item.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-[16px] font-bold text-[#15171C] mb-2">{item.title}</h3>
-                  <p className="text-[12px] leading-[1.6] text-[#6D727D]">
+                  <h3 className="text-[18px] sm:text-[19px] font-bold text-[#15171C] mb-2">{item.title}</h3>
+                  <p className="text-[14px] sm:text-[15px] leading-[1.65] text-[#555963]">
                     {item.description}
                   </p>
                 </motion.div>
@@ -808,11 +808,11 @@ export default function App() {
                 viewport={{ once: true, margin: "-100px" }}
                 className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100"
               >
-                <span className="inline-flex items-center justify-center h-5 px-3 rounded-full bg-[#F2F3F7] text-[7px] uppercase tracking-[0.14em] text-[#7C808B]">
+                <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
                   Proceso simple
                 </span>
 
-                <h2 className="mt-4 max-w-[18ch] text-[24px] sm:text-[28px] md:text-[30px] leading-[1.08] tracking-tight font-bold text-[#15171C]">
+                <h2 className="mt-4 max-w-[18ch] text-[28px] sm:text-[32px] md:text-[36px] leading-[1.15] tracking-tight font-bold text-[#15171C]">
                   Una estructura pensada para tu comodidad
                 </h2>
 
@@ -830,9 +830,9 @@ export default function App() {
                       viewport={{ once: true }}
                       className={`rounded-[12px] p-4 pro-card shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 ${item.dark ? 'bg-[rgb(122,24,35)] text-white' : 'bg-[#F3F4F7] text-[#15171C]'}`}
                     >
-                      <p className={`text-[9px] uppercase tracking-[0.10em] ${item.dark ? 'text-white/80' : 'text-[#7A7F8A]'}`}>{item.step}</p>
-                      <h3 className="mt-2 text-[14px] md:text-[15px] leading-[1.2] font-bold">{item.title}</h3>
-                      <p className={`mt-2 text-[11px] md:text-[10px] lg:text-[11px] leading-[1.6] ${item.dark ? 'text-white/85' : 'text-[#6D727D]'}`}>{item.desc}</p>
+                      <p className={`text-[11px] sm:text-[12px] uppercase tracking-wider font-bold ${item.dark ? 'text-white/80' : 'text-[#7A7F8A]'}`}>{item.step}</p>
+                      <h3 className="mt-2 text-[17px] sm:text-[18px] leading-[1.25] font-bold">{item.title}</h3>
+                      <p className={`mt-2 text-[13px] sm:text-[14px] leading-[1.65] ${item.dark ? 'text-white/85' : 'text-[#6D727D]'}`}>{item.desc}</p>
                     </motion.article>
                   ))}
                 </div>
@@ -847,10 +847,10 @@ export default function App() {
               >
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
                   <div>
-                    <span className="inline-flex items-center justify-center h-5 px-3 rounded-full bg-[#F2F3F7] text-[7px] uppercase tracking-[0.14em] text-[#7C808B]">
+                    <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
                       Marcas reconocidas
                     </span>
-                    <h2 className="mt-4 max-w-[28ch] text-[24px] sm:text-[28px] md:text-[30px] leading-[1.08] tracking-tight font-bold text-[#15171C]">
+                    <h2 className="mt-4 max-w-[28ch] text-[28px] sm:text-[34px] md:text-[38px] leading-tight tracking-tight font-bold text-[#15171C]">
                       Opciones populares en <span className="text-[rgb(122,24,35)]">lentes y soluciones visuales</span> según tu necesidad
                     </h2>
                   </div>
@@ -880,7 +880,7 @@ export default function App() {
                 </div>
 
                 <div className="mt-5 rounded-[12px] bg-[#F3F4F7] px-4 py-4 pro-card shadow-sm border border-gray-100">
-                  <p className="max-w-[68ch] text-[11px] sm:text-[12px] md:text-[11px] leading-[1.65] text-[#6D727D]">
+                  <p className="max-w-[68ch] text-[14px] sm:text-[15px] leading-[1.7] text-[#555963]">
                     La recomendación final depende de tu examen visual, tu graduación y el tipo de uso diario que necesités.
                   </p>
                 </div>
@@ -893,7 +893,7 @@ export default function App() {
           <section id="servicios" className="w-full py-14 md:py-24 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center">
-              <span className="inline-flex items-center justify-center h-5 px-3 rounded-full bg-white text-[7px] uppercase tracking-[0.14em] text-[#767A84] shadow-sm">
+              <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#767A84] shadow-sm">
                 Nuestros servicios
               </span>
             </div>
@@ -914,7 +914,7 @@ export default function App() {
                       color: isSelected ? '#ffffff' : '#374151',
                       backgroundColor: isSelected ? 'rgb(122, 24, 35)' : '#ffffff',
                     }}
-                    className={`px-4 py-2 rounded-full text-[12px] font-semibold transition-all cursor-pointer ${
+                    className={`px-5 py-2.5 rounded-full text-[14px] font-bold transition-all cursor-pointer ${
                       isSelected
                         ? '!text-white text-white bg-[rgb(122,24,35)] shadow-md shadow-[rgb(122,24,35)]/25 scale-105 border border-[rgb(122,24,35)] hover:!text-white hover:text-white hover:bg-[rgb(142,30,42)]'
                         : 'bg-white text-gray-700 border border-gray-200 hover:border-[rgb(122,24,35)] hover:text-[rgb(122,24,35)]'
@@ -946,7 +946,7 @@ export default function App() {
                       <div className="w-9 h-9 rounded-lg bg-[#F3F4F7] flex items-center justify-center text-[rgb(122,24,35)] shadow-xs">
                         <service.icon className="w-4 h-4" />
                       </div>
-                      <h3 className="text-[17px] sm:text-[18px] md:text-[18px] leading-[1.2] tracking-tight font-bold text-[#15171C]">{service.title}</h3>
+                      <h3 className="text-[19px] sm:text-[20px] md:text-[21px] leading-[1.25] tracking-tight font-bold text-[#15171C]">{service.title}</h3>
                     </div>
                   </div>
 
@@ -956,11 +956,11 @@ export default function App() {
                     </span>
                   </div>
 
-                  <p className="text-[12px] sm:text-[13px] md:text-[11px] lg:text-[12px] leading-[1.65] text-[#6A6D77] flex-grow">
+                  <p className="text-[14px] sm:text-[15px] leading-[1.7] text-[#555963] flex-grow">
                     {service.description}
                   </p>
 
-                  <a href="https://wa.me/50672760215" className="inline-flex items-center gap-2 mt-4 text-[11px] md:text-[10px] font-bold text-[#15171C] hover:text-[rgb(122,24,35)] transition-colors group/link">
+                  <a href="https://wa.me/50672760215" className="inline-flex items-center gap-2 mt-4 text-[13px] sm:text-[14px] font-bold text-[#15171C] hover:text-[rgb(122,24,35)] transition-colors group/link">
                     Reservar cita <ArrowUpRight className="w-3 h-3 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                   </a>
                 </motion.article>
@@ -980,10 +980,10 @@ export default function App() {
             >
               <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
                 <div>
-                  <span className="inline-flex items-center justify-center h-5 px-3 rounded-full bg-[#F2F3F7] text-[7px] uppercase tracking-[0.14em] text-[#7C808B]">
+                  <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
                     Galería
                   </span>
-                  <h2 className="mt-4 max-w-[24ch] text-[24px] sm:text-[28px] md:text-[30px] leading-[1.08] tracking-tight font-bold text-[#15171C]">
+                  <h2 className="mt-4 max-w-[24ch] text-[28px] sm:text-[34px] md:text-[38px] leading-tight tracking-tight font-bold text-[#15171C]">
                     Un espacio pensado para una revisión visual <span className="text-[rgb(122,24,35)]">cómoda, clara y profesional</span>
                   </h2>
                 </div>
@@ -1012,7 +1012,7 @@ export default function App() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
                   <div className="absolute left-0 right-0 bottom-0 p-5 md:p-6 transform transition-transform duration-500 group-hover:-translate-y-1">
-                    <div className="inline-flex items-center h-5 px-2 rounded-full bg-white/90 text-[7px] uppercase tracking-[0.14em] text-[#6A6E79] font-bold">
+                    <div className="inline-flex items-center h-7 px-3.5 rounded-full bg-white/90 text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#6A6E79] font-bold">
                       Atención visual
                     </div>
                     <h3 className="mt-3 max-w-[24ch] text-[20px] sm:text-[22px] md:text-[24px] leading-[1.1] tracking-tight font-bold text-white">
@@ -1109,7 +1109,7 @@ export default function App() {
             >
               <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
                 <div>
-                  <span className="inline-flex items-center justify-center h-5 px-3 rounded-full bg-[#F2F3F7] text-[7px] uppercase tracking-[0.14em] text-[#7C808B]">
+                  <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
                     Testimonios
                   </span>
                   <h2 className="mt-4 max-w-[26ch] text-[24px] sm:text-[28px] md:text-[30px] leading-[1.08] tracking-tight font-bold text-[#15171C]">
@@ -1141,7 +1141,7 @@ export default function App() {
                       {t.content}
                     </p>
                     <div className="mt-5 pt-4 border-t border-[#E3E5EC]">
-                      <h3 className="text-[12px] sm:text-[13px] font-bold text-[#15171C]">{t.name}</h3>
+                      <h3 className="text-[15px] sm:text-[16px] font-bold text-[#15171C]">{t.name}</h3>
                       <p className="mt-1 text-[10px] sm:text-[11px] text-[#7A7F8A]">{t.role}</p>
                     </div>
                   </motion.article>
@@ -1156,7 +1156,7 @@ export default function App() {
                   viewport={{ once: true }}
                   className="bg-[#F3F4F7] rounded-[14px] p-5 pro-card shadow-sm border border-gray-100"
                 >
-                  <span className="inline-flex items-center justify-center h-5 px-2 rounded-full bg-white text-[7px] uppercase tracking-[0.14em] text-[#7C808B] shadow-sm">
+                  <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B] shadow-sm">
                     Experiencia del paciente
                   </span>
                   <h3 className="mt-4 max-w-[24ch] text-[20px] sm:text-[22px] md:text-[24px] leading-[1.1] tracking-tight font-bold text-[#15171C]">
@@ -1192,7 +1192,7 @@ export default function App() {
                   <div className="mt-10 sm:mt-6">
                     <a
                       href="https://wa.me/50672760215"
-                      className="inline-flex items-center justify-center w-full sm:w-auto h-12 sm:h-10 px-8 rounded-[10px] bg-white text-[rgb(122,24,35)] text-[12px] sm:text-[11px] md:text-[10px] font-bold shadow-md hover:bg-gray-100 transition-all active:scale-95"
+                      className="inline-flex items-center justify-center w-full sm:w-auto h-12 sm:h-10 px-8 rounded-[10px] bg-white text-[rgb(122,24,35)] text-[12px] sm:text-[11px] md:text-[11px] font-bold shadow-md hover:bg-gray-100 transition-all active:scale-95"
                     >
                       Quiero agendar mi cita
                     </a>
@@ -1245,7 +1245,7 @@ export default function App() {
 
                 <div className="flex-1 px-5 md:px-10 py-10 md:py-12 flex flex-col justify-center text-center md:text-left">
                   <div className="flex justify-center md:justify-start">
-                    <span className="inline-flex items-center h-5 px-2 rounded-full bg-white text-[7px] uppercase tracking-[0.14em] text-[#7C808B] shadow-sm">
+                    <span className="inline-flex items-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B] shadow-sm">
                       Confianza profesional
                     </span>
                   </div>
@@ -1269,7 +1269,7 @@ export default function App() {
                         whileHover={{ y: -3, transition: { duration: 0.2 } }}
                         className="bg-white rounded-[12px] px-4 py-5 text-left pro-card shadow-sm border border-gray-100 transition-all hover:shadow-md"
                       >
-                        <h3 className="text-[12px] sm:text-[13px] font-bold text-[#15171C]">{item.title}</h3>
+                        <h3 className="text-[15px] sm:text-[16px] font-bold text-[#15171C]">{item.title}</h3>
                         <p className="mt-2 text-[10px] md:text-[9px] lg:text-[10px] leading-[1.5] text-[#6D727D]">
                           {item.desc}
                         </p>
@@ -1407,7 +1407,7 @@ export default function App() {
               className="bg-white rounded-[14px] p-5 shadow-sm"
             >
               <div className="flex justify-start">
-                <span className="inline-flex items-center h-5 px-2 rounded-full bg-[#F2F3F7] text-[7px] uppercase tracking-[0.14em] text-[#7C808B] shadow-sm">
+                <span className="inline-flex items-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B] shadow-sm">
                   Contacto
                 </span>
               </div>
@@ -1453,7 +1453,7 @@ export default function App() {
                         <Phone className="w-4 h-4 text-[rgb(122,24,35)]" />
                       </div>
                       <div>
-                        <h4 className="text-[10px] font-bold text-[#7C808B] uppercase tracking-[0.1em]">Teléfonos</h4>
+                        <h4 className="text-[11px] font-bold text-[#7C808B] uppercase tracking-[0.1em]">Teléfonos</h4>
                         <p className="mt-0.5 text-[13px] text-[#15171C] font-bold tracking-tight">+506 2515 0002</p>
                         <p className="text-[13px] text-[#15171C] font-bold tracking-tight">+506 7276 0215</p>
                       </div>
@@ -1465,7 +1465,7 @@ export default function App() {
                         <MessageCircle className="w-4 h-4 text-[rgb(122,24,35)]" />
                       </div>
                       <div>
-                        <h4 className="text-[10px] font-bold text-[#7C808B] uppercase tracking-[0.1em]">Correo</h4>
+                        <h4 className="text-[11px] font-bold text-[#7C808B] uppercase tracking-[0.1em]">Correo</h4>
                         <p className="mt-0.5 text-[12px] text-[#15171C] font-bold break-all">fmora@opticaspopular.com</p>
                       </div>
                     </div>
@@ -1476,7 +1476,7 @@ export default function App() {
                         <ArrowUpRight className="w-4 h-4 text-[rgb(122,24,35)]" />
                       </div>
                       <div>
-                        <h4 className="text-[10px] font-bold text-[#7C808B] uppercase tracking-[0.1em]">Ubicación</h4>
+                        <h4 className="text-[11px] font-bold text-[#7C808B] uppercase tracking-[0.1em]">Ubicación</h4>
                         <p className="mt-0.5 text-[12px] text-[#15171C] font-bold leading-[1.5]">
                           Plaza Higuerones, Local 23.<br />
                           San Rafael Abajo, Desamparados.
@@ -1490,7 +1490,7 @@ export default function App() {
                         <Clock className="w-4 h-4 text-[rgb(122,24,35)]" />
                       </div>
                       <div>
-                        <h4 className="text-[10px] font-bold text-[#7C808B] uppercase tracking-[0.1em]">Horario</h4>
+                        <h4 className="text-[11px] font-bold text-[#7C808B] uppercase tracking-[0.1em]">Horario</h4>
                         <p className="mt-0.5 text-[12px] text-[#15171C] font-bold">Lunes a Sábado</p>
                         <p className="text-[11px] text-[#6D727D]">Bajo cita previa</p>
                       </div>
@@ -1520,7 +1520,7 @@ export default function App() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Visitar nuestra página de Facebook" 
-                  className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[10px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2 transition-all hover:bg-[#1877F2] hover:text-white hover:shadow-lg hover:shadow-[#1877F2]/20"
+                  className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[11px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2 transition-all hover:bg-[#1877F2] hover:text-white hover:shadow-lg hover:shadow-[#1877F2]/20"
                 >
                   <Facebook className="w-3.5 h-3.5" /> Facebook
                 </a>
@@ -1529,14 +1529,14 @@ export default function App() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Visitar nuestro perfil de Instagram" 
-                  className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[10px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2 transition-all hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:text-white hover:shadow-lg hover:shadow-[#ee2a7b]/20"
+                  className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[11px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2 transition-all hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:text-white hover:shadow-lg hover:shadow-[#ee2a7b]/20"
                 >
                   <Instagram className="w-3.5 h-3.5" /> Instagram
                 </a>
                 <a 
                   href="#" 
                   aria-label="Visitar nuestro perfil de TikTok" 
-                  className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[10px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2 transition-all hover:bg-black hover:text-white hover:shadow-lg hover:shadow-black/20"
+                  className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[11px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2 transition-all hover:bg-black hover:text-white hover:shadow-lg hover:shadow-black/20"
                 >
                   <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.31-.75.42-1.24 1.25-1.33 2.1-.1.7.1 1.41.53 1.96.44.53 1.11.85 1.79.9.69.05 1.4-.16 1.97-.55.62-.43 1-1.14 1.05-1.89.01-3.22-.01-6.43.01-9.64z"/></svg>
                   TikTok
@@ -1560,14 +1560,14 @@ export default function App() {
                     <span className="text-[9px] font-medium text-[rgb(122,24,35)] uppercase tracking-wider mt-0.5">Dr. Fabio Mora Medina</span>
                   </div>
                 </a>
-                <p className="text-[12px] leading-relaxed text-[#6D727D]">
+                <p className="text-[14px] leading-relaxed text-gray-400">
                   Especialistas en salud visual integral en San Rafael Abajo de Desamparados. Ofrecemos exámenes de la vista avanzados y soluciones personalizadas.
                 </p>
               </div>
               
               <div>
                 <h4 className="text-[12px] font-bold text-white uppercase tracking-wider">Navegación</h4>
-                <ul className="mt-4 space-y-2 text-[12px] text-[#6D727D]">
+                <ul className="mt-4 space-y-2 text-[14px] sm:text-[15px] text-[#555963]">
                   <li><a href="#inicio" className="hover:text-[rgb(122,24,35)] transition-colors">Inicio</a></li>
                   <li><a href="#servicios" className="hover:text-[rgb(122,24,35)] transition-colors">Servicios</a></li>
                   <li><a href="#doctor" className="hover:text-[rgb(122,24,35)] transition-colors">Doctor</a></li>
@@ -1578,7 +1578,7 @@ export default function App() {
 
               <div>
                 <h4 className="text-[12px] font-bold text-white uppercase tracking-wider">Servicios</h4>
-                <ul className="mt-4 space-y-2 text-[12px] text-[#6D727D]">
+                <ul className="mt-4 space-y-2 text-[14px] sm:text-[15px] text-[#555963]">
                   <li><a href="#servicios" className="hover:text-[rgb(122,24,35)] transition-colors">Examen de la vista</a></li>
                   <li><a href="#servicios" className="hover:text-[rgb(122,24,35)] transition-colors">Fotografía de retina</a></li>
                   <li><a href="#servicios" className="hover:text-[rgb(122,24,35)] transition-colors">Presión ocular</a></li>
@@ -1588,14 +1588,14 @@ export default function App() {
 
               <div>
                 <h4 className="text-[12px] font-bold text-white uppercase tracking-wider">Ubicación</h4>
-                <p className="mt-4 text-[12px] text-[#6D727D] leading-relaxed">
+                <p className="mt-4 text-[14px] sm:text-[15px] text-[#555963] leading-relaxed">
                   Plaza Higuerones, San Rafael Abajo de Desamparados, Local 23.<br />
                   <span className="block mt-2 font-bold text-white">Lunes a Sábado</span>
                   9:00 AM - 6:00 PM
                 </p>
               </div>
             </div>
-            <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-gray-400 uppercase tracking-widest">
+            <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6 text-[12px] text-gray-400 tracking-wider">
               <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
                 <span>© {new Date().getFullYear()} Ópticas Popular Dr. Fabio Mora Medina. Todos los derechos reservados.</span>
                 <div className="flex items-center gap-6">
@@ -1615,21 +1615,21 @@ export default function App() {
             <div className="grid grid-cols-3 gap-2 max-w-[460px] mx-auto">
               <button
                 onClick={() => setIsMenuOpen(true)}
-                className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[#F3F4F7] text-[#15171C] text-[10px] font-bold active:scale-95 transition-transform"
+                className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[#F3F4F7] text-[#15171C] text-[11px] font-bold active:scale-95 transition-transform"
               >
                 <Menu className="w-4 h-4 text-[rgb(122,24,35)] mb-0.5" />
                 <span>Menú</span>
               </button>
               <a
                 href="tel:+50672760215"
-                className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-white border border-[#E3E5EC] text-[#15171C] text-[10px] font-bold active:scale-95 transition-transform shadow-xs"
+                className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-white border border-[#E3E5EC] text-[#15171C] text-[11px] font-bold active:scale-95 transition-transform shadow-xs"
               >
                 <Phone className="w-4 h-4 text-[rgb(122,24,35)] mb-0.5" />
                 <span>Llamar</span>
               </a>
               <a
                 href="https://wa.me/50672760215"
-                className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[rgb(122,24,35)] text-white text-[10px] font-bold active:scale-95 transition-transform shadow-md"
+                className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[rgb(122,24,35)] text-white text-[11px] font-bold active:scale-95 transition-transform shadow-md"
               >
                 <MessageCircle className="w-4 h-4 mb-0.5" />
                 <span>Cita</span>
