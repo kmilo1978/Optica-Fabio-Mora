@@ -106,8 +106,8 @@ function getNavigationMenu(lang: Language): NavCategory[] {
         {
           title: t.diagnostics,
           items: [
-            { name: lang === 'es' ? 'Evaluación Visual Integral' : 'Comprehensive Visual Exam', href: '#servicios', desc: lang === 'es' ? 'Graduación precisa y fondo de ojo' : 'Accurate refraction & fundus exam', icon: Eye },
-            { name: lang === 'es' ? 'Para Toda la Familia' : 'For the Whole Family', href: '#edades', desc: lang === 'es' ? 'Niños, adultos y personas mayores' : 'Kids, adults, and seniors', icon: Users },
+            { name: lang === 'es' ? 'Examen Visual Completo' : 'Comprehensive Visual Exam', href: '#servicios', desc: lang === 'es' ? 'Graduación certera y fondo de ojo' : 'Accurate refraction & fundus exam', icon: Eye },
+            { name: lang === 'es' ? 'Para Toda la Familia' : 'For the Whole Family', href: '#edades', desc: lang === 'es' ? 'Chiquitos, adultos y adultos mayores' : 'Kids, adults, and seniors', icon: Users },
             { name: lang === 'es' ? 'Fotografía de Retina' : 'Retinal Photography', href: '#servicios', desc: lang === 'es' ? 'Diagnóstico digital de retina' : 'Digital retinal imaging', icon: Camera },
             { name: lang === 'es' ? 'Toma de Presión Ocular' : 'Eye Pressure Test', href: '#servicios', desc: lang === 'es' ? 'Control preventivo de glaucoma' : 'Glaucoma screening', icon: Activity },
           ],
@@ -116,14 +116,14 @@ function getNavigationMenu(lang: Language): NavCategory[] {
           title: t.specialties,
           items: [
             { name: lang === 'es' ? 'Valoración de Cataratas' : 'Cataract Assessment', href: '#servicios', desc: lang === 'es' ? 'Evaluación y orientación médica' : 'Evaluation & medical guidance', icon: Stethoscope },
-            { name: lang === 'es' ? 'Evaluación de Ojo Seco' : 'Dry Eye Evaluation', href: '#servicios', desc: lang === 'es' ? 'Alivio de resequedad e irritación' : 'Relief for irritation and dryness', icon: Droplets },
+            { name: lang === 'es' ? 'Evaluación de Ojo Seco' : 'Dry Eye Evaluation', href: '#servicios', desc: lang === 'es' ? 'Alivio de resequedad y ardor' : 'Relief for irritation and dryness', icon: Droplets },
             { name: lang === 'es' ? 'Lentes de Contacto' : 'Contact Lenses', href: '#servicios', desc: lang === 'es' ? 'Adaptación personalizada y cómoda' : 'Custom, comfortable lens fitting', icon: Contact },
           ],
         },
         {
           title: t.methodology,
           items: [
-            { name: lang === 'es' ? 'Proceso de Consulta' : 'Exam Step-by-Step', href: '#proceso', desc: lang === 'es' ? 'Paso a paso de tu cita médica' : 'What to expect at your appointment', icon: CheckCircle2 },
+            { name: lang === 'es' ? 'Paso a Paso de tu Cita' : 'Exam Step-by-Step', href: '#proceso', desc: lang === 'es' ? 'Cómo te atendemos en tu consulta' : 'What to expect at your appointment', icon: CheckCircle2 },
           ],
         },
       ],
@@ -134,7 +134,7 @@ function getNavigationMenu(lang: Language): NavCategory[] {
       href: '#doctor',
       groups: [
         {
-          title: lang === 'es' ? 'La Clínica' : 'Our Practice',
+          title: lang === 'es' ? 'El Consultorio' : 'Our Practice',
           items: [
             { name: t.drName, href: '#doctor', desc: t.drDesc, icon: Award },
             { name: t.whyUs, href: '#beneficios', desc: t.whyUsDesc, icon: ShieldCheck },
@@ -191,22 +191,22 @@ function getWhyChooseUs(lang: Language) {
   return [
     {
       title: 'Tecnología de punta',
-      description: 'Equipos avanzados para diagnósticos precisos y detallados.',
+      description: 'Equipos digitales de última generación para diagnósticos certeros y sin enredos.',
       icon: Zap,
     },
     {
       title: 'Atención personalizada',
-      description: 'Cada paciente recibe el tiempo y la dedicación que su salud visual merece.',
+      description: 'Te atendemos con calma y paciencia, dedicándote el tiempo que tus ojos merecen.',
       icon: ShieldCheck,
     },
     {
       title: 'Experiencia clínica',
-      description: <>Más de <span className="text-[rgb(122,24,35)] font-bold"><AnimatedNumber value={18} /></span> años de trayectoria profesional y formación académica constante.</>,
+      description: <>Más de <span className="text-[rgb(122,24,35)] font-bold"><AnimatedNumber value={18} /></span> años de trayectoria profesional y actualización médica constante.</>,
       icon: Award,
     },
     {
       title: 'Enfoque preventivo',
-      description: 'Detectamos problemas antes de que afecten tu calidad de vida.',
+      description: 'Detectamos a tiempo cualquier cambio antes de que afecte tu calidad de vida.',
       icon: Eye,
     },
   ];
@@ -247,32 +247,32 @@ function getFaqs(lang: Language) {
   }
   return [
     {
-      question: '¿Cada cuánto debo hacerme un examen de la vista?',
-      answer: 'Se recomienda realizar un examen visual completo al menos una vez al año, especialmente si usas lentes, trabajas mucho frente a pantallas o tienes antecedentes familiares de problemas oculares.'
+      question: '¿Cada cuánto me tengo que hacer el examen de la vista?',
+      answer: 'Lo ideal es hacerse un examen completo al menos una vez al año, sobre todo si usás anteojos, pasás muchas horas frente a la compu o el celular, o si en la familia hay antecedentes de problemas en los ojos.'
     },
     {
-      question: '¿Qué incluye la evaluación visual integral?',
-      answer: 'Incluye la medición de tu agudeza visual, refracción para determinar tu graduación, examen de fondo de ojo, toma de presión ocular y evaluación de la salud externa del ojo.'
+      question: '¿Qué incluye la valoración visual integral?',
+      answer: 'Incluye agudeza visual, refracción computarizada para darte la graduación exacta, revisión de fondo de ojo, toma de presión ocular y chequeo preventivo de la salud de tus ojos.'
     },
     {
-      question: '¿Atienden a niños y adultos mayores?',
-      answer: 'Sí, brindamos atención personalizada para todas las edades. Adaptamos nuestras pruebas según las necesidades de niños, jóvenes, adultos y personas de la tercera edad.'
+      question: '¿Atienden a chiquitos y a adultos mayores?',
+      answer: '¡Claro que sí! Atendemos a toda la familia: chiquitos en edad escolar, jóvenes, adultos y abuelitos. A cada uno lo tratamos con el tiempo, la paciencia y el cariño que necesita.'
     },
     {
-      question: '¿Necesito cita previa para atenderme?',
-      answer: 'Sí, trabajamos bajo un sistema de citas para garantizarte el tiempo y la atención de calidad que tu salud visual merece. Podés agendar fácilmente por WhatsApp o llamada.'
+      question: '¿Tengo que sacar cita previa para ir?',
+      answer: 'Sí, trabajamos con cita previa para garantizarte una atención sin carreras y con el tiempo exclusivo que merecés. Podés agendar facilito y de inmediato por WhatsApp o por teléfono.'
     },
     {
-      question: '¿Cuánto tiempo dura la consulta?',
-      answer: 'Una evaluación integral suele durar entre 30 y 45 minutos, dependiendo de las pruebas adicionales que tu caso específico pueda requerir.'
+      question: '¿Cuánto dura la consulta?',
+      answer: 'La valoración completa suele durar entre 30 y 45 minutos, tomándonos el tiempo necesario para explicarte todo con calma y sin prisas.'
     },
     {
-      question: '¿Qué pasa si no me adapto a mis nuevos lentes o graduación?',
-      answer: 'Contamos con una Garantía de Adaptación Visual de 30 días. Si durante el primer mes sientes cualquier incomodidad o dificultad de enfoque con tus nuevos lentes (especialmente en multifocales o progresivos), el Dr. Fabio Mora te realiza una reevaluación completa y el reajuste de tus lentes sin costo adicional.'
+      question: '¿Qué pasa si no me adapto a mis nuevos lentes o a la graduación?',
+      answer: 'Tenés nuestra Garantía de Adaptación de 30 días. Si durante el primer mes sentís alguna molestia o te cuesta enfocar (especialmente con lentes progresivos), el Dr. Fabio Mora te hace una reevaluación completa y el ajuste de tus lentes sin cobrarte ni un solo colón extra.'
     },
     {
-      question: '¿Cuáles métodos de pago aceptan y puedo usar mis propios aros?',
-      answer: 'Aceptamos pagos en efectivo, SINPE Móvil, tarjetas de crédito y débito, y facilidades con Tasa Cero. Además, emitimos factura electrónica para reintegros con seguros o asociaciones. Y sí, si tienes una montura favorita en buen estado, podemos adaptarle únicamente tus nuevos cristales.'
+      question: '¿Qué formas de pago reciben y puedo llevar mis propios aros?',
+      answer: 'Aceptamos SINPE Móvil, efectivo, tarjetas de débito y crédito, y facilidades con Tasa Cero. Además, emitimos factura electrónica para reintegros con seguros o asociaciones. Y por supuesto: si tenés unos aros favoritos en buen estado, con gusto les adaptamos únicamente los cristales nuevos.'
     }
   ];
 }
@@ -326,45 +326,45 @@ function getServices(lang: Language) {
   }
   return [
     {
-      title: 'Evaluación visual integral',
+      title: 'Examen de la vista completo',
       category: 'Diagnóstico y Exámenes',
       categoryId: 'diag',
-      description: 'Examen completo para conocer con precisión tu estado visual y orientar la mejor solución.',
+      description: 'Valoración computarizada para conocer con exactitud el estado de tus ojos y orientar la mejor solución.',
       icon: Eye,
     },
     {
-      title: 'Fotografía de retina',
+      title: 'Fotografía digital de retina',
       category: 'Especialidades Oculares',
       categoryId: 'spec',
-      description: 'Valoración de la salud ocular mediante imágenes que ayudan a detectar alteraciones a tiempo.',
+      description: 'Revisión preventiva de la retina con imágenes de alta resolución para detectar a tiempo cualquier alteración.',
       icon: Camera,
     },
     {
       title: 'Toma de presión ocular',
       category: 'Diagnóstico y Exámenes',
       categoryId: 'diag',
-      description: 'Medición orientada a detectar factores de riesgo relacionados con glaucoma y control ocular.',
+      description: 'Medición rápida y sin dolor orientada a prevenir factores de riesgo de glaucoma.',
       icon: Activity,
     },
     {
       title: 'Valoración de cataratas',
       category: 'Especialidades Oculares',
       categoryId: 'spec',
-      description: 'Diagnóstico y orientación para entender el estado de tu visión y el manejo recomendado.',
+      description: 'Diagnóstico y orientación médica clara para entender el estado de tu visión y el tratamiento recomendado.',
       icon: Stethoscope,
     },
     {
-      title: 'Evaluación de ojo seco',
+      title: 'Evaluación de ojo seco y fatiga',
       category: 'Especialidades Oculares',
       categoryId: 'spec',
-      description: 'Revisión de molestias o resequedad para proponerte una solución más cómoda y efectiva.',
+      description: 'Revisión de ardor, molestias o resequedad para proponerte una solución cómoda y efectiva.',
       icon: Droplets,
     },
     {
-      title: 'Lentes de contacto',
-      category: 'Lentes y Contactología',
+      title: 'Adaptación de lentes de contacto',
+      category: 'Aros, Lentes y Contactología',
       categoryId: 'lens',
-      description: 'Adaptación personalizada para opciones esféricas, astigmatismo y multifocal según tu caso.',
+      description: 'Adaptación personalizada para opciones esféricas, astigmatismo y multifocal a tu medida.',
       icon: Contact,
     },
   ];
@@ -394,17 +394,17 @@ function getTestimonials(lang: Language) {
     {
       name: 'María G.',
       role: 'Paciente',
-      content: 'Me explicaron todo con mucha claridad y sentí seguridad durante toda la evaluación. La atención fue muy profesional y cercana.',
+      content: 'Me explicaron todo con muchísima claridad y sentí una gran confianza en la consulta. La atención del doctor es impecable y súper humana.',
     },
     {
       name: 'Carlos R.',
       role: 'Paciente',
-      content: 'Tenía molestias visuales desde hacía tiempo y salí con una orientación clara. El proceso fue ordenado, rápido y muy completo.',
+      content: 'Tenía días de sentir fatiga en la vista por la compu y salí con una solución perfecta. El proceso fue rápido, ordenado y pura vida.',
     },
     {
       name: 'Andrea M.',
       role: 'Paciente',
-      content: 'Excelente trato y mucha confianza. Me ayudaron a entender cuál era la mejor solución para mi visión y mis lentes.',
+      content: 'Excelente trato y honestidad. Me ayudaron a elegir los aros y cristales ideales para mi trabajo sin venderme nada innecesario.',
     },
   ];
 }
@@ -424,7 +424,7 @@ function getAgeGroups(lang: Language) {
         { title: e.ninosH2Title, desc: e.ninosH2Desc },
         { title: e.ninosH3Title, desc: e.ninosH3Desc },
       ],
-      waMessage: lang === 'es' ? 'Hola Dr. Fabio, deseo agendar una valoración visual para mi hijo(a).' : 'Hello Dr. Fabio, I would like to book a pediatric eye exam for my child.',
+      waMessage: lang === 'es' ? '¡Hola Dr. Fabio! Deseo agendar una cita de salud visual para mi hijo(a).' : 'Hello Dr. Fabio, I would like to book a pediatric eye exam for my child.',
       buttonText: e.ninosBtn,
     },
     {
@@ -439,7 +439,7 @@ function getAgeGroups(lang: Language) {
         { title: e.adultosH2Title, desc: e.adultosH2Desc },
         { title: e.adultosH3Title, desc: e.adultosH3Desc },
       ],
-      waMessage: lang === 'es' ? 'Hola Dr. Fabio, paso muchas horas en pantallas/trabajo y deseo agendar mi examen visual.' : 'Hello Dr. Fabio, I spend long hours on screens and would like to schedule an eye exam.',
+      waMessage: lang === 'es' ? '¡Hola Dr. Fabio! Paso muchas horas frente a pantallas/compu y deseo agendar mi examen de la vista.' : 'Hello Dr. Fabio, I spend long hours on screens and would like to schedule an eye exam.',
       buttonText: e.adultosBtn,
     },
     {
@@ -454,7 +454,7 @@ function getAgeGroups(lang: Language) {
         { title: e.mayoresH2Title, desc: e.mayoresH2Desc },
         { title: e.mayoresH3Title, desc: e.mayoresH3Desc },
       ],
-      waMessage: lang === 'es' ? 'Hola Dr. Fabio, deseo agendar una consulta de salud visual para adulto mayor.' : 'Hello Dr. Fabio, I would like to book a comprehensive senior eye care consultation.',
+      waMessage: lang === 'es' ? '¡Hola Dr. Fabio! Deseo agendar una consulta de salud visual para adulto mayor.' : 'Hello Dr. Fabio, I would like to book a comprehensive senior eye care consultation.',
       buttonText: e.mayoresBtn,
     },
   ];
@@ -1261,17 +1261,17 @@ export default function App() {
                         { 
                           step: lang === 'es' ? 'Paso 1' : 'Step 1', 
                           title: lang === 'es' ? 'Contactás por WhatsApp o llamada' : 'Reach out via WhatsApp or phone', 
-                          desc: lang === 'es' ? 'Elegís la vía más rápida para coordinar tu cita según tu horario.' : 'Choose the fastest way to arrange your consultation at your convenience.' 
+                          desc: lang === 'es' ? 'Elegís el momento que mejor te quede y coordinamos tu cita facilito y sin carreras.' : 'Choose the fastest way to arrange your consultation at your convenience.' 
                         },
                         { 
                           step: lang === 'es' ? 'Paso 2' : 'Step 2', 
-                          title: lang === 'es' ? 'Recibís evaluación visual integral' : 'Receive comprehensive visual evaluation', 
-                          desc: lang === 'es' ? 'Se evalúa tu visión, retina y presión ocular, explicando los hallazgos con claridad.' : 'Your vision, retina, and eye pressure are evaluated, explaining all findings clearly.' 
+                          title: lang === 'es' ? 'Recibís tu valoración completa' : 'Receive comprehensive visual evaluation', 
+                          desc: lang === 'es' ? 'Evaluamos tu graduación, fondo de ojo y presión ocular, explicándote todo clarito y con calma.' : 'Your vision, retina, and eye pressure are evaluated, explaining all findings clearly.' 
                         },
                         { 
                           step: lang === 'es' ? 'Paso 3' : 'Step 3', 
-                          title: lang === 'es' ? 'Salís con una recomendación clara' : 'Leave with transparent clinical recommendations', 
-                          desc: lang === 'es' ? 'Entendés con exactitud qué necesitás y cuál es la mejor solución para tus ojos.' : 'Understand precisely what you need with honest advice and visual solutions.', 
+                          title: lang === 'es' ? 'Salís con todo claro y resuelto' : 'Leave with transparent clinical recommendations', 
+                          desc: lang === 'es' ? 'Entendés con exactitud cómo están tus ojos y cuál es la mejor opción en aros o lentes para vos.' : 'Understand precisely what you need with honest advice and visual solutions.', 
                           dark: true 
                         },
                       ].map((item, i) => (

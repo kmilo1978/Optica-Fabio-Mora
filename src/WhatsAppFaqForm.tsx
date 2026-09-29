@@ -44,10 +44,10 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
       ]
     : [
         { id: 'exam', label: '🩺 Examen de la vista y graduación' },
-        { id: 'frames', label: '👓 Aros, monturas o cambio de cristales' },
+        { id: 'frames', label: '👓 Aros y cambio de cristales' },
         { id: 'guarantee', label: '🔍 Garantía de adaptación (30 días)' },
-        { id: 'family', label: '👨‍👩‍👧 Citas consecutivas para familia' },
-        { id: 'payment', label: '💳 Precios, métodos de pago y Tasa Cero' },
+        { id: 'family', label: '👨‍👩‍👧 Citas seguidas para la familia' },
+        { id: 'payment', label: '💳 Precios, SINPE Móvil y Tasa Cero' },
         { id: 'location', label: '📍 Ubicación en Plaza Higuerones y horarios' },
         { id: 'other', label: '💬 Otra consulta médica o general' }
       ];
@@ -69,7 +69,7 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
       setErrorMsg(
         isEn
           ? 'You must accept being contacted to process your inquiry.'
-          : 'Debes aceptar ser contactado(a) para atender tu consulta.'
+          : 'Debés aceptar que te contactemos para coordinar tu consulta.'
       );
       return;
     }
@@ -101,7 +101,7 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
     }
 
     lines.push('');
-    lines.push(isEn ? '_Looking forward to your reply. Thank you!_' : '_Quedo atento(a) a su respuesta. ¡Muchas gracias!_');
+    lines.push(isEn ? '_Looking forward to your reply. Thank you!_' : '_Quedo atento(a) a su respuesta. ¡Muchas gracias, pura vida!_');
 
     const fullMessage = lines.join('\n');
     const waUrl = `https://wa.me/50672760215?text=${encodeURIComponent(fullMessage)}`;
@@ -243,7 +243,7 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
               placeholder={
                 isEn
                   ? 'e.g. I experience eyestrain while working on computer screens...'
-                  : 'ej: Siento fatiga visual al trabajar en la computadora o necesito renovar mi graduación...'
+                  : 'ej: Siento fatiga visual al bretear en la compu o necesito cambiar la graduación de mis aros...'
               }
               className="w-full p-3 rounded-xl bg-white border border-gray-200 text-[13.5px] text-[#14161B] placeholder-gray-400 focus:outline-hidden focus:border-[rgb(122,24,35)] focus:ring-2 focus:ring-[rgb(122,24,35)]/15 transition-all shadow-2xs resize-none"
             />
@@ -265,7 +265,7 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
                 </strong>{' '}
                 {isEn
                   ? 'I agree to be contacted via WhatsApp or phone call by Ópticas Popular to answer my inquiry and coordinate my appointment.'
-                  : 'Acepto ser contactado(a) por WhatsApp o llamada para atender mi consulta y coordinar mi cita con Ópticas Popular.'}
+                  : 'Acepto que me contacten por WhatsApp o llamada para responder mi consulta y coordinar mi cita con Ópticas Popular.'}
               </span>
             </label>
 
@@ -284,7 +284,7 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
                 </strong>{' '}
                 {isEn
                   ? 'I wish to receive exclusive optical offers, frame arrivals, and visual health recommendations directly on WhatsApp.'
-                  : 'Deseo recibir ofertas exclusivas, promociones de aros y consejos de salud visual en mi WhatsApp.'}
+                  : 'Quiero recibir promos tuanis de aros y consejos de salud visual en mi WhatsApp.'}
               </span>
             </label>
 
@@ -303,7 +303,7 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
                 </strong>{' '}
                 {isEn
                   ? 'Your personal data is treated strictly confidentially and never shared with third parties.'
-                  : 'Tus datos son tratados de forma estrictamente confidencial bajo secreto profesional.'}
+                  : 'Tus datos se manejan con estricta confidencialidad médica y respeto profesional.'}
               </span>
             </label>
           </div>
@@ -325,7 +325,7 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
             <p className="mt-2 text-center text-[11px] text-gray-500">
               {isEn
                 ? '⚡ Instant response during clinical hours (Mon-Sat 9:00 AM - 6:00 PM)'
-                : '⚡ Respuesta rápida en horario de clínica (Lun a Sáb: 9:00 AM - 6:00 PM)'}
+                : '⚡ Te respondemos rapidito en horario de clínica (Lun a Sáb: 9:00 AM - 6:00 PM)'}
             </p>
           </div>
         </form>
