@@ -59,34 +59,40 @@
   }
 }
 
-/* REGLA GLOBAL INVIOLABLE: Toda letra e icono dentro de botones y enlaces rojos DEBE ser 100% blanca */
-button[class*="bg-[rgb(122,24,35)"],
-a[class*="bg-[rgb(122,24,35)"],
-button[class*="bg-[rgb(142,30,42)"],
-a[class*="bg-[rgb(142,30,42)"],
-button[class*="bg-[rgb(142,28,41)"],
-a[class*="bg-[rgb(142,28,41)"],
-button[class*="bg-[rgb(162,35,48)"],
-a[class*="bg-[rgb(162,35,48)"],
-button[class*="bg-red-"],
-a[class*="bg-red-"],
+/* REGLA GLOBAL INVIOLABLE: Toda letra e icono dentro de botones y enlaces con fondo rojo/vino corporativo DEBE ser 100% blanca */
+button[class~="bg-[rgb(122,24,35)]"],
+a[class~="bg-[rgb(122,24,35)]"],
+button[class~="bg-[rgb(142,30,42)]"],
+a[class~="bg-[rgb(142,30,42)]"],
+button[class~="bg-[rgb(142,28,41)]"],
+a[class~="bg-[rgb(142,28,41)]"],
+button[class~="bg-[rgb(162,35,48)]"],
+a[class~="bg-[rgb(162,35,48)]"],
+button[class~="bg-red-600"],
+a[class~="bg-red-600"],
+button[class~="bg-red-700"],
+a[class~="bg-red-700"],
 .btn-red,
-.cta-primary {
+.cta-primary,
+.btn-shimmer {
   color: #ffffff !important;
 }
 
-button[class*="bg-[rgb(122,24,35)"] *,
-a[class*="bg-[rgb(122,24,35)"] *,
-button[class*="bg-[rgb(142,30,42)"] *,
-a[class*="bg-[rgb(142,30,42)"] *,
-button[class*="bg-[rgb(142,28,41)"] *,
-a[class*="bg-[rgb(142,28,41)"] *,
-button[class*="bg-[rgb(162,35,48)"] *,
-a[class*="bg-[rgb(162,35,48)"] *,
-button[class*="bg-red-"] *,
-a[class*="bg-red-"] *,
+button[class~="bg-[rgb(122,24,35)]"] *,
+a[class~="bg-[rgb(122,24,35)]"] *,
+button[class~="bg-[rgb(142,30,42)]"] *,
+a[class~="bg-[rgb(142,30,42)]"] *,
+button[class~="bg-[rgb(142,28,41)]"] *,
+a[class~="bg-[rgb(142,28,41)]"] *,
+button[class~="bg-[rgb(162,35,48)]"] *,
+a[class~="bg-[rgb(162,35,48)]"] *,
+button[class~="bg-red-600"] *,
+a[class~="bg-red-600"] *,
+button[class~="bg-red-700"] *,
+a[class~="bg-red-700"] *,
 .btn-red *,
-.cta-primary * {
+.cta-primary *,
+.btn-shimmer * {
   color: #ffffff !important;
   stroke: currentColor;
 }

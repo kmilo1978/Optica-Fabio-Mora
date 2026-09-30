@@ -208,7 +208,7 @@ export default function CalificarPage({ onBack, lang = 'es' }: CalificarPageProp
                 onClick={() => setRating(val)}
                 onMouseEnter={() => setHoveredRating(val)}
                 onMouseLeave={() => setHoveredRating(null)}
-                className="group flex flex-col items-center gap-2 p-2 rounded-2xl hover:bg-[rgb(122,24,35)]/5 transition-all duration-200 cursor-pointer focus:outline-none"
+                className="group flex flex-col items-center gap-2 p-2 rounded-2xl hover:bg-[#FDF6F7] transition-all duration-200 cursor-pointer focus:outline-none"
                 aria-label={`Calificar con ${val} lentes de 5`}
               >
                 <GlassesRatingEmblem active={rating !== null && val <= rating} hovered={hoveredRating !== null && val <= (hoveredRating ?? 0)} />

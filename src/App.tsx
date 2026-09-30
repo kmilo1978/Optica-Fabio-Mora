@@ -2035,7 +2035,7 @@ export default function App() {
                 <button
                   onClick={() => setIsMenuOpen(true)}
                   aria-label="Abrir menú de navegación"
-                  className="lg:hidden inline-flex items-center gap-2 h-10 px-3 rounded-xl bg-white border-2 border-[rgb(122,24,35)]/20 text-[#15171C] font-bold text-[12px] shadow-2xs hover:border-[rgb(122,24,35)] hover:bg-[rgb(122,24,35)]/5 active:scale-95 transition-all cursor-pointer shrink-0"
+                  className="lg:hidden inline-flex items-center gap-2 h-10 px-3 rounded-xl bg-white border-2 border-[rgb(122,24,35)]/20 text-[#15171C] font-bold text-[12px] shadow-2xs hover:border-[rgb(122,24,35)] hover:bg-[#FDF6F7] active:scale-95 transition-all cursor-pointer shrink-0"
                 >
                   <div className="w-6 h-6 rounded-lg bg-[rgb(122,24,35)] text-white flex items-center justify-center shadow-xs">
                     <Menu className="w-3.5 h-3.5" />
@@ -3759,7 +3759,7 @@ export default function App() {
                           <button
                             key={opt.id}
                             onClick={() => handleSelectSymptom(opt.id)}
-                            className="w-full text-left p-3.5 rounded-2xl border border-gray-200/80 hover:border-[rgb(122,24,35)] hover:bg-[rgb(122,24,35)]/5 transition-all duration-200 flex items-start gap-3 group cursor-pointer active:scale-[0.99]"
+                            className="w-full text-left p-3.5 rounded-2xl border border-gray-200/90 hover:border-[rgb(122,24,35)] hover:bg-[#FDF6F7] transition-all duration-200 flex items-start gap-3 group cursor-pointer active:scale-[0.99] bg-white shadow-2xs"
                           >
                             <div className="w-8 h-8 rounded-xl bg-slate-100 group-hover:bg-[rgb(122,24,35)] group-hover:text-white text-[rgb(122,24,35)] flex items-center justify-center shrink-0 mt-0.5 transition-colors">
                               <Eye className="w-4 h-4" />
@@ -3769,11 +3769,11 @@ export default function App() {
                                 <span className="text-[13.5px] sm:text-[14px] font-bold text-[#15171C] group-hover:text-[rgb(122,24,35)] transition-colors">
                                   {opt.title}
                                 </span>
-                                <span className="text-[9px] uppercase tracking-wider font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-md shrink-0">
+                                <span className="text-[9px] uppercase tracking-wider font-semibold text-[#4B5262] bg-gray-100 group-hover:bg-white px-2 py-0.5 rounded-md shrink-0 border border-gray-200/50">
                                   {opt.badge}
                                 </span>
                               </div>
-                              <p className="text-[11.5px] sm:text-[12px] text-[#6D727D] mt-0.5 leading-snug">
+                              <p className="text-[11.5px] sm:text-[12px] text-[#4F5460] mt-0.5 leading-snug">
                                 {opt.desc}
                               </p>
                             </div>
