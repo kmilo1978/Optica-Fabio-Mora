@@ -2996,7 +2996,7 @@ export default function App() {
           </section>
 
           {/* Cuidado Visual Multigeneracional - Niños, Adultos y Personas Mayores */}
-          <section id="edades" className="w-full py-14 md:py-20 bg-gradient-to-b from-slate-50/70 via-white to-slate-50/70 border-y border-gray-100 relative overflow-hidden">
+          <section id="edades" className="w-full pt-10 pb-4 md:py-20 bg-gradient-to-b from-slate-50/70 via-white to-slate-50/70 border-y border-gray-100 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               {/* Encabezado */}
               <div className="text-center max-w-3xl mx-auto">
@@ -3213,7 +3213,7 @@ export default function App() {
 
 
           {/* Gallery */}
-          <section id="galeria" className="w-full py-14 md:py-20 bg-slate-50/60 border-y border-gray-100">
+          <section id="galeria" className="w-full pt-4 pb-12 md:py-20 bg-slate-50/60 border-y border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
