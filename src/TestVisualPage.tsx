@@ -19,7 +19,14 @@ import {
   HelpCircle,
   AlertTriangle,
   ArrowUp,
-  ArrowDown
+  ArrowDown,
+  User,
+  Phone,
+  Mail,
+  Calendar,
+  FileText,
+  Edit3,
+  Stethoscope
 } from 'lucide-react';
 import { Language } from './translations';
 import Footer from './Footer';
@@ -132,6 +139,12 @@ export default function TestVisualPage({ onBack, lang = 'es', onNavigate }: Test
     }
   };
 
+  // Estados para datos de contacto del paciente
+  const [patientName, setPatientName] = useState('');
+  const [patientPhone, setPatientPhone] = useState('');
+  const [patientEmail, setPatientEmail] = useState('');
+  const [isEditingContact, setIsEditingContact] = useState(false);
+
   // Reiniciar test
   const handleRestart = () => {
     setPhase('intro');
@@ -143,34 +156,47 @@ export default function TestVisualPage({ onBack, lang = 'es', onNavigate }: Test
     setContrastAnswer(null);
     setNearAnswer(null);
     setColorAnswer(null);
+    setIsEditingContact(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Construir mensaje de WhatsApp con resultados
   const buildWhatsAppMessage = () => {
-    const acuityText = acuityScore >= 3 ? 'Agudeza visual buena' : 'Posible baja agudeza visual';
+    const acuityText = acuityScore >= 3 ? 'Agudeza visual adecuada' : 'Posible baja agudeza visual';
     const astigText = astigmatismAnswer === 'normal' ? 'Sin distorsión radial evidente' : 'Líneas con tono desigual (posible astigmatismo)';
     const contrastText = contrastAnswer && contrastAnswer >= 3 ? 'Buen contraste' : 'Dificultad en bajo contraste';
     const nearText = nearAnswer === 'perfect' ? 'Buena lectura cercana' : 'Dificultad en lectura de cerca';
     const colorText = colorAnswer === '12' ? 'Percepción cromática adecuada' : 'Variación en prueba de color';
 
+    const patientInfoLines = [
+      patientName.trim() ? `• *Nombre:* ${patientName.trim()}` : null,
+      patientPhone.trim() ? `• *Teléfono:* ${patientPhone.trim()}` : null,
+      patientEmail.trim() ? `• *Correo:* ${patientEmail.trim()}` : null,
+    ].filter(Boolean);
+
+    const patientBlock = patientInfoLines.length > 0 
+      ? `\n\n*DATOS DEL PACIENTE:*\n${patientInfoLines.join('\n')}\n`
+      : '';
+
     const text = isEn
-      ? `Hello Dr. Fabio Mora, I just completed the Online Vision Test at Ópticas Popular with these results:
-- Visual Acuity: ${acuityText} (${acuityScore}/4)
-- Astigmatism: ${astigText}
-- Contrast: ${contrastText}
-- Near Vision: ${nearText}
-- Color Vision: ${colorText}
+      ? `Hello Dr. Fabio Mora, I just completed the Online Vision Screening at Ópticas Popular:${patientBlock}
+*SCREENING RESULTS:*
+• Visual Acuity: ${acuityText} (${acuityScore}/4)
+• Astigmatism: ${astigText}
+• Contrast: ${contrastText}
+• Near Vision: ${nearText}
+• Color Vision: ${colorText}
 
 I would like to schedule a comprehensive evaluation at Plaza Higuerones.`
-      : `Hola Dr. Fabio Mora, acabo de realizar el Test Visual Online en la página de Ópticas Popular con estos resultados:
-- Agudeza visual: ${acuityText} (${acuityScore}/4)
-- Astigmatismo: ${astigText}
-- Sensibilidad al contraste: ${contrastText}
-- Visión de cerca: ${nearText}
-- Visión cromática: ${colorText}
+      : `¡Hola Dr. Fabio Mora! Acabo de realizar el Test Visual Online en la web de Ópticas Popular:${patientBlock}
+*RESULTADOS DE LA EVALUACIÓN:*
+• Agudeza visual: ${acuityText} (${acuityScore}/4)
+• Astigmatismo: ${astigText}
+• Sensibilidad al contraste: ${contrastText}
+• Visión de cerca: ${nearText}
+• Visión cromática: ${colorText}
 
-Me gustaría coordinar una cita para valoración completa en Plaza Higuerones.`;
+Me gustaría que me asesoren o coordinar una cita de valoración en consultorio (Plaza Higuerones).`;
 
     return `https://wa.me/50672760215?text=${encodeURIComponent(text)}`;
   };
@@ -227,72 +253,170 @@ Me gustaría coordinar una cita para valoración completa en Plaza Higuerones.`;
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35 }}
-              className="bg-white rounded-3xl border border-gray-200/90 shadow-xl overflow-hidden grid lg:grid-cols-[0.9fr_1.1fr]"
+              className="bg-white rounded-3xl border border-gray-200/90 shadow-xl overflow-hidden grid lg:grid-cols-[0.85fr_1.15fr]"
             >
-              {/* Lado Izquierdo: Tarjeta Visual Médica de Alto Impacto */}
-              <div className="bg-[#0e1726] p-8 sm:p-12 flex flex-col items-center justify-center text-center relative overflow-hidden text-white">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgb(122,24,35)]/20 to-transparent pointer-events-none" />
-                
-                {/* Cuadro Snellen Estilizado */}
-                <div className="relative border-2 border-white/20 p-8 sm:p-10 rounded-2xl bg-white/5 backdrop-blur-xs shadow-2xl max-w-[280px] w-full">
-                  <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-[rgb(122,24,35)]" />
-                  <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-[rgb(122,24,35)]" />
-                  <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-[rgb(122,24,35)]" />
-                  <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-[rgb(122,24,35)]" />
+              {/* Lado Izquierdo: Presentación Clínica y Cartilla Optométrica Auténtica */}
+              <div className="bg-[#161B33] p-8 sm:p-10 md:p-12 flex flex-col justify-between relative overflow-hidden text-white">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[rgb(122,24,35)]/15 rounded-full blur-3xl pointer-events-none" />
 
-                  <div className="text-[28px] sm:text-[32px] tracking-[0.25em] font-black text-white font-mono leading-none mb-3">
-                    D N C Z O
+                <div>
+                  {/* Encabezado Clínico Institucional */}
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)] flex items-center justify-center text-white shadow-md shrink-0">
+                      <Stethoscope className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-[12px] font-bold tracking-wider uppercase text-white/90">
+                        Ópticas Popular
+                      </p>
+                      <p className="text-[11px] text-gray-300">
+                        Consultorio Dr. Fabio Mora Medina
+                      </p>
+                    </div>
                   </div>
-                  <div className="text-[20px] sm:text-[23px] tracking-[0.3em] font-bold text-gray-200 font-mono leading-none mb-3">
-                    S K D V H
-                  </div>
-                  <div className="text-[14px] sm:text-[16px] tracking-[0.35em] font-semibold text-rose-300 font-mono leading-none">
-                    Z C R N S
+
+                  {/* Cartilla Optométrica Médica en Papel Mate Clínico (Diseño Auténtico) */}
+                  <div className="bg-[#FCFCFD] text-[#15171C] rounded-2xl p-6 sm:p-7 border border-white/20 shadow-xl max-w-[310px] mx-auto text-center relative">
+                    <div className="border-b border-gray-200 pb-2 mb-3.5 flex items-center justify-between text-[9px] font-bold text-gray-500 uppercase tracking-widest">
+                      <span>Cartilla Optométrica</span>
+                      <span>Snellen · 20/20</span>
+                    </div>
+
+                    <div className="space-y-2 select-none py-1">
+                      <div className="text-[36px] font-black tracking-[0.2em] font-serif text-[#14161B] leading-none">
+                        E
+                      </div>
+                      <div className="text-[23px] font-bold tracking-[0.25em] font-serif text-[#1C202A] leading-none">
+                        F P
+                      </div>
+                      <div className="text-[16px] font-bold tracking-[0.3em] font-serif text-gray-800 leading-none">
+                        T O Z
+                      </div>
+                      <div className="text-[12px] font-semibold tracking-[0.35em] font-serif text-gray-600 leading-none">
+                        L P E D
+                      </div>
+                      <div className="text-[9.5px] font-semibold tracking-[0.4em] font-serif text-gray-500 leading-none">
+                        P E C F D
+                      </div>
+                    </div>
+
+                    {/* Líneas Duocromo Clínicas (Bicromático Rojo / Verde) */}
+                    <div className="mt-4 pt-3 border-t border-gray-200 grid grid-cols-2 gap-1 rounded overflow-hidden h-2.5">
+                      <div className="bg-red-600 rounded-l" />
+                      <div className="bg-emerald-600 rounded-r" />
+                    </div>
+                    <p className="mt-1.5 text-[9px] text-gray-400">Patrón de referencia refractiva clínica</p>
                   </div>
                 </div>
 
-                <div className="mt-6 flex items-center gap-2 text-[12px] text-gray-300">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span>{isEn ? 'Standardized Clinical Optometry Screening' : 'Protocolo Optométrico Orientativo'}</span>
+                {/* Credenciales de Confianza Médica */}
+                <div className="mt-8 pt-6 border-t border-white/10 space-y-2.5 text-left text-[11.5px] text-gray-300">
+                  <div className="flex items-center gap-2">
+                    <Award className="w-4 h-4 text-[rgb(180,50,65)] shrink-0" />
+                    <span>Licenciado con Honores (U. Latina) · Máster Valencia, España</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>11 años de trayectoria en Plaza Higuerones, Desamparados</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-sky-400 shrink-0" />
+                    <span>Autoevaluación guiada (3 minutos, 5 pruebas clínicas)</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Lado Derecho: Contenido Informativo y Consentimiento */}
+              {/* Lado Derecho: Formulario de Contacto y Preparación */}
               <div className="p-7 sm:p-10 md:p-12 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center gap-2 mb-3">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] font-bold uppercase tracking-wider">
                       <Clock className="w-3.5 h-3.5" />
-                      <span>{isEn ? "3' Quick Test" : "3' Minutos"}</span>
+                      <span>{isEn ? "3' Quick Test" : "3 Minutos"}</span>
                     </span>
-                    <span className="text-[12px] text-gray-500">· 5 {isEn ? 'quick tests' : 'pruebas interactivas'}</span>
+                    <span className="text-[12px] text-gray-500">· 5 {isEn ? 'interactive tests' : 'pruebas optométricas'}</span>
                   </div>
 
-                  <h1 className="text-[28px] sm:text-[34px] font-bold text-[#14161B] tracking-tight leading-tight">
-                    {isEn ? 'Check your vision online' : 'Revisá tu visión online'}
+                  <h1 className="text-[26px] sm:text-[32px] font-bold text-[#14161B] tracking-tight leading-tight">
+                    {isEn ? 'Vision Screening — Basic Info' : 'Autoevaluación de Salud Visual'}
                   </h1>
 
-                  <p className="mt-3 text-[14.5px] sm:text-[15.5px] text-[#555963] leading-relaxed">
+                  <p className="mt-2 text-[14px] sm:text-[15px] text-[#555963] leading-relaxed">
                     {isEn
-                      ? 'Perform these 5 basic visual checks to understand if your eyes need an in-person clinical evaluation with an eye care specialist.'
-                      : 'Realizá estas 5 pruebas visuales básicas para saber si tus ojos necesitan una revisión en consultorio con el Dr. Fabio Mora.'}
+                      ? 'Enter your basic details so Dr. Fabio Mora and our clinical team can follow up with your results and guide your care.'
+                      : 'Completá tus datos de contacto para que el Dr. Fabio Mora y su equipo puedan brindarte seguimiento personalizado sobre tus resultados.'}
                   </p>
 
-                  {/* Aviso Legal & Médico */}
-                  <div className="mt-6 p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-[12.5px] sm:text-[13px] text-amber-950 leading-relaxed space-y-2">
+                  {/* Formulario de Datos Básicos de Contacto */}
+                  <div className="mt-6 space-y-3.5 text-left">
+                    {/* Nombre Completo */}
+                    <div>
+                      <label className="block text-[12px] font-bold text-gray-700 mb-1">
+                        {isEn ? 'Full Name' : 'Nombre completo'} <span className="text-[rgb(122,24,35)]">*</span>
+                      </label>
+                      <div className="relative">
+                        <User className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          type="text"
+                          value={patientName}
+                          onChange={(e) => setPatientName(e.target.value)}
+                          placeholder={isEn ? 'e.g. Maria Rodriguez' : 'Ej: María Rodríguez Solís'}
+                          className="w-full h-11 pl-10 pr-4 rounded-xl bg-gray-50 border border-gray-200 text-[13.5px] text-[#14161B] focus:bg-white focus:border-[rgb(122,24,35)] focus:ring-2 focus:ring-[rgb(122,24,35)]/20 transition-all outline-hidden"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Teléfono y Correo Electrónico en 2 Columnas */}
+                    <div className="grid sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[12px] font-bold text-gray-700 mb-1">
+                          {isEn ? 'Phone / WhatsApp' : 'Teléfono / WhatsApp'} <span className="text-[rgb(122,24,35)]">*</span>
+                        </label>
+                        <div className="relative">
+                          <Phone className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                          <input
+                            type="tel"
+                            value={patientPhone}
+                            onChange={(e) => setPatientPhone(e.target.value)}
+                            placeholder={isEn ? 'e.g. 8888-8888' : 'Ej: 8888-8888'}
+                            className="w-full h-11 pl-10 pr-4 rounded-xl bg-gray-50 border border-gray-200 text-[13.5px] text-[#14161B] focus:bg-white focus:border-[rgb(122,24,35)] focus:ring-2 focus:ring-[rgb(122,24,35)]/20 transition-all outline-hidden"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[12px] font-bold text-gray-700 mb-1">
+                          {isEn ? 'Email' : 'Correo electrónico'} <span className="text-gray-400 font-normal">({isEn ? 'optional' : 'opcional'})</span>
+                        </label>
+                        <div className="relative">
+                          <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                          <input
+                            type="email"
+                            value={patientEmail}
+                            onChange={(e) => setPatientEmail(e.target.value)}
+                            placeholder={isEn ? 'e.g. maria@email.com' : 'Ej: maria@correo.com'}
+                            className="w-full h-11 pl-10 pr-4 rounded-xl bg-gray-50 border border-gray-200 text-[13.5px] text-[#14161B] focus:bg-white focus:border-[rgb(122,24,35)] focus:ring-2 focus:ring-[rgb(122,24,35)]/20 transition-all outline-hidden"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Aviso Clínico */}
+                  <div className="mt-5 p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-[12px] text-amber-950 leading-relaxed space-y-1 text-left">
                     <p className="font-semibold flex items-center gap-1.5 text-amber-900">
-                      <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
-                      <span>{isEn ? 'Important Medical Notice' : 'Aviso Clínico Importante'}</span>
+                      <AlertTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                      <span>{isEn ? 'Clinical Screening Notice' : 'Aviso Clínico Orientativo'}</span>
                     </p>
-                    <p className="text-amber-900/90">
+                    <p className="text-amber-900/90 text-[11.5px]">
                       {isEn
-                        ? 'These interactive tests are purely orientative and do not replace a comprehensive clinical eye examination. No personal health data is stored.'
-                        : 'Estas pruebas son exclusivamente orientativas y no sustituyen un examen oftalmológico ni optométrico completo con equipo computarizado. No se almacena ningún dato de salud.'}
+                        ? 'These tests are purely orientative and do not replace a comprehensive clinical eye examination with computerized digital equipment.'
+                        : 'Estas pruebas son exclusivamente orientativas y no sustituyen un examen optométrico completo con equipo digital en consultorio.'}
                     </p>
                   </div>
 
                   {/* Checkbox de Aceptación */}
-                  <label className="mt-6 flex items-start gap-3 cursor-pointer group select-none">
+                  <label className="mt-4 flex items-start gap-2.5 cursor-pointer group select-none text-left">
                     <input
                       type="checkbox"
                       checked={acceptedDisclaimer}
@@ -300,34 +424,34 @@ Me gustaría coordinar una cita para valoración completa en Plaza Higuerones.`;
                         setAcceptedDisclaimer(e.target.checked);
                         if (e.target.checked) setDisclaimerError(false);
                       }}
-                      className="mt-0.5 w-4.5 h-4.5 rounded text-[rgb(122,24,35)] focus:ring-[rgb(122,24,35)] border-gray-300 cursor-pointer"
+                      className="mt-0.5 w-4 h-4 rounded text-[rgb(122,24,35)] focus:ring-[rgb(122,24,35)] border-gray-300 cursor-pointer"
                     />
-                    <span className="text-[13px] text-[#555963] group-hover:text-[#15171C] transition-colors">
+                    <span className="text-[12px] text-[#555963] group-hover:text-[#15171C] transition-colors leading-snug">
                       {isEn
-                        ? 'I have read and accept the medical disclaimer and understand this is an orientative test.'
-                        : 'He leído y acepto el aviso legal. Entiendo que es una autoevaluación orientativa.'}
+                        ? 'I understand this is an orientative test and authorize Ópticas Popular to follow up on my visual screening.'
+                        : 'Entiendo que es una autoevaluación orientativa y autorizo a Ópticas Popular a contactarme respecto a mis resultados.'}
                     </span>
                   </label>
 
                   {disclaimerError && (
-                    <p className="mt-2 text-[12px] text-red-600 font-semibold">
+                    <p className="mt-2 text-[12px] text-red-600 font-semibold text-left">
                       {isEn ? 'Please check the box above to continue.' : 'Por favor marcá la casilla para continuar.'}
                     </p>
                   )}
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between gap-4">
+                <div className="mt-6 pt-5 border-t border-gray-100 flex items-center justify-between gap-4">
                   <button
                     type="button"
                     onClick={handleStartFromIntro}
-                    className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-2xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer btn-shimmer"
+                    className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer btn-shimmer"
                   >
-                    <span>{isEn ? 'Start Screening' : 'Iniciar'}</span>
+                    <span>{isEn ? 'Start Screening' : 'Comenzar Evaluación'}</span>
                     <ArrowRight className="w-4 h-4 ml-1" />
                   </button>
 
                   <span className="text-[12px] text-gray-500 font-medium hidden sm:inline">
-                    {isEn ? 'Free & Instant' : 'Gratuito e interactivo'}
+                    {isEn ? 'Free & Orientative' : 'Gratuito e interactivo'}
                   </span>
                 </div>
               </div>
@@ -858,142 +982,301 @@ Me gustaría coordinar una cita para valoración completa en Plaza Higuerones.`;
           )}
 
           {/* ========================================================= */}
-          {/* FASE 4: RESULTADOS GLOBALES & ATENCIÓN POR WHATSAPP        */}
+          {/* FASE 4: FICHA ORIENTATIVA DE SALUD VISUAL & ATENCIÓN       */}
           {/* ========================================================= */}
           {phase === 'results' && (
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.35 }}
-              className="max-w-3xl mx-auto bg-white rounded-3xl border border-gray-200/90 shadow-2xl p-6 sm:p-10 md:p-12 text-center"
+              className="max-w-4xl mx-auto bg-white rounded-3xl border border-gray-200/90 shadow-2xl p-6 sm:p-10 md:p-12 text-center"
             >
-              {/* Insignia de Estado */}
-              <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-4 border border-emerald-200 shadow-xs">
-                <CheckCircle2 className="w-9 h-9" />
-              </div>
-
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] font-bold uppercase tracking-wider mb-2">
-                {isEn ? 'Evaluation Complete' : 'Evaluación Completada'}
-              </span>
-
-              <h2 className="text-[28px] sm:text-[34px] font-bold text-[#14161B]">
-                {isEn ? 'Your Vision Screening Results' : 'Tus Resultados Orientativos'}
-              </h2>
-
-              <p className="mt-2 text-[14.5px] sm:text-[15.5px] text-[#555963] max-w-xl mx-auto leading-relaxed">
-                {isEn
-                  ? 'Here is an orientative breakdown of your visual performance. Share these findings directly with Dr. Fabio Mora to receive professional guidance.'
-                  : 'Aquí tenés un resumen orientativo de tus respuestas. Podés compartírselo directamente al Dr. Fabio Mora para que te asesore con claridad.'}
-              </p>
-
-              {/* Resumen Clínico en Cuadrícula */}
-              <div className="mt-8 grid sm:grid-cols-2 gap-3 text-left">
-                {/* Agudeza */}
-                <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200/80">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[12px] font-bold text-gray-500 uppercase tracking-wider">{isEn ? 'Acuity' : 'Agudeza'}</span>
-                    <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
-                      acuityScore >= 3 ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
-                    }`}>
-                      {acuityScore >= 3 ? (isEn ? 'Good' : 'Adecuada') : (isEn ? 'Review advised' : 'A revisar')}
+              {/* Encabezado Editorial Clínico */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 mb-8 border-b border-gray-100 text-left">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-12 h-12 rounded-2xl bg-[rgb(122,24,35)] text-white flex items-center justify-center shadow-md shrink-0">
+                    <FileText className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[rgb(122,24,35)] block">
+                      {isEn ? 'Official Orientation Sheet' : 'Ficha Orientativa de Salud Visual'}
                     </span>
+                    <h2 className="text-[22px] sm:text-[26px] font-bold text-[#14161B] leading-tight">
+                      {isEn ? 'Vision Screening Summary' : 'Resumen Orientativo de Salud Visual'}
+                    </h2>
                   </div>
-                  <div className="mt-2 text-[14px] font-bold text-[#14161B]">
-                    {acuityScore}/4 {isEn ? 'correct directions' : 'aciertos'}
-                  </div>
-                  <p className="text-[11.5px] text-gray-500 mt-0.5">
-                    {acuityScore >= 3 
-                      ? (isEn ? 'Clear directional focus.' : 'Identificación clara de orientación.')
-                      : (isEn ? 'Possible need for prescription adjustment.' : 'Podrías requerir actualización de graduación.')}
-                  </p>
                 </div>
 
-                {/* Astigmatismo */}
-                <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200/80">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[12px] font-bold text-gray-500 uppercase tracking-wider">{isEn ? 'Astigmatism' : 'Astigmatismo'}</span>
-                    <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
-                      astigmatismAnswer === 'normal' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
-                    }`}>
-                      {astigmatismAnswer === 'normal' ? (isEn ? 'Symmetric' : 'Simétrico') : (isEn ? 'Possible distortion' : 'Asimetría')}
-                    </span>
-                  </div>
-                  <div className="mt-2 text-[14px] font-bold text-[#14161B]">
-                    {astigmatismAnswer === 'normal' ? (isEn ? 'Uniform radial focus' : 'Líneas uniformes') : (isEn ? 'Uneven lines detected' : 'Líneas desiguales')}
-                  </div>
-                  <p className="text-[11.5px] text-gray-500 mt-0.5">
-                    {astigmatismAnswer === 'normal' 
-                      ? (isEn ? 'No significant meridian distortion.' : 'No se detecta distorsión de meridiano evidente.')
-                      : (isEn ? 'A clinical refraction is recommended.' : 'Recomendamos verificar cilindro en consultorio.')}
+                <div className="text-right sm:border-l sm:border-gray-200 sm:pl-5">
+                  <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                    {isEn ? 'Clinic' : 'Consultorio'}
                   </p>
-                </div>
-
-                {/* Contraste */}
-                <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200/80">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[12px] font-bold text-gray-500 uppercase tracking-wider">{isEn ? 'Contrast' : 'Contraste'}</span>
-                    <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
-                      {isEn ? 'Level recorded' : 'Nivel registrado'}
-                    </span>
-                  </div>
-                  <div className="mt-2 text-[14px] font-bold text-[#14161B]">
-                    {contrastAnswer ? `Nivel ${contrastAnswer}/4` : (isEn ? 'Completed' : 'Completado')}
-                  </div>
-                  <p className="text-[11.5px] text-gray-500 mt-0.5">
-                    {isEn ? 'Evaluates comfort in twilight and night driving.' : 'Importante para el manejo nocturno y confort ante pantallas.'}
+                  <p className="text-[12.5px] font-bold text-[#14161B]">
+                    Plaza Higuerones, Local 23
                   </p>
-                </div>
-
-                {/* Lectura de Cerca */}
-                <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200/80">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[12px] font-bold text-gray-500 uppercase tracking-wider">{isEn ? 'Near Vision' : 'Visión de cerca'}</span>
-                    <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
-                      nearAnswer === 'perfect' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
-                    }`}>
-                      {nearAnswer === 'perfect' ? (isEn ? 'Comfortable' : 'Confortable') : (isEn ? 'Eye strain' : 'Fatiga')}
-                    </span>
-                  </div>
-                  <div className="mt-2 text-[14px] font-bold text-[#14161B]">
-                    {nearAnswer === 'perfect' ? (isEn ? 'Clear small print' : 'Lectura nítida') : (isEn ? 'Need to move back' : 'Necesidad de alejar')}
-                  </div>
-                  <p className="text-[11.5px] text-gray-500 mt-0.5">
-                    {nearAnswer === 'perfect'
-                      ? (isEn ? 'Presbyopia compensation looks stable.' : 'Acomodación visual adecuada.')
-                      : (isEn ? 'Lenses with anti-fatigue or progressive design can help.' : 'Lentes antirreflejo o progresivos pueden aliviarte.')}
+                  <p className="text-[11px] text-gray-500">
+                    Dr. Fabio Mora Medina
                   </p>
                 </div>
               </div>
 
-              {/* Tarjeta de Recomendación y Envío a WhatsApp */}
-              <div className="mt-8 p-6 sm:p-8 rounded-3xl bg-[rgb(122,24,35)]/5 border border-[rgb(122,24,35)]/20 text-center">
-                <h3 className="text-[20px] font-bold text-[#14161B]">
-                  {isEn ? 'Send your results to Dr. Fabio Mora' : 'Enviá tus resultados al Dr. Fabio Mora'}
-                </h3>
-                <p className="mt-2 text-[13.5px] text-[#555963] max-w-lg mx-auto leading-relaxed">
-                  {isEn
-                    ? 'Get personalized clinical feedback and coordinate your comprehensive appointment at Plaza Higuerones without delays.'
-                    : 'Recibí retroalimentación profesional y coordiná tu examen en Plaza Higuerones con una atención personalizada y sin carreras.'}
-                </p>
+              {/* Ficha con Datos del Paciente (Para que la clínica pueda ponerse en contacto) */}
+              <div className="bg-[#FAFBFD] rounded-2xl border border-gray-200/90 p-5 sm:p-6 mb-8 text-left shadow-2xs">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 border-b border-gray-200/80">
+                  <div className="flex items-center gap-2.5">
+                    <User className="w-4 h-4 text-[rgb(122,24,35)]" />
+                    <span className="text-[12px] font-bold text-[#14161B] uppercase tracking-wider">
+                      {isEn ? 'Patient Contact Information' : 'Datos del Paciente para Contacto y Seguimiento'}
+                    </span>
+                  </div>
 
-                <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setIsEditingContact(!isEditingContact)}
+                    className="inline-flex items-center gap-1.5 text-[11.5px] font-bold text-[rgb(122,24,35)] hover:underline cursor-pointer"
+                  >
+                    <Edit3 className="w-3.5 h-3.5" />
+                    <span>{isEditingContact ? (isEn ? 'Close Editor' : 'Guardar Datos') : (isEn ? 'Edit Info' : 'Modificar Datos')}</span>
+                  </button>
+                </div>
+
+                {/* Si está en modo edición, mostrar inputs */}
+                {isEditingContact ? (
+                  <div className="grid sm:grid-cols-3 gap-3 pt-4">
+                    <div>
+                      <label className="block text-[11px] font-bold text-gray-500 mb-1">{isEn ? 'Name' : 'Nombre'}</label>
+                      <input
+                        type="text"
+                        value={patientName}
+                        onChange={(e) => setPatientName(e.target.value)}
+                        placeholder="Nombre y apellidos"
+                        className="w-full h-10 px-3 rounded-lg bg-white border border-gray-200 text-[12.5px] text-[#14161B] focus:border-[rgb(122,24,35)] outline-hidden"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-bold text-gray-500 mb-1">{isEn ? 'Phone' : 'Teléfono / WhatsApp'}</label>
+                      <input
+                        type="tel"
+                        value={patientPhone}
+                        onChange={(e) => setPatientPhone(e.target.value)}
+                        placeholder="Ej: 8888-8888"
+                        className="w-full h-10 px-3 rounded-lg bg-white border border-gray-200 text-[12.5px] text-[#14161B] focus:border-[rgb(122,24,35)] outline-hidden"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-bold text-gray-500 mb-1">{isEn ? 'Email' : 'Correo electrónico'}</label>
+                      <input
+                        type="email"
+                        value={patientEmail}
+                        onChange={(e) => setPatientEmail(e.target.value)}
+                        placeholder="correo@ejemplo.com"
+                        className="w-full h-10 px-3 rounded-lg bg-white border border-gray-200 text-[12.5px] text-[#14161B] focus:border-[rgb(122,24,35)] outline-hidden"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid sm:grid-cols-3 gap-4 pt-3.5 text-[13px]">
+                    <div>
+                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
+                        {isEn ? 'Patient Name' : 'Paciente'}
+                      </span>
+                      <span className="font-semibold text-[#14161B] text-[14px]">
+                        {patientName.trim() || (isEn ? 'Not specified' : 'Paciente sin registrar')}
+                      </span>
+                    </div>
+
+                    <div>
+                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
+                        {isEn ? 'Phone / WhatsApp' : 'Teléfono / WhatsApp'}
+                      </span>
+                      <span className="font-semibold text-[#14161B]">
+                        {patientPhone.trim() || (isEn ? 'Pending' : 'Por coordinar')}
+                      </span>
+                    </div>
+
+                    <div>
+                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
+                        {isEn ? 'Email Address' : 'Correo electrónico'}
+                      </span>
+                      <span className="font-semibold text-[#14161B] truncate block">
+                        {patientEmail.trim() || (isEn ? 'None' : 'No indicado')}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Cuadrícula Clínica de los 5 Hallazgos Optométricos */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5 text-left mb-8">
+                {/* 1. Agudeza Visual */}
+                <div className="p-4 rounded-2xl bg-gray-50/90 border border-gray-200/80 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                        {isEn ? 'Visual Acuity' : '1. Agudeza Visual'}
+                      </span>
+                      <span className={`text-[10.5px] font-bold px-2 py-0.5 rounded-full ${
+                        acuityScore >= 3 ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                      }`}>
+                        {acuityScore >= 3 ? (isEn ? 'Adequate' : 'Adecuada') : (isEn ? 'Review advised' : 'A revisar')}
+                      </span>
+                    </div>
+                    <div className="mt-2 text-[14px] font-bold text-[#14161B]">
+                      {acuityScore}/4 {isEn ? 'correct directions' : 'aciertos'}
+                    </div>
+                    <p className="text-[11.5px] text-gray-500 mt-1 leading-relaxed">
+                      {acuityScore >= 3 
+                        ? (isEn ? 'Clear directional focus at distance.' : 'Identificación nítida de orientaciones a distancia.')
+                        : (isEn ? 'Potential refractive update needed.' : 'Podrías requerir actualización de graduación en consultorio.')}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 2. Astigmatismo */}
+                <div className="p-4 rounded-2xl bg-gray-50/90 border border-gray-200/80 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                        {isEn ? 'Astigmatism' : '2. Astigmatismo'}
+                      </span>
+                      <span className={`text-[10.5px] font-bold px-2 py-0.5 rounded-full ${
+                        astigmatismAnswer === 'normal' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                      }`}>
+                        {astigmatismAnswer === 'normal' ? (isEn ? 'Symmetric' : 'Simétrico') : (isEn ? 'Asymmetry' : 'Asimetría')}
+                      </span>
+                    </div>
+                    <div className="mt-2 text-[14px] font-bold text-[#14161B]">
+                      {astigmatismAnswer === 'normal' ? (isEn ? 'Uniform radial lines' : 'Líneas uniformes') : (isEn ? 'Uneven lines noticed' : 'Tono o grosor desigual')}
+                    </div>
+                    <p className="text-[11.5px] text-gray-500 mt-1 leading-relaxed">
+                      {astigmatismAnswer === 'normal' 
+                        ? (isEn ? 'No evident meridian distortion.' : 'Enfoque homogéneo en todos los meridianos visuales.')
+                        : (isEn ? 'Clinical refraction recommended to check cylinder.' : 'Suele indicar presencia de astigmatismo que se corrige con lentes graduadas.')}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 3. Sensibilidad al Contraste */}
+                <div className="p-4 rounded-2xl bg-gray-50/90 border border-gray-200/80 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                        {isEn ? 'Contrast' : '3. Contraste'}
+                      </span>
+                      <span className="text-[10.5px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                        {contrastAnswer ? `Nivel ${contrastAnswer}/4` : (isEn ? 'Completed' : 'Completado')}
+                      </span>
+                    </div>
+                    <div className="mt-2 text-[14px] font-bold text-[#14161B]">
+                      {contrastAnswer && contrastAnswer >= 3 
+                        ? (isEn ? 'Good low-light detection' : 'Detección adecuada')
+                        : (isEn ? 'Moderate contrast sensitivity' : 'Sensibilidad moderada')}
+                    </div>
+                    <p className="text-[11.5px] text-gray-500 mt-1 leading-relaxed">
+                      {isEn 
+                        ? 'Key for twilight driving comfort, rain, and prolonged digital screens.'
+                        : 'Relevante para el confort en manejo nocturno, lluvia y horas frente a computadoras.'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 4. Visión de Cerca */}
+                <div className="p-4 rounded-2xl bg-gray-50/90 border border-gray-200/80 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                        {isEn ? 'Near Vision' : '4. Visión de Cerca'}
+                      </span>
+                      <span className={`text-[10.5px] font-bold px-2 py-0.5 rounded-full ${
+                        nearAnswer === 'perfect' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                      }`}>
+                        {nearAnswer === 'perfect' ? (isEn ? 'Comfortable' : 'Confortable') : (isEn ? 'Eye strain' : 'Fatiga')}
+                      </span>
+                    </div>
+                    <div className="mt-2 text-[14px] font-bold text-[#14161B]">
+                      {nearAnswer === 'perfect' ? (isEn ? 'Clear small print' : 'Lectura nítida a 35 cm') : (isEn ? 'Need to push back' : 'Necesidad de alejar o fatiga')}
+                    </div>
+                    <p className="text-[11.5px] text-gray-500 mt-1 leading-relaxed">
+                      {nearAnswer === 'perfect'
+                        ? (isEn ? 'Adequate near accommodation.' : 'Acomodación visual adecuada para lectura y celular.')
+                        : (isEn ? 'Progressive or anti-fatigue lenses can provide relief.' : 'Indicio de vista cansada (presbicia) o fatiga que se resuelve con lentes progresivas.')}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 5. Visión Cromática */}
+                <div className="p-4 rounded-2xl bg-gray-50/90 border border-gray-200/80 flex flex-col justify-between sm:col-span-2 lg:col-span-2">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                        {isEn ? 'Color Vision' : '5. Visión Cromática'}
+                      </span>
+                      <span className={`text-[10.5px] font-bold px-2 py-0.5 rounded-full ${
+                        colorAnswer === '12' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                      }`}>
+                        {colorAnswer === '12' ? (isEn ? 'Normal perception' : 'Percepción adecuada') : (isEn ? 'Variation' : 'Variación')}
+                      </span>
+                    </div>
+                    <div className="mt-2 text-[14px] font-bold text-[#14161B]">
+                      {colorAnswer === '12' 
+                        ? (isEn ? 'Correct number identified (12)' : 'Número identificado correctamente (12)')
+                        : (isEn ? 'Different perception' : 'Variación en la lámina de color')}
+                    </div>
+                    <p className="text-[11.5px] text-gray-500 mt-1 leading-relaxed">
+                      {colorAnswer === '12'
+                        ? (isEn ? 'Standard differentiation across red-green channels.' : 'Discriminación adecuada en la prueba de Ishihara.')
+                        : (isEn ? 'A full color discrimination test can be done in clinic.' : 'Se recomienda valoración con cartillas completas en consultorio.')}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tarjeta de Respaldo Profesional del Dr. Fabio Mora Medina y Acciones */}
+              <div className="p-6 sm:p-8 rounded-3xl bg-[rgb(122,24,35)]/5 border border-[rgb(122,24,35)]/20 text-center">
+                <div className="max-w-xl mx-auto mb-6">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] font-bold uppercase tracking-wider mb-2">
+                    <Award className="w-3.5 h-3.5" />
+                    <span>{isEn ? 'Professional Guidance' : 'Orientación Profesional'}</span>
+                  </div>
+
+                  <h3 className="text-[20px] sm:text-[22px] font-bold text-[#14161B]">
+                    {isEn ? 'Send your orientation sheet to Dr. Fabio Mora' : 'Enviá tu ficha directamente al Dr. Fabio Mora'}
+                  </h3>
+
+                  <p className="mt-2 text-[13.5px] text-[#555963] leading-relaxed">
+                    {isEn
+                      ? 'Your details and screening results will be shared directly via WhatsApp so our team can follow up with personalized advice.'
+                      : 'Tus datos de contacto y respuestas se enviarán directamente por WhatsApp para que el consultorio te asesore de manera personalizada y sin carreras.'}
+                  </p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a
                     href={buildWhatsAppMessage()}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 h-13 px-8 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-[15px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 h-13 px-8 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-[14.5px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
                   >
                     <MessageCircle className="w-5 h-5 fill-white" />
-                    <span>{isEn ? 'Send Results via WhatsApp' : 'Enviar Resultados a WhatsApp'}</span>
+                    <span>{isEn ? 'Send Results via WhatsApp' : 'Enviar Ficha a WhatsApp'}</span>
+                  </a>
+
+                  <a
+                    href="tel:+50672760215"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-6 rounded-2xl bg-white border border-gray-200 text-[#15171C] text-[13.5px] font-bold hover:bg-gray-50 transition-all cursor-pointer shadow-xs active:scale-95"
+                    title="Llamar: 2515-0002 / 7276-0215"
+                  >
+                    <Phone className="w-4 h-4 text-[rgb(122,24,35)]" />
+                    <span>{isEn ? 'Call: 2515-0002' : 'Llamar: 2515-0002'}</span>
                   </a>
 
                   <button
                     type="button"
                     onClick={handleRestart}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-6 rounded-2xl bg-white border border-gray-200 text-[#15171C] text-[13.5px] font-bold hover:bg-gray-50 transition-all cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-6 rounded-2xl bg-white border border-gray-200 text-gray-700 text-[13.5px] font-semibold hover:bg-gray-50 transition-all cursor-pointer"
                   >
-                    <RotateCcw className="w-4 h-4 text-gray-500" />
-                    <span>{isEn ? 'Retake Test' : 'Repetir Test'}</span>
+                    <RotateCcw className="w-4 h-4 text-gray-400" />
+                    <span>{isEn ? 'Retake Test' : 'Repetir Evaluación'}</span>
                   </button>
                 </div>
               </div>
