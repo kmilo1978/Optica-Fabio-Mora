@@ -67,7 +67,7 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
 
             {/* Insignia de Google Reviews */}
             <a
-              href="https://maps.google.com/?q=Ópticas+Popular+Plaza+Higuerones+San+Rafael+Abajo+Desamparados"
+              href="https://share.google/BUvr9vBhe3MZzBL6Y"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white transition-all group"
@@ -166,7 +166,7 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
                   <ChevronRight className="w-3.5 h-3.5 text-rose-400 group-hover:translate-x-0.5 transition-transform" />
                   <span className="text-amber-200 group-hover:text-amber-100 transition-colors">{lang === 'es' ? 'Muro Reseñas Google' : 'Google Reviews Wall'}</span>
                   <span className="px-1.5 py-0.5 rounded text-[9.5px] font-bold bg-amber-500/20 text-amber-300 uppercase tracking-wider ml-1 border border-amber-500/30">
-                    4.9 ★
+                    5.0 ★
                   </span>
                 </a>
               </li>

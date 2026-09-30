@@ -211,11 +211,15 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
           </motion.p>
 
           {/* Social Proof: Widget de Avatares y Reseñas en el Hero */}
-          <motion.div
+          <motion.a
+            href="https://share.google/BUvr9vBhe3MZzBL6Y"
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}
-            className="mt-5 inline-flex items-center gap-3 bg-white px-3.5 py-1.5 rounded-full border border-gray-200/80 shadow-xs"
+            className="mt-5 inline-flex items-center gap-3 bg-white hover:bg-gray-50 px-3.5 py-1.5 rounded-full border border-gray-200/80 hover:border-[rgb(122,24,35)]/40 shadow-xs hover:shadow-md transition-all duration-300 group cursor-pointer"
+            title={isEn ? 'View Google profile and reviews' : 'Ver ficha y opiniones en Google'}
           >
             <div className="flex items-center -space-x-2 overflow-hidden py-0.5">
               {[
@@ -244,13 +248,13 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
                     <Star key={sIdx} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <span className="text-[12px] font-black text-[#15171C] ml-1">4.9 / 5.0</span>
+                <span className="text-[12px] font-black text-[#15171C] ml-1">5.0 / 5.0</span>
               </div>
-              <span className="text-[10.5px] sm:text-[11px] text-gray-600 font-semibold tracking-tight mt-0.5 leading-none">
-                {isEn ? 'from 128+ verified reviews' : 'más de 128 valoraciones reales'}
+              <span className="text-[10.5px] sm:text-[11px] text-gray-600 group-hover:text-[rgb(122,24,35)] font-semibold tracking-tight mt-0.5 leading-none transition-colors">
+                {isEn ? '9 verified reviews on Google Maps' : '9 reseñas reales en Google Maps'}
               </span>
             </div>
-          </motion.div>
+          </motion.a>
         </div>
 
         {/* 1. Selector Superior Interactivo (Segmented Tabs) */}

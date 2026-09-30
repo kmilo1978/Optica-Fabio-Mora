@@ -176,7 +176,7 @@ function getNavigationMenu(lang: Language): NavCategory[] {
             { 
               name: lang === 'es' ? 'Muro Reseñas Google' : 'Google Reviews Wall', 
               href: '#testimonios-google', 
-              desc: lang === 'es' ? 'Muro interactivo con 4.9 estrellas y opiniones reales' : 'Interactive masonry wall with 4.9 stars & reviews', 
+              desc: lang === 'es' ? 'Muro interactivo con 5.0 estrellas y opiniones reales' : 'Interactive masonry wall with 5.0 stars & reviews', 
               icon: Star 
             },
             { name: t.rate, href: '#calificar', desc: t.rateDesc, icon: Award },
@@ -2567,15 +2567,15 @@ export default function App() {
                   </motion.div>
 
                   {/* Widget de Testimonios y Avatares con Gafas en el Hero */}
-                  <motion.div
+                  <motion.a
+                    href="https://share.google/BUvr9vBhe3MZzBL6Y"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.45 }}
-                    className="mt-4 flex items-center gap-3 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-gray-200/80 shadow-xs w-fit cursor-pointer hover:border-[rgb(122,24,35)]/30 transition-all"
-                    onClick={() => {
-                      const el = document.getElementById('testimonios');
-                      if (el) el.scrollIntoView({ behavior: 'smooth' });
-                    }}
+                    className="mt-4 flex items-center gap-3 bg-white/95 hover:bg-gray-50 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-gray-200/80 hover:border-[rgb(122,24,35)]/40 shadow-xs hover:shadow-md transition-all duration-300 w-fit cursor-pointer group"
+                    title={lang === 'es' ? 'Ver ficha oficial y opiniones en Google' : 'View official Google profile and reviews'}
                   >
                     <div className="flex items-center -space-x-2 overflow-hidden py-0.5">
                       {[
@@ -2604,13 +2604,13 @@ export default function App() {
                             <Star key={sIdx} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                           ))}
                         </div>
-                        <span className="text-[12px] font-black text-[#15171C] ml-1">4.9 / 5.0</span>
+                        <span className="text-[12px] font-black text-[#15171C] ml-1">5.0 / 5.0</span>
                       </div>
-                      <span className="text-[10.5px] sm:text-[11px] text-gray-600 font-semibold tracking-tight mt-0.5 leading-none">
-                        {lang === 'es' ? 'más de 128 valoraciones reales' : 'from 128+ verified reviews'}
+                      <span className="text-[10.5px] sm:text-[11px] text-gray-600 group-hover:text-[rgb(122,24,35)] font-semibold tracking-tight mt-0.5 leading-none transition-colors">
+                        {lang === 'es' ? '9 reseñas reales en Google Maps' : '9 verified reviews on Google Maps'}
                       </span>
                     </div>
-                  </motion.div>
+                  </motion.a>
 
                   {/* Micro-insignias de tranquilidad junto a los botones */}
                   <motion.div 
@@ -3405,7 +3405,7 @@ export default function App() {
                     className="inline-flex items-center justify-center gap-1.5 h-11 px-4.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-900 text-[13px] font-bold shadow-2xs transition-all active:scale-95 cursor-pointer"
                   >
                     <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
-                    <span>{lang === 'es' ? 'Muro Reseñas Google (128+)' : 'Google Reviews Wall (128+)'}</span>
+                    <span>{lang === 'es' ? 'Muro Reseñas Google (5.0 ★)' : 'Google Reviews Wall (5.0 ★)'}</span>
                   </button>
                   <a 
                     href="#calificar" 

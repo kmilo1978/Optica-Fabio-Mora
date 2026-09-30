@@ -59,7 +59,7 @@ interface ReviewItem {
   verifiedLocation: string;
 }
 
-const GOOGLE_REVIEWS_URL = "https://www.google.com/search?q=opricas+popular+fabio+mora&sca_esv=e6b59a3d51ae05de&sxsrf=APpeQnuq1QrM8ewtr1hA9BMeWgYIFgCTOQ%3A1790798692193";
+const GOOGLE_REVIEWS_URL = "https://share.google/BUvr9vBhe3MZzBL6Y";
 
 export default function TestimoniosPage({ onBack, lang = 'es', onNavigate }: TestimoniosPageProps) {
   const isEn = lang === 'en';
@@ -471,8 +471,8 @@ export default function TestimoniosPage({ onBack, lang = 'es', onNavigate }: Tes
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
               </svg>
-              <span className="hidden sm:inline">{isEn ? 'Verified on Google' : '4.9 en Google Maps'}</span>
-              <span className="sm:hidden">4.9 ★</span>
+              <span className="hidden sm:inline">{isEn ? 'Verified on Google (5.0 ★)' : '5.0 en Google Maps'}</span>
+              <span className="sm:hidden">5.0 ★</span>
             </a>
 
             <a
@@ -505,7 +505,7 @@ export default function TestimoniosPage({ onBack, lang = 'es', onNavigate }: Tes
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
             <span className="text-[11.5px] font-bold text-emerald-700">
-              {isEn ? '100% Authentic' : '100% Reales'}
+              {isEn ? '100% 5-Star Rating' : 'Calificación Perfecta 5.0'}
             </span>
           </div>
 
@@ -530,7 +530,7 @@ export default function TestimoniosPage({ onBack, lang = 'es', onNavigate }: Tes
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-8">
             <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-2xl border border-gray-200/90 shadow-2xs">
               <div className="flex flex-col items-center">
-                <span className="text-3xl font-extrabold text-[#15171C] leading-none">4.9</span>
+                <span className="text-3xl font-extrabold text-[#15171C] leading-none">5.0</span>
                 <span className="text-[10px] font-bold text-gray-400 mt-1 uppercase">de 5.0</span>
               </div>
               <div className="h-8 w-px bg-gray-200"></div>
@@ -541,7 +541,7 @@ export default function TestimoniosPage({ onBack, lang = 'es', onNavigate }: Tes
                   ))}
                 </div>
                 <p className="text-[11.5px] font-semibold text-gray-600 mt-1">
-                  {isEn ? 'Over 128+ verified reviews' : 'Más de 128 opiniones en Google'}
+                  {isEn ? '9 verified Google reviews' : '9 reseñas en Google Maps'}
                 </p>
               </div>
             </div>
