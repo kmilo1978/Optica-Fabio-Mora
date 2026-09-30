@@ -670,6 +670,582 @@ function VisualAccessibilityWidget({ lang }: { lang: Language }) {
   );
 }
 
+function LensTechnologyShowcase({ lang }: { lang: Language }) {
+  const [activeTab, setActiveTab] = useState<'progresivas' | 'transitions' | 'luz-azul'>('progresivas');
+  
+  // Estados interactivos para cada demostrador visual
+  const [progZone, setProgZone] = useState<'lejos' | 'intermedio' | 'cerca'>('intermedio');
+  const [transMode, setTransMode] = useState<'interior' | 'exterior'>('interior');
+  const [blueFilterOn, setBlueFilterOn] = useState<boolean>(true);
+
+  const tabs = [
+    {
+      id: 'progresivas' as const,
+      name: lang === 'es' ? 'Lentes Progresivas Digitales' : 'Digital Progressive Lenses',
+      shortName: lang === 'es' ? 'Progresivas FreeForm' : 'Digital Progressives',
+      tagline: lang === 'es' ? 'Presbicia y Enfoque Continuo' : 'Presbyopia & Continuous Focus',
+      icon: Glasses,
+      category: lang === 'es' ? 'Cerca · Intermedio · Lejos' : 'Near · Mid · Far',
+    },
+    {
+      id: 'transitions' as const,
+      name: lang === 'es' ? 'Lentes Fotosensibles Transitions®' : 'Transitions® Smart Lenses',
+      shortName: lang === 'es' ? 'Transitions® Inteligentes' : 'Smart Transitions®',
+      tagline: lang === 'es' ? 'Adaptación Solar Dinámica' : 'Dynamic Solar Adaptation',
+      icon: Sun,
+      category: lang === 'es' ? 'Fotocromático Inteligente' : 'Smart Photochromic',
+    },
+    {
+      id: 'luz-azul' as const,
+      name: lang === 'es' ? 'Protección de Luz Azul & Antirreflejo' : 'Blue Light & AR Shield',
+      shortName: lang === 'es' ? 'Luz Azul & Antirreflejo' : 'Blue Light Filter',
+      tagline: lang === 'es' ? 'Confort Digital y Descanso' : 'Digital Comfort & Night Rest',
+      icon: Monitor,
+      category: lang === 'es' ? 'Filtro Anti-Fatiga Digital' : 'Anti-Digital Fatigue',
+    },
+  ];
+
+  return (
+    <div className="w-full">
+      {/* 1. Selector Superior Interactivo (Pestañas de Navegación Dinámica) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-8">
+        {tabs.map((tab) => {
+          const isSelected = activeTab === tab.id;
+          const TabIcon = tab.icon;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`p-4 sm:p-5 rounded-2xl border text-left transition-all duration-300 cursor-pointer relative overflow-hidden group ${
+                isSelected
+                  ? 'bg-white border-[rgb(122,24,35)] shadow-md ring-2 ring-[rgb(122,24,35)]/15 -translate-y-0.5'
+                  : 'bg-white/70 hover:bg-white border-gray-200/90 hover:border-gray-300 shadow-2xs hover:shadow-xs'
+              }`}
+            >
+              {/* Barra indicadora superior si está activo */}
+              {isSelected && (
+                <div className="absolute top-0 inset-x-0 h-1 bg-[rgb(122,24,35)]" />
+              )}
+              
+              <div className="flex items-center justify-between gap-3 mb-2.5">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                  isSelected 
+                    ? 'bg-[rgb(122,24,35)] text-white shadow-xs' 
+                    : 'bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] group-hover:scale-105'
+                }`}>
+                  <TabIcon className="w-5 h-5" />
+                </div>
+                <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
+                  isSelected
+                    ? 'bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)]'
+                    : 'bg-gray-100 text-gray-500'
+                }`}>
+                  {tab.category}
+                </span>
+              </div>
+
+              <h3 className={`text-[15.5px] sm:text-[16.5px] font-bold tracking-tight transition-colors ${
+                isSelected ? 'text-[rgb(122,24,35)]' : 'text-[#14161B] group-hover:text-[rgb(122,24,35)]'
+              }`}>
+                {tab.shortName}
+              </h3>
+              <p className="text-[12px] text-[#555963] mt-0.5">
+                {tab.tagline}
+              </p>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* 2. Gran Canvas Dinámico de Presentación (2 Columnas con Animación Fluida) */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.3 }}
+          className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-gray-200/90 shadow-sm"
+        >
+          {/* CONTENIDO 1: PROGRESIVAS */}
+          {activeTab === 'progresivas' && (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+              {/* Columna Izquierda: Información Clínica y Beneficios */}
+              <div className="lg:col-span-7 flex flex-col justify-between">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 h-6 px-3 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] font-bold uppercase tracking-wider mb-3">
+                    <Glasses className="w-3.5 h-3.5" />
+                    <span>{lang === 'es' ? 'Tecnología FreeForm Digital' : 'FreeForm Digital Technology'}</span>
+                  </div>
+
+                  <h3 className="text-[24px] sm:text-[28px] font-bold text-[#14161B] leading-tight">
+                    {lang === 'es' 
+                      ? 'Lentes Progresivas Digitales Personalizadas' 
+                      : 'Custom Digital Progressive Lenses'}
+                  </h3>
+
+                  <p className="mt-3 text-[14px] sm:text-[15px] text-[#555963] leading-relaxed">
+                    {lang === 'es'
+                      ? 'Diseñadas para personas con presbicia o vista cansada a partir de los 40 años. Reemplazan a los antiguos bifocales unificando todas las distancias en un solo cristal continuo, sin líneas divisorias visibles y sin saltos bruscos de imagen.'
+                      : 'Designed for presbyopia. Replaces traditional bifocals by unifying all focal distances into a single seamless lens, free of visible lines and image jumps.'}
+                  </p>
+
+                  {/* Micro-tarjetas interactivas de zonas focales */}
+                  <div className="mt-6 space-y-2.5">
+                    <p className="text-[12px] font-bold uppercase tracking-wider text-[#7C808B]">
+                      {lang === 'es' ? 'Explorá las 3 Zonas de Visión en el Lente:' : 'Explore the 3 Visual Zones on the Lens:'}
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                      {[
+                        { 
+                          id: 'lejos' as const, 
+                          title: lang === 'es' ? '1. Visión Lejana' : '1. Distance Vision',
+                          desc: lang === 'es' ? 'Conducción, cine, paisajes y paseos' : 'Driving, TV, and outdoor walks',
+                        },
+                        { 
+                          id: 'intermedio' as const, 
+                          title: lang === 'es' ? '2. Zona Intermedia' : '2. Intermediate Zone',
+                          desc: lang === 'es' ? 'Computadora, cocina y tablero del auto' : 'Computer, cooking, and dashboard',
+                        },
+                        { 
+                          id: 'cerca' as const, 
+                          title: lang === 'es' ? '3. Visión Cercana' : '3. Near Reading',
+                          desc: lang === 'es' ? 'Lectura en celular, libros y documentos' : 'Smartphone, books, and fine print',
+                        },
+                      ].map((zone) => {
+                        const isSelected = progZone === zone.id;
+                        return (
+                          <button
+                            key={zone.id}
+                            onClick={() => setProgZone(zone.id)}
+                            className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                              isSelected
+                                ? 'bg-[rgb(122,24,35)]/5 border-[rgb(122,24,35)] ring-1 ring-[rgb(122,24,35)]'
+                                : 'bg-gray-50/70 border-gray-200/80 hover:bg-gray-50 hover:border-gray-300'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between mb-1">
+                              <span className={`text-[12.5px] font-bold ${isSelected ? 'text-[rgb(122,24,35)]' : 'text-[#14161B]'}`}>
+                                {zone.title}
+                              </span>
+                              <div className={`w-2 h-2 rounded-full ${isSelected ? 'bg-[rgb(122,24,35)]' : 'bg-gray-300'}`} />
+                            </div>
+                            <p className="text-[11px] text-[#555963] leading-snug">
+                              {zone.desc}
+                            </p>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Garantía Clínica de Adaptación */}
+                  <div className="mt-6 p-3.5 rounded-2xl bg-[#F8F9FB] border border-gray-200/80 flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-[12.5px] font-bold text-[#14161B]">
+                        {lang === 'es' ? 'Garantía de Adaptación de 30 Días' : '30-Day Adaptation Guarantee'}
+                      </p>
+                      <p className="text-[11.5px] text-[#555963]">
+                        {lang === 'es' 
+                          ? 'Calibradas con precisión milimétrica por el Dr. Fabio Mora para asegurar una adaptación natural y sin mareos.'
+                          : 'Precision-measured by Dr. Fabio Mora ensuring natural visual adaptation without dizziness.'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Botón CTA */}
+                <div className="mt-6 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-3">
+                  <a
+                    href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                      lang === 'es'
+                        ? '¡Hola Dr. Fabio Mora! Quisiera consultar por la cotización y prueba de lentes progresivas digitales.'
+                        : 'Hello Dr. Fabio Mora, I would like advice and pricing for digital progressive lenses.'
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>{lang === 'es' ? 'Consultar progresivos por WhatsApp' : 'Inquire progressives on WhatsApp'}</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Columna Derecha: Simulador Visual Interactivo del Lente */}
+              <div className="lg:col-span-5">
+                <div className="relative rounded-2xl bg-gradient-to-b from-[#14161B] to-[#1E2229] p-6 text-white border border-gray-800 shadow-xl overflow-hidden">
+                  {/* Etiqueta superior del simulador */}
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-gray-300 flex items-center gap-1.5">
+                      <Eye className="w-3.5 h-3.5 text-[rgb(180,40,55)]" />
+                      {lang === 'es' ? 'Simulador de Corredor Óptico' : 'Optical Corridor Simulator'}
+                    </span>
+                    <span className="text-[10px] font-bold bg-white/10 px-2 py-0.5 rounded-full text-white/80">
+                      FreeForm 3D
+                    </span>
+                  </div>
+
+                  {/* Silueta interactiva del cristal con 3 zonas */}
+                  <div className="relative w-full max-w-[260px] mx-auto aspect-[4/5] rounded-[38px] border-2 border-white/20 bg-white/5 backdrop-blur-xs flex flex-col overflow-hidden p-2 shadow-inner">
+                    {/* Zona 1: Lejos */}
+                    <button
+                      onClick={() => setProgZone('lejos')}
+                      className={`flex-1 rounded-2xl p-3 flex flex-col items-center justify-center transition-all cursor-pointer ${
+                        progZone === 'lejos'
+                          ? 'bg-[rgb(122,24,35)]/50 border border-[rgb(180,40,55)] shadow-md'
+                          : 'hover:bg-white/5 opacity-60 hover:opacity-90'
+                      }`}
+                    >
+                      <span className="text-[11px] font-bold tracking-wide uppercase">
+                        {lang === 'es' ? 'Zona de Lejos' : 'Distance Field'}
+                      </span>
+                      <span className="text-[9.5px] text-white/70">
+                        {lang === 'es' ? 'Manejo / Panorámica' : 'Driving / Distance'}
+                      </span>
+                    </button>
+
+                    {/* Zona 2: Intermedio */}
+                    <button
+                      onClick={() => setProgZone('intermedio')}
+                      className={`h-24 my-1.5 rounded-2xl p-2 flex flex-col items-center justify-center transition-all cursor-pointer ${
+                        progZone === 'intermedio'
+                          ? 'bg-[rgb(122,24,35)]/60 border border-[rgb(180,40,55)] shadow-md'
+                          : 'hover:bg-white/5 opacity-60 hover:opacity-90'
+                      }`}
+                    >
+                      <span className="text-[11px] font-bold tracking-wide uppercase">
+                        {lang === 'es' ? 'Corredor Intermedio' : 'Intermediate Corridor'}
+                      </span>
+                      <span className="text-[9.5px] text-white/70">
+                        {lang === 'es' ? 'Computadora / Pantallas' : 'Computer / Desk'}
+                      </span>
+                    </button>
+
+                    {/* Zona 3: Cerca */}
+                    <button
+                      onClick={() => setProgZone('cerca')}
+                      className={`flex-1 rounded-2xl p-3 flex flex-col items-center justify-center transition-all cursor-pointer ${
+                        progZone === 'cerca'
+                          ? 'bg-[rgb(122,24,35)]/50 border border-[rgb(180,40,55)] shadow-md'
+                          : 'hover:bg-white/5 opacity-60 hover:opacity-90'
+                      }`}
+                    >
+                      <span className="text-[11px] font-bold tracking-wide uppercase">
+                        {lang === 'es' ? 'Zona de Lectura' : 'Reading Field'}
+                      </span>
+                      <span className="text-[9.5px] text-white/70">
+                        {lang === 'es' ? 'Celular / Letra pequeña' : 'Smartphone / Books'}
+                      </span>
+                    </button>
+                  </div>
+
+                  {/* Detalle activo de la zona seleccionada */}
+                  <div className="mt-5 p-3 rounded-xl bg-white/10 border border-white/10 text-center">
+                    <p className="text-[12px] font-bold text-white">
+                      {progZone === 'lejos' && (lang === 'es' ? 'Enfoque nítido al infinito sin mover la cabeza' : 'Crisp infinity focus without head strain')}
+                      {progZone === 'intermedio' && (lang === 'es' ? 'Transición suave y descanso ergonómico en la oficina' : 'Smooth transition with ergonomic office posture')}
+                      {progZone === 'cerca' && (lang === 'es' ? 'Amplitud de campo para leer con total naturalidad' : 'Wide visual field for natural reading comfort')}
+                    </p>
+                    <p className="text-[10px] text-gray-300 mt-1">
+                      {lang === 'es' ? 'Tallado computarizado punto a punto que elimina distorsiones laterales' : 'Point-by-point digital surfacing removes swim distortion'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* CONTENIDO 2: TRANSITIONS */}
+          {activeTab === 'transitions' && (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+              {/* Columna Izquierda */}
+              <div className="lg:col-span-7 flex flex-col justify-between">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 h-6 px-3 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] font-bold uppercase tracking-wider mb-3">
+                    <Sun className="w-3.5 h-3.5" />
+                    <span>{lang === 'es' ? 'Protección Fotocromática Inteligente' : 'Smart Photochromic Defense'}</span>
+                  </div>
+
+                  <h3 className="text-[24px] sm:text-[28px] font-bold text-[#14161B] leading-tight">
+                    {lang === 'es' ? 'Lentes Fotosensibles Transitions®' : 'Transitions® Smart Light Lenses'}
+                  </h3>
+
+                  <p className="mt-3 text-[14px] sm:text-[15px] text-[#555963] leading-relaxed">
+                    {lang === 'es'
+                      ? 'La solución definitiva para quienes no quieren cambiar constantemente entre anteojos de sol y lentes graduados. En interiores se mantienen perfectamente transparentes y, al salir al sol, se oscurecen dinámicamente en segundos para protegerte del resplandor y la radiación UV.'
+                      : 'The all-in-one answer to switching between prescription glasses and sunglasses. Crystal-clear indoors, dynamically darkening outdoors in seconds for complete UV and glare protection.'}
+                  </p>
+
+                  {/* Beneficios clave estructurados */}
+                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="p-3.5 rounded-2xl bg-gray-50 border border-gray-200/80">
+                      <div className="flex items-center gap-2 text-[rgb(122,24,35)] mb-1">
+                        <CheckCircle2 className="w-4 h-4" />
+                        <span className="text-[12.5px] font-bold text-[#14161B]">100% Filtro UVA / UVB</span>
+                      </div>
+                      <p className="text-[11.5px] text-[#555963]">
+                        {lang === 'es' ? 'Bloqueo total contra radiación solar dañina para la retina.' : 'Full protection against harmful solar radiation.'}
+                      </p>
+                    </div>
+
+                    <div className="p-3.5 rounded-2xl bg-gray-50 border border-gray-200/80">
+                      <div className="flex items-center gap-2 text-[rgb(122,24,35)] mb-1">
+                        <CheckCircle2 className="w-4 h-4" />
+                        <span className="text-[12.5px] font-bold text-[#14161B]">Aclarado Rápido</span>
+                      </div>
+                      <p className="text-[11.5px] text-[#555963]">
+                        {lang === 'es' ? 'Vuelven a su estado claro casi al instante al entrar bajo techo.' : 'Returns to crystal clear swiftly upon stepping indoors.'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Selector interactivo de ambiente */}
+                  <div className="mt-6 p-4 rounded-2xl bg-[#F8F9FB] border border-gray-200/80">
+                    <p className="text-[12px] font-bold uppercase tracking-wider text-[#7C808B] mb-2.5">
+                      {lang === 'es' ? 'Probá el comportamiento de luz en el simulador:' : 'Test light behavior in the simulator:'}
+                    </p>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setTransMode('interior')}
+                        className={`flex-1 py-2.5 px-3 rounded-xl text-[12.5px] font-bold transition-all cursor-pointer ${
+                          transMode === 'interior'
+                            ? 'bg-[rgb(122,24,35)] text-white shadow-xs'
+                            : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-100'
+                        }`}
+                      >
+                        {lang === 'es' ? 'En Interiores (100% Claro)' : 'Indoors (100% Clear)'}
+                      </button>
+                      <button
+                        onClick={() => setTransMode('exterior')}
+                        className={`flex-1 py-2.5 px-3 rounded-xl text-[12.5px] font-bold transition-all cursor-pointer ${
+                          transMode === 'exterior'
+                            ? 'bg-[rgb(122,24,35)] text-white shadow-xs'
+                            : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-100'
+                        }`}
+                      >
+                        {lang === 'es' ? 'Bajo el Sol (Oscurecido)' : 'Outdoors (Darkened)'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Botón CTA */}
+                <div className="mt-6 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-3">
+                  <a
+                    href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                      lang === 'es'
+                        ? '¡Hola Dr. Fabio Mora! Quisiera consultar por cristales Transitions fotosensibles en Ópticas Popular.'
+                        : 'Hello Dr. Fabio Mora, I would like details about Transitions lenses.'
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>{lang === 'es' ? 'Consultar Transitions por WhatsApp' : 'Inquire Transitions on WhatsApp'}</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Columna Derecha: Simulador Visual Interactivo Transitions */}
+              <div className="lg:col-span-5">
+                <div className="relative rounded-2xl bg-gradient-to-b from-[#14161B] to-[#1E2229] p-6 text-white border border-gray-800 shadow-xl overflow-hidden text-center">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-gray-300 flex items-center gap-1.5">
+                      <Sun className="w-3.5 h-3.5 text-[rgb(180,40,55)]" />
+                      {lang === 'es' ? 'Simulador de Adaptación Solar' : 'Solar Adaptation Simulator'}
+                    </span>
+                    <span className="text-[10px] font-bold bg-white/10 px-2 py-0.5 rounded-full text-white/80">
+                      {transMode === 'interior' ? 'Filtro UV 0% (Claro)' : 'Filtro UV 100% (Activo)'}
+                    </span>
+                  </div>
+
+                  {/* Silueta del cristal con transición animada */}
+                  <div className="relative w-full max-w-[240px] mx-auto aspect-square rounded-full border-4 border-white/20 p-2 flex items-center justify-center overflow-hidden my-4 shadow-2xl">
+                    <motion.div
+                      animate={{
+                        backgroundColor: transMode === 'interior' ? 'rgba(255, 255, 255, 0.94)' : 'rgba(30, 30, 32, 0.92)',
+                        boxShadow: transMode === 'exterior' ? 'inset 0 0 40px rgba(0,0,0,0.85)' : 'inset 0 0 15px rgba(255,255,255,0.4)',
+                      }}
+                      transition={{ duration: 0.6 }}
+                      className="w-full h-full rounded-full flex flex-col items-center justify-center p-4 border border-white/30"
+                    >
+                      <motion.div
+                        animate={{ scale: transMode === 'exterior' ? 1.1 : 1 }}
+                        transition={{ duration: 0.4 }}
+                        className="mb-1"
+                      >
+                        <Sun className={`w-10 h-10 transition-colors ${transMode === 'exterior' ? 'text-[rgb(210,60,75)]' : 'text-gray-400'}`} />
+                      </motion.div>
+                      <span className={`text-[13px] font-bold transition-colors ${transMode === 'exterior' ? 'text-white' : 'text-gray-800'}`}>
+                        {transMode === 'interior' ? (lang === 'es' ? 'Cristal 100% Claro' : '100% Clear Lens') : (lang === 'es' ? 'Tinte Grafito Protector' : 'Graphite Dark Tint')}
+                      </span>
+                      <span className={`text-[10px] mt-0.5 transition-colors ${transMode === 'exterior' ? 'text-gray-300' : 'text-gray-500'}`}>
+                        {transMode === 'interior' ? (lang === 'es' ? 'Interior / Noche' : 'Indoor / Night') : (lang === 'es' ? 'Exterior bajo luz solar' : 'Outdoor under direct sun')}
+                      </span>
+                    </motion.div>
+                  </div>
+
+                  <p className="text-[12px] font-semibold text-gray-200 mt-2">
+                    {transMode === 'interior' 
+                      ? (lang === 'es' ? 'Visión nítida y cristalina en oficinas, hogar y conducción de noche.' : 'Clear vision in offices, home, and night driving.')
+                      : (lang === 'es' ? 'Máximo confort visual que elimina el encandilamiento en la calle.' : 'Zero glare with maximum eye relaxation outdoors.')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* CONTENIDO 3: LUZ AZUL */}
+          {activeTab === 'luz-azul' && (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+              {/* Columna Izquierda */}
+              <div className="lg:col-span-7 flex flex-col justify-between">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 h-6 px-3 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] font-bold uppercase tracking-wider mb-3">
+                    <Monitor className="w-3.5 h-3.5" />
+                    <span>{lang === 'es' ? 'Salud Visual en la Era Digital' : 'Digital Eye Health'}</span>
+                  </div>
+
+                  <h3 className="text-[24px] sm:text-[28px] font-bold text-[#14161B] leading-tight">
+                    {lang === 'es' ? 'Filtro de Luz Azul & Antirreflejo Multicapa' : 'Blue Light Filter & AR Shield'}
+                  </h3>
+
+                  <p className="mt-3 text-[14px] sm:text-[15px] text-[#555963] leading-relaxed">
+                    {lang === 'es'
+                      ? 'Monitores, tabletas y celulares emiten luz azul de alta energía que penetra hasta la retina, produciendo ojo seco, visión borrosa al final del día y alteraciones en el sueño. Nuestro tratamiento selectivo BlueBlock filtra esta longitud de onda sin distorsionar los colores.'
+                      : 'Screens emit high-energy blue-violet light causing digital eye strain, dryness, and insomnia. Our selective BlueBlock treatment filters harmful rays while keeping true color balance.'}
+                  </p>
+
+                  {/* Beneficios clave estructurados */}
+                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="p-3.5 rounded-2xl bg-gray-50 border border-gray-200/80">
+                      <div className="flex items-center gap-2 text-[rgb(122,24,35)] mb-1">
+                        <CheckCircle2 className="w-4 h-4" />
+                        <span className="text-[12.5px] font-bold text-[#14161B]">Descanso Ocular Inmediato</span>
+                      </div>
+                      <p className="text-[11.5px] text-[#555963]">
+                        {lang === 'es' ? 'Menor pesadez, lagrimeo y fatiga muscular tras horas de trabajo.' : 'Less dryness, redness, and end-of-day muscle tension.'}
+                      </p>
+                    </div>
+
+                    <div className="p-3.5 rounded-2xl bg-gray-50 border border-gray-200/80">
+                      <div className="flex items-center gap-2 text-[rgb(122,24,35)] mb-1">
+                        <CheckCircle2 className="w-4 h-4" />
+                        <span className="text-[12.5px] font-bold text-[#14161B]">Antirreflejo Hidrófobo</span>
+                      </div>
+                      <p className="text-[11.5px] text-[#555963]">
+                        {lang === 'es' ? 'Elimina destellos de luces artificiales y es fácil de limpiar.' : 'Eliminates glare from artificial lighting, easy to clean.'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Switch interactivo de prueba */}
+                  <div className="mt-6 p-4 rounded-2xl bg-[#F8F9FB] border border-gray-200/80">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-[12.5px] font-bold text-[#14161B]">
+                          {lang === 'es' ? 'Simular filtro en pantalla:' : 'Simulate screen filter:'}
+                        </p>
+                        <p className="text-[11.5px] text-[#555963]">
+                          {blueFilterOn ? (lang === 'es' ? 'Filtro protector activado (Descanso)' : 'Protective filter active (Comfort)') : (lang === 'es' ? 'Sin filtro (Resplandor directo)' : 'No filter (Harsh screen glare)')}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => setBlueFilterOn(!blueFilterOn)}
+                        className={`h-9 px-4 rounded-xl text-[12px] font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                          blueFilterOn
+                            ? 'bg-[rgb(122,24,35)] text-white shadow-xs'
+                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        }`}
+                      >
+                        <ShieldCheck className="w-3.5 h-3.5" />
+                        <span>{blueFilterOn ? (lang === 'es' ? 'Filtro ON' : 'Filter ON') : (lang === 'es' ? 'Filtro OFF' : 'Filter OFF')}</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Botón CTA */}
+                <div className="mt-6 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-3">
+                  <a
+                    href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                      lang === 'es'
+                        ? '¡Hola Dr. Fabio Mora! Quisiera consultar por cristales con filtro de luz azul y antirreflejo.'
+                        : 'Hello Dr. Fabio Mora, I would like advice on blue light and anti-reflective lenses.'
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>{lang === 'es' ? 'Consultar filtro azul por WhatsApp' : 'Inquire blue filter on WhatsApp'}</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Columna Derecha: Simulador Visual Interactivo Luz Azul */}
+              <div className="lg:col-span-5">
+                <div className="relative rounded-2xl bg-gradient-to-b from-[#14161B] to-[#1E2229] p-6 text-white border border-gray-800 shadow-xl overflow-hidden text-center">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-gray-300 flex items-center gap-1.5">
+                      <Monitor className="w-3.5 h-3.5 text-[rgb(180,40,55)]" />
+                      {lang === 'es' ? 'Simulador de Confort de Pantalla' : 'Screen Comfort Simulator'}
+                    </span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${blueFilterOn ? 'bg-white/20 text-white' : 'bg-red-500/20 text-red-200'}`}>
+                      {blueFilterOn ? (lang === 'es' ? 'Protegido' : 'Protected') : (lang === 'es' ? 'Fatiga Digital' : 'Eye Strain')}
+                    </span>
+                  </div>
+
+                  {/* Pantalla simulada */}
+                  <div className={`relative rounded-xl p-5 border transition-all duration-500 ${
+                    blueFilterOn 
+                      ? 'bg-white/10 border-white/20 shadow-lg' 
+                      : 'bg-white/5 border-gray-600 shadow-inner'
+                  }`}>
+                    <div className="w-full h-28 rounded-lg bg-[#0F1115] p-3 flex flex-col justify-between text-left border border-white/10">
+                      <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                        <div className="flex gap-1.5">
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-500" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-500" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-500" />
+                        </div>
+                        <span className="text-[10px] text-gray-400">workspace.doc</span>
+                      </div>
+                      <div>
+                        <div className={`h-2 rounded w-3/4 mb-1.5 transition-colors ${blueFilterOn ? 'bg-gray-300' : 'bg-gray-500'}`} />
+                        <div className={`h-2 rounded w-1/2 transition-colors ${blueFilterOn ? 'bg-gray-400' : 'bg-gray-600'}`} />
+                      </div>
+                    </div>
+
+                    <p className={`text-[12px] font-bold mt-4 transition-colors ${blueFilterOn ? 'text-white' : 'text-gray-400'}`}>
+                      {blueFilterOn 
+                        ? (lang === 'es' ? 'Contraste cálido y relajado: 0 ardor ocular' : 'Warm, relaxed contrast: 0 eye burning')
+                        : (lang === 'es' ? 'Resplandor frío y agresivo que causa fatiga' : 'Harsh cold glare causing eye fatigue')}
+                    </p>
+                  </div>
+
+                  <p className="text-[11px] text-gray-400 mt-3">
+                    {lang === 'es' ? 'Recomendado para teletrabajo, estudio y uso de celular por más de 3 horas al día.' : 'Recommended for remote work, studying, and screen usage > 3 hrs/day.'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function App() {
   const [lang, setLang] = useState<Language>(() => {
     try {
@@ -1899,194 +2475,8 @@ export default function App() {
                 </p>
               </div>
 
-              {/* 3 Tarjetas Visuales Elegantes y Claras */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-                {/* Tarjeta 1: Lentes Progresivas Digitales */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45 }}
-                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                  className="bg-white rounded-2xl p-7 sm:p-8 border border-gray-200/80 shadow-xs hover:shadow-xl hover:border-[rgb(122,24,35)]/30 transition-all duration-300 flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-3 mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center group-hover:scale-105 group-hover:bg-[rgb(122,24,35)] group-hover:text-white transition-all duration-300 shadow-2xs">
-                        <Glasses className="w-6 h-6" />
-                      </div>
-                      <span className="text-[10.5px] font-extrabold uppercase tracking-wider text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10 px-2.5 py-1 rounded-full">
-                        {lang === 'es' ? 'Cerca · Intermedio · Lejos' : 'Near · Mid · Far'}
-                      </span>
-                    </div>
-
-                    <h3 className="text-[20px] sm:text-[22px] font-bold text-[#14161B] mb-2 group-hover:text-[rgb(122,24,35)] transition-colors">
-                      {lang === 'es' ? 'Lentes Progresivas Digitales' : 'Digital Progressive Lenses'}
-                    </h3>
-
-                    <p className="text-[13.5px] sm:text-[14px] text-[#555963] leading-relaxed mb-5">
-                      {lang === 'es' 
-                        ? 'Diseñadas para presbicia o vista cansada. Reemplazan las bifocales tradicionales con una transición continua y sin líneas visibles.'
-                        : 'Engineered for presbyopia. Replaces traditional bifocals with smooth continuous progression and no visible lines.'}
-                    </p>
-
-                    <div className="space-y-2 pt-2 border-t border-gray-100">
-                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
-                        <span>{lang === 'es' ? 'Tallado digital FreeForm sin distorsión lateral' : 'FreeForm digital surfacing without lateral distortion'}</span>
-                      </div>
-                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
-                        <span>{lang === 'es' ? 'Lectura en celular y computadora sin mareos' : 'Phone & computer reading with effortless comfort'}</span>
-                      </div>
-                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
-                        <span>{lang === 'es' ? 'Adaptación guiada garantizada en consultorio' : 'Personalized fitting guidance in clinic'}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-7 pt-4 border-t border-gray-100">
-                    <a
-                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
-                        lang === 'es'
-                          ? '¡Hola Dr. Fabio Mora! Quisiera consultar por lentes progresivos digitales personalizados en Ópticas Popular.'
-                          : 'Hello Dr. Fabio Mora, I would like to inquire about customized progressive lenses at Opticas Popular.'
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-between w-full h-10 px-4 rounded-xl bg-gray-50 hover:bg-[rgb(122,24,35)] hover:text-white text-[rgb(122,24,35)] text-[12.5px] sm:text-[13px] font-bold transition-all duration-200 active:scale-95 group/btn"
-                    >
-                      <span>{lang === 'es' ? 'Consultar progresivos' : 'Inquire progressives'}</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
-                    </a>
-                  </div>
-                </motion.div>
-
-                {/* Tarjeta 2: Lentes Fotosensibles Transitions® */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: 0.1 }}
-                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                  className="bg-white rounded-2xl p-7 sm:p-8 border border-gray-200/80 shadow-xs hover:shadow-xl hover:border-[rgb(122,24,35)]/30 transition-all duration-300 flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-3 mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center group-hover:scale-105 group-hover:bg-[rgb(122,24,35)] group-hover:text-white transition-all duration-300 shadow-2xs">
-                        <Sun className="w-6 h-6" />
-                      </div>
-                      <span className="text-[10.5px] font-extrabold uppercase tracking-wider text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10 px-2.5 py-1 rounded-full">
-                        {lang === 'es' ? 'Fotocromático Inteligente' : 'Smart Photochromic'}
-                      </span>
-                    </div>
-
-                    <h3 className="text-[20px] sm:text-[22px] font-bold text-[#14161B] mb-2 group-hover:text-[rgb(122,24,35)] transition-colors">
-                      {lang === 'es' ? 'Lentes Fotosensibles Transitions®' : 'Transitions® Smart Lenses'}
-                    </h3>
-
-                    <p className="text-[13.5px] sm:text-[14px] text-[#555963] leading-relaxed mb-5">
-                      {lang === 'es' 
-                        ? 'Respuesta rápida ante la radiación solar. Claros en interiores y se oscurecen dinámicamente al aire libre para máxima protección.'
-                        : 'Fast response to UV radiation. Crystal-clear indoors and dynamically darkens outdoors for total eye comfort.'}
-                    </p>
-
-                    <div className="space-y-2 pt-2 border-t border-gray-100">
-                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
-                        <span>{lang === 'es' ? '100% de protección contra rayos UVA y UVB' : '100% defense against UVA & UVB solar radiation'}</span>
-                      </div>
-                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
-                        <span>{lang === 'es' ? 'Activación y aclarado rápido en pocos segundos' : 'Swift indoor fading and outdoor activation'}</span>
-                      </div>
-                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
-                        <span>{lang === 'es' ? 'Un solo par de anteojos para todo el día' : 'All-in-one comfort for indoor and outdoor life'}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-7 pt-4 border-t border-gray-100">
-                    <a
-                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
-                        lang === 'es'
-                          ? '¡Hola Dr. Fabio Mora! Deseo consultar sobre lentes Transitions fotosensibles en Ópticas Popular.'
-                          : 'Hello Dr. Fabio Mora, I would like information about Transitions lenses at Opticas Popular.'
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-between w-full h-10 px-4 rounded-xl bg-gray-50 hover:bg-[rgb(122,24,35)] hover:text-white text-[rgb(122,24,35)] text-[12.5px] sm:text-[13px] font-bold transition-all duration-200 active:scale-95 group/btn"
-                    >
-                      <span>{lang === 'es' ? 'Consultar Transitions' : 'Inquire Transitions'}</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
-                    </a>
-                  </div>
-                </motion.div>
-
-                {/* Tarjeta 3: Protección de Luz Azul & Antirreflejo */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: 0.2 }}
-                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                  className="bg-white rounded-2xl p-7 sm:p-8 border border-gray-200/80 shadow-xs hover:shadow-xl hover:border-[rgb(122,24,35)]/30 transition-all duration-300 flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-3 mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center group-hover:scale-105 group-hover:bg-[rgb(122,24,35)] group-hover:text-white transition-all duration-300 shadow-2xs">
-                        <Monitor className="w-6 h-6" />
-                      </div>
-                      <span className="text-[10.5px] font-extrabold uppercase tracking-wider text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10 px-2.5 py-1 rounded-full">
-                        {lang === 'es' ? 'Filtro Anti-Fatiga Digital' : 'Anti-Digital Fatigue'}
-                      </span>
-                    </div>
-
-                    <h3 className="text-[20px] sm:text-[22px] font-bold text-[#14161B] mb-2 group-hover:text-[rgb(122,24,35)] transition-colors">
-                      {lang === 'es' ? 'Protección de Luz Azul & Antirreflejo' : 'Blue Light Filter & AR Coating'}
-                    </h3>
-
-                    <p className="text-[13.5px] sm:text-[14px] text-[#555963] leading-relaxed mb-5">
-                      {lang === 'es' 
-                        ? 'Filtro selectivo contra la radiación azul-violeta de monitores, tabletas y celulares. Reduce el ardor ocular y mejora el descanso nocturno.'
-                        : 'Selective blocking of high-energy blue-violet rays from screens. Reduces ocular burning, headaches, and sleep disruption.'}
-                    </p>
-
-                    <div className="space-y-2 pt-2 border-t border-gray-100">
-                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
-                        <span>{lang === 'es' ? 'Menor pesadez, ojo rojo y fatiga al final del día' : 'Less eye strain, redness, and end-of-day fatigue'}</span>
-                      </div>
-                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
-                        <span>{lang === 'es' ? 'Tratamiento antirreflejo de máxima transparencia' : 'Crystal-clear multi-layer anti-reflective coating'}</span>
-                      </div>
-                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
-                        <span>{lang === 'es' ? 'Ideal para teletrabajo, estudio y conducción nocturna' : 'Ideal for remote work, study, and nighttime driving'}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-7 pt-4 border-t border-gray-100">
-                    <a
-                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
-                        lang === 'es'
-                          ? '¡Hola Dr. Fabio Mora! Quisiera consultar por cristales con filtro de luz azul y antirreflejo.'
-                          : 'Hello Dr. Fabio Mora, I would like advice on blue light and anti-reflective lenses.'
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-between w-full h-10 px-4 rounded-xl bg-gray-50 hover:bg-[rgb(122,24,35)] hover:text-white text-[rgb(122,24,35)] text-[12.5px] sm:text-[13px] font-bold transition-all duration-200 active:scale-95 group/btn"
-                    >
-                      <span>{lang === 'es' ? 'Consultar filtro azul' : 'Inquire blue filter'}</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
-                    </a>
-                  </div>
-                </motion.div>
-              </div>
+              {/* Presentación Dinámica e Interactiva de Innovación en Cristales */}
+              <LensTechnologyShowcase lang={lang} />
             </div>
           </section>
 
