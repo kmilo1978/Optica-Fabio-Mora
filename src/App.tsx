@@ -2993,12 +2993,7 @@ export default function App() {
             </div>
           </section>
 
-          {/* Sección de Lentes de Contacto (Carrusel Dinámico Moderno) */}
-          <section id="lentes-contacto" className="w-full py-10 md:py-16 bg-white border-b border-gray-100">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <ContactLensCarouselBanner lang={lang} />
-            </div>
-          </section>
+
 
           {/* Gallery */}
           <section id="galeria" className="w-full py-14 md:py-20 bg-slate-50/60 border-y border-gray-100">
@@ -3596,110 +3591,10 @@ export default function App() {
             </div>
           </section>
 
-          {/* Contact Section - Editorial Invitation to Dedicated Contact Page */}
-          <section id="contacto" className="w-full py-12 md:py-16 bg-[#FAFAFC] border-t border-gray-100 pb-20 md:pb-24">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="relative overflow-hidden rounded-3xl bg-white p-7 sm:p-10 md:p-12 shadow-sm border border-gray-200/80"
-              >
-                {/* Subtle refined accent bar on top */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[rgb(122,24,35)] via-[rgb(180,40,55)] to-[rgb(122,24,35)]" />
-
-                <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
-                  <div className="lg:col-span-7">
-                    <span className="inline-flex items-center gap-1.5 h-7 px-3.5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] sm:text-[12px] font-bold uppercase tracking-wider mb-4">
-                      <MapPin className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
-                      <span>{lang === 'es' ? 'Sede Plaza Higuerones' : 'Plaza Higuerones Clinic'}</span>
-                    </span>
-
-                    <h2 className="text-[26px] sm:text-[32px] md:text-[36px] font-bold text-[#15171C] tracking-tight leading-[1.2]">
-                      {lang === 'es' ? (
-                        <>No te quedés sin <span className="text-[rgb(122,24,35)]">tu cita</span> ni tu valoración visual</>
-                      ) : (
-                        <>Do not miss your <span className="text-[rgb(122,24,35)]">visual appointment</span> with us</>
-                      )}
-                    </h2>
-
-                    <p className="mt-3 text-[14px] sm:text-[15px] text-[#555963] leading-[1.65] max-w-xl">
-                      {lang === 'es' 
-                        ? 'Visitanos en San Rafael Abajo de Desamparados. Accedé a nuestra página dedicada de Contacto con mapa interactivo en pantalla completa, rutas en Waze, horarios y canales directos.'
-                        : 'Visit us in San Rafael Abajo, Desamparados. Access our dedicated Contact page with full-screen interactive maps, Waze navigation, hours, and direct channels.'}
-                    </p>
-
-                    <div className="mt-7 flex flex-wrap items-center gap-3">
-                      <button
-                        onClick={() => {
-                          setCurrentView('contacto');
-                          window.location.hash = '#contacto';
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }}
-                        className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer group"
-                      >
-                        <MapPin className="w-4 h-4 text-white !text-white group-hover:scale-110 transition-transform" />
-                        <span className="text-white !text-white">{lang === 'es' ? 'Ver Ubicación, Horarios y Waze' : 'View Location, Hours & Waze'}</span>
-                        <ArrowRight className="w-4 h-4 ml-0.5 text-white !text-white group-hover:translate-x-1 transition-transform" />
-                      </button>
-
-                      <a
-                        href="https://waze.com/ul?ll=9.8910441,-84.081993&navigate=yes"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[#1E232A] hover:bg-[#15171C] text-white !text-white border border-gray-700 text-[13px] sm:text-[14px] font-bold shadow-md transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
-                      >
-                        <Navigation className="w-4 h-4 text-white !text-white" />
-                        <span>{lang === 'es' ? 'Ruta Waze' : 'Waze Route'}</span>
-                      </a>
-
-                      <a
-                        href="https://wa.me/50672760215"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#128C7E] border border-[#25D366]/30 text-[13px] sm:text-[14px] font-bold shadow-2xs transition-all duration-200 active:scale-95"
-                      >
-                        <MessageCircle className="w-4 h-4 text-[#25D366]" />
-                        <span>WhatsApp</span>
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="lg:col-span-5">
-                    <div className="bg-[#F8F9FB] rounded-2xl p-6 border border-gray-200/80 shadow-xs space-y-4">
-                      <div className="flex items-center gap-3.5">
-                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/10 flex items-center justify-center text-[rgb(122,24,35)] shrink-0 shadow-2xs">
-                          <Clock className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <p className="text-[11px] font-bold text-[#7C808B] uppercase tracking-wider">{lang === 'es' ? 'Horario de Atención' : 'Working Hours'}</p>
-                          <p className="text-[13.5px] font-bold text-[#15171C]">{lang === 'es' ? 'Lunes a Sábado bajo cita' : 'Mon to Sat by appointment'}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-3.5">
-                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/10 flex items-center justify-center text-[rgb(122,24,35)] shrink-0 shadow-2xs">
-                          <Phone className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <p className="text-[11px] font-bold text-[#7C808B] uppercase tracking-wider">{lang === 'es' ? 'Teléfonos Directos' : 'Direct Phone'}</p>
-                          <p className="text-[13.5px] font-bold text-[#15171C]">+506 2515-0002 / +506 7276-0215</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-3.5">
-                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/10 flex items-center justify-center text-[rgb(122,24,35)] shrink-0 shadow-2xs">
-                          <ShieldCheck className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <p className="text-[11px] font-bold text-[#7C808B] uppercase tracking-wider">{lang === 'es' ? 'Facilidades' : 'Amenities'}</p>
-                          <p className="text-[13.5px] font-bold text-[#15171C]">{lang === 'es' ? 'SINPE Móvil, Tarjetas y Parqueo' : 'SINPE Móvil, Cards & Free Parking'}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+          {/* Banner Tipo Carrusel Dinámico en Sección de Contacto */}
+          <section id="contacto" className="w-full py-10 md:py-16 bg-[#FAFAFC] border-t border-gray-100 pb-20 md:pb-24">
+            <div id="lentes-contacto" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <ContactLensCarouselBanner lang={lang} />
             </div>
           </section>
           </main>
