@@ -312,8 +312,8 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
                   rel="noopener noreferrer"
                   className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white font-bold text-[12.5px] transition-all shadow-sm hover:shadow active:scale-98"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>{t.footer.whatsappLabel}: 7276-0215</span>
+                  <MessageCircle className="w-4 h-4 text-white !text-white" />
+                  <span className="text-white !text-white">{t.footer.whatsappLabel}: 7276-0215</span>
                 </a>
                 <a
                   href="tel:+50672760215"

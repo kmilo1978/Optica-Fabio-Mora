@@ -309,8 +309,8 @@ export default function ContactoPage({ onBack, lang = 'es', onNavigate }: Contac
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 h-13 px-6 rounded-2xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer btn-shimmer"
                   >
-                    <MessageCircle className="w-4.5 h-4.5" />
-                    <span>{isEn ? 'Book Appointment via WhatsApp' : 'Agendar Cita por WhatsApp'}</span>
+                    <MessageCircle className="w-4.5 h-4.5 text-white !text-white" />
+                    <span className="text-white !text-white">{isEn ? 'Book Appointment via WhatsApp' : 'Agendar Cita por WhatsApp'}</span>
                   </a>
                 </div>
               </div>

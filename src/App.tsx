@@ -632,9 +632,9 @@ function VisualAccessibilityWidget({ lang }: { lang: Language }) {
           disabled={zoomLevel >= 130}
           aria-label={lang === 'es' ? 'Aumentar tamaño de letra y pantalla' : 'Increase text and screen size'}
           title={lang === 'es' ? 'Aumentar tamaño (+) hasta 130%' : 'Zoom in (+) up to 130%'}
-          className="w-8 h-8 rounded-xl bg-gray-50 hover:bg-[rgb(122,24,35)] hover:text-white text-gray-700 flex items-center justify-center font-bold transition-all duration-200 active:scale-90 disabled:opacity-25 disabled:pointer-events-none cursor-pointer shadow-xs"
+          className="w-8 h-8 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white flex items-center justify-center font-bold transition-all duration-200 active:scale-90 disabled:opacity-30 disabled:pointer-events-none cursor-pointer shadow-xs btn-shimmer"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-4 h-4 text-white !text-white" />
         </button>
 
         {/* Indicador de porcentaje actual */}
@@ -653,9 +653,9 @@ function VisualAccessibilityWidget({ lang }: { lang: Language }) {
           disabled={zoomLevel <= 90}
           aria-label={lang === 'es' ? 'Disminuir tamaño de letra y pantalla' : 'Decrease text and screen size'}
           title={lang === 'es' ? 'Disminuir tamaño (-) hasta 90%' : 'Zoom out (-) down to 90%'}
-          className="w-8 h-8 rounded-xl bg-gray-50 hover:bg-[rgb(122,24,35)] hover:text-white text-gray-700 flex items-center justify-center font-bold transition-all duration-200 active:scale-90 disabled:opacity-25 disabled:pointer-events-none cursor-pointer shadow-xs"
+          className="w-8 h-8 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white flex items-center justify-center font-bold transition-all duration-200 active:scale-90 disabled:opacity-30 disabled:pointer-events-none cursor-pointer shadow-xs btn-shimmer"
         >
-          <Minus className="w-4 h-4" />
+          <Minus className="w-4 h-4 text-white !text-white" />
         </button>
       </div>
 
@@ -2307,8 +2307,8 @@ export default function App() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[12px] font-bold shadow-md active:scale-95 transition-all duration-200 cursor-pointer btn-shimmer"
                         >
-                          <MessageCircle className="w-4 h-4" />
-                          <span>WhatsApp</span>
+                          <MessageCircle className="w-4 h-4 text-white !text-white" />
+                          <span className="text-white !text-white">WhatsApp</span>
                         </a>
                       </div>
                     </div>
@@ -2384,7 +2384,7 @@ export default function App() {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-xl bg-[rgb(122,24,35)] text-white text-[14px] font-bold cta-primary btn-shimmer w-full sm:w-auto"
+                      className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[14px] font-bold cta-primary btn-shimmer w-full sm:w-auto"
                     >
                       <MessageCircle className="w-4 h-4" />
                       <span>{lang === 'es' ? 'Agendar por WhatsApp' : 'Book via WhatsApp'}</span>
@@ -3029,8 +3029,8 @@ export default function App() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold whitespace-nowrap shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer shrink-0 self-start md:self-center btn-shimmer"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>{lang === 'es' ? 'Agendar valoración' : 'Book appointment'}</span>
+                  <MessageCircle className="w-4 h-4 text-white !text-white" />
+                  <span className="text-white !text-white">{lang === 'es' ? 'Agendar valoración' : 'Book appointment'}</span>
                 </a>
               </div>
 
@@ -3457,8 +3457,8 @@ export default function App() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13.5px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
                     >
-                      <MessageCircle className="w-4 h-4" />
-                      <span>{lang === 'es' ? 'Agendá cita con el Dr. Mora' : 'Book with Dr. Mora'}</span>
+                      <MessageCircle className="w-4 h-4 text-white !text-white" />
+                      <span className="text-white !text-white">{lang === 'es' ? 'Agendá cita con el Dr. Mora' : 'Book with Dr. Mora'}</span>
                     </a>
 
                     <a 
@@ -3503,8 +3503,8 @@ export default function App() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold whitespace-nowrap shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer shrink-0 self-start lg:self-center btn-shimmer"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>{lang === 'es' ? 'Agendá por WhatsApp' : 'Book via WhatsApp'}</span>
+                <MessageCircle className="w-4 h-4 text-white !text-white" />
+                <span className="text-white !text-white">{lang === 'es' ? 'Agendá por WhatsApp' : 'Book via WhatsApp'}</span>
               </a>
             </motion.div>
             </div>
@@ -3638,9 +3638,9 @@ export default function App() {
                         }}
                         className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer group"
                       >
-                        <MapPin className="w-4 h-4 text-white/90 group-hover:scale-110 transition-transform" />
-                        <span>{lang === 'es' ? 'Ver Ubicación, Horarios y Waze' : 'View Location, Hours & Waze'}</span>
-                        <ArrowRight className="w-4 h-4 ml-0.5 group-hover:translate-x-1 transition-transform" />
+                        <MapPin className="w-4 h-4 text-white !text-white group-hover:scale-110 transition-transform" />
+                        <span className="text-white !text-white">{lang === 'es' ? 'Ver Ubicación, Horarios y Waze' : 'View Location, Hours & Waze'}</span>
+                        <ArrowRight className="w-4 h-4 ml-0.5 text-white !text-white group-hover:translate-x-1 transition-transform" />
                       </button>
 
                       <a
@@ -3739,11 +3739,11 @@ export default function App() {
             <div className="grid grid-cols-12 gap-2 max-w-[460px] mx-auto items-center">
               <button
                 onClick={() => setIsMenuOpen(true)}
-                className="col-span-3 inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] font-bold active:scale-95 transition-all border border-[rgb(122,24,35)]/20 shadow-2xs hover:bg-[rgb(122,24,35)]/20 cursor-pointer"
+                className="col-span-3 inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[11px] font-bold active:scale-95 transition-all shadow-md btn-shimmer cursor-pointer"
                 aria-label="Abrir Menú de Navegación"
               >
-                <Menu className="w-4 h-4 text-[rgb(122,24,35)] mb-0.5" />
-                <span className="font-extrabold">Menú</span>
+                <Menu className="w-4 h-4 text-white !text-white mb-0.5" />
+                <span className="font-extrabold text-white !text-white">Menú</span>
               </button>
               
               <a
@@ -3768,8 +3768,8 @@ export default function App() {
                 className="col-span-5 inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[12px] font-bold active:scale-95 transition-all duration-200 shadow-md btn-shimmer cursor-pointer"
                 aria-label="Agendar cita por WhatsApp"
               >
-                <MessageCircle className="w-4 h-4 shrink-0" />
-                <span>WhatsApp</span>
+                <MessageCircle className="w-4 h-4 shrink-0 text-white !text-white" />
+                <span className="text-white !text-white">WhatsApp</span>
               </a>
             </div>
           </nav>
@@ -4016,8 +4016,8 @@ export default function App() {
                         )}`}
                         className="w-full inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 btn-shimmer"
                       >
-                        <MessageCircle className="w-4 h-4" />
-                        <span>Agendar examen con el Dr. Fabio Mora</span>
+                        <MessageCircle className="w-4 h-4 text-white !text-white" />
+                        <span className="text-white !text-white">Agendar examen con el Dr. Fabio Mora</span>
                       </a>
 
                       <div className="flex items-center justify-between pt-1">

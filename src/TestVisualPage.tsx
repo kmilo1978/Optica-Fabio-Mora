@@ -446,8 +446,8 @@ Me gustaría que me asesoren o coordinar una cita de valoración en consultorio 
                     onClick={handleStartFromIntro}
                     className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer btn-shimmer"
                   >
-                    <span>{isEn ? 'Start Screening' : 'Comenzar Evaluación'}</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
+                    <span className="text-white !text-white">{isEn ? 'Start Screening' : 'Comenzar Evaluación'}</span>
+                    <ArrowRight className="w-4 h-4 ml-1 text-white !text-white" />
                   </button>
 
                   <span className="text-[12px] text-gray-500 font-medium hidden sm:inline">
@@ -972,8 +972,8 @@ Me gustaría que me asesoren o coordinar una cita de valoración en consultorio 
                       onClick={handleNextStep}
                       className="inline-flex items-center gap-2 h-11 px-7 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] font-bold shadow-md transition-all cursor-pointer"
                     >
-                      <span>{activeStep === 5 ? (isEn ? 'See Results' : 'Ver Resultados') : (isEn ? 'Next Test' : 'Siguiente')}</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <span className="text-white !text-white">{activeStep === 5 ? (isEn ? 'See Results' : 'Ver Resultados') : (isEn ? 'Next Test' : 'Siguiente')}</span>
+                      <ArrowRight className="w-4 h-4 text-white !text-white" />
                     </button>
                   )}
                 </div>
