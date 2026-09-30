@@ -1536,6 +1536,39 @@ export default function App() {
 
   const [currentView, setCurrentView] = useState<'home' | 'calificar' | 'consulta' | 'test-visual' | 'contacto' | 'tecnologia-cristales'>('home');
 
+  // Carrusel dinámico del Hero con imágenes clínicas (adultos, niños y adultos mayores)
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const [isHeroPaused, setIsHeroPaused] = useState(false);
+
+  const heroSlides = [
+    {
+      id: 0,
+      src: '/images/hero-examen-hombre-adulto.jpg',
+      alt: lang === 'es' ? 'Examen visual profesional en adultos con lámpara de hendidura' : 'Adult comprehensive eye examination with slit lamp',
+      label: lang === 'es' ? 'Adultos · Evaluación y confort' : 'Adults · Visual comfort'
+    },
+    {
+      id: 1,
+      src: '/images/hero-examen-nino.jpg',
+      alt: lang === 'es' ? 'Salud visual y examen pediátrico infantil' : 'Pediatric eye exam and vision health',
+      label: lang === 'es' ? 'Niños · Salud visual infantil' : 'Children · Pediatric care'
+    },
+    {
+      id: 2,
+      src: '/images/hero-examen-mujer-mayor.jpg',
+      alt: lang === 'es' ? 'Examen óptico integral y preventivo en adultos mayores' : 'Comprehensive eye exam and preventive health in seniors',
+      label: lang === 'es' ? 'Adultos mayores · Cuidado preventivo' : 'Seniors · Preventive health'
+    }
+  ];
+
+  useEffect(() => {
+    if (isHeroPaused) return;
+    const interval = setInterval(() => {
+      setActiveHeroSlide((prev) => (prev + 1) % 3);
+    }, 6500);
+    return () => clearInterval(interval);
+  }, [isHeroPaused]);
+
   useEffect(() => {
     const handleHash = () => {
       const h = window.location.hash;
@@ -2309,21 +2342,59 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative overflow-hidden rounded-[14px] min-h-[500px] md:min-h-[600px] bg-gray-200"
+              onMouseEnter={() => setIsHeroPaused(true)}
+              onMouseLeave={() => setIsHeroPaused(false)}
+              className="relative overflow-hidden rounded-[14px] min-h-[500px] md:min-h-[600px] bg-slate-100 group"
             >
-              {/* Background Image */}
-                <div className="absolute inset-0 z-0 overflow-hidden">
-                  <motion.img 
-                    initial={{ filter: 'blur(8px)', scale: 1.06 }}
-                    animate={{ filter: 'blur(0px)', scale: 1 }}
-                    transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
-                    src="https://content.pancake.vn/web-media-262/5c/03/26/a7/7e1e233b9f04b56292c21db5debf9fc7fe2a4f04ec99bf461b126061-w:1200-h:618-l:28899-t:image/jpeg.jpeg" 
-                    alt="Examen visual profesional con tecnología avanzada" 
-                    className="w-full h-full object-cover object-right md:object-center"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/98 via-white/90 to-transparent md:bg-gradient-to-r md:from-white/95 md:via-white/75 md:to-transparent"></div>
+              {/* Carrusel de Imágenes de Exámenes Clínicos con Entrada Lenta y Difuminado */}
+              <div className="absolute inset-0 z-0 overflow-hidden">
+                {heroSlides.map((slide, idx) => {
+                  const isActive = activeHeroSlide === idx;
+                  return (
+                    <div
+                      key={slide.id}
+                      className={`absolute inset-0 transition-opacity duration-[2200ms] ease-in-out ${
+                        isActive ? 'opacity-100 z-1' : 'opacity-0 z-0 pointer-events-none'
+                      }`}
+                    >
+                      <img 
+                        src={slide.src} 
+                        alt={slide.alt}
+                        className={`w-full h-full object-cover object-right md:object-center transition-transform duration-[8000ms] ease-out ${
+                          isActive ? 'scale-105' : 'scale-100'
+                        }`}
+                        loading={idx === 0 ? 'eager' : 'lazy'}
+                      />
+                    </div>
+                  );
+                })}
+
+                {/* Difuminado y gradiente de protección para máxima legibilidad idéntico al original */}
+                <div className="absolute inset-0 bg-gradient-to-r from-white/98 via-white/90 to-transparent md:bg-gradient-to-r md:from-white/95 md:via-white/75 md:to-transparent z-2 pointer-events-none" />
+
+                {/* Micro indicador flotante de diapositiva en esquina inferior derecha */}
+                <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex items-center gap-2 bg-black/45 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 shadow-md">
+                  <span className="text-[11px] font-semibold text-white/90 hidden sm:inline">
+                    {heroSlides[activeHeroSlide].label}
+                  </span>
+                  <span className="text-[11px] font-bold text-white/40 hidden sm:inline">·</span>
+                  <div className="flex items-center gap-1.5">
+                    {heroSlides.map((slide, idx) => {
+                      const isActive = activeHeroSlide === idx;
+                      return (
+                        <button
+                          key={slide.id}
+                          onClick={() => setActiveHeroSlide(idx)}
+                          aria-label={`Ver foto de ${slide.label}`}
+                          className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${
+                            isActive ? 'w-6 bg-white shadow-xs' : 'w-2 bg-white/40 hover:bg-white/70'
+                          }`}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
+              </div>
 
                 <div className="grid md:grid-cols-[1.1fr_0.9fr] h-full relative z-10">
                   <div className="px-5 sm:px-8 md:px-10 py-8 md:py-10 flex flex-col justify-center items-center md:items-start text-center md:text-left">
