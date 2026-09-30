@@ -671,6 +671,18 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Bloquear el scroll de fondo cuando el menú móvil hamburguesa esté abierto
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
   if (currentView === 'calificar') {
     return (
       <CalificarPage 
@@ -1048,41 +1060,44 @@ export default function App() {
                   <span>{lang === 'es' ? 'Agendar' : 'Book Exam'}</span>
                 </a>
 
-                {/* Botón Menú Hamburguesa para Móviles */}
+                {/* Botón Menú Hamburguesa para Móviles - Destacado y Visual */}
                 <button
                   onClick={() => setIsMenuOpen(true)}
                   aria-label="Abrir menú de navegación"
-                  className="lg:hidden inline-flex items-center gap-2 h-10 px-3.5 rounded-xl bg-white border border-[#E3E5EC] text-[#15171C] font-semibold text-[12px] shadow-sm hover:border-[rgb(122,24,35)] active:scale-95 transition-all"
+                  className="lg:hidden inline-flex items-center gap-2 h-10 px-3 rounded-xl bg-white border-2 border-[rgb(122,24,35)]/20 text-[#15171C] font-bold text-[12px] shadow-2xs hover:border-[rgb(122,24,35)] hover:bg-[rgb(122,24,35)]/5 active:scale-95 transition-all cursor-pointer shrink-0"
                 >
-                  <Menu className="w-5 h-5 text-[rgb(122,24,35)]" />
-                  <span className="text-[11px] font-bold tracking-wider uppercase">Menú</span>
+                  <div className="w-6 h-6 rounded-lg bg-[rgb(122,24,35)] text-white flex items-center justify-center shadow-xs">
+                    <Menu className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="text-[11.5px] font-bold tracking-wider uppercase text-[rgb(122,24,35)]">Menú</span>
                 </button>
               </div>
             </div>
+          </header>
 
-            {/* Menú Lateral Deslizante tipo Hamburguesa (Mobile Drawer) */}
-            <AnimatePresence>
-              {isMenuOpen && (
-                <div className="fixed inset-0 z-[9999] flex justify-end">
-                  {/* Fondo oscuro translúcido con cierre al tocar */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="fixed inset-0 bg-black/60 backdrop-blur-xs"
-                    aria-hidden="true"
-                  />
+          {/* Menú Lateral Deslizante tipo Hamburguesa (Mobile Drawer) */}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <div className="fixed inset-0 z-[99999] flex justify-end">
+                {/* Fondo oscuro translúcido con cierre al tocar */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="fixed inset-0 bg-black/60 backdrop-blur-xs"
+                  aria-hidden="true"
+                />
 
-                  {/* Panel Drawer lateral deslizable */}
-                  <motion.div
-                    initial={{ x: '100%' }}
-                    animate={{ x: 0 }}
-                    exit={{ x: '100%' }}
-                    transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-                    className="relative z-10 w-full max-w-[340px] sm:max-w-[380px] h-full bg-white shadow-2xl flex flex-col justify-between overflow-hidden"
-                  >
+                {/* Panel Drawer lateral deslizable */}
+                <motion.div
+                  initial={{ x: '100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '100%' }}
+                  transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+                  className="relative z-10 w-full max-w-[340px] sm:max-w-[380px] h-[100dvh] max-h-[100dvh] bg-white shadow-2xl flex flex-col justify-between overflow-hidden"
+                >
                     {/* Encabezado del Menú Hamburguesa */}
                     <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-[#F8F9FB]">
                       <div className="flex items-center gap-3">
@@ -1099,6 +1114,21 @@ export default function App() {
                       >
                         <X size={20} />
                       </button>
+                    </div>
+
+                    {/* Subtítulo Clínico y Ubicación de Alta Confianza */}
+                    <div className="px-5 py-2.5 bg-gradient-to-r from-[rgb(122,24,35)]/10 via-[rgb(122,24,35)]/5 to-transparent border-b border-gray-100 flex items-center justify-between">
+                      <div className="text-left">
+                        <p className="text-[12px] font-bold text-[rgb(122,24,35)] leading-tight">
+                          Dr. Fabio Mora Medina
+                        </p>
+                        <p className="text-[10px] text-gray-500">
+                          {lang === 'es' ? 'Plaza Higuerones · 11 años de trayectoria' : 'Plaza Higuerones · 11 years of trust'}
+                        </p>
+                      </div>
+                      <span className="text-[9.5px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[rgb(122,24,35)] text-white shadow-2xs">
+                        {lang === 'es' ? 'Local 23' : 'Suite 23'}
+                      </span>
                     </div>
 
                     {/* Contenido con Scroll de Categorías y Subcategorías */}
@@ -1307,7 +1337,6 @@ export default function App() {
                 </div>
               )}
             </AnimatePresence>
-          </header>
 
           <main id="main-content" role="main">
           {/* Hero Section */}
@@ -2862,11 +2891,11 @@ export default function App() {
             <div className="grid grid-cols-12 gap-2 max-w-[460px] mx-auto items-center">
               <button
                 onClick={() => setIsMenuOpen(true)}
-                className="col-span-3 inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[#F4F5F8] text-[#15171C] text-[11px] font-bold active:scale-95 transition-all border border-gray-200/60"
-                aria-label="Abrir Menú"
+                className="col-span-3 inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] font-bold active:scale-95 transition-all border border-[rgb(122,24,35)]/20 shadow-2xs hover:bg-[rgb(122,24,35)]/20 cursor-pointer"
+                aria-label="Abrir Menú de Navegación"
               >
                 <Menu className="w-4 h-4 text-[rgb(122,24,35)] mb-0.5" />
-                <span>Menú</span>
+                <span className="font-extrabold">Menú</span>
               </button>
               
               <a
