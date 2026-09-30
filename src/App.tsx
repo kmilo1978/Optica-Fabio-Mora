@@ -1261,8 +1261,8 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
       description: lang === 'es'
         ? 'Fabricados en hidrogel de silicona de última generación con ultra oxigenación corneal. Disfrutá de una visión cristalina, ojos frescos y confort total desde la mañana hasta la noche.'
         : 'Engineered with premium breathable silicone hydrogel. Enjoy razor-sharp clarity, moisturized eyes, and all-day comfort without bulky eyeglass frames.',
-      image: '/images/lentes-contacto-modelo-1.jpg',
-      imageAlt: lang === 'es' ? 'Mujer sonriente con lente de contacto en la yema del dedo' : 'Smiling woman with contact lens on fingertip',
+      image: '/images/optica-lentes-contacto-1.jpg',
+      imageAlt: lang === 'es' ? 'Optometrista guiando a paciente en prueba de lentes de contacto en óptica' : 'Optometrist guiding patient with contact lens trial in optical clinic',
       pills: lang === 'es' 
         ? ['100% Respirables', 'Desechables o Mensuales', 'Sensación Ojo Desnudo']
         : ['100% Breathable', 'Daily or Monthly', 'Natural Bare-Eye Feel'],
@@ -1280,8 +1280,8 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
       description: lang === 'es'
         ? '¿Pensabas que con astigmatismo o vista cansada no podías usar lentes de contacto? Los nuevos diseños se estabilizan con cada parpadeo para darte enfoque perfecto de lejos, intermedio y cerca.'
         : 'Thought astigmatism or reading blur prevented you from wearing contacts? Modern stabilization technology locks focus sharp at all distances with zero rotational drift.',
-      image: '/images/lentes-contacto-modelo-2.jpg',
-      imageAlt: lang === 'es' ? 'Hombre joven sonriente con lente de contacto' : 'Young man smiling with contact lens',
+      image: '/images/optica-lentes-contacto-2.jpg',
+      imageAlt: lang === 'es' ? 'Examen visual con lámpara de hendidura y forópter en clínica óptica' : 'Slit lamp and phoropter eye examination in optometry clinic',
       pills: lang === 'es'
         ? ['Estabilidad al Parpadear', 'Enfoque Multifocal Continuo', 'Calibración Digital']
         : ['Blink-Stabilized', 'Seamless Multifocal', 'Digital Precision'],
@@ -1299,8 +1299,8 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
       description: lang === 'es'
         ? 'El Dr. Fabio Mora evalúa la curvatura corneal y calidad lagrimal de tus ojos. Te acompañamos paso a paso para que aprendas a colocarlos y retirarlos con total seguridad y sin temor.'
         : 'Dr. Fabio Mora evaluates your corneal topography and tear film health, patiently guiding you through hygienic insertion and removal for zero-stress wear.',
-      image: '/images/lentes-contacto-modelo-3.jpg',
-      imageAlt: lang === 'es' ? 'Consulta clínica de contactología con el Dr. Fabio Mora' : 'Clinical contact lens fitting consultation',
+      image: '/images/optica-lentes-contacto-3.jpg',
+      imageAlt: lang === 'es' ? 'Asesoría de contactología en mostrador de boutique óptica' : 'Contact lens consultation at optical dispensary counter',
       pills: lang === 'es'
         ? ['Topografía Corneal', 'Acompañamiento Paciente', 'Garantía de Adaptación']
         : ['Corneal Mapping', 'Gentle Step-by-Step Trial', 'Adaptation Guarantee'],
