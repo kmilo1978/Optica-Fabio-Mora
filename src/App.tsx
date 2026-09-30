@@ -40,7 +40,9 @@ import {
   BookOpen,
   Monitor,
   Globe,
-  ArrowRight
+  ArrowRight,
+  Plus,
+  Minus
 } from 'lucide-react';
 import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring } from 'motion/react';
 import { useRef } from 'react';
@@ -557,6 +559,115 @@ function getBrands(lang: Language): BrandItem[] {
   ];
 }
 
+function VisualAccessibilityWidget({ lang }: { lang: Language }) {
+  const [zoomLevel, setZoomLevel] = useState<number>(() => {
+    try {
+      const saved = localStorage.getItem('opticas_popular_zoom');
+      if (saved) {
+        const parsed = parseInt(saved, 10);
+        if (parsed >= 90 && parsed <= 130) return parsed;
+      }
+    } catch (e) {}
+    return 100;
+  });
+
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  useEffect(() => {
+    try {
+      if (zoomLevel === 100) {
+        (document.body.style as any).zoom = '';
+        document.documentElement.style.fontSize = '';
+      } else {
+        (document.body.style as any).zoom = `${zoomLevel}%`;
+        document.documentElement.style.fontSize = `${(zoomLevel / 100) * 16}px`;
+      }
+      localStorage.setItem('opticas_popular_zoom', zoomLevel.toString());
+    } catch (e) {}
+  }, [zoomLevel]);
+
+  const handleIncrease = () => {
+    setZoomLevel((prev) => Math.min(prev + 10, 130));
+  };
+
+  const handleDecrease = () => {
+    setZoomLevel((prev) => Math.max(prev - 10, 90));
+  };
+
+  const handleReset = () => {
+    setZoomLevel(100);
+  };
+
+  return (
+    <div 
+      className="fixed z-40 bottom-[74px] right-3.5 md:bottom-[92px] md:right-[32px] flex flex-col items-center select-none"
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+      role="region"
+      aria-label={lang === 'es' ? 'Control de tamaño visual' : 'Visual size controls'}
+    >
+      <div className="bg-white/95 backdrop-blur-md border border-gray-200 shadow-xl rounded-2xl p-1 flex flex-col items-center gap-1 transition-all duration-300 hover:shadow-2xl hover:border-[rgb(122,24,35)]/40">
+        {/* Indicador de salud visual / reset */}
+        <button 
+          onClick={handleReset}
+          aria-label={lang === 'es' ? 'Restablecer zoom al 100%' : 'Reset zoom to 100%'}
+          title={lang === 'es' ? 'Salud visual: Click para restablecer al 100%' : 'Eye comfort: Click to reset to 100%'}
+          className="w-8 h-6 flex items-center justify-center text-[rgb(122,24,35)]/70 hover:text-[rgb(122,24,35)] transition-colors cursor-pointer"
+        >
+          <Eye className="w-3.5 h-3.5" />
+        </button>
+
+        {/* Botón Aumentar (+) */}
+        <button
+          onClick={handleIncrease}
+          disabled={zoomLevel >= 130}
+          aria-label={lang === 'es' ? 'Aumentar tamaño de letra y pantalla' : 'Increase text and screen size'}
+          title={lang === 'es' ? 'Aumentar tamaño (+) hasta 130%' : 'Zoom in (+) up to 130%'}
+          className="w-8 h-8 rounded-xl bg-gray-50 hover:bg-[rgb(122,24,35)] hover:text-white text-gray-700 flex items-center justify-center font-bold transition-all duration-200 active:scale-90 disabled:opacity-25 disabled:pointer-events-none cursor-pointer shadow-xs"
+        >
+          <Plus className="w-4 h-4" />
+        </button>
+
+        {/* Indicador de porcentaje actual */}
+        <button
+          onClick={handleReset}
+          aria-label={lang === 'es' ? `Tamaño actual ${zoomLevel}%. Click para restablecer.` : `Current size ${zoomLevel}%. Click to reset.`}
+          title={lang === 'es' ? `Tamaño actual: ${zoomLevel}% (Click para restablecer 100%)` : `Current size: ${zoomLevel}% (Click to reset 100%)`}
+          className="w-8 py-1 rounded-md text-[10px] font-extrabold text-gray-600 hover:text-[rgb(122,24,35)] hover:bg-gray-100 transition-colors flex items-center justify-center cursor-pointer"
+        >
+          {zoomLevel}%
+        </button>
+
+        {/* Botón Disminuir (-) */}
+        <button
+          onClick={handleDecrease}
+          disabled={zoomLevel <= 90}
+          aria-label={lang === 'es' ? 'Disminuir tamaño de letra y pantalla' : 'Decrease text and screen size'}
+          title={lang === 'es' ? 'Disminuir tamaño (-) hasta 90%' : 'Zoom out (-) down to 90%'}
+          className="w-8 h-8 rounded-xl bg-gray-50 hover:bg-[rgb(122,24,35)] hover:text-white text-gray-700 flex items-center justify-center font-bold transition-all duration-200 active:scale-90 disabled:opacity-25 disabled:pointer-events-none cursor-pointer shadow-xs"
+        >
+          <Minus className="w-4 h-4" />
+        </button>
+      </div>
+
+      {/* Tooltip informativo flotante en desktop */}
+      <AnimatePresence>
+        {showTooltip && (
+          <motion.div
+            initial={{ opacity: 0, x: 8 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 8 }}
+            className="hidden md:flex absolute right-12 top-1/2 -translate-y-1/2 bg-[#15171C]/95 text-white text-[11px] font-medium py-1.5 px-3 rounded-xl whitespace-nowrap shadow-xl pointer-events-none items-center gap-1.5 border border-white/10"
+          >
+            <Eye className="w-3.5 h-3.5 text-[rgb(180,40,55)]" />
+            <span>{lang === 'es' ? 'Ajustar tamaño de lectura (+ / -)' : 'Adjust reading size (+ / -)'}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function App() {
   const [lang, setLang] = useState<Language>(() => {
     try {
@@ -685,169 +796,181 @@ export default function App() {
 
   if (currentView === 'calificar') {
     return (
-      <CalificarPage 
-        onBack={() => {
-          window.location.hash = '';
-          setCurrentView('home');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }} 
-        lang={lang}
-        onNavigate={(view, hash) => {
-          if (view === 'landing' || view === 'home') {
+      <>
+        <CalificarPage 
+          onBack={() => {
+            window.location.hash = '';
             setCurrentView('home');
-            window.location.hash = hash || '';
-            if (hash && hash !== '#inicio') {
-              setTimeout(() => {
-                const el = document.querySelector(hash);
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-                else window.scrollTo({ top: 0, behavior: 'smooth' });
-              }, 100);
-            } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }} 
+          lang={lang}
+          onNavigate={(view, hash) => {
+            if (view === 'landing' || view === 'home') {
+              setCurrentView('home');
+              window.location.hash = hash || '';
+              if (hash && hash !== '#inicio') {
+                setTimeout(() => {
+                  const el = document.querySelector(hash);
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  else window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            } else if (view === 'consulta') {
+              setCurrentView('consulta');
+              window.location.hash = '#consulta';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'calificar') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'test-visual') {
+              setCurrentView('test-visual');
+              window.location.hash = '#test-visual';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'contacto') {
+              setCurrentView('contacto');
+              window.location.hash = '#contacto';
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-          } else if (view === 'consulta') {
-            setCurrentView('consulta');
-            window.location.hash = '#consulta';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (view === 'calificar') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (view === 'test-visual') {
-            setCurrentView('test-visual');
-            window.location.hash = '#test-visual';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (view === 'contacto') {
-            setCurrentView('contacto');
-            window.location.hash = '#contacto';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-        }}
-      />
+          }}
+        />
+        <VisualAccessibilityWidget lang={lang} />
+      </>
     );
   }
 
   if (currentView === 'consulta') {
     return (
-      <ConsultaPage 
-        onBack={() => {
-          window.location.hash = '';
-          setCurrentView('home');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }} 
-        lang={lang}
-        onNavigate={(view, hash) => {
-          if (view === 'landing' || view === 'home') {
+      <>
+        <ConsultaPage 
+          onBack={() => {
+            window.location.hash = '';
             setCurrentView('home');
-            window.location.hash = hash || '';
-            if (hash && hash !== '#inicio') {
-              setTimeout(() => {
-                const el = document.querySelector(hash);
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-                else window.scrollTo({ top: 0, behavior: 'smooth' });
-              }, 100);
-            } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }} 
+          lang={lang}
+          onNavigate={(view, hash) => {
+            if (view === 'landing' || view === 'home') {
+              setCurrentView('home');
+              window.location.hash = hash || '';
+              if (hash && hash !== '#inicio') {
+                setTimeout(() => {
+                  const el = document.querySelector(hash);
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  else window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            } else if (view === 'consulta') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'calificar') {
+              setCurrentView('calificar');
+              window.location.hash = '#calificar';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'test-visual') {
+              setCurrentView('test-visual');
+              window.location.hash = '#test-visual';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'contacto') {
+              setCurrentView('contacto');
+              window.location.hash = '#contacto';
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-          } else if (view === 'consulta') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (view === 'calificar') {
-            setCurrentView('calificar');
-            window.location.hash = '#calificar';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (view === 'test-visual') {
-            setCurrentView('test-visual');
-            window.location.hash = '#test-visual';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (view === 'contacto') {
-            setCurrentView('contacto');
-            window.location.hash = '#contacto';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-        }}
-      />
+          }}
+        />
+        <VisualAccessibilityWidget lang={lang} />
+      </>
     );
   }
 
   if (currentView === 'test-visual') {
     return (
-      <TestVisualPage 
-        onBack={() => {
-          window.location.hash = '';
-          setCurrentView('home');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }} 
-        lang={lang}
-        onNavigate={(view, hash) => {
-          if (view === 'landing' || view === 'home') {
+      <>
+        <TestVisualPage 
+          onBack={() => {
+            window.location.hash = '';
             setCurrentView('home');
-            window.location.hash = hash || '';
-            if (hash && hash !== '#inicio') {
-              setTimeout(() => {
-                const el = document.querySelector(hash);
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-                else window.scrollTo({ top: 0, behavior: 'smooth' });
-              }, 100);
-            } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }} 
+          lang={lang}
+          onNavigate={(view, hash) => {
+            if (view === 'landing' || view === 'home') {
+              setCurrentView('home');
+              window.location.hash = hash || '';
+              if (hash && hash !== '#inicio') {
+                setTimeout(() => {
+                  const el = document.querySelector(hash);
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  else window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            } else if (view === 'consulta') {
+              setCurrentView('consulta');
+              window.location.hash = '#consulta';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'calificar') {
+              setCurrentView('calificar');
+              window.location.hash = '#calificar';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'test-visual') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'contacto') {
+              setCurrentView('contacto');
+              window.location.hash = '#contacto';
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-          } else if (view === 'consulta') {
-            setCurrentView('consulta');
-            window.location.hash = '#consulta';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (view === 'calificar') {
-            setCurrentView('calificar');
-            window.location.hash = '#calificar';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (view === 'test-visual') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (view === 'contacto') {
-            setCurrentView('contacto');
-            window.location.hash = '#contacto';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-        }}
-      />
+          }}
+        />
+        <VisualAccessibilityWidget lang={lang} />
+      </>
     );
   }
 
   if (currentView === 'contacto') {
     return (
-      <ContactoPage 
-        onBack={() => {
-          window.location.hash = '';
-          setCurrentView('home');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }} 
-        lang={lang}
-        onNavigate={(view, hash) => {
-          if (view === 'landing' || view === 'home') {
+      <>
+        <ContactoPage 
+          onBack={() => {
+            window.location.hash = '';
             setCurrentView('home');
-            window.location.hash = hash || '';
-            if (hash && hash !== '#inicio') {
-              setTimeout(() => {
-                const el = document.querySelector(hash);
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-                else window.scrollTo({ top: 0, behavior: 'smooth' });
-              }, 100);
-            } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }} 
+          lang={lang}
+          onNavigate={(view, hash) => {
+            if (view === 'landing' || view === 'home') {
+              setCurrentView('home');
+              window.location.hash = hash || '';
+              if (hash && hash !== '#inicio') {
+                setTimeout(() => {
+                  const el = document.querySelector(hash);
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  else window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            } else if (view === 'consulta') {
+              setCurrentView('consulta');
+              window.location.hash = '#consulta';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'calificar') {
+              setCurrentView('calificar');
+              window.location.hash = '#calificar';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'test-visual') {
+              setCurrentView('test-visual');
+              window.location.hash = '#test-visual';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'contacto') {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-          } else if (view === 'consulta') {
-            setCurrentView('consulta');
-            window.location.hash = '#consulta';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (view === 'calificar') {
-            setCurrentView('calificar');
-            window.location.hash = '#calificar';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (view === 'test-visual') {
-            setCurrentView('test-visual');
-            window.location.hash = '#test-visual';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else if (view === 'contacto') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-        }}
-      />
+          }}
+        />
+        <VisualAccessibilityWidget lang={lang} />
+      </>
     );
   }
 
@@ -3225,6 +3348,9 @@ export default function App() {
             <span className="relative inline-flex rounded-full h-4 w-4 bg-[#25D366] border-2 border-white"></span>
           </span>
         </motion.a>
+
+        {/* Control Flotante de Tamaño y Accesibilidad Visual (+ / -) */}
+        <VisualAccessibilityWidget lang={lang} />
     </div>
   );
 }
