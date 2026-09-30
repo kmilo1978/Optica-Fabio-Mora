@@ -1,0 +1,21 @@
+{
+  "name": "Ópticas Popular - Dr. Fabio Mora Medina",
+  "short_name": "Ópticas Popular",
+  "description": "Examen de la vista en Desamparados con el Dr. Fabio Mora. Lentes progresivos con garantía de 30 días en Plaza Higuerones.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7A1823",
+  "icons": [
+    {
+      "src": "/images/logo-opticas-popular.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo-opticas-popular.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

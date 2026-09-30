@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://opticaspopular.com/</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://opticaspopular.com/images/hero-examen-mujer-mayor.jpg</image:loc>
+      <image:title>Examen visual integral con el Dr. Fabio Mora en Ópticas Popular</image:title>
+      <image:caption>Consultorio optométrico moderno en Plaza Higuerones, Desamparados</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://opticaspopular.com/#tecnologia-cristales</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://opticaspopular.com/images/tecnologia-cristales-laboratorio.jpg</image:loc>
+      <image:title>Cristales progresivos digitales y antirreflejo HD</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://opticaspopular.com/#test-visual</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://opticaspopular.com/#contacto</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://opticaspopular.com/#consulta</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://opticaspopular.com/#calificar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+</urlset>

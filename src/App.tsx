@@ -3413,7 +3413,8 @@ export default function App() {
                 <div className="w-full md:w-[38%] lg:w-[32%] min-h-[340px] md:min-h-[480px] relative overflow-hidden group/doctor cursor-help">
                   <img 
                     src="https://content.pancake.vn/web-media-262/f8/7a/8c/db/28a595fabedd02a19921777a0ab62c9a2d54e3e34ae3176dbb60cc55-w:1760-h:2370-l:7142028-t:image/png.png" 
-                    alt="Dr. Fabio Mora Medina"
+                    alt="Dr. Fabio Mora Medina - Optometrista en Ópticas Popular Desamparados"
+                    loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover object-top transition-[filter,transform] duration-[1200ms] ease-in-out blur-0 md:blur-0 md:group-hover/doctor:blur-[12px] md:scale-100 md:group-hover/doctor:scale-110"
                     referrerPolicy="no-referrer"
                   />
