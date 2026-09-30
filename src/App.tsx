@@ -1039,25 +1039,11 @@ export default function App() {
 
                 <a
                   href="tel:+50672760215"
-                  className="hidden sm:inline-flex items-center justify-center h-9 px-3.5 rounded-[8px] bg-white border border-[#E3E5EC] hover:bg-gray-50 text-[#15171C] text-[11px] font-bold shadow-2xs hover:shadow-xs transition-all duration-200 active:scale-95 cursor-pointer"
+                  className="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-[8px] bg-white border border-[#E3E5EC] hover:bg-gray-50 text-[#15171C] text-[12px] font-bold shadow-2xs hover:shadow-xs transition-all duration-200 active:scale-95 cursor-pointer hover:border-[rgb(122,24,35)]"
                   title={lang === 'es' ? 'Llamar a la óptica: 2515-0002 / 7276-0215' : 'Call our clinic: 2515-0002 / 7276-0215'}
                 >
                   <Phone className="w-3.5 h-3.5 mr-1.5 text-[rgb(122,24,35)]" />
-                  <span>2515-0002</span>
-                </a>
-
-                <a
-                  href={`https://wa.me/50672760215?text=${encodeURIComponent(
-                    lang === 'es' 
-                      ? '¡Hola Dr. Fabio Mora! Quisiera agendar una cita de valoración visual en Ópticas Popular.' 
-                      : 'Hello Dr. Fabio Mora, I would like to schedule an eye examination at Opticas Popular.'
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[11px] font-bold whitespace-nowrap hover:bg-[rgb(142,30,42)] shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
-                >
-                  <MessageCircle className="w-3.5 h-3.5 mr-1.5" />
-                  <span>{lang === 'es' ? 'Agendar' : 'Book Exam'}</span>
+                  <span>{lang === 'es' ? 'Llamar' : 'Call'}</span>
                 </a>
 
                 {/* Botón Menú Hamburguesa para Móviles - Destacado y Visual */}
@@ -1314,9 +1300,10 @@ export default function App() {
                         <a
                           href="tel:+50672760215"
                           className="inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-white hover:bg-gray-50 border border-[#E3E5EC] text-[#15171C] text-[12px] font-bold shadow-xs active:scale-95 transition-all duration-200 cursor-pointer"
+                          title="2515-0002 / 7276-0215"
                         >
                           <Phone className="w-4 h-4 text-[rgb(122,24,35)]" />
-                          <span>2515-0002</span>
+                          <span>{lang === 'es' ? 'Llamar' : 'Call'}</span>
                         </a>
                         <a
                           href={`https://wa.me/50672760215?text=${encodeURIComponent(
