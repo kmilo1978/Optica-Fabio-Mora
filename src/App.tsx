@@ -172,13 +172,6 @@ function getNavigationMenu(lang: Language): NavCategory[] {
           title: lang === 'es' ? 'Experiencia y Espacio' : 'Experience & Clinic',
           items: [
             { name: t.facilities, href: '#galeria', desc: t.facilitiesDesc, icon: Camera },
-            { name: t.testimonials, href: '#testimonios', desc: t.testimonialsDesc, icon: Users },
-            { 
-              name: lang === 'es' ? 'Muro Reseñas Google' : 'Google Reviews Wall', 
-              href: '#testimonios-google', 
-              desc: lang === 'es' ? 'Muro interactivo con 5.0 estrellas y opiniones reales' : 'Interactive masonry wall with 5.0 stars & reviews', 
-              icon: Star 
-            },
             { name: t.rate, href: '#calificar', desc: t.rateDesc, icon: Award },
           ],
         },
