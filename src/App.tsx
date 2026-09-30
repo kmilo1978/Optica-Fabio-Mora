@@ -160,7 +160,7 @@ function getNavigationMenu(lang: Language): NavCategory[] {
           items: [
             { name: t.facilities, href: '#galeria', desc: t.facilitiesDesc, icon: Camera },
             { name: t.testimonials, href: '#testimonios', desc: t.testimonialsDesc, icon: Users },
-            { name: t.rate, href: '#calificar', desc: t.rateDesc },
+            { name: t.rate, href: '#calificar', desc: t.rateDesc, icon: Star },
           ],
         },
       ],
