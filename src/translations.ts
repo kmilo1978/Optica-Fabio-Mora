@@ -178,6 +178,8 @@ export interface TranslationDictionary {
     navContact: string;
     navRate: string;
     navRateBadge: string;
+    navInquiry: string;
+    navInquiryBadge: string;
     servicesTitle: string;
     srvExam: string;
     srvRetina: string;
@@ -384,6 +386,8 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
       navContact: 'Ubicación & Citas',
       navRate: 'Calificá tu Experiencia',
       navRateBadge: 'Nuevo',
+      navInquiry: 'Formulario de Consulta WhatsApp',
+      navInquiryBadge: 'Nuevo',
       servicesTitle: 'Servicios Especializados',
       srvExam: 'Examen de la Vista Computarizado',
       srvRetina: 'Fotografía Digital de Retina',
@@ -588,6 +592,8 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
       navContact: 'Location & Booking',
       navRate: 'Rate Experience',
       navRateBadge: 'New',
+      navInquiry: 'WhatsApp Inquiry Form',
+      navInquiryBadge: 'New',
       servicesTitle: 'Specialized Services',
       srvExam: 'Computerized Eye Exam',
       srvRetina: 'Digital Retinal Photography',

@@ -11,10 +11,12 @@ import {
 } from 'lucide-react';
 
 import { Language } from './translations';
+import Footer from './Footer';
 
 interface CalificarPageProps {
   onBack: () => void;
   lang?: Language;
+  onNavigate?: (view: 'landing' | 'consulta' | 'calificar', hash?: string) => void;
 }
 
 // Emblema de Lentes Oftálmicos para calificación con colores corporativos oficiales
@@ -373,18 +375,27 @@ export default function CalificarPage({ onBack, lang = 'es' }: CalificarPageProp
         </AnimatePresence>
       </main>
 
-      {/* Pie de Página Minimalista de Alto Contraste */}
-      <footer className="py-7 px-4 text-center border-t border-gray-200/80 bg-gray-50/80 text-[12.5px] text-[#555963]">
-        <p className="font-bold text-[#15171C]">
-          Ópticas Popular · Dr. Fabio Mora Medina
-        </p>
-        <p className="mt-1 text-gray-600">
-          Plaza Higuerones, {isEn ? 'Unit 23 · San Rafael Abajo de Desamparados, San Jose, Costa Rica' : 'Local 23 · San Rafael Abajo de Desamparados, San José, Costa Rica'}
-        </p>
-        <p className="mt-2 text-[11.5px] text-gray-500">
-          © {new Date().getFullYear()} {isEn ? 'All rights reserved.' : 'Todos los derechos reservados.'}
-        </p>
-      </footer>
+      {/* Footer Corporativo Oficial de Alto Contraste */}
+      <Footer 
+        lang={lang} 
+        onNavigate={(view, hash) => {
+          if (onNavigate) {
+            onNavigate(view, hash);
+          } else if (view === 'landing') {
+            onBack();
+            if (hash && hash !== '#inicio') {
+              setTimeout(() => {
+                const el = document.querySelector(hash);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }
+          } else if (view === 'consulta') {
+            window.location.hash = '#consulta';
+          } else if (view === 'calificar') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }} 
+      />
     </div>
   );
 }

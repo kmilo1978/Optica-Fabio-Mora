@@ -20,13 +20,15 @@ import {
   Award
 } from 'lucide-react';
 import { Language } from './translations';
+import Footer from './Footer';
 
 interface ConsultaPageProps {
   onBack: () => void;
   lang?: Language;
+  onNavigate?: (view: 'landing' | 'consulta' | 'calificar', hash?: string) => void;
 }
 
-export default function ConsultaPage({ onBack, lang = 'es' }: ConsultaPageProps) {
+export default function ConsultaPage({ onBack, lang = 'es', onNavigate }: ConsultaPageProps) {
   const isEn = lang === 'en';
 
   const [fullName, setFullName] = useState('');
@@ -430,19 +432,27 @@ export default function ConsultaPage({ onBack, lang = 'es' }: ConsultaPageProps)
         </div>
       </main>
 
-      {/* Pie de Página Minimalista */}
-      <footer className="bg-white border-t border-gray-100 py-6 text-center text-[12px] text-gray-500">
-        <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p>© {new Date().getFullYear()} Ópticas Popular · Dr. Fabio Mora Medina</p>
-          <div className="flex items-center gap-4">
-            <button type="button" onClick={onBack} className="hover:text-[rgb(122,24,35)] font-semibold transition-colors cursor-pointer">
-              {isEn ? 'Return to Home' : 'Volver al Inicio'}
-            </button>
-            <span>·</span>
-            <span>Plaza Higuerones, Desamparados</span>
-          </div>
-        </div>
-      </footer>
+      {/* Footer Corporativo Oficial de Alto Contraste */}
+      <Footer 
+        lang={lang} 
+        onNavigate={(view, hash) => {
+          if (onNavigate) {
+            onNavigate(view, hash);
+          } else if (view === 'landing') {
+            onBack();
+            if (hash && hash !== '#inicio') {
+              setTimeout(() => {
+                const el = document.querySelector(hash);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }
+          } else if (view === 'consulta') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (view === 'calificar') {
+            window.location.hash = '#calificar';
+          }
+        }} 
+      />
     </div>
   );
 }
