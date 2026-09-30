@@ -428,16 +428,19 @@ function getTestimonials(lang: Language) {
       {
         name: 'Maria G.',
         role: 'Patient',
+        avatar: '/images/avatars/avatar-gafas-1.webp',
         content: 'Everything was explained with great clarity and I felt confident throughout the exam. The care was very professional and warm.',
       },
       {
         name: 'Carlos R.',
         role: 'Patient',
+        avatar: '/images/avatars/avatar-gafas-2.webp',
         content: 'I had been experiencing eye fatigue for a while and left with clear guidance. The process was organized, fast, and very thorough.',
       },
       {
         name: 'Andrea M.',
         role: 'Patient',
+        avatar: '/images/avatars/avatar-gafas-3.webp',
         content: 'Excellent treatment and high trust. They helped me understand the best solution for my vision and my glasses.',
       },
     ];
@@ -446,16 +449,19 @@ function getTestimonials(lang: Language) {
     {
       name: 'María G.',
       role: 'Paciente',
+      avatar: '/images/avatars/avatar-gafas-1.webp',
       content: 'Me explicaron todo con muchísima claridad y sentí una gran confianza en la consulta. La atención del doctor es impecable y súper humana.',
     },
     {
       name: 'Carlos R.',
       role: 'Paciente',
+      avatar: '/images/avatars/avatar-gafas-2.webp',
       content: 'Tenía días de sentir fatiga en la vista por la compu y salí con una solución perfecta. El proceso fue rápido, ordenado y pura vida.',
     },
     {
       name: 'Andrea M.',
       role: 'Paciente',
+      avatar: '/images/avatars/avatar-gafas-3.webp',
       content: 'Excelente trato y honestidad. Me ayudaron a elegir los aros y cristales ideales para mi trabajo sin venderme nada innecesario.',
     },
   ];
@@ -3268,9 +3274,19 @@ export default function App() {
                       </p>
                     </div>
                     <div className="mt-5 pt-4 border-t border-gray-200/70 flex items-center justify-between">
-                      <div>
-                        <h3 className="text-[15px] sm:text-[16px] font-bold text-[#15171C]">{t.name}</h3>
-                        <p className="text-[11px] sm:text-[12px] text-[#7A7F8A]">{t.role}</p>
+                      <div className="flex items-center gap-2.5">
+                        <img 
+                          src={t.avatar} 
+                          alt={`Foto de ${t.name}`}
+                          width={38}
+                          height={38}
+                          loading="lazy"
+                          className="w-9 h-9 rounded-full object-cover ring-2 ring-gray-100 shadow-2xs shrink-0"
+                        />
+                        <div>
+                          <h3 className="text-[14.5px] sm:text-[15px] font-bold text-[#15171C] leading-snug">{t.name}</h3>
+                          <p className="text-[11px] text-[#7A7F8A]">{t.role}</p>
+                        </div>
                       </div>
                       <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-medium">
                         <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Verificado

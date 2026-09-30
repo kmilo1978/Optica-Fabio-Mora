@@ -858,38 +858,37 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
 
               {/* Componente de Testimonio y Avatares con Gafas (Social Proof) */}
               <div className="mt-5 pt-4 border-t border-white/15 flex flex-col sm:flex-row sm:items-center gap-4">
-                <div className="flex items-center gap-3">
+                <div className="inline-flex items-center gap-3.5 bg-black/25 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-white/15 shadow-sm">
                   {/* Stack de 5 avatares reales de pacientes usando gafas */}
-                  <div className="flex items-center -space-x-2.5 overflow-hidden py-1">
+                  <div className="flex items-center -space-x-2 overflow-hidden py-0.5">
                     {[
-                      { src: '/images/avatars/avatar-gafas-1.jpg', alt: 'Paciente mujer usando aros y cristales Ópticas Popular' },
-                      { src: '/images/avatars/avatar-gafas-2.jpg', alt: 'Paciente hombre usando lentes oftálmicos modernos' },
-                      { src: '/images/avatars/avatar-gafas-3.jpg', alt: 'Paciente mujer con gafas de marco transparente' },
-                      { src: '/images/avatars/avatar-gafas-4.jpg', alt: 'Paciente joven con gafas metálicas circulares' },
-                      { src: '/images/avatars/avatar-gafas-5.jpg', alt: 'Paciente con cristales progresivos de alta definición' },
+                      { src: '/images/avatars/avatar-gafas-1.webp', alt: 'Paciente mujer con aros Ópticas Popular' },
+                      { src: '/images/avatars/avatar-gafas-2.webp', alt: 'Paciente hombre con anteojos modernos' },
+                      { src: '/images/avatars/avatar-gafas-3.webp', alt: 'Paciente mujer con gafas de marco transparente' },
+                      { src: '/images/avatars/avatar-gafas-4.webp', alt: 'Paciente joven con gafas metálicas circulares' },
+                      { src: '/images/avatars/avatar-gafas-5.webp', alt: 'Paciente con cristales progresivos de alta definición' },
                     ].map((av, aIdx) => (
                       <img
                         key={aIdx}
                         src={av.src}
                         alt={av.alt}
-                        width={40}
-                        height={40}
+                        width={32}
+                        height={32}
                         loading="lazy"
-                        className="inline-block w-9 h-9 sm:w-10 sm:h-10 rounded-full ring-2 ring-white/90 object-cover shadow-md transition-transform duration-200 hover:scale-120 hover:z-20 cursor-pointer"
+                        className="inline-block w-8 h-8 rounded-full ring-2 ring-white/95 object-cover shadow-sm transition-transform duration-200 hover:scale-125 hover:z-20 cursor-pointer shrink-0"
                       />
                     ))}
                   </div>
 
-                  {/* Estrellas doradas y conteo de reseñas */}
-                  <div className="flex flex-col">
-                    <div className="flex items-center gap-1 text-amber-400">
+                  {/* Estrellas doradas y conteo de reseñas exactamente estilo referencia */}
+                  <div className="flex flex-col justify-center">
+                    <div className="flex items-center gap-0.5 text-amber-400 leading-none">
                       {[...Array(5)].map((_, sIdx) => (
                         <Star key={sIdx} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                       ))}
-                      <span className="text-[12px] font-black text-white ml-1">4.9 / 5.0</span>
                     </div>
-                    <span className="text-[11px] text-white/80 font-medium">
-                      {isEn ? 'from 128+ verified reviews' : 'más de 128 valoraciones reales'}
+                    <span className="text-[11px] text-white/90 font-medium tracking-tight mt-1 leading-none">
+                      {isEn ? 'from 128+ reviews' : 'más de 128 opiniones'}
                     </span>
                   </div>
                 </div>
