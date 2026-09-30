@@ -1529,6 +1529,36 @@ export default function App() {
   const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>('servicios');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<'all' | 'ninos' | 'adultos' | 'mayores'>('all');
+  const [activeMobileAgeIndex, setActiveMobileAgeIndex] = useState(0);
+  const ageCarouselRef = useRef<HTMLDivElement>(null);
+
+  const scrollToAgeIndex = (index: number) => {
+    setActiveMobileAgeIndex(index);
+    if (ageCarouselRef.current) {
+      const container = ageCarouselRef.current;
+      const card = container.children[index] as HTMLElement | undefined;
+      if (card) {
+        card.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest'
+        });
+      }
+    }
+  };
+
+  const handleAgeScroll = () => {
+    if (ageCarouselRef.current) {
+      const container = ageCarouselRef.current;
+      const scrollLeft = container.scrollLeft;
+      const card = container.firstElementChild as HTMLElement | null;
+      const cardWidth = card ? card.offsetWidth + 16 : container.offsetWidth * 0.85;
+      const newIndex = Math.round(scrollLeft / cardWidth);
+      if (newIndex >= 0 && newIndex !== activeMobileAgeIndex) {
+        setActiveMobileAgeIndex(newIndex);
+      }
+    }
+  };
   const [showDiagnosticModal, setShowDiagnosticModal] = useState(false);
   const [diagnosticStep, setDiagnosticStep] = useState<'question' | 'scanning' | 'result'>('question');
   const [selectedSymptom, setSelectedSymptom] = useState<string | null>(null);
@@ -2968,7 +2998,13 @@ export default function App() {
                   return (
                     <button
                       key={tab.id}
-                      onClick={() => setSelectedAgeGroup(tab.id as any)}
+                      onClick={() => {
+                        setSelectedAgeGroup(tab.id as any);
+                        setActiveMobileAgeIndex(0);
+                        if (ageCarouselRef.current) {
+                          ageCarouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+                        }
+                      }}
                       className={`inline-flex items-center gap-2 px-4.5 py-2.5 rounded-full text-[13px] sm:text-[13.5px] font-bold transition-all cursor-pointer bg-white ${
                         isSelected
                           ? 'text-[rgb(122,24,35)] border-2 border-[rgb(122,24,35)] shadow-md scale-105 ring-2 ring-[rgb(122,24,35)]/15'
@@ -2982,84 +3018,142 @@ export default function App() {
                 })}
               </motion.div>
 
-              {/* Grid de Tarjetas Animadas de Edades con Colores Corporativos y Letra Blanca en Hover */}
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
-                {ageGroups.filter((g) => selectedAgeGroup === 'all' || g.id === selectedAgeGroup).map((group, idx) => {
-                  const GroupIcon = group.icon;
-                  return (
-                    <motion.article
-                      key={group.id}
-                      initial={{ opacity: 0, y: 25 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.45, delay: idx * 0.1 }}
-                      whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                      className="group bg-white rounded-3xl p-6 sm:p-7 border border-gray-200/90 hover:border-[rgb(122,24,35)] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
+              {/* Carrusel en Móvil / Grid en Escritorio */}
+              {(() => {
+                const displayedAgeGroups = ageGroups.filter((g) => selectedAgeGroup === 'all' || g.id === selectedAgeGroup);
+                return (
+                  <>
+                    <div 
+                      ref={ageCarouselRef}
+                      onScroll={handleAgeScroll}
+                      className="mt-8 flex md:grid md:grid-cols-3 gap-4 md:gap-5 lg:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-smooth no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 py-2"
                     >
-                      {/* Línea superior corporativa */}
-                      <div className="absolute top-0 left-0 right-0 h-1.5 bg-[rgb(122,24,35)]"></div>
+                      {displayedAgeGroups.map((group, idx) => {
+                        const GroupIcon = group.icon;
+                        return (
+                          <motion.article
+                            key={group.id}
+                            initial={{ opacity: 0, y: 25 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.45, delay: idx * 0.1 }}
+                            whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                            className="group bg-white rounded-3xl p-6 sm:p-7 border border-gray-200/90 hover:border-[rgb(122,24,35)] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden w-[85vw] max-w-[340px] sm:max-w-[360px] md:max-w-none md:w-auto shrink-0 md:shrink snap-center"
+                          >
+                            {/* Línea superior corporativa */}
+                            <div className="absolute top-0 left-0 right-0 h-1.5 bg-[rgb(122,24,35)]"></div>
 
-                      <div>
-                        {/* Header de la Tarjeta */}
-                        <div className="flex items-center justify-between gap-3 mb-4">
-                          <div className="w-12 h-12 rounded-2xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shadow-xs border border-[rgb(122,24,35)]/15">
-                            <GroupIcon className="w-6 h-6" />
-                          </div>
-                          <div className="flex flex-col items-end">
-                            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                              Rango de edad
-                            </span>
-                            <span className="text-[13px] font-bold text-[#15171C] bg-gray-100 px-2.5 py-0.5 rounded-full mt-0.5">
-                              {group.ageRange}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Título y Badge */}
-                        <div className="mb-3">
-                          <span className="inline-block text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full border border-[rgb(122,24,35)]/20 bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] mb-2">
-                            {group.roleTag}
-                          </span>
-                          <h3 className="text-[21px] sm:text-[22px] font-bold text-[#15171C] leading-tight">
-                            {group.title}
-                          </h3>
-                        </div>
-
-                        <p className="text-[13.5px] leading-relaxed text-[#555963] mb-5">
-                          {group.description}
-                        </p>
-
-                        {/* Puntos destacados con alta legibilidad */}
-                        <div className="space-y-3 pt-4 border-t border-gray-100">
-                          {group.highlights.map((item, hIdx) => (
-                            <div key={hIdx} className="flex items-start gap-2.5">
-                              <div className="w-5 h-5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0 mt-0.5">
-                                <CheckCircle2 className="w-3.5 h-3.5" />
+                            <div>
+                              {/* Header de la Tarjeta */}
+                              <div className="flex items-center justify-between gap-3 mb-4">
+                                <div className="w-12 h-12 rounded-2xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shadow-xs border border-[rgb(122,24,35)]/15">
+                                  <GroupIcon className="w-6 h-6" />
+                                </div>
+                                <div className="flex flex-col items-end">
+                                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                                    Rango de edad
+                                  </span>
+                                  <span className="text-[13px] font-bold text-[#15171C] bg-gray-100 px-2.5 py-0.5 rounded-full mt-0.5">
+                                    {group.ageRange}
+                                  </span>
+                                </div>
                               </div>
-                              <div className="text-[13px] leading-snug">
-                                <span className="font-bold text-[#15171C]">{item.title}: </span>
-                                <span className="text-[#555963]">{item.desc}</span>
+
+                              {/* Título y Badge */}
+                              <div className="mb-3">
+                                <span className="inline-block text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full border border-[rgb(122,24,35)]/20 bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] mb-2">
+                                  {group.roleTag}
+                                </span>
+                                <h3 className="text-[21px] sm:text-[22px] font-bold text-[#15171C] leading-tight">
+                                  {group.title}
+                                </h3>
+                              </div>
+
+                              <p className="text-[13.5px] leading-relaxed text-[#555963] mb-5">
+                                {group.description}
+                              </p>
+
+                              {/* Puntos destacados con alta legibilidad */}
+                              <div className="space-y-3 pt-4 border-t border-gray-100">
+                                {group.highlights.map((item, hIdx) => (
+                                  <div key={hIdx} className="flex items-start gap-2.5">
+                                    <div className="w-5 h-5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0 mt-0.5">
+                                      <CheckCircle2 className="w-3.5 h-3.5" />
+                                    </div>
+                                    <div className="text-[13px] leading-snug">
+                                      <span className="font-bold text-[#15171C]">{item.title}: </span>
+                                      <span className="text-[#555963]">{item.desc}</span>
+                                    </div>
+                                  </div>
+                                ))}
                               </div>
                             </div>
+
+                            {/* Botón de Acción Directo en Blanco con Letra Vino Tinto de Alta Legibilidad */}
+                            <div className="mt-6 pt-5 border-t border-gray-100 flex flex-col gap-2">
+                              <a
+                                href={`https://wa.me/50625150002?text=${encodeURIComponent(group.waMessage)}`}
+                                className="w-full inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[13.5px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
+                              >
+                                <MessageCircle className="w-4 h-4 text-white !text-white" />
+                                <span className="text-white !text-white">{group.buttonText}</span>
+                                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-white !text-white" />
+                              </a>
+                            </div>
+                          </motion.article>
+                        );
+                      })}
+                    </div>
+
+                    {/* Controles de Navegación del Carrusel para Móvil */}
+                    {displayedAgeGroups.length > 1 && (
+                      <div className="flex md:hidden items-center justify-between mt-4 px-3.5 py-2.5 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
+                        <div className="flex items-center gap-1.5">
+                          {displayedAgeGroups.map((_, i) => (
+                            <button
+                              key={i}
+                              type="button"
+                              onClick={() => scrollToAgeIndex(i)}
+                              aria-label={`Ir a tarjeta ${i + 1}`}
+                              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                                activeMobileAgeIndex === i 
+                                  ? 'w-6 bg-[rgb(122,24,35)]' 
+                                  : 'w-2 bg-gray-300 hover:bg-gray-400'
+                              }`}
+                            />
                           ))}
                         </div>
-                      </div>
 
-                      {/* Botón de Acción Directo en Blanco con Letra Vino Tinto de Alta Legibilidad */}
-                      <div className="mt-6 pt-5 border-t border-gray-100 flex flex-col gap-2">
-                        <a
-                          href={`https://wa.me/50625150002?text=${encodeURIComponent(group.waMessage)}`}
-                          className="w-full inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[13.5px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
-                        >
-                          <MessageCircle className="w-4 h-4 text-white !text-white" />
-                          <span className="text-white !text-white">{group.buttonText}</span>
-                          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-white !text-white" />
-                        </a>
+                        <div className="flex items-center gap-2.5">
+                          <span className="text-[12px] font-bold text-gray-500">
+                            {Math.min(activeMobileAgeIndex + 1, displayedAgeGroups.length)} de {displayedAgeGroups.length}
+                          </span>
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              type="button"
+                              onClick={() => scrollToAgeIndex(Math.max(0, activeMobileAgeIndex - 1))}
+                              disabled={activeMobileAgeIndex === 0}
+                              aria-label="Tarjeta anterior"
+                              className="w-8 h-8 rounded-xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-50 active:scale-95 shadow-2xs transition-all cursor-pointer"
+                            >
+                              <ChevronLeft className="w-4 h-4" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => scrollToAgeIndex(Math.min(displayedAgeGroups.length - 1, activeMobileAgeIndex + 1))}
+                              disabled={activeMobileAgeIndex >= displayedAgeGroups.length - 1}
+                              aria-label="Siguiente tarjeta"
+                              className="w-8 h-8 rounded-xl border border-gray-200 bg-white flex items-center justify-center text-gray-700 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-50 active:scale-95 shadow-2xs transition-all cursor-pointer"
+                            >
+                              <ChevronRight className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                    </motion.article>
-                  );
-                })}
-              </div>
+                    )}
+                  </>
+                );
+              })()}
 
 
             </div>

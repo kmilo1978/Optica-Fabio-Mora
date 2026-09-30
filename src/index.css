@@ -56,6 +56,13 @@
     left: 160%;
     transition: left 0.85s cubic-bezier(0.4, 0, 0.2, 1);
   }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* REGLA GLOBAL INVIOLABLE: Toda letra e icono dentro de botones y enlaces con fondo rojo/vino corporativo DEBE ser 100% blanca */
