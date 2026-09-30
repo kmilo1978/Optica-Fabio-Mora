@@ -1532,6 +1532,7 @@ export default function App() {
   const [showDiagnosticModal, setShowDiagnosticModal] = useState(false);
   const [diagnosticStep, setDiagnosticStep] = useState<'question' | 'scanning' | 'result'>('question');
   const [selectedSymptom, setSelectedSymptom] = useState<string | null>(null);
+  const [activeGalleryCard, setActiveGalleryCard] = useState<number | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -3265,7 +3266,10 @@ export default function App() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6 }}
                   viewport={{ once: true }}
-                  className="group relative rounded-2xl overflow-hidden min-h-[320px] md:min-h-[360px] pro-card shadow-md cursor-pointer"
+                  tabIndex={0}
+                  onClick={() => setActiveGalleryCard(prev => prev === 0 ? null : 0)}
+                  onTouchStart={() => setActiveGalleryCard(0)}
+                  className="group relative rounded-2xl overflow-hidden min-h-[320px] md:min-h-[360px] pro-card shadow-md cursor-pointer select-none touch-manipulation focus:outline-hidden"
                 >
                   <img
                     src="/images/dr-fabio-mora-examen.jpg"
@@ -3273,10 +3277,16 @@ export default function App() {
                     width={1376}
                     height={768}
                     loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover blur-[2px] md:blur-[2.5px] scale-[1.02] group-hover:blur-none group-hover:scale-[1.06] transition-[filter,transform] duration-700 ease-out"
+                    className={`absolute inset-0 w-full h-full object-cover transition-[filter,transform] duration-500 ease-out group-hover:blur-none group-hover:scale-[1.06] group-active:blur-none group-active:scale-[1.06] ${
+                      activeGalleryCard === 0 ? 'blur-none scale-[1.06]' : 'blur-[2px] md:blur-[2.5px] scale-[1.02]'
+                    }`}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
-                  <div className="absolute left-0 right-0 bottom-0 p-5 md:p-6 transform transition-transform duration-500 group-hover:-translate-y-1">
+                  <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90 ${
+                    activeGalleryCard === 0 ? 'opacity-90' : ''
+                  }`}></div>
+                  <div className={`absolute left-0 right-0 bottom-0 p-5 md:p-6 transform transition-transform duration-500 group-hover:-translate-y-1 ${
+                    activeGalleryCard === 0 ? '-translate-y-1' : ''
+                  }`}>
                     <div className="inline-flex items-center h-7 px-3.5 rounded-full bg-white/90 text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#6A6E79]">
                       Atención visual
                     </div>
@@ -3292,7 +3302,10 @@ export default function App() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                     viewport={{ once: true }}
-                    className="group relative rounded-2xl overflow-hidden min-h-[173px] pro-card shadow-md cursor-pointer"
+                    tabIndex={0}
+                    onClick={() => setActiveGalleryCard(prev => prev === 1 ? null : 1)}
+                    onTouchStart={() => setActiveGalleryCard(1)}
+                    className="group relative rounded-2xl overflow-hidden min-h-[173px] pro-card shadow-md cursor-pointer select-none touch-manipulation focus:outline-hidden"
                   >
                     <img
                       src="/images/tecnologia-diagnostico.jpg"
@@ -3300,10 +3313,16 @@ export default function App() {
                       width={1200}
                       height={675}
                       loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover blur-[2px] md:blur-[2.5px] scale-[1.02] group-hover:blur-none group-hover:scale-[1.06] transition-[filter,transform] duration-700 ease-out"
+                      className={`absolute inset-0 w-full h-full object-cover transition-[filter,transform] duration-500 ease-out group-hover:blur-none group-hover:scale-[1.06] group-active:blur-none group-active:scale-[1.06] ${
+                        activeGalleryCard === 1 ? 'blur-none scale-[1.06]' : 'blur-[2px] md:blur-[2.5px] scale-[1.02]'
+                      }`}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
-                    <div className="absolute left-0 right-0 bottom-0 p-4 transform transition-transform duration-500 group-hover:-translate-y-1">
+                    <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90 ${
+                      activeGalleryCard === 1 ? 'opacity-90' : ''
+                    }`}></div>
+                    <div className={`absolute left-0 right-0 bottom-0 p-4 transform transition-transform duration-500 group-hover:-translate-y-1 ${
+                      activeGalleryCard === 1 ? '-translate-y-1' : ''
+                    }`}>
                       <h3 className="max-w-[20ch] text-[16px] sm:text-[17px] md:text-[18px] leading-[1.15] tracking-tight font-bold text-white">
                         Tecnología para una valoración precisa
                       </h3>
@@ -3316,7 +3335,10 @@ export default function App() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.6, delay: 0.3 }}
                       viewport={{ once: true }}
-                      className="group relative rounded-2xl overflow-hidden min-h-[173px] pro-card shadow-md cursor-pointer"
+                      tabIndex={0}
+                      onClick={() => setActiveGalleryCard(prev => prev === 2 ? null : 2)}
+                      onTouchStart={() => setActiveGalleryCard(2)}
+                      className="group relative rounded-2xl overflow-hidden min-h-[173px] pro-card shadow-md cursor-pointer select-none touch-manipulation focus:outline-hidden"
                     >
                       <img
                         src="/images/dr-fabio-mora-ninos.jpg"
@@ -3324,10 +3346,16 @@ export default function App() {
                         width={297}
                         height={400}
                         loading="lazy"
-                        className="absolute inset-0 w-full h-full object-cover blur-[2px] md:blur-[2.5px] scale-[1.02] group-hover:blur-none group-hover:scale-[1.06] transition-[filter,transform] duration-700 ease-out"
+                        className={`absolute inset-0 w-full h-full object-cover transition-[filter,transform] duration-500 ease-out group-hover:blur-none group-hover:scale-[1.06] group-active:blur-none group-active:scale-[1.06] ${
+                          activeGalleryCard === 2 ? 'blur-none scale-[1.06]' : 'blur-[2px] md:blur-[2.5px] scale-[1.02]'
+                        }`}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
-                      <div className="absolute left-0 right-0 bottom-0 p-4 transform transition-transform duration-500 group-hover:-translate-y-1">
+                      <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90 ${
+                        activeGalleryCard === 2 ? 'opacity-90' : ''
+                      }`}></div>
+                      <div className={`absolute left-0 right-0 bottom-0 p-4 transform transition-transform duration-500 group-hover:-translate-y-1 ${
+                        activeGalleryCard === 2 ? '-translate-y-1' : ''
+                      }`}>
                         <h3 className="max-w-[12ch] text-[14px] sm:text-[15px] md:text-[16px] leading-[1.15] tracking-tight font-bold text-white">
                           Atención infantil y familiar
                         </h3>
@@ -3339,7 +3367,10 @@ export default function App() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.6, delay: 0.4 }}
                       viewport={{ once: true }}
-                      className="group relative rounded-2xl overflow-hidden min-h-[173px] pro-card shadow-md cursor-pointer"
+                      tabIndex={0}
+                      onClick={() => setActiveGalleryCard(prev => prev === 3 ? null : 3)}
+                      onTouchStart={() => setActiveGalleryCard(3)}
+                      className="group relative rounded-2xl overflow-hidden min-h-[173px] pro-card shadow-md cursor-pointer select-none touch-manipulation focus:outline-hidden"
                     >
                       <img
                         src="/images/dr-fabio-mora-adultos.jpg"
@@ -3347,10 +3378,16 @@ export default function App() {
                         width={297}
                         height={400}
                         loading="lazy"
-                        className="absolute inset-0 w-full h-full object-cover blur-[2px] md:blur-[2.5px] scale-[1.02] group-hover:blur-none group-hover:scale-[1.06] transition-[filter,transform] duration-700 ease-out"
+                        className={`absolute inset-0 w-full h-full object-cover transition-[filter,transform] duration-500 ease-out group-hover:blur-none group-hover:scale-[1.06] group-active:blur-none group-active:scale-[1.06] ${
+                          activeGalleryCard === 3 ? 'blur-none scale-[1.06]' : 'blur-[2px] md:blur-[2.5px] scale-[1.02]'
+                        }`}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
-                      <div className="absolute left-0 right-0 bottom-0 p-4 transform transition-transform duration-500 group-hover:-translate-y-1">
+                      <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90 ${
+                        activeGalleryCard === 3 ? 'opacity-90' : ''
+                      }`}></div>
+                      <div className={`absolute left-0 right-0 bottom-0 p-4 transform transition-transform duration-500 group-hover:-translate-y-1 ${
+                        activeGalleryCard === 3 ? '-translate-y-1' : ''
+                      }`}>
                         <h3 className="max-w-[12ch] text-[14px] sm:text-[15px] md:text-[16px] leading-[1.15] tracking-tight font-bold text-white">
                           Soluciones a tu medida
                         </h3>
