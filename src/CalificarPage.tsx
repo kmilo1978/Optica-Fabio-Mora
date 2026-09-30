@@ -119,23 +119,35 @@ export default function CalificarPage({ onBack, lang = 'es' }: CalificarPageProp
   return (
     <div className="min-h-screen bg-[#FCFCFD] text-[#15171C] flex flex-col justify-between selection:bg-[rgb(122,24,35)] selection:text-white">
       {/* Barra Superior con botón para volver */}
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 py-3.5 px-4 sm:px-6 lg:px-8 shadow-2xs">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <button
-            onClick={onBack}
-            className="inline-flex items-center gap-2 text-[13px] font-bold text-[#555963] hover:text-[rgb(122,24,35)] transition-colors active:scale-95 cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>{isEn ? 'Return to main site' : 'Volver al sitio principal'}</span>
-          </button>
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 py-3.5 px-4 sm:px-6 lg:px-8 shadow-2xs">
+        <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
+          {/* Logo a la izquierda */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <a href="#inicio" onClick={onBack} className="flex items-center gap-2 group py-0.5" aria-label="Volver al inicio">
+              <img 
+                src="/images/logo-opticas-popular.png" 
+                alt="Logo Oficial Ópticas Popular" 
+                className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105" 
+              />
+            </a>
 
-          <a href="#inicio" onClick={onBack} className="flex items-center gap-2 group py-0.5">
-            <img 
-              src="/images/logo-opticas-popular.png" 
-              alt="Logo Oficial Ópticas Popular" 
-              className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105" 
-            />
-          </a>
+            <div className="h-5 w-px bg-gray-200 hidden sm:block" />
+
+            <div className="hidden sm:flex items-center gap-2 text-[12px] text-gray-500">
+              <span className="font-semibold text-gray-700">{isEn ? 'Patient Experience' : 'Experiencia del Paciente'}</span>
+            </div>
+          </div>
+
+          {/* Botón Volver a la derecha */}
+          <button
+            type="button"
+            onClick={onBack}
+            className="inline-flex items-center gap-2 h-9 px-3.5 rounded-xl bg-gray-50 hover:bg-gray-100 text-[#15171C] font-semibold text-[13px] border border-gray-200 transition-all active:scale-95 cursor-pointer"
+            title={isEn ? 'Return to main site' : 'Volver al sitio principal'}
+          >
+            <ArrowLeft className="w-4 h-4 text-[rgb(122,24,35)]" />
+            <span>{isEn ? 'Back to Home' : 'Volver al Inicio'}</span>
+          </button>
         </div>
       </header>
 

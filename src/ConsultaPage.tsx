@@ -151,16 +151,15 @@ export default function ConsultaPage({ onBack, lang = 'es', onNavigate }: Consul
       {/* Barra Superior con Navegación y Retorno */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-2xs">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+          {/* Logo a la izquierda */}
           <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={onBack}
-              className="inline-flex items-center gap-2 h-10 px-3.5 rounded-xl bg-gray-50 hover:bg-gray-100 text-[#15171C] font-semibold text-[13px] border border-gray-200 transition-all active:scale-95 cursor-pointer"
-              title={isEn ? 'Back to main website' : 'Volver a la página principal'}
-            >
-              <ArrowLeft className="w-4 h-4 text-[rgb(122,24,35)]" />
-              <span>{isEn ? 'Back to Home' : 'Volver al Inicio'}</span>
-            </button>
+            <a href="#inicio" onClick={onBack} className="shrink-0 group flex items-center py-0.5" aria-label="Volver al inicio">
+              <img 
+                src="/images/logo-opticas-popular.png" 
+                alt="Ópticas Popular" 
+                className="h-9 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+              />
+            </a>
 
             <div className="h-6 w-px bg-gray-200 hidden sm:block" />
 
@@ -171,13 +170,16 @@ export default function ConsultaPage({ onBack, lang = 'es', onNavigate }: Consul
             </div>
           </div>
 
-          <a href="#inicio" onClick={onBack} className="shrink-0">
-            <img 
-              src="/images/logo-opticas-popular.png" 
-              alt="Ópticas Popular" 
-              className="h-9 sm:h-10 w-auto object-contain" 
-            />
-          </a>
+          {/* Botón Volver al Inicio a la derecha */}
+          <button
+            type="button"
+            onClick={onBack}
+            className="inline-flex items-center gap-2 h-10 px-3.5 rounded-xl bg-gray-50 hover:bg-gray-100 text-[#15171C] font-semibold text-[13px] border border-gray-200 transition-all active:scale-95 cursor-pointer"
+            title={isEn ? 'Back to main website' : 'Volver a la página principal'}
+          >
+            <ArrowLeft className="w-4 h-4 text-[rgb(122,24,35)]" />
+            <span>{isEn ? 'Back to Home' : 'Volver al Inicio'}</span>
+          </button>
         </div>
       </header>
 
