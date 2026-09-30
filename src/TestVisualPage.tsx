@@ -200,7 +200,7 @@ I would like to schedule a comprehensive evaluation at Plaza Higuerones.`
 
 Me gustaría que me asesoren o coordinar una cita de valoración en consultorio (Plaza Higuerones).`;
 
-    return `https://wa.me/50672760215?text=${encodeURIComponent(text)}`;
+    return `https://wa.me/50625150002?text=${encodeURIComponent(text)}`;
   };
 
   return (
@@ -1264,9 +1264,9 @@ Me gustaría que me asesoren o coordinar una cita de valoración en consultorio 
                   </a>
 
                   <a
-                    href="tel:+50672760215"
+                    href="tel:+50625150002"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-6 rounded-2xl bg-white border border-gray-200 text-[#15171C] text-[13.5px] font-bold hover:bg-gray-50 transition-all cursor-pointer shadow-xs active:scale-95"
-                    title="Llamar: 2515-0002 / 7276-0215"
+                    title="Llamar: 2515-0002"
                   >
                     <Phone className="w-4 h-4 text-[rgb(122,24,35)]" />
                     <span>{isEn ? 'Call: 2515-0002' : 'Llamar: 2515-0002'}</span>

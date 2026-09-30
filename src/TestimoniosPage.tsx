@@ -476,7 +476,7 @@ export default function TestimoniosPage({ onBack, lang = 'es', onNavigate }: Tes
             </a>
 
             <a
-              href="https://wa.me/50688383820?text=Hola%20Dr.%20Fabio%20Mora,%20deseo%20agendar%20una%20cita%20visual"
+              href="https://wa.me/50625150002?text=Hola%20Dr.%20Fabio%20Mora,%20deseo%20agendar%20una%20cita%20visual"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 h-9 px-3.5 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[12px] sm:text-[13px] font-bold shadow-xs transition-all duration-200 cursor-pointer"
@@ -588,7 +588,7 @@ export default function TestimoniosPage({ onBack, lang = 'es', onNavigate }: Tes
             </a>
 
             <a
-              href="https://wa.me/50688383820?text=Hola%20Dr.%20Fabio%20Mora,%20le%C3%AD%20las%20rese%C3%B1as%20y%20deseo%20agendar%20mi%20cita%20visual"
+              href="https://wa.me/50625150002?text=Hola%20Dr.%20Fabio%20Mora,%20le%C3%AD%20las%20rese%C3%B1as%20y%20deseo%20agendar%20mi%20cita%20visual"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-[13.5px] font-bold shadow-2xs transition-all duration-200 active:scale-95 cursor-pointer"
@@ -807,7 +807,9 @@ export default function TestimoniosPage({ onBack, lang = 'es', onNavigate }: Tes
       {/* Pie de Página */}
       <Footer 
         onNavigate={(view, hash) => {
-          if (view === 'landing') {
+          if (onNavigate) {
+            onNavigate(view as any, hash);
+          } else if (view === 'landing' || view === 'home') {
             onBack();
             if (hash && hash !== '#inicio') {
               setTimeout(() => {
@@ -815,8 +817,6 @@ export default function TestimoniosPage({ onBack, lang = 'es', onNavigate }: Tes
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }, 100);
             }
-          } else if (onNavigate) {
-            onNavigate(view as any, hash);
           }
         }} 
         lang={lang} 

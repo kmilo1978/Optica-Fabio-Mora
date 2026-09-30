@@ -255,9 +255,9 @@ export default function ContactoPage({ onBack, lang = 'es', onNavigate }: Contac
                       <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-800">
                         {isEn ? 'Official WhatsApp' : 'WhatsApp Oficial'}
                       </div>
-                      <div className="text-[14px] font-bold text-[#14161B] mt-0.5">+506 7276 0215</div>
+                      <div className="text-[14px] font-bold text-[#14161B] mt-0.5">+506 2515 0002</div>
                       <a
-                        href="https://wa.me/50672760215"
+                        href="https://wa.me/50625150002"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-[12px] font-bold text-emerald-700 hover:text-emerald-900 mt-1"
@@ -277,7 +277,7 @@ export default function ContactoPage({ onBack, lang = 'es', onNavigate }: Contac
                       <div className="text-[11px] font-bold uppercase tracking-wider text-gray-500">
                         {isEn ? 'Phone Calls' : 'Llamadas Telefónicas'}
                       </div>
-                      <div className="text-[13.5px] font-bold text-[#14161B] mt-0.5">+506 7276 0215 · +506 2515 0002</div>
+                      <div className="text-[13.5px] font-bold text-[#14161B] mt-0.5">+506 2515 0002</div>
                       <p className="text-[11.5px] text-gray-500 mt-0.5">
                         {isEn ? 'Available during opening hours' : 'Coordinación directa de citas'}
                       </p>
@@ -306,7 +306,7 @@ export default function ContactoPage({ onBack, lang = 'es', onNavigate }: Contac
                 {/* Botón Principal de WhatsApp */}
                 <div className="pt-2">
                   <a
-                    href="https://wa.me/50672760215?text=Hola%20Dr.%20Fabio%20Mora,%20deseo%20coordinar%20una%20cita%20de%20valoraci%C3%B3n%20en%20Plaza%20Higuerones."
+                    href="https://wa.me/50625150002?text=Hola%20Dr.%20Fabio%20Mora,%20deseo%20coordinar%20una%20cita%20de%20valoraci%C3%B3n%20en%20Plaza%20Higuerones."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 h-13 px-6 rounded-2xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer btn-shimmer"

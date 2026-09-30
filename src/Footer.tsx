@@ -161,13 +161,10 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
                 <a 
                   href="#testimonios-google" 
                   onClick={(e) => handleLinkClick(e, 'testimonios-page', '#testimonios-google')}
-                  className="text-white font-semibold hover:translate-x-1 inline-flex items-center gap-1.5 transition-all group"
+                  className="text-gray-300 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
-                  <ChevronRight className="w-3.5 h-3.5 text-rose-400 group-hover:translate-x-0.5 transition-transform" />
-                  <span className="text-amber-200 group-hover:text-amber-100 transition-colors">{lang === 'es' ? 'Muro Reseñas Google' : 'Google Reviews Wall'}</span>
-                  <span className="px-1.5 py-0.5 rounded text-[9.5px] font-bold bg-amber-500/20 text-amber-300 uppercase tracking-wider ml-1 border border-amber-500/30">
-                    5.0 ★
-                  </span>
+                  <ChevronRight className="w-3.5 h-3.5 text-rose-400" />
+                  <span>{lang === 'es' ? 'Muro Reseñas Google' : 'Google Reviews Wall'}</span>
                 </a>
               </li>
               <li>
@@ -181,33 +178,27 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
                 </a>
               </li>
 
-              {/* Nueva Función: Formulario de Consulta WhatsApp */}
+              {/* Formulario de Consulta WhatsApp */}
               <li>
                 <a
                   href="#consulta"
                   onClick={(e) => handleLinkClick(e, 'consulta', '#consulta')}
-                  className="text-white font-semibold hover:translate-x-1 inline-flex items-center gap-1.5 transition-all group"
+                  className="text-gray-300 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
-                  <ChevronRight className="w-3.5 h-3.5 text-rose-400 group-hover:translate-x-0.5 transition-transform" />
-                  <span className="text-rose-200 group-hover:text-white transition-colors">{t.footer.navInquiry}</span>
-                  <span className="px-1.5 py-0.5 rounded text-[9.5px] font-bold bg-[rgb(122,24,35)] text-white uppercase tracking-wider ml-1 border border-white/20">
-                    {t.footer.navInquiryBadge}
-                  </span>
+                  <ChevronRight className="w-3.5 h-3.5 text-rose-400" />
+                  <span>{t.footer.navInquiry}</span>
                 </a>
               </li>
 
-              {/* Nueva Subcategoría: Test Visual Online Interactivo */}
+              {/* Test Visual Online Interactivo */}
               <li>
                 <a
                   href="#test-visual"
                   onClick={(e) => handleLinkClick(e, 'test-visual', '#test-visual')}
-                  className="text-white font-semibold hover:translate-x-1 inline-flex items-center gap-1.5 transition-all group"
+                  className="text-gray-300 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
-                  <ChevronRight className="w-3.5 h-3.5 text-rose-400 group-hover:translate-x-0.5 transition-transform" />
-                  <span className="text-rose-200 group-hover:text-white transition-colors">{lang === 'es' ? 'Test Visual Online' : 'Online Vision Test'}</span>
-                  <span className="px-1.5 py-0.5 rounded text-[9.5px] font-bold bg-[rgb(122,24,35)] text-white uppercase tracking-wider ml-1 border border-white/20">
-                    {lang === 'es' ? '3 min' : '3 min'}
-                  </span>
+                  <ChevronRight className="w-3.5 h-3.5 text-rose-400" />
+                  <span>{lang === 'es' ? 'Test Visual Online' : 'Online Vision Test'}</span>
                 </a>
               </li>
 
@@ -216,13 +207,10 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
                 <a
                   href="#calificar"
                   onClick={(e) => handleLinkClick(e, 'calificar', '#calificar')}
-                  className="text-gray-300 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all font-semibold"
+                  className="text-gray-300 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
                   <ChevronRight className="w-3.5 h-3.5 text-rose-400" />
                   <span>{t.footer.navRate}</span>
-                  <span className="px-1.5 py-0.5 rounded text-[9.5px] font-bold bg-[rgb(122,24,35)] text-white uppercase tracking-wider ml-1">
-                    {t.footer.navRateBadge}
-                  </span>
                 </a>
               </li>
 
@@ -231,7 +219,7 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
                 <a
                   href="#contacto"
                   onClick={(e) => handleLinkClick(e, 'contacto', '#contacto')}
-                  className="text-white hover:text-rose-200 hover:translate-x-1 inline-flex items-center gap-1.5 transition-all font-medium"
+                  className="text-gray-300 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
                   <ChevronRight className="w-3.5 h-3.5 text-rose-400" />
                   <span>{lang === 'es' ? 'Ubicación, Waze y Horarios' : 'Location, Waze & Hours'}</span>
@@ -322,20 +310,20 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
 
               <div className="pt-2 border-t border-white/10 space-y-2">
                 <a
-                  href="https://wa.me/50672760215"
+                  href="https://wa.me/50625150002"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white font-bold text-[12.5px] transition-all shadow-sm hover:shadow active:scale-98"
                 >
                   <MessageCircle className="w-4 h-4 text-white !text-white" />
-                  <span className="text-white !text-white">{t.footer.whatsappLabel}: 7276-0215</span>
+                  <span className="text-white !text-white">{t.footer.whatsappLabel}: 2515-0002</span>
                 </a>
                 <a
-                  href="tel:+50672760215"
+                  href="tel:+50625150002"
                   className="w-full inline-flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white text-[12px] font-medium transition-colors"
                 >
                   <Phone className="w-3.5 h-3.5 text-rose-300" />
-                  <span>{t.footer.phoneLabel}: (+506) 7276-0215</span>
+                  <span>{t.footer.phoneLabel}: (+506) 2515-0002</span>
                 </a>
               </div>
             </div>
@@ -350,7 +338,7 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
           <div className="flex items-center gap-5 text-[12px]">
             <a 
               href="#contacto" 
-              onClick={(e) => handleLinkClick(e, 'landing', '#contacto')}
+              onClick={(e) => handleLinkClick(e, 'contacto', '#contacto')}
               className="text-gray-400 hover:text-white transition-colors cursor-pointer"
             >
               {t.footer.privacy}
@@ -358,7 +346,7 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
             <span className="text-gray-700">·</span>
             <a 
               href="#contacto" 
-              onClick={(e) => handleLinkClick(e, 'landing', '#contacto')}
+              onClick={(e) => handleLinkClick(e, 'contacto', '#contacto')}
               className="text-gray-400 hover:text-white transition-colors cursor-pointer"
             >
               {t.footer.terms}

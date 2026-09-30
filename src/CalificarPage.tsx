@@ -112,7 +112,7 @@ export default function CalificarPage({ onBack, lang = 'es', onNavigate }: Calif
     const textoMensaje = isEn
       ? `Hello Dr. Fabio Mora, I rated my visit at Opticas Popular with *${rating} of 5*.%0A%0A*Name:* ${nombre ? encodeURIComponent(nombre) : 'Anonymous'}%0A*What can we improve?*%0A${encodeURIComponent(comentario || 'I would like to share feedback.')}`
       : `Hola Dr. Fabio Mora, califiqué mi visita en Ópticas Popular con *${rating} de 5*.%0A%0A*Nombre:* ${nombre ? encodeURIComponent(nombre) : 'Anónimo'}%0A*¿Qué podemos mejorar?*%0A${encodeURIComponent(comentario || 'Deseo dejar constancia para su retroalimentación.')}`;
-    window.open(`https://wa.me/50672760215?text=${textoMensaje}`, '_blank');
+    window.open(`https://wa.me/50625150002?text=${textoMensaje}`, '_blank');
     setEnviado(true);
   };
 
@@ -369,7 +369,7 @@ export default function CalificarPage({ onBack, lang = 'es', onNavigate }: Calif
               <div className="space-y-3">
                 {/* Botón Principal Corporativo: Google My Business */}
                 <a
-                  href="https://maps.google.com/?q=Ópticas+Popular+Plaza+Higuerones+San+Rafael+Abajo+Desamparados"
+                  href="https://share.google/BUvr9vBhe3MZzBL6Y"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: '#ffffff' }}

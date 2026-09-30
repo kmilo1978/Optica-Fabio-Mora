@@ -151,7 +151,7 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
           {/* Canales de contacto directos */}
           <div className="flex items-center gap-2.5">
             <a
-              href="tel:+50672760215"
+              href="tel:+50625150002"
               className="hidden sm:inline-flex items-center gap-1.5 h-9 px-3.5 rounded-xl border border-gray-200 text-[#15171C] hover:text-[rgb(122,24,35)] hover:border-[rgb(122,24,35)] text-[12px] font-bold transition-all duration-200 active:scale-95 cursor-pointer shadow-2xs"
             >
               <Phone className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
@@ -159,7 +159,7 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
             </a>
 
             <a
-              href="https://wa.me/50672760215"
+              href="https://wa.me/50625150002"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 h-9 px-4 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[12px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
@@ -410,7 +410,7 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
                   {/* Botón CTA con texto blanco y btn-shimmer */}
                   <div className="mt-6 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-3">
                     <a
-                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                      href={`https://wa.me/50625150002?text=${encodeURIComponent(
                         isEn
                           ? 'Hello Dr. Fabio Mora, I would like advice and pricing for digital progressive lenses.'
                           : '¡Hola Dr. Fabio Mora! Quisiera consultar por la cotización y prueba de lentes progresivas digitales.'
@@ -582,7 +582,7 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
                   {/* Botón CTA con texto blanco y btn-shimmer */}
                   <div className="mt-6 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-3">
                     <a
-                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                      href={`https://wa.me/50625150002?text=${encodeURIComponent(
                         isEn
                           ? 'Hello Dr. Fabio Mora, I would like details about Transitions lenses.'
                           : '¡Hola Dr. Fabio Mora! Quisiera consultar por cristales Transitions fotosensibles en Ópticas Popular.'
@@ -715,7 +715,7 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
                   {/* Botón CTA con texto blanco y btn-shimmer */}
                   <div className="mt-6 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-3">
                     <a
-                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                      href={`https://wa.me/50625150002?text=${encodeURIComponent(
                         isEn
                           ? 'Hello Dr. Fabio Mora, I would like advice on blue light and anti-reflective lenses.'
                           : '¡Hola Dr. Fabio Mora! Quisiera consultar por cristales con filtro de luz azul y antirreflejo.'
@@ -932,7 +932,9 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
       {/* Pie de Página */}
       <Footer 
         onNavigate={(view, hash) => {
-          if (view === 'landing') {
+          if (onNavigate) {
+            onNavigate(view as any, hash);
+          } else if (view === 'landing' || view === 'home') {
             onBack();
             if (hash && hash !== '#inicio') {
               setTimeout(() => {
@@ -940,8 +942,6 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }, 100);
             }
-          } else if (onNavigate) {
-            onNavigate(view as any, hash);
           }
         }} 
         lang={lang} 

@@ -142,7 +142,7 @@ export default function ConsultaPage({ onBack, lang = 'es', onNavigate }: Consul
     lines.push(isEn ? 'Looking forward to your reply. Thank you.' : 'Quedo atento(a) a su respuesta. Muchas gracias.');
 
     const fullMessage = lines.join('\n');
-    const waUrl = `https://wa.me/50672760215?text=${encodeURIComponent(fullMessage)}`;
+    const waUrl = `https://wa.me/50625150002?text=${encodeURIComponent(fullMessage)}`;
 
     setIsSubmitted(true);
     window.open(waUrl, '_blank', 'noopener,noreferrer');

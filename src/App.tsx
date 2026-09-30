@@ -886,7 +886,7 @@ function LensTechnologyShowcase({ lang }: { lang: Language }) {
                 {/* Botón CTA */}
                 <div className="mt-6 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-3">
                   <a
-                    href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                    href={`https://wa.me/50625150002?text=${encodeURIComponent(
                       lang === 'es'
                         ? '¡Hola Dr. Fabio Mora! Quisiera consultar por la cotización y prueba de lentes progresivas digitales.'
                         : 'Hello Dr. Fabio Mora, I would like advice and pricing for digital progressive lenses.'
@@ -1063,7 +1063,7 @@ function LensTechnologyShowcase({ lang }: { lang: Language }) {
                 {/* Botón CTA */}
                 <div className="mt-6 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-3">
                   <a
-                    href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                    href={`https://wa.me/50625150002?text=${encodeURIComponent(
                       lang === 'es'
                         ? '¡Hola Dr. Fabio Mora! Quisiera consultar por cristales Transitions fotosensibles en Ópticas Popular.'
                         : 'Hello Dr. Fabio Mora, I would like details about Transitions lenses.'
@@ -1201,7 +1201,7 @@ function LensTechnologyShowcase({ lang }: { lang: Language }) {
                 {/* Botón CTA */}
                 <div className="mt-6 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-3">
                   <a
-                    href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                    href={`https://wa.me/50625150002?text=${encodeURIComponent(
                       lang === 'es'
                         ? '¡Hola Dr. Fabio Mora! Quisiera consultar por cristales con filtro de luz azul y antirreflejo.'
                         : 'Hello Dr. Fabio Mora, I would like advice on blue light and anti-reflective lenses.'
@@ -1715,49 +1715,83 @@ export default function App() {
     };
   }, [isMenuOpen]);
 
+  const handleGlobalNavigate = (view: 'landing' | 'home' | 'consulta' | 'calificar' | 'test-visual' | 'contacto' | 'tecnologia-cristales' | 'testimonios-page', hash?: string) => {
+    if (view === 'landing' || view === 'home') {
+      setCurrentView('home');
+      window.location.hash = hash || '';
+      if (hash && hash !== '#inicio') {
+        setTimeout(() => {
+          const el = document.querySelector(hash);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          else window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (view === 'consulta') {
+      if (currentView === 'consulta') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setCurrentView('consulta');
+        window.location.hash = '#consulta';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (view === 'calificar') {
+      if (currentView === 'calificar') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setCurrentView('calificar');
+        window.location.hash = '#calificar';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (view === 'test-visual') {
+      if (currentView === 'test-visual') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setCurrentView('test-visual');
+        window.location.hash = '#test-visual';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (view === 'contacto') {
+      if (currentView === 'contacto') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setCurrentView('contacto');
+        window.location.hash = '#contacto';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (view === 'tecnologia-cristales') {
+      if (currentView === 'tecnologia-cristales') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setCurrentView('tecnologia-cristales');
+        window.location.hash = '#tecnologia-cristales';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (view === 'testimonios-page') {
+      if (currentView === 'testimonios-page') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setCurrentView('testimonios-page');
+        window.location.hash = '#testimonios-google';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else {
+      window.location.hash = hash || '';
+      if (hash) {
+        const el = document.querySelector(hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   if (currentView === 'calificar') {
     return (
       <>
         <CalificarPage 
-          onBack={() => {
-            window.location.hash = '';
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }} 
+          onBack={() => handleGlobalNavigate('home')} 
           lang={lang}
-          onNavigate={(view, hash) => {
-            if (view === 'landing' || view === 'home') {
-              setCurrentView('home');
-              window.location.hash = hash || '';
-              if (hash && hash !== '#inicio') {
-                setTimeout(() => {
-                  const el = document.querySelector(hash);
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  else window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 100);
-              } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            } else if (view === 'consulta') {
-              setCurrentView('consulta');
-              window.location.hash = '#consulta';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'calificar') {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'test-visual') {
-              setCurrentView('test-visual');
-              window.location.hash = '#test-visual';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'contacto') {
-              setCurrentView('contacto');
-              window.location.hash = '#contacto';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'testimonios-page') {
-              setCurrentView('testimonios-page');
-              window.location.hash = '#testimonios-google';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-          }}
+          onNavigate={handleGlobalNavigate}
         />
         <VisualAccessibilityWidget lang={lang} />
       </>
@@ -1768,45 +1802,9 @@ export default function App() {
     return (
       <>
         <ConsultaPage 
-          onBack={() => {
-            window.location.hash = '';
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }} 
+          onBack={() => handleGlobalNavigate('home')} 
           lang={lang}
-          onNavigate={(view, hash) => {
-            if (view === 'landing' || view === 'home') {
-              setCurrentView('home');
-              window.location.hash = hash || '';
-              if (hash && hash !== '#inicio') {
-                setTimeout(() => {
-                  const el = document.querySelector(hash);
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  else window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 100);
-              } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            } else if (view === 'consulta') {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'calificar') {
-              setCurrentView('calificar');
-              window.location.hash = '#calificar';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'test-visual') {
-              setCurrentView('test-visual');
-              window.location.hash = '#test-visual';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'contacto') {
-              setCurrentView('contacto');
-              window.location.hash = '#contacto';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'testimonios-page') {
-              setCurrentView('testimonios-page');
-              window.location.hash = '#testimonios-google';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-          }}
+          onNavigate={handleGlobalNavigate}
         />
         <VisualAccessibilityWidget lang={lang} />
       </>
@@ -1817,45 +1815,9 @@ export default function App() {
     return (
       <>
         <TestVisualPage 
-          onBack={() => {
-            window.location.hash = '';
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }} 
+          onBack={() => handleGlobalNavigate('home')} 
           lang={lang}
-          onNavigate={(view, hash) => {
-            if (view === 'landing' || view === 'home') {
-              setCurrentView('home');
-              window.location.hash = hash || '';
-              if (hash && hash !== '#inicio') {
-                setTimeout(() => {
-                  const el = document.querySelector(hash);
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  else window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 100);
-              } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            } else if (view === 'consulta') {
-              setCurrentView('consulta');
-              window.location.hash = '#consulta';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'calificar') {
-              setCurrentView('calificar');
-              window.location.hash = '#calificar';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'test-visual') {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'contacto') {
-              setCurrentView('contacto');
-              window.location.hash = '#contacto';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'testimonios-page') {
-              setCurrentView('testimonios-page');
-              window.location.hash = '#testimonios-google';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-          }}
+          onNavigate={handleGlobalNavigate}
         />
         <VisualAccessibilityWidget lang={lang} />
       </>
@@ -1866,49 +1828,9 @@ export default function App() {
     return (
       <>
         <ContactoPage 
-          onBack={() => {
-            window.location.hash = '';
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }} 
+          onBack={() => handleGlobalNavigate('home')} 
           lang={lang}
-          onNavigate={(view, hash) => {
-            if (view === 'landing' || view === 'home') {
-              setCurrentView('home');
-              window.location.hash = hash || '';
-              if (hash && hash !== '#inicio') {
-                setTimeout(() => {
-                  const el = document.querySelector(hash);
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  else window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 100);
-              } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            } else if (view === 'consulta') {
-              setCurrentView('consulta');
-              window.location.hash = '#consulta';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'calificar') {
-              setCurrentView('calificar');
-              window.location.hash = '#calificar';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'test-visual') {
-              setCurrentView('test-visual');
-              window.location.hash = '#test-visual';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'contacto') {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if ((view as string) === 'tecnologia-cristales') {
-              setCurrentView('tecnologia-cristales');
-              window.location.hash = '#tecnologia-cristales';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'testimonios-page') {
-              setCurrentView('testimonios-page');
-              window.location.hash = '#testimonios-google';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-          }}
+          onNavigate={handleGlobalNavigate}
         />
         <VisualAccessibilityWidget lang={lang} />
       </>
@@ -1919,49 +1841,9 @@ export default function App() {
     return (
       <>
         <TecnologiaCristalesPage 
-          onBack={() => {
-            window.location.hash = '';
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }} 
+          onBack={() => handleGlobalNavigate('home')} 
           lang={lang}
-          onNavigate={(view, hash) => {
-            if (view === 'landing' || view === 'home') {
-              setCurrentView('home');
-              window.location.hash = hash || '';
-              if (hash && hash !== '#inicio') {
-                setTimeout(() => {
-                  const el = document.querySelector(hash);
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  else window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 100);
-              } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            } else if (view === 'consulta') {
-              setCurrentView('consulta');
-              window.location.hash = '#consulta';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'calificar') {
-              setCurrentView('calificar');
-              window.location.hash = '#calificar';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'test-visual') {
-              setCurrentView('test-visual');
-              window.location.hash = '#test-visual';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'contacto') {
-              setCurrentView('contacto');
-              window.location.hash = '#contacto';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'tecnologia-cristales') {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'testimonios-page') {
-              setCurrentView('testimonios-page');
-              window.location.hash = '#testimonios-google';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-          }}
+          onNavigate={handleGlobalNavigate}
         />
         <VisualAccessibilityWidget lang={lang} />
       </>
@@ -1972,49 +1854,9 @@ export default function App() {
     return (
       <>
         <TestimoniosPage 
-          onBack={() => {
-            window.location.hash = '';
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }} 
+          onBack={() => handleGlobalNavigate('home')} 
           lang={lang}
-          onNavigate={(view, hash) => {
-            if (view === 'landing' || view === 'home') {
-              setCurrentView('home');
-              window.location.hash = hash || '';
-              if (hash && hash !== '#inicio') {
-                setTimeout(() => {
-                  const el = document.querySelector(hash);
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  else window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 100);
-              } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            } else if (view === 'consulta') {
-              setCurrentView('consulta');
-              window.location.hash = '#consulta';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'calificar') {
-              setCurrentView('calificar');
-              window.location.hash = '#calificar';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'test-visual') {
-              setCurrentView('test-visual');
-              window.location.hash = '#test-visual';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'contacto') {
-              setCurrentView('contacto');
-              window.location.hash = '#contacto';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'tecnologia-cristales') {
-              setCurrentView('tecnologia-cristales');
-              window.location.hash = '#tecnologia-cristales';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (view === 'testimonios-page') {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-          }}
+          onNavigate={handleGlobalNavigate}
         />
         <VisualAccessibilityWidget lang={lang} />
       </>
@@ -2185,9 +2027,9 @@ export default function App() {
 
                 {/* Botón de Llamar visible en móvil y mucho más grande y destacado en escritorio */}
                 <a
-                  href="tel:+50672760215"
+                  href="tel:+50625150002"
                   className="inline-flex items-center justify-center h-10 sm:h-11 px-3.5 sm:px-5 rounded-xl bg-white border-2 border-[rgb(122,24,35)] hover:bg-[rgb(122,24,35)] text-[rgb(122,24,35)] hover:text-white text-[13px] sm:text-[14px] font-black shadow-xs hover:shadow-md transition-all duration-200 active:scale-95 cursor-pointer group shrink-0"
-                  title={lang === 'es' ? 'Llamar a la Óptica: 2515-0002 / 7276-0215' : 'Call our clinic: 2515-0002 / 7276-0215'}
+                  title={lang === 'es' ? 'Llamar a la Óptica: 2515-0002' : 'Call our clinic: 2515-0002'}
                 >
                   <Phone className="w-4 h-4 mr-1.5 sm:mr-2 text-[rgb(122,24,35)] group-hover:text-white transition-colors" />
                   <span className="tracking-wide">{lang === 'es' ? 'Llamar' : 'Call'}</span>
@@ -2420,15 +2262,15 @@ export default function App() {
                     <div className="p-4 border-t border-gray-100 bg-[#F8F9FB] space-y-2">
                       <div className="grid grid-cols-2 gap-2">
                         <a
-                          href="tel:+50672760215"
+                          href="tel:+50625150002"
                           className="inline-flex items-center justify-center gap-2 h-14 rounded-xl bg-white hover:bg-gray-50 border-2 border-[rgb(122,24,35)] text-[rgb(122,24,35)] text-[14px] font-black shadow-xs active:scale-95 transition-all duration-200 cursor-pointer"
-                          title="2515-0002 / 7276-0215"
+                          title="2515-0002"
                         >
                           <Phone className="w-4.5 h-4.5 text-[rgb(122,24,35)]" />
                           <span>{lang === 'es' ? 'Llamar al 2515-0002' : 'Call 2515-0002'}</span>
                         </a>
                         <a
-                          href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                          href={`https://wa.me/50625150002?text=${encodeURIComponent(
                             lang === 'es' 
                               ? '¡Hola Dr. Fabio Mora! Quisiera agendar una cita de valoración visual en Ópticas Popular.' 
                               : 'Hello Dr. Fabio Mora, I would like to schedule an eye examination at Opticas Popular.'
@@ -2545,7 +2387,7 @@ export default function App() {
                     className="mt-6 flex flex-col sm:flex-row sm:flex-wrap gap-3 w-full sm:w-auto max-w-[440px] justify-center md:justify-start"
                   >
                     <a
-                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                      href={`https://wa.me/50625150002?text=${encodeURIComponent(
                         lang === 'es'
                           ? '¡Hola Dr. Fabio Mora! Deseo agendar mi examen visual en Plaza Higuerones.'
                           : 'Hello Dr. Fabio Mora, I would like to book my eye exam at Plaza Higuerones.'
@@ -2954,7 +2796,7 @@ export default function App() {
                   </p>
 
                   <a 
-                    href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                    href={`https://wa.me/50625150002?text=${encodeURIComponent(
                       lang === 'es'
                         ? `Hola Dr. Fabio Mora, deseo consultar por el servicio de ${service.title} y coordinar mi cita en Ópticas Popular.`
                         : `Hello Dr. Fabio Mora, I would like to inquire about ${service.title} and book an appointment at Opticas Popular.`
@@ -3206,7 +3048,7 @@ export default function App() {
                       {/* Botón de Acción Directo en Blanco con Letra Vino Tinto de Alta Legibilidad */}
                       <div className="mt-6 pt-5 border-t border-gray-100 flex flex-col gap-2">
                         <a
-                          href={`https://wa.me/50672760215?text=${encodeURIComponent(group.waMessage)}`}
+                          href={`https://wa.me/50625150002?text=${encodeURIComponent(group.waMessage)}`}
                           className="w-full inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[13.5px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
                         >
                           <MessageCircle className="w-4 h-4 text-white !text-white" />
@@ -3245,7 +3087,7 @@ export default function App() {
                 </div>
 
                 <a 
-                  href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                  href={`https://wa.me/50625150002?text=${encodeURIComponent(
                     lang === 'es'
                       ? '¡Hola Dr. Fabio Mora! Vi las instalaciones de la clínica y deseo agendar una valoración en Plaza Higuerones.'
                       : 'Hello Dr. Fabio Mora, I saw your clinic facilities and would like to book an appointment at Plaza Higuerones.'
@@ -3411,7 +3253,7 @@ export default function App() {
                     <span>{lang === 'es' ? 'Calificar experiencia' : 'Rate experience'}</span>
                   </a>
                   <a 
-                    href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                    href={`https://wa.me/50625150002?text=${encodeURIComponent(
                       lang === 'es'
                         ? '¡Hola Dr. Fabio Mora! Leí las opiniones de sus pacientes y me gustaría agendar una valoración con usted.'
                         : 'Hello Dr. Fabio Mora, I read the patient testimonials and would like to schedule an eye evaluation.'
@@ -3576,7 +3418,7 @@ export default function App() {
                     </div>
 
                     <a
-                      href="https://wa.me/50672760215"
+                      href="https://wa.me/50625150002"
                       className="inline-flex items-center justify-center h-11 px-7 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[13px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 btn-shimmer shrink-0 border border-white/25"
                     >
                       <span className="text-white !text-white">{lang === 'es' ? 'Quiero agendar mi cita' : 'Book my appointment'}</span>
@@ -3700,7 +3542,7 @@ export default function App() {
                   {/* Botones de Acción */}
                   <div className="mt-7 flex flex-wrap items-center justify-center md:justify-start gap-3">
                     <a 
-                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                      href={`https://wa.me/50625150002?text=${encodeURIComponent(
                         lang === 'es' 
                           ? '¡Hola Dr. Fabio Mora! Le escribo desde su página web para coordinar una consulta con usted en Plaza Higuerones.' 
                           : 'Hello Dr. Fabio Mora, I am writing to schedule an appointment with you at Plaza Higuerones.'
@@ -3714,9 +3556,9 @@ export default function App() {
                     </a>
 
                     <a 
-                      href="tel:+50672760215"
+                      href="tel:+50625150002"
                       className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white hover:bg-gray-50 border border-gray-200 text-[#15171C] text-[13.5px] sm:text-[14px] font-bold shadow-2xs hover:shadow-xs transition-all duration-200 active:scale-95 cursor-pointer"
-                      title={lang === 'es' ? 'Llamar: 2515-0002 / 7276-0215' : 'Call: 2515-0002 / 7276-0215'}
+                      title={lang === 'es' ? 'Llamar: 2515-0002' : 'Call: 2515-0002'}
                     >
                       <Phone className="w-4 h-4 text-[rgb(122,24,35)]" />
                       <span>{lang === 'es' ? 'Llamar: 2515-0002' : 'Call: 2515-0002'}</span>
@@ -3746,7 +3588,7 @@ export default function App() {
                 </p>
               </div>
               <a 
-                href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                href={`https://wa.me/50625150002?text=${encodeURIComponent(
                   lang === 'es'
                     ? '¡Hola Dr. Fabio Mora! Deseo coordinar una consulta de valoración visual en Ópticas Popular.'
                     : 'Hello Dr. Fabio Mora, I would like to arrange an eye examination at Opticas Popular.'
@@ -3859,31 +3701,7 @@ export default function App() {
           {/* Footer Corporativo de Alto Contraste y Bilingüe */}
           <Footer
             lang={lang}
-            onNavigate={(view, hash) => {
-              if (view === 'consulta') {
-                setCurrentView('consulta');
-                window.location.hash = '#consulta';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              } else if (view === 'calificar') {
-                setCurrentView('calificar');
-                window.location.hash = '#calificar';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              } else if (view === 'test-visual') {
-                setCurrentView('test-visual');
-                window.location.hash = '#test-visual';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              } else if (view === 'contacto') {
-                setCurrentView('contacto');
-                window.location.hash = '#contacto';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              } else {
-                window.location.hash = hash || '';
-                if (hash) {
-                  const el = document.querySelector(hash);
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }
-              }
-            }}
+            onNavigate={handleGlobalNavigate}
           />
 
           {/* Barra de Acción Rápida Inferior para Móviles (Mobile Sticky Bar) */}
@@ -3910,7 +3728,7 @@ export default function App() {
               </a>
 
               <a
-                href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                href={`https://wa.me/50625150002?text=${encodeURIComponent(
                   lang === 'es'
                     ? '¡Hola Dr. Fabio Mora! Deseo agendar una cita en Ópticas Popular Plaza Higuerones.'
                     : 'Hello Dr. Fabio Mora, I would like to book an appointment at Opticas Popular Plaza Higuerones.'
@@ -4159,7 +3977,7 @@ export default function App() {
                       </div>
 
                       <a
-                        href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                        href={`https://wa.me/50625150002?text=${encodeURIComponent(
                           `Hola Dr. Fabio Mora, realicé el test de confort visual en su web (${
                             selectedSymptom === 'borroso' ? 'dificultad para enfocar' :
                             selectedSymptom === 'pantallas' ? 'fatiga por pantallas' :
@@ -4219,7 +4037,7 @@ export default function App() {
 
       {/* Floating WhatsApp Button (solo visible en pantallas de escritorio / oculto en móviles) */}
         <motion.a
-          href="https://wa.me/50672760215"
+          href="https://wa.me/50625150002"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ scale: 0, opacity: 0 }}
