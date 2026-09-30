@@ -14,13 +14,13 @@ import { TRANSLATIONS, Language } from './translations';
 
 interface FooterProps {
   lang: Language;
-  onNavigate?: (view: 'landing' | 'consulta' | 'calificar' | 'test-visual', hash?: string) => void;
+  onNavigate?: (view: 'landing' | 'consulta' | 'calificar' | 'test-visual' | 'contacto', hash?: string) => void;
 }
 
 export default function Footer({ lang, onNavigate }: FooterProps) {
   const t = TRANSLATIONS[lang];
 
-  const handleLinkClick = (e: React.MouseEvent, view: 'landing' | 'consulta' | 'calificar' | 'test-visual', hash: string) => {
+  const handleLinkClick = (e: React.MouseEvent, view: 'landing' | 'consulta' | 'calificar' | 'test-visual' | 'contacto', hash: string) => {
     e.preventDefault();
     if (onNavigate) {
       onNavigate(view, hash);
@@ -208,6 +208,18 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
                   <span className="px-1.5 py-0.5 rounded text-[9.5px] font-bold bg-[rgb(122,24,35)] text-white uppercase tracking-wider ml-1">
                     {t.footer.navRateBadge}
                   </span>
+                </a>
+              </li>
+
+              {/* Ubicación & Contacto Dedicado */}
+              <li>
+                <a
+                  href="#contacto"
+                  onClick={(e) => handleLinkClick(e, 'contacto', '#contacto')}
+                  className="text-white hover:text-rose-200 hover:translate-x-1 inline-flex items-center gap-1.5 transition-all font-medium"
+                >
+                  <ChevronRight className="w-3.5 h-3.5 text-rose-400" />
+                  <span>{lang === 'es' ? 'Ubicación, Waze y Horarios' : 'Location, Waze & Hours'}</span>
                 </a>
               </li>
             </ul>

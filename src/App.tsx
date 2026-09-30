@@ -47,6 +47,7 @@ import { useRef } from 'react';
 import CalificarPage from './CalificarPage';
 import ConsultaPage from './ConsultaPage';
 import TestVisualPage from './TestVisualPage';
+import ContactoPage from './ContactoPage';
 import Footer from './Footer';
 import { TRANSLATIONS, Language } from './translations';
 
@@ -635,7 +636,7 @@ export default function App() {
     setSelectedSymptom(null);
   };
 
-  const [currentView, setCurrentView] = useState<'home' | 'calificar' | 'consulta' | 'test-visual'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'calificar' | 'consulta' | 'test-visual' | 'contacto'>('home');
 
   useEffect(() => {
     const handleHash = () => {
@@ -648,6 +649,9 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (h === '#test-visual' || h === '#test-vision' || h === '#revisar-vision') {
         setCurrentView('test-visual');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (h === '#contacto' || h === '#ubicacion' || h === '#horarios') {
+        setCurrentView('contacto');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         setCurrentView('home');
@@ -695,6 +699,14 @@ export default function App() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           } else if (view === 'calificar') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (view === 'test-visual') {
+            setCurrentView('test-visual');
+            window.location.hash = '#test-visual';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (view === 'contacto') {
+            setCurrentView('contacto');
+            window.location.hash = '#contacto';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           }
         }}
       />
@@ -732,6 +744,10 @@ export default function App() {
           } else if (view === 'test-visual') {
             setCurrentView('test-visual');
             window.location.hash = '#test-visual';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (view === 'contacto') {
+            setCurrentView('contacto');
+            window.location.hash = '#contacto';
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }
         }}
@@ -771,6 +787,52 @@ export default function App() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           } else if (view === 'test-visual') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (view === 'contacto') {
+            setCurrentView('contacto');
+            window.location.hash = '#contacto';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }}
+      />
+    );
+  }
+
+  if (currentView === 'contacto') {
+    return (
+      <ContactoPage 
+        onBack={() => {
+          window.location.hash = '';
+          setCurrentView('home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }} 
+        lang={lang}
+        onNavigate={(view, hash) => {
+          if (view === 'landing' || view === 'home') {
+            setCurrentView('home');
+            window.location.hash = hash || '';
+            if (hash && hash !== '#inicio') {
+              setTimeout(() => {
+                const el = document.querySelector(hash);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                else window.scrollTo({ top: 0, behavior: 'smooth' });
+              }, 100);
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          } else if (view === 'consulta') {
+            setCurrentView('consulta');
+            window.location.hash = '#consulta';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (view === 'calificar') {
+            setCurrentView('calificar');
+            window.location.hash = '#calificar';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (view === 'test-visual') {
+            setCurrentView('test-visual');
+            window.location.hash = '#test-visual';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (view === 'contacto') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           }
         }}
       />
@@ -807,6 +869,14 @@ export default function App() {
                       <a
                         key={cat.id}
                         href={cat.href}
+                        onClick={(e) => {
+                          if (cat.href === '#contacto') {
+                            e.preventDefault();
+                            setCurrentView('contacto');
+                            window.location.hash = '#contacto';
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }
+                        }}
                         className="px-3.5 py-2 rounded-xl text-[13px] md:text-[14px] font-semibold text-[#1C1D21] hover:text-[rgb(122,24,35)] hover:bg-black/5 transition-all"
                       >
                         {cat.name}
@@ -869,6 +939,16 @@ export default function App() {
                                               e.preventDefault();
                                               setCurrentView('consulta');
                                               window.location.hash = '#consulta';
+                                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                                            } else if (item.href === '#test-visual') {
+                                              e.preventDefault();
+                                              setCurrentView('test-visual');
+                                              window.location.hash = '#test-visual';
+                                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                                            } else if (item.href === '#contacto') {
+                                              e.preventDefault();
+                                              setCurrentView('contacto');
+                                              window.location.hash = '#contacto';
                                               window.scrollTo({ top: 0, behavior: 'smooth' });
                                             }
                                             setDesktopDropdown(null);
@@ -1071,7 +1151,15 @@ export default function App() {
                               <a
                                 key={cat.id}
                                 href={cat.href}
-                                onClick={() => setIsMenuOpen(false)}
+                                onClick={(e) => {
+                                  if (cat.href === '#contacto') {
+                                    e.preventDefault();
+                                    setCurrentView('contacto');
+                                    window.location.hash = '#contacto';
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                  }
+                                  setIsMenuOpen(false);
+                                }}
                                 className="flex items-center justify-between h-12 px-4 rounded-xl bg-[#F8F9FB] hover:bg-[rgb(122,24,35)] hover:text-white text-[#15171C] text-[13px] font-semibold active:scale-[0.99] transition-all"
                               >
                                 <span>{cat.name}</span>
@@ -1131,6 +1219,16 @@ export default function App() {
                                                   e.preventDefault();
                                                   setCurrentView('consulta');
                                                   window.location.hash = '#consulta';
+                                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                                } else if (item.href === '#test-visual') {
+                                                  e.preventDefault();
+                                                  setCurrentView('test-visual');
+                                                  window.location.hash = '#test-visual';
+                                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                                } else if (item.href === '#contacto') {
+                                                  e.preventDefault();
+                                                  setCurrentView('contacto');
+                                                  window.location.hash = '#contacto';
                                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                                 }
                                                 setIsMenuOpen(false);
@@ -2286,229 +2384,111 @@ export default function App() {
             </div>
           </section>
 
-          {/* Contact Section */}
+          {/* Contact Section - Editorial Invitation to Dedicated Contact Page */}
           <section id="contacto" className="w-full py-14 md:py-20 bg-white pb-24 md:pb-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-[14px] p-5 shadow-sm"
-            >
-              <div className="flex justify-start">
-                <span className="inline-flex items-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B] shadow-sm">
-                  Contacto
-                </span>
-              </div>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1C1D21] via-[#242730] to-[#15171C] text-white p-7 sm:p-10 md:p-12 shadow-2xl border border-gray-800"
+              >
+                {/* Decorative background glow */}
+                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-[rgb(122,24,35)]/20 blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-rose-500/10 blur-3xl pointer-events-none" />
 
-              <h2 className="mt-4 text-[24px] sm:text-[28px] md:text-[30px] leading-[1.08] tracking-tight font-bold text-[#15171C]">
-                No te quedés sin <span className="text-[rgb(122,24,35)]">tu cita</span>
-              </h2>
-
-              <div className="mt-6 grid lg:grid-cols-[1fr_340px] gap-5">
-                {/* Left: Expanded Map */}
-                <div className="flex flex-col h-full">
-                  <div className="flex-1 min-h-[340px] rounded-[16px] overflow-hidden border border-[#E3E5EC] shadow-sm relative group">
-                    <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15722.057649214696!2d-84.081993!3d9.8910441!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e3edbed430b5%3A0x4e83f4dbd6b649b2!2s%C3%93pticas%20Popular%20Plaza%20Higuerones%3A%20Aros%20I%20Lentes%20I%20Servicios%20Oft%C3%A1lmicos%20I%20Ex%C3%A1menes%20de%20Vista!5e0!3m2!1ses!2sco!4v1707761517794!5m2!1ses!2sco" 
-                      width="100%" 
-                      height="100%" 
-                      style={{ border: 0 }} 
-                      allowFullScreen 
-                      loading="lazy" 
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="Ubicación de Ópticas Popular"
-                      className="grayscale-[0.2] contrast-[1.1] transition-all duration-700 group-hover:grayscale-0 w-full h-full min-h-[300px]"
-                    ></iframe>
-                    <div className="absolute top-4 left-4 pointer-events-none">
-                      <span className="inline-flex items-center h-6 px-3 rounded-full bg-white/90 backdrop-blur-sm text-[10px] font-bold uppercase tracking-wider text-[#15171C] shadow-md border border-white">
-                        <MapPin className="w-3 h-3 mr-1.5 text-[rgb(122,24,35)]" /> Plaza Higuerones
-                      </span>
+                <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
+                  <div className="lg:col-span-7">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-rose-300 text-[11px] font-bold uppercase tracking-wider mb-4">
+                      <MapPin className="w-3.5 h-3.5 text-rose-400" />
+                      <span>{lang === 'es' ? 'Sede Plaza Higuerones' : 'Plaza Higuerones Clinic'}</span>
                     </div>
-                  </div>
 
-                  {/* Botones directos de Waze y Google Maps (Costa Rica) */}
-                  <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <a
-                      href="https://waze.com/ul?ll=9.8910441,-84.081993&navigate=yes"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 h-11 px-4 rounded-xl bg-[#33CCFF] hover:bg-[#28b8e6] text-[#0b3340] font-bold text-[13px] shadow-sm hover:shadow-md transition-all active:scale-95"
-                    >
-                      <Navigation className="w-4 h-4 text-[#0b3340]" />
-                      <span>Abrir ruta en Waze</span>
-                    </a>
-                    <a
-                      href="https://maps.google.com/?q=Ópticas+Popular+Plaza+Higuerones+San+Rafael+Abajo+Desamparados"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 h-11 px-4 rounded-xl bg-white hover:bg-gray-50 border border-gray-200 text-[#15171C] font-bold text-[13px] shadow-sm hover:shadow-md transition-all active:scale-95"
-                    >
-                      <MapPin className="w-4 h-4 text-[rgb(122,24,35)]" />
-                      <span>Abrir en Google Maps</span>
-                    </a>
-                  </div>
-                </div>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                      {lang === 'es' ? (
+                        <>No te quedés sin <span className="text-rose-400">tu cita</span> ni tu valoración visual</>
+                      ) : (
+                        <>Do not miss your <span className="text-rose-400">visual appointment</span> with us</>
+                      )}
+                    </h2>
 
-                {/* Right: Contact Info "Franja" */}
-                <div className="bg-[#F8F9FB] rounded-[16px] p-6 flex flex-col border border-[#E3E5EC] shadow-sm">
-                  <div className="mb-6">
-                    <h3 className="text-[15px] font-bold text-[#15171C] tracking-tight">Reservá tu valoración</h3>
-                    <p className="mt-1.5 text-[11px] leading-[1.6] text-[#6D727D]">
-                      Coordiná tu cita hoy mismo y recibí atención profesional personalizada.
+                    <p className="mt-3 text-sm sm:text-base text-gray-300 leading-relaxed max-w-xl">
+                      {lang === 'es' 
+                        ? 'Visitanos en San Rafael Abajo de Desamparados. Accedé a nuestra página dedicada de Contacto con mapa interactivo en pantalla completa, rutas en Waze, horarios y canales directos.'
+                        : 'Visit us in San Rafael Abajo, Desamparados. Access our dedicated Contact page with full-screen interactive maps, Waze navigation, hours, and direct channels.'}
                     </p>
-                  </div>
 
-                  <div className="flex-1 space-y-6">
-                    {/* Phone */}
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm border border-[#E3E5EC] flex-shrink-0">
-                        <Phone className="w-4 h-4 text-[rgb(122,24,35)]" />
-                      </div>
-                      <div>
-                        <h4 className="text-[11px] font-bold text-[#7C808B] uppercase tracking-[0.1em]">Teléfonos</h4>
-                        <p className="mt-0.5 text-[13px] text-[#15171C] font-bold tracking-tight">+506 2515 0002</p>
-                        <p className="text-[13px] text-[#15171C] font-bold tracking-tight">+506 7276 0215</p>
-                      </div>
-                    </div>
+                    <div className="mt-7 flex flex-wrap items-center gap-3">
+                      <button
+                        onClick={() => {
+                          setCurrentView('contacto');
+                          window.location.hash = '#contacto';
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(145,28,42)] text-white text-[13px] font-bold shadow-lg shadow-black/30 transition-all active:scale-95 group cursor-pointer"
+                      >
+                        <MapPin className="w-4 h-4 text-rose-300 group-hover:scale-110 transition-transform" />
+                        <span>{lang === 'es' ? 'Ver Ubicación, Horarios y Waze' : 'View Location, Hours & Waze'}</span>
+                        <ArrowRight className="w-4 h-4 ml-0.5 group-hover:translate-x-1 transition-transform" />
+                      </button>
 
-                    {/* Email */}
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm border border-[#E3E5EC] flex-shrink-0">
-                        <MessageCircle className="w-4 h-4 text-[rgb(122,24,35)]" />
-                      </div>
-                      <div>
-                        <h4 className="text-[11px] font-bold text-[#7C808B] uppercase tracking-[0.1em]">Correo</h4>
-                        <p className="mt-0.5 text-[12px] text-[#15171C] font-bold break-all">fmora@opticaspopular.com</p>
-                      </div>
-                    </div>
+                      <a
+                        href="https://waze.com/ul?ll=9.8910441,-84.081993&navigate=yes"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#33CCFF] hover:bg-[#28b8e6] text-[#0b3340] text-[13px] font-bold shadow-md transition-all active:scale-95"
+                      >
+                        <Navigation className="w-4 h-4 text-[#0b3340]" />
+                        <span>{lang === 'es' ? 'Ruta Waze' : 'Waze Route'}</span>
+                      </a>
 
-                    {/* Location */}
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm border border-[#E3E5EC] flex-shrink-0">
-                        <ArrowUpRight className="w-4 h-4 text-[rgb(122,24,35)]" />
-                      </div>
-                      <div>
-                        <h4 className="text-[11px] font-bold text-[#7C808B] uppercase tracking-[0.1em]">Ubicación</h4>
-                        <p className="mt-0.5 text-[12px] text-[#15171C] font-bold leading-[1.5]">
-                          Plaza Higuerones, Local 23.<br />
-                          San Rafael Abajo, Desamparados.
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Schedule */}
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm border border-[#E3E5EC] flex-shrink-0">
-                        <Clock className="w-4 h-4 text-[rgb(122,24,35)]" />
-                      </div>
-                      <div>
-                        <h4 className="text-[11px] font-bold text-[#7C808B] uppercase tracking-[0.1em]">Horario</h4>
-                        <p className="mt-0.5 text-[12px] text-[#15171C] font-bold">Lunes a Sábado</p>
-                        <p className="text-[11px] text-[#6D727D]">Bajo cita previa</p>
-                      </div>
+                      <a
+                        href="https://wa.me/50672760215"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-[13px] font-bold border border-white/20 transition-all active:scale-95"
+                      >
+                        <MessageCircle className="w-4 h-4 text-emerald-400" />
+                        <span>WhatsApp</span>
+                      </a>
                     </div>
                   </div>
 
-                  <div className="mt-8 flex flex-col gap-3">
-                    <a 
-                      href="tel:+50672760215" 
-                      className="inline-flex items-center justify-center h-12 px-6 rounded-[12px] bg-white text-[#15171C] text-[11px] font-bold border border-[#E3E5EC] shadow-sm transition-all hover:bg-gray-50 active:scale-[0.98]"
-                    >
-                      Llamar ahora
-                    </a>
-                    <a 
-                      href="https://wa.me/50672760215" 
-                      className="inline-flex items-center justify-center h-12 px-6 rounded-[12px] bg-[rgb(122,24,35)] text-white text-[11px] font-bold shadow-lg shadow-[rgb(122,24,35)]/20 transition-all hover:opacity-90 active:scale-[0.98]"
-                    >
-                      Agendar por WhatsApp
-                    </a>
-                  </div>
-                </div>
-              </div>
+                  <div className="lg:col-span-5">
+                    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 space-y-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/40 flex items-center justify-center text-rose-300 shrink-0">
+                          <Clock className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{lang === 'es' ? 'Horario de Atención' : 'Working Hours'}</p>
+                          <p className="text-[13.5px] font-semibold text-white">{lang === 'es' ? 'Lunes a Sábado bajo cita' : 'Mon to Sat by appointment'}</p>
+                        </div>
+                      </div>
 
-              <div className="mt-4 grid sm:grid-cols-3 gap-3">
-                <a 
-                  href="https://www.facebook.com/opticaspopularcr" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visitar nuestra página de Facebook" 
-                  className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[11px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2 transition-all hover:bg-[#1877F2] hover:text-white hover:shadow-lg hover:shadow-[#1877F2]/20"
-                >
-                  <Facebook className="w-3.5 h-3.5" /> Facebook
-                </a>
-                <a 
-                  href="https://www.instagram.com/opticaspopularcr" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visitar nuestro perfil de Instagram" 
-                  className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[11px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2 transition-all hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:text-white hover:shadow-lg hover:shadow-[#ee2a7b]/20"
-                >
-                  <Instagram className="w-3.5 h-3.5" /> Instagram
-                </a>
-                <a 
-                  href="#" 
-                  aria-label="Visitar nuestro perfil de TikTok" 
-                  className="bg-[#F3F4F7] rounded-[12px] px-4 py-3 text-[11px] md:text-[11px] font-bold text-[#15171C] text-center pro-card shadow-sm flex items-center justify-center gap-2 transition-all hover:bg-black hover:text-white hover:shadow-lg hover:shadow-black/20"
-                >
-                  <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.31-.75.42-1.24 1.25-1.33 2.1-.1.7.1 1.41.53 1.96.44.53 1.11.85 1.79.9.69.05 1.4-.16 1.97-.55.62-.43 1-1.14 1.05-1.89.01-3.22-.01-6.43.01-9.64z"/></svg>
-                  TikTok
-                </a>
-              </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/40 flex items-center justify-center text-rose-300 shrink-0">
+                          <Phone className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{lang === 'es' ? 'Teléfonos Directos' : 'Direct Phone'}</p>
+                          <p className="text-[13.5px] font-semibold text-white">+506 2515-0002 / +506 7276-0215</p>
+                        </div>
+                      </div>
 
-              {/* Barra de Facilidades y Métodos de Pago aceptados en Costa Rica */}
-              <div className="mt-5 rounded-2xl bg-[#F8F9FA] border border-gray-200/80 p-4 sm:p-5">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-gray-200/70">
-                  <div className="flex items-center gap-2">
-                    <CreditCard className="w-4 h-4 text-[rgb(122,24,35)]" />
-                    <span className="text-[13.5px] font-bold text-[#15171C]">Facilidades y Métodos de Pago</span>
-                  </div>
-                  <span className="text-[11.5px] text-gray-500 font-medium">Comodidad y transparencia en tu consulta</span>
-                </div>
-
-                <div className="mt-3.5 grid grid-cols-2 lg:grid-cols-4 gap-2.5">
-                  <div className="bg-white rounded-xl p-3 border border-gray-200/60 shadow-2xs flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                      <Smartphone className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-[12.5px] font-bold text-[#15171C]">SINPE Móvil</div>
-                      <div className="text-[10.5px] text-gray-500">Transferencia al 7276-0215</div>
-                    </div>
-                  </div>
-
-                  <div className="bg-white rounded-xl p-3 border border-gray-200/60 shadow-2xs flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                      <CreditCard className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-[12.5px] font-bold text-[#15171C]">Tarjetas</div>
-                      <div className="text-[10.5px] text-gray-500">Débito y Crédito en datáfono</div>
-                    </div>
-                  </div>
-
-                  <div className="bg-white rounded-xl p-3 border border-gray-200/60 shadow-2xs flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-                      <Award className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-[12.5px] font-bold text-[#15171C]">Tasa Cero</div>
-                      <div className="text-[10.5px] text-gray-500">Planes en cuotas autorizadas</div>
-                    </div>
-                  </div>
-
-                  <div className="bg-white rounded-xl p-3 border border-gray-200/60 shadow-2xs flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                      <Receipt className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-[12.5px] font-bold text-[#15171C]">Factura Electrónica</div>
-                      <div className="text-[10.5px] text-gray-500">Para seguros médicos o INS</div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/40 flex items-center justify-center text-rose-300 shrink-0">
+                          <ShieldCheck className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{lang === 'es' ? 'Facilidades' : 'Amenities'}</p>
+                          <p className="text-[13.5px] font-semibold text-white">{lang === 'es' ? 'SINPE Móvil, Tarjetas y Parqueo' : 'SINPE Móvil, Cards & Free Parking'}</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
             </div>
           </section>
           </main>
@@ -2528,6 +2508,10 @@ export default function App() {
               } else if (view === 'test-visual') {
                 setCurrentView('test-visual');
                 window.location.hash = '#test-visual';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              } else if (view === 'contacto') {
+                setCurrentView('contacto');
+                window.location.hash = '#contacto';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               } else {
                 window.location.hash = hash || '';
