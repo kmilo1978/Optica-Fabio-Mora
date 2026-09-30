@@ -2241,139 +2241,64 @@ export default function App() {
             </div>
           </section>
 
-          {/* Nueva Sección Separada: Contactología Clínica y Lentes de Contacto */}
-          <section id="lentes-contacto" className="w-full py-14 md:py-20 bg-white border-b border-gray-100">
+          {/* Sección de Lentes de Contacto (Banner Separado y Elegante) */}
+          <section id="lentes-contacto" className="w-full py-10 md:py-16 bg-white border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div 
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.55 }}
-                className="rounded-3xl bg-[#FAFAFC] border border-gray-200/90 p-7 sm:p-10 md:p-12 shadow-sm relative overflow-hidden"
+                transition={{ duration: 0.5 }}
+                className="relative rounded-3xl bg-[#BF1D2C] text-white overflow-hidden shadow-xl"
               >
-                {/* Acento superior vino tinto sutil */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-[rgb(122,24,35)]" />
-
-                <div className="grid lg:grid-cols-12 gap-8 items-center">
-                  {/* Columna Izquierda: Información Editorial y Opciones */}
-                  <div className="lg:col-span-7 flex flex-col justify-center">
-                    <span className="inline-flex items-center gap-1.5 h-7 px-3.5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold shadow-2xs mb-3.5 w-fit">
-                      <Contact className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
-                      <span>{lang === 'es' ? 'Contactología Clínica · Dr. Fabio Mora' : 'Clinical Contactology · Dr. Fabio Mora'}</span>
+                <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+                  {/* Contenido Editorial Izquierdo */}
+                  <div className="lg:col-span-7 p-7 sm:p-10 md:p-12 lg:pr-4 z-10 flex flex-col justify-center">
+                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-xs text-white text-[11px] sm:text-[12px] uppercase tracking-wider font-extrabold w-fit mb-3">
+                      <Contact className="w-3.5 h-3.5 text-white" />
+                      <span>{lang === 'es' ? 'En Ópticas Popular · Dr. Fabio Mora' : 'At Ópticas Popular · Dr. Fabio Mora'}</span>
                     </span>
 
-                    <h2 className="text-[26px] sm:text-[32px] md:text-[36px] font-bold leading-tight tracking-tight text-[#14161B] mb-3">
+                    <h2 className="text-[26px] sm:text-[32px] md:text-[38px] font-bold leading-tight tracking-tight text-white mb-3.5">
                       {lang === 'es' ? (
-                        <>Descubrí la libertad visual con <span className="text-[rgb(122,24,35)]">lentes de contacto</span> a tu medida</>
+                        <>Descubrí los <span className="underline decoration-white/30 decoration-wavy underline-offset-4">lentes de contacto</span> perfectos para vos.</>
                       ) : (
-                        <>Discover visual freedom with <span className="text-[rgb(122,24,35)]">tailored contact lenses</span></>
+                        <>Discover the <span className="underline decoration-white/30 decoration-wavy underline-offset-4">contact lenses</span> made for you.</>
                       )}
                     </h2>
 
-                    <p className="text-[14px] sm:text-[15.5px] text-[#555963] leading-relaxed mb-6">
-                      {lang === 'es'
-                        ? 'Adaptación profesional con topografía corneal y prueba lagrimal. Diseñados para responder con total hidratación, descanso y oxigenación para tu estilo de vida.'
-                        : 'Professional fitting with corneal health assessment and tear evaluation. Engineered for maximum hydration, all-day comfort, and high oxygen permeability.'}
+                    <p className="text-[14px] sm:text-[15.5px] text-white/90 leading-relaxed max-w-xl mb-7">
+                      {lang === 'es' 
+                        ? 'Lentes de contacto desechables y reusables esféricos, para astigmatismo y multifocal. Adaptación clínica personalizada, segura y cómoda.'
+                        : 'Daily and reusable spherical, toric for astigmatism, and multifocal contact lenses. Professional, comfortable, and hygienic fitting.'}
                     </p>
 
-                    {/* Grilla de ventajas clínicas */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-7">
-                      <div className="bg-white rounded-xl p-3.5 border border-gray-200/70 shadow-2xs">
-                        <div className="flex items-center gap-2 font-bold text-[13px] text-[#15171C] mb-1">
-                          <Droplets className="w-4 h-4 text-[rgb(122,24,35)]" />
-                          <span>{lang === 'es' ? 'Desechables Diarios & Mensuales' : 'Daily & Monthly Disposables'}</span>
-                        </div>
-                        <p className="text-[12px] text-[#606573] leading-snug">
-                          {lang === 'es' ? 'Máxima higiene sin soluciones para deporte o uso diario continuo.' : 'Maximum hygiene with no solutions needed for sports or daily wear.'}
-                        </p>
-                      </div>
-
-                      <div className="bg-white rounded-xl p-3.5 border border-gray-200/70 shadow-2xs">
-                        <div className="flex items-center gap-2 font-bold text-[13px] text-[#15171C] mb-1">
-                          <Eye className="w-4 h-4 text-[rgb(122,24,35)]" />
-                          <span>{lang === 'es' ? 'Tóricos para Astigmatismo' : 'Toric Lenses for Astigmatism'}</span>
-                        </div>
-                        <p className="text-[12px] text-[#606573] leading-snug">
-                          {lang === 'es' ? 'Estabilidad rotacional para que el lente no se desplace al parpadear.' : 'Rotational stability ensuring your vision stays razor-sharp.'}
-                        </p>
-                      </div>
-
-                      <div className="bg-white rounded-xl p-3.5 border border-gray-200/70 shadow-2xs">
-                        <div className="flex items-center gap-2 font-bold text-[13px] text-[#15171C] mb-1">
-                          <Glasses className="w-4 h-4 text-[rgb(122,24,35)]" />
-                          <span>{lang === 'es' ? 'Multifocales para Presbicia' : 'Multifocal Contact Lenses'}</span>
-                        </div>
-                        <p className="text-[12px] text-[#606573] leading-snug">
-                          {lang === 'es' ? 'Enfoque claro de cerca, computadora y lejos sin depender de anteojos.' : 'Sharp focus near, intermediate and far without reading glasses.'}
-                        </p>
-                      </div>
-
-                      <div className="bg-white rounded-xl p-3.5 border border-gray-200/70 shadow-2xs">
-                        <div className="flex items-center gap-2 font-bold text-[13px] text-[#15171C] mb-1">
-                          <ShieldCheck className="w-4 h-4 text-[rgb(122,24,35)]" />
-                          <span>{lang === 'es' ? 'Entrenamiento & Prueba Guiada' : 'Hands-on Fitting & Training'}</span>
-                        </div>
-                        <p className="text-[12px] text-[#606573] leading-snug">
-                          {lang === 'es' ? 'Te enseñamos con calma cómo colocártelos y retirártelos con seguridad.' : 'Patient-first guidance on safe insertion, removal, and hygiene.'}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Botonera de Contactología */}
-                    <div className="flex flex-wrap items-center gap-3">
+                    <div>
                       <a
                         href={`https://wa.me/50672760215?text=${encodeURIComponent(
                           lang === 'es'
-                            ? '¡Hola Dr. Fabio Mora! Quisiera agendar una cita para valoración y adaptación de lentes de contacto en Plaza Higuerones.'
-                            : 'Hello Dr. Fabio Mora, I would like to schedule a contact lens fitting appointment at Plaza Higuerones.'
+                            ? '¡Hola Dr. Fabio Mora! Quisiera consultar por lentes de contacto y programar mi examen en Plaza Higuerones.'
+                            : 'Hello Dr. Fabio Mora, I would like to inquire about contact lenses and book my appointment.'
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer group"
+                        className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl bg-[#141A2E] hover:bg-[#1E2642] text-white text-[14px] font-bold shadow-lg transition-all duration-200 active:scale-95 group cursor-pointer"
                       >
                         <Contact className="w-4 h-4 text-white" />
-                        <span>{lang === 'es' ? '¡Programá tu adaptación hoy!' : 'Book your lens fitting today!'}</span>
-                        <ArrowRight className="w-4 h-4 ml-0.5 group-hover:translate-x-1 transition-transform" />
-                      </a>
-
-                      <a
-                        href="#consulta"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setCurrentView('consulta');
-                          window.location.hash = '#consulta';
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }}
-                        className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-white hover:bg-gray-50 text-[#15171C] border border-gray-200 text-[13px] sm:text-[14px] font-bold shadow-2xs transition-all duration-200 active:scale-95 cursor-pointer"
-                      >
-                        <MessageCircle className="w-4 h-4 text-[rgb(122,24,35)]" />
-                        <span>{lang === 'es' ? 'Hacer una consulta' : 'Ask a question'}</span>
+                        <span>{lang === 'es' ? '¡Programá tu examen hoy!' : 'Book your exam today!'}</span>
+                        <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
                       </a>
                     </div>
                   </div>
 
-                  {/* Columna Derecha: Composición Visual Elegante */}
-                  <div className="lg:col-span-5 relative flex items-center justify-center">
-                    <div className="relative w-full max-w-[420px] rounded-2xl overflow-hidden border border-gray-200/80 shadow-md bg-white group">
-                      <img
-                        src="/images/lentes-contacto-banner.png"
-                        alt="Adaptación clínica de lentes de contacto Dr. Fabio Mora"
-                        className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#15171C]/80 via-transparent to-transparent flex items-end p-5">
-                        <div className="text-white">
-                          <p className="text-[11px] font-extrabold uppercase tracking-wider text-gray-300">
-                            {lang === 'es' ? 'Salud Ocular Garantizada' : 'Guaranteed Eye Health'}
-                          </p>
-                          <p className="text-[13.5px] font-bold leading-snug">
-                            {lang === 'es' 
-                              ? '11 años de experiencia clínica en adaptación de lentes de contacto' 
-                              : '11 years of clinical excellence in contact lens fittings'}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                  {/* Imagen del Paciente en el Lado Derecho */}
+                  <div className="lg:col-span-5 relative flex items-end justify-center lg:justify-end h-full">
+                    <img
+                      src="/images/paciente-lentes-contacto.png"
+                      alt="Adaptación clínica de lentes de contacto en Ópticas Popular"
+                      className="w-full max-w-[380px] lg:max-w-none h-auto object-contain object-bottom"
+                      loading="lazy"
+                    />
                   </div>
                 </div>
               </motion.div>
