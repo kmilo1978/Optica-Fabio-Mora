@@ -2881,44 +2881,22 @@ export default function App() {
                 })}
               </div>
 
-              {/* Invitación a la Página Separada de Consulta */}
-              <div className="mt-10 max-w-3xl mx-auto">
-                <div className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-gray-200/90 shadow-sm text-center flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-2xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center mb-3.5">
-                    <MessageCircle className="w-6 h-6" />
-                  </div>
-                  
-                  <span className="inline-flex items-center gap-1.5 h-6 px-3 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] font-bold uppercase tracking-wider mb-2">
-                    {lang === 'es' ? 'Atención Personalizada' : 'Personalized Support'}
-                  </span>
-
-                  <h3 className="text-[20px] sm:text-[24px] font-bold text-[#14161B]">
-                    {lang === 'es' ? '¿Tenés alguna consulta médica o querés cotizar?' : 'Have a medical question or need a quote?'}
-                  </h3>
-
-                  <p className="mt-2 text-[13.5px] sm:text-[14.5px] text-[#555963] max-w-lg leading-relaxed">
-                    {lang === 'es'
-                      ? 'Accedé a nuestra página dedicada de consulta para preparar tu mensaje clasificado y enviarlo directamente al Dr. Fabio Mora por WhatsApp.'
-                      : 'Open our dedicated inquiry page to format your questions and send them directly to Dr. Fabio Mora via WhatsApp.'}
-                  </p>
-
-                  <div className="mt-6">
-                    <a
-                      href="#consulta"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setCurrentView('consulta');
-                        window.location.hash = '#consulta';
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                      }}
-                      className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-2xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer"
-                    >
-                      <MessageCircle className="w-4 h-4" />
-                      <span>{lang === 'es' ? 'Abrir Formulario de Consulta' : 'Open Inquiry Page'}</span>
-                      <ArrowRight className="w-4 h-4 ml-1" />
-                    </a>
-                  </div>
-                </div>
+              {/* Enlace sutil al final de Preguntas Frecuentes */}
+              <div className="mt-8 text-center">
+                <p className="text-[14px] text-[#555963]">
+                  {lang === 'es' ? '¿Tenés alguna duda puntual sobre tu caso o querés cotizar?' : 'Have a specific question about your case or need a quote?'}{' '}
+                  <button
+                    onClick={() => {
+                      setCurrentView('consulta');
+                      window.location.hash = '#consulta';
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="inline-flex items-center gap-1 font-semibold text-[rgb(122,24,35)] hover:underline ml-1 cursor-pointer transition-colors"
+                  >
+                    <span>{lang === 'es' ? 'Escribinos en el formulario de consulta' : 'Send an inquiry through our form'}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </p>
               </div>
             </div>
           </section>
