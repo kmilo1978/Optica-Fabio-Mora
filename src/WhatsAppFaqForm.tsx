@@ -9,7 +9,13 @@ import {
   Sparkles, 
   HelpCircle,
   ShieldCheck,
-  BellRing
+  BellRing,
+  Stethoscope,
+  Glasses,
+  Users,
+  CreditCard,
+  MapPin,
+  Clock
 } from 'lucide-react';
 import { Language } from './translations';
 
@@ -32,25 +38,43 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
   const [errorMsg, setErrorMsg] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const FAQ_TOPICS = isEn
-    ? [
-        { id: 'exam', label: '🩺 Eye Exam & Prescription' },
-        { id: 'frames', label: '👓 Frames & Lens Replacement' },
-        { id: 'guarantee', label: '🔍 30-Day Adaptation Guarantee' },
-        { id: 'family', label: '👨‍👩‍👧 Family Coordinated Appointments' },
-        { id: 'payment', label: '💳 Pricing, SINPE & Zero-Interest' },
-        { id: 'location', label: '📍 Plaza Higuerones Location & Hours' },
-        { id: 'other', label: '💬 Other Custom Inquiry' }
-      ]
-    : [
-        { id: 'exam', label: '🩺 Examen de la vista y graduación' },
-        { id: 'frames', label: '👓 Aros y cambio de cristales' },
-        { id: 'guarantee', label: '🔍 Garantía de adaptación (30 días)' },
-        { id: 'family', label: '👨‍👩‍👧 Citas seguidas para la familia' },
-        { id: 'payment', label: '💳 Precios, SINPE Móvil y Tasa Cero' },
-        { id: 'location', label: '📍 Ubicación en Plaza Higuerones y horarios' },
-        { id: 'other', label: '💬 Otra consulta médica o general' }
-      ];
+  const FAQ_TOPICS = [
+    { 
+      id: 'exam', 
+      label: isEn ? 'Eye Exam & Prescription' : 'Examen de la vista y graduación',
+      icon: Stethoscope 
+    },
+    { 
+      id: 'frames', 
+      label: isEn ? 'Frames & Lens Replacement' : 'Aros y cambio de cristales',
+      icon: Glasses 
+    },
+    { 
+      id: 'guarantee', 
+      label: isEn ? '30-Day Adaptation Guarantee' : 'Garantía de adaptación (30 días)',
+      icon: ShieldCheck 
+    },
+    { 
+      id: 'family', 
+      label: isEn ? 'Family Coordinated Appointments' : 'Citas seguidas para la familia',
+      icon: Users 
+    },
+    { 
+      id: 'payment', 
+      label: isEn ? 'Pricing, SINPE & Zero-Interest' : 'Precios, SINPE Móvil y Tasa Cero',
+      icon: CreditCard 
+    },
+    { 
+      id: 'location', 
+      label: isEn ? 'Plaza Higuerones Location & Hours' : 'Ubicación en Plaza Higuerones y horarios',
+      icon: MapPin 
+    },
+    { 
+      id: 'other', 
+      label: isEn ? 'Other Custom Inquiry' : 'Otra consulta médica o general',
+      icon: HelpCircle 
+    }
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,16 +100,16 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
 
     setErrorMsg('');
 
-    // Construcción del mensaje para WhatsApp
+    // Construcción formal y médica del mensaje para WhatsApp (sin emoticones)
     const lines = [
       isEn 
-        ? '*Hello Dr. Fabio Mora! I am contacting you from the Opticas Popular website.*'
-        : '*¡Hola Dr. Fabio Mora! Le escribo desde la página web de Ópticas Popular.*',
+        ? '*Hello Dr. Fabio Mora, I am contacting you from the Opticas Popular website.*'
+        : '*Hola Dr. Fabio Mora, le escribo desde el sitio web de Ópticas Popular.*',
       '',
-      isEn ? '📋 *Inquiry Details:*' : '📋 *Datos de la Consulta:*',
+      isEn ? '*INQUIRY DETAILS:*' : '*DATOS DE LA CONSULTA:*',
       `• *${isEn ? 'Name' : 'Nombre'}:* ${fullName.trim()}`,
       `• *${isEn ? 'Phone / WhatsApp' : 'Teléfono / WhatsApp'}:* ${phoneNumber.trim()}`,
-      `• *${isEn ? 'Selected FAQ Topic' : 'Tema de consulta'}:* ${selectedTopic}`,
+      `• *${isEn ? 'Selected Topic' : 'Tema de consulta'}:* ${selectedTopic}`,
     ];
 
     if (customMessage.trim()) {
@@ -93,7 +117,7 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
     }
 
     lines.push('');
-    lines.push(isEn ? '✅ *Authorizations & Preferences:*' : '✅ *Autorizaciones y Preferencias:*');
+    lines.push(isEn ? '*AUTHORIZATIONS & PREFERENCES:*' : '*AUTORIZACIONES Y PREFERENCIAS:*');
     lines.push(`• ${isEn ? 'Contact permission' : 'Acepto ser contactado para mi cita'}: ${acceptContact ? (isEn ? 'Yes' : 'Sí') : 'No'}`);
     lines.push(`• ${isEn ? 'Receive promotions and visual tips' : 'Acepto recibir promociones y consejos'}: ${acceptPromo ? (isEn ? 'Yes' : 'Sí') : 'No'}`);
     if (acceptPrivacy) {
@@ -101,7 +125,7 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
     }
 
     lines.push('');
-    lines.push(isEn ? '_Looking forward to your reply. Thank you!_' : '_Quedo atento(a) a su respuesta. ¡Muchas gracias, pura vida!_');
+    lines.push(isEn ? 'Looking forward to your reply. Thank you.' : 'Quedo atento(a) a su respuesta. Muchas gracias.');
 
     const fullMessage = lines.join('\n');
     const waUrl = `https://wa.me/50672760215?text=${encodeURIComponent(fullMessage)}`;
@@ -111,7 +135,7 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
   };
 
   return (
-    <div className="mt-12 max-w-3xl mx-auto">
+    <div id="formulario-whatsapp" className="mt-12 max-w-3xl mx-auto scroll-mt-24">
       <div className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border-2 border-[rgb(122,24,35)]/20 shadow-xl relative overflow-hidden">
         {/* Cabecera del formulario */}
         <div className="text-center mb-8">
@@ -208,6 +232,7 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {FAQ_TOPICS.map((topic) => {
                 const isSelected = selectedTopic === topic.label;
+                const TopicIcon = topic.icon;
                 return (
                   <button
                     key={topic.id}
@@ -219,12 +244,12 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
                         : 'bg-white border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50'
                     }`}
                   >
-                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                      isSelected ? 'border-[rgb(122,24,35)] bg-[rgb(122,24,35)] text-white' : 'border-gray-300 bg-white'
+                    <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                      isSelected ? 'bg-[rgb(122,24,35)] text-white' : 'bg-gray-100 text-gray-600'
                     }`}>
-                      {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
+                      <TopicIcon className="w-3.5 h-3.5" />
                     </div>
-                    <span className="leading-snug">{topic.label}</span>
+                    <span className="leading-snug flex-1">{topic.label}</span>
                   </button>
                 );
               })}
@@ -322,10 +347,13 @@ export default function WhatsAppFaqForm({ lang }: WhatsAppFaqFormProps) {
               </span>
               <Send className="w-4 h-4 ml-1" />
             </button>
-            <p className="mt-2 text-center text-[11px] text-gray-500">
-              {isEn
-                ? '⚡ Instant response during clinical hours (Mon-Sat 9:00 AM - 6:00 PM)'
-                : '⚡ Te respondemos rapidito en horario de clínica (Lun a Sáb: 9:00 AM - 6:00 PM)'}
+            <p className="mt-2 text-center text-[11px] text-gray-500 flex items-center justify-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
+              <span>
+                {isEn
+                  ? 'Fast response during clinical hours (Mon-Sat 9:00 AM - 6:00 PM)'
+                  : 'Respuesta rápida en horario de clínica (Lun a Sáb: 9:00 AM - 6:00 PM)'}
+              </span>
             </p>
           </div>
         </form>

@@ -154,6 +154,25 @@ function getNavigationMenu(lang: Language): NavCategory[] {
       id: 'faq',
       name: t.faq,
       href: '#faq',
+      groups: [
+        {
+          title: lang === 'es' ? 'Preguntas y Consultas' : 'Questions & Support',
+          items: [
+            { 
+              name: lang === 'es' ? 'Preguntas Frecuentes' : 'Frequently Asked Questions', 
+              href: '#faq', 
+              desc: lang === 'es' ? 'Respuestas sobre exámenes, pagos y garantía' : 'Answers on exams, payments & guarantee', 
+              icon: HelpCircle 
+            },
+            { 
+              name: lang === 'es' ? 'Formulario a WhatsApp' : 'WhatsApp Inquiry Form', 
+              href: '#formulario-whatsapp', 
+              desc: lang === 'es' ? 'Enviá tu consulta directa al Dr. Fabio Mora' : 'Send inquiry directly to Dr. Fabio Mora', 
+              icon: MessageCircle 
+            },
+          ],
+        },
+      ],
     },
     {
       id: 'contacto',
@@ -700,7 +719,7 @@ export default function App() {
                             exit={{ opacity: 0, y: 8, scale: 0.98 }}
                             transition={{ duration: 0.18 }}
                             className={`absolute top-full mt-2 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100 p-5 z-50 ${
-                              cat.id === 'servicios' ? 'w-[640px] -left-28' : 'w-[480px] -left-16'
+                              cat.id === 'servicios' ? 'w-[640px] -left-28' : cat.id === 'faq' ? 'w-[360px] -left-20' : 'w-[480px] -left-16'
                             }`}
                           >
                             <div className={`grid gap-6 ${cat.groups!.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
@@ -2402,6 +2421,12 @@ export default function App() {
                       <a href="#faq" className="text-gray-300 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all">
                         <ChevronRight className="w-3.5 h-3.5 text-rose-400" />
                         <span>{t.footer.navFaq}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#formulario-whatsapp" className="text-gray-300 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all">
+                        <ChevronRight className="w-3.5 h-3.5 text-rose-400" />
+                        <span>{lang === 'es' ? 'Consulta a WhatsApp' : 'WhatsApp Inquiry'}</span>
                       </a>
                     </li>
                     <li>
