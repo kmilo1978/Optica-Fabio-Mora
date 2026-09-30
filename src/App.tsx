@@ -123,7 +123,8 @@ function getNavigationMenu(lang: Language): NavCategory[] {
           items: [
             { name: lang === 'es' ? 'Valoración de Cataratas' : 'Cataract Assessment', href: '#servicios', desc: lang === 'es' ? 'Evaluación y orientación médica' : 'Evaluation & medical guidance', icon: Stethoscope },
             { name: lang === 'es' ? 'Evaluación de Ojo Seco' : 'Dry Eye Evaluation', href: '#servicios', desc: lang === 'es' ? 'Alivio de resequedad y ardor' : 'Relief for irritation and dryness', icon: Droplets },
-            { name: lang === 'es' ? 'Lentes de Contacto' : 'Contact Lenses', href: '#servicios', desc: lang === 'es' ? 'Adaptación personalizada y cómoda' : 'Custom, comfortable lens fitting', icon: Contact },
+            { name: lang === 'es' ? 'Lentes de Contacto' : 'Contact Lenses', href: '#lentes-contacto', desc: lang === 'es' ? 'Adaptación clínica y prueba guiada' : 'Clinical fitting & hands-on trial', icon: Contact },
+            { name: lang === 'es' ? 'Tecnología en Cristales' : 'Lens Technology', href: '#tecnologia-visual', desc: lang === 'es' ? 'Progresivos, Transitions y Filtro Azul' : 'Progressives, Transitions & Blue Light', icon: Glasses },
           ],
         },
         {
@@ -1873,218 +1874,218 @@ export default function App() {
             </div>
           </section>
 
-          {/* Nueva Sección: Tecnología Visual (Lentes Progresivas, Transitions, Filtro Azul & Lentes de Contacto) */}
+          {/* Sección de Innovación en Cristales Oftálmicos (Progresivas, Transitions y Filtro Luz Azul) */}
           <section id="tecnologia-visual" className="w-full py-14 md:py-20 bg-slate-50/70 border-y border-gray-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               {/* Encabezado Principal */}
-              <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-                <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold shadow-2xs mb-3 border border-[rgb(122,24,35)]/20">
-                  {lang === 'es' ? 'Innovación en Cristales & Soluciones' : 'Lens Technology & Solutions'}
+              <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+                <span className="inline-flex items-center gap-1.5 h-7 px-3.5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold shadow-2xs mb-3 border border-[rgb(122,24,35)]/20">
+                  <Sparkles className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
+                  <span>{lang === 'es' ? 'Innovación en Cristales & Tratamientos' : 'Lens Technology & Treatments'}</span>
                 </span>
-                <h2 className="text-[28px] sm:text-[36px] md:text-[40px] font-bold text-[#14161B] tracking-tight leading-tight">
-                  {lang === 'es' ? 'Tecnología Visual' : 'Visual Technology'}
+                <h2 className="text-[28px] sm:text-[34px] md:text-[38px] font-bold text-[#14161B] tracking-tight leading-tight">
+                  {lang === 'es' ? (
+                    <>Tecnología visual pensada para <span className="text-[rgb(122,24,35)]">tu comodidad diaria</span></>
+                  ) : (
+                    <>Visual technology engineered for <span className="text-[rgb(122,24,35)]">your daily comfort</span></>
+                  )}
                 </h2>
                 <div className="w-16 h-1 bg-[rgb(122,24,35)] mx-auto mt-3 rounded-full" />
                 <p className="mt-3.5 text-[14.5px] sm:text-[15.5px] text-[#555963] leading-relaxed">
                   {lang === 'es' 
-                    ? 'Cristales de alta gama diseñados para responder con nitidez, descanso y comodidad ante las exigencias de tu vida diaria.'
-                    : 'High-end ophthalmic lenses engineered for precision, eye comfort, and seamless adaptation to your daily routine.'}
+                    ? 'Cristales oftálmicos de alta precisión calibrados por el Dr. Fabio Mora para brindarte una visión nítida, descanso ante pantallas y protección ante los cambios de luz.'
+                    : 'High-precision ophthalmic lenses calibrated by Dr. Fabio Mora to provide razor-sharp clarity, screen comfort, and seamless adaptation to changing light.'}
                 </p>
               </div>
 
-              {/* 3 Tarjetas Visuales (Fieles al diseño: 2 Vino Tinto y 1 Azul Marino en el centro) */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7">
-                {/* Tarjeta 1: Lentes Progresivas (Vino Tinto Corporativo) */}
+              {/* 3 Tarjetas Visuales Elegantes y Claras */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                {/* Tarjeta 1: Lentes Progresivas Digitales */}
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45 }}
                   whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                  className="rounded-3xl p-8 sm:p-9 text-white bg-[rgb(122,24,35)] flex flex-col items-center text-center shadow-lg shadow-[rgb(122,24,35)]/20 relative overflow-hidden group"
+                  className="bg-white rounded-2xl p-7 sm:p-8 border border-gray-200/80 shadow-xs hover:shadow-xl hover:border-[rgb(122,24,35)]/30 transition-all duration-300 flex flex-col justify-between group"
                 >
-                  <div className="w-20 h-20 rounded-full border-2 border-white/80 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 bg-white/10 backdrop-blur-xs">
-                    <svg className="w-10 h-10 text-white" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="8" y="8" width="32" height="32" rx="4" opacity="0.2" fill="white" />
-                      <circle cx="17" cy="27" r="6.5" />
-                      <circle cx="31" cy="27" r="6.5" />
-                      <path d="M23.5 27h1" />
-                      <path d="M10.5 25l-2.5-2M37.5 25l2.5-2" />
-                      <line x1="15" y1="16" x2="33" y2="16" />
-                      <line x1="15" y1="20" x2="25" y2="20" />
-                    </svg>
+                  <div>
+                    <div className="flex items-center justify-between gap-3 mb-5">
+                      <div className="w-12 h-12 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center group-hover:scale-105 group-hover:bg-[rgb(122,24,35)] group-hover:text-white transition-all duration-300 shadow-2xs">
+                        <Glasses className="w-6 h-6" />
+                      </div>
+                      <span className="text-[10.5px] font-extrabold uppercase tracking-wider text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10 px-2.5 py-1 rounded-full">
+                        {lang === 'es' ? 'Cerca · Intermedio · Lejos' : 'Near · Mid · Far'}
+                      </span>
+                    </div>
+
+                    <h3 className="text-[20px] sm:text-[22px] font-bold text-[#14161B] mb-2 group-hover:text-[rgb(122,24,35)] transition-colors">
+                      {lang === 'es' ? 'Lentes Progresivas Digitales' : 'Digital Progressive Lenses'}
+                    </h3>
+
+                    <p className="text-[13.5px] sm:text-[14px] text-[#555963] leading-relaxed mb-5">
+                      {lang === 'es' 
+                        ? 'Diseñadas para presbicia o vista cansada. Reemplazan las bifocales tradicionales con una transición continua y sin líneas visibles.'
+                        : 'Engineered for presbyopia. Replaces traditional bifocals with smooth continuous progression and no visible lines.'}
+                    </p>
+
+                    <div className="space-y-2 pt-2 border-t border-gray-100">
+                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
+                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
+                        <span>{lang === 'es' ? 'Tallado digital FreeForm sin distorsión lateral' : 'FreeForm digital surfacing without lateral distortion'}</span>
+                      </div>
+                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
+                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
+                        <span>{lang === 'es' ? 'Lectura en celular y computadora sin mareos' : 'Phone & computer reading with effortless comfort'}</span>
+                      </div>
+                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
+                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
+                        <span>{lang === 'es' ? 'Adaptación guiada garantizada en consultorio' : 'Personalized fitting guidance in clinic'}</span>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-[22px] sm:text-[24px] font-bold tracking-tight text-white mb-3">
-                    {lang === 'es' ? 'Lentes Progresivas' : 'Progressive Lenses'}
-                  </h3>
-                  <p className="text-[14px] sm:text-[14.5px] leading-relaxed text-white/90 font-medium">
-                    {lang === 'es' 
-                      ? 'Gafas personalizadas para visión cómoda en todas las distancias y uso diario.'
-                      : 'Customized lenses for comfortable vision at every distance and daily use.'}
-                  </p>
-                  <div className="mt-6 pt-5 border-t border-white/20 w-full flex justify-center">
+
+                  <div className="mt-7 pt-4 border-t border-gray-100">
                     <a
                       href={`https://wa.me/50672760215?text=${encodeURIComponent(
                         lang === 'es'
-                          ? '¡Hola Dr. Fabio Mora! Quisiera consultar por lentes progresivos personalizados en Ópticas Popular.'
-                          : 'Hello Dr. Fabio Mora, I would like to inquire about progressive lenses at Opticas Popular.'
+                          ? '¡Hola Dr. Fabio Mora! Quisiera consultar por lentes progresivos digitales personalizados en Ópticas Popular.'
+                          : 'Hello Dr. Fabio Mora, I would like to inquire about customized progressive lenses at Opticas Popular.'
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[12.5px] font-bold text-white/95 hover:text-white group/link transition-all active:scale-95 cursor-pointer"
+                      className="inline-flex items-center justify-between w-full h-10 px-4 rounded-xl bg-gray-50 hover:bg-[rgb(122,24,35)] hover:text-white text-[rgb(122,24,35)] text-[12.5px] sm:text-[13px] font-bold transition-all duration-200 active:scale-95 group/btn"
                     >
                       <span>{lang === 'es' ? 'Consultar progresivos' : 'Inquire progressives'}</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
                     </a>
                   </div>
                 </motion.div>
 
-                {/* Tarjeta 2: Lentes Transitions (Midnight Navy) */}
+                {/* Tarjeta 2: Lentes Fotosensibles Transitions® */}
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: 0.1 }}
                   whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                  className="rounded-3xl p-8 sm:p-9 text-white bg-[#161B33] flex flex-col items-center text-center shadow-xl shadow-black/15 relative overflow-hidden group border border-white/10"
+                  className="bg-white rounded-2xl p-7 sm:p-8 border border-gray-200/80 shadow-xs hover:shadow-xl hover:border-[rgb(122,24,35)]/30 transition-all duration-300 flex flex-col justify-between group"
                 >
-                  <div className="w-20 h-20 rounded-full border-2 border-white/80 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 bg-white/10 backdrop-blur-xs">
-                    <svg className="w-10 h-10 text-white" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="16" cy="24" r="9" />
-                      <circle cx="32" cy="24" r="9" />
-                      <path d="M25 24h-2" />
-                      <path d="M24 15v-5M24 33v5" />
-                      <path d="M7 24H3M45 24h-4" />
-                      <circle cx="16" cy="24" r="4" fill="white" opacity="0.3" />
-                      <circle cx="32" cy="24" r="4" fill="white" opacity="0.8" />
-                    </svg>
+                  <div>
+                    <div className="flex items-center justify-between gap-3 mb-5">
+                      <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center group-hover:scale-105 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300 shadow-2xs">
+                        <Sparkles className="w-6 h-6" />
+                      </div>
+                      <span className="text-[10.5px] font-extrabold uppercase tracking-wider text-amber-700 bg-amber-500/10 px-2.5 py-1 rounded-full">
+                        {lang === 'es' ? 'Fotocromático Inteligente' : 'Smart Photochromic'}
+                      </span>
+                    </div>
+
+                    <h3 className="text-[20px] sm:text-[22px] font-bold text-[#14161B] mb-2 group-hover:text-[rgb(122,24,35)] transition-colors">
+                      {lang === 'es' ? 'Lentes Fotosensibles Transitions®' : 'Transitions® Smart Lenses'}
+                    </h3>
+
+                    <p className="text-[13.5px] sm:text-[14px] text-[#555963] leading-relaxed mb-5">
+                      {lang === 'es' 
+                        ? 'Respuesta rápida ante la radiación solar. Claros en interiores y se oscurecen dinámicamente al aire libre para máxima protección.'
+                        : 'Fast response to UV radiation. Crystal-clear indoors and dynamically darkens outdoors for total eye comfort.'}
+                    </p>
+
+                    <div className="space-y-2 pt-2 border-t border-gray-100">
+                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
+                        <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                        <span>{lang === 'es' ? '100% de protección contra rayos UVA y UVB' : '100% defense against UVA & UVB solar radiation'}</span>
+                      </div>
+                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
+                        <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                        <span>{lang === 'es' ? 'Activación y aclarado rápido en pocos segundos' : 'Swift indoor fading and outdoor activation'}</span>
+                      </div>
+                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
+                        <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                        <span>{lang === 'es' ? 'Un solo par de anteojos para todo el día' : 'All-in-one comfort for indoor and outdoor life'}</span>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-[22px] sm:text-[24px] font-bold tracking-tight text-white mb-3">
-                    {lang === 'es' ? 'Lentes Transitions' : 'Transitions Lenses'}
-                  </h3>
-                  <p className="text-[14px] sm:text-[14.5px] leading-relaxed text-white/90 font-medium">
-                    {lang === 'es' 
-                      ? 'Adaptación inteligente a la luz, oscureciéndose afuera y aclarándose adentro.'
-                      : 'Intelligent light adaptation, darkening outdoors and clearing up indoors.'}
-                  </p>
-                  <div className="mt-6 pt-5 border-t border-white/20 w-full flex justify-center">
+
+                  <div className="mt-7 pt-4 border-t border-gray-100">
                     <a
                       href={`https://wa.me/50672760215?text=${encodeURIComponent(
                         lang === 'es'
-                          ? '¡Hola Dr. Fabio Mora! Deseo información sobre lentes Transitions fotosensibles.'
-                          : 'Hello Dr. Fabio Mora, I would like information about Transitions lenses.'
+                          ? '¡Hola Dr. Fabio Mora! Deseo consultar sobre lentes Transitions fotosensibles en Ópticas Popular.'
+                          : 'Hello Dr. Fabio Mora, I would like information about Transitions lenses at Opticas Popular.'
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[12.5px] font-bold text-white/95 hover:text-white group/link transition-all active:scale-95 cursor-pointer"
+                      className="inline-flex items-center justify-between w-full h-10 px-4 rounded-xl bg-gray-50 hover:bg-[rgb(122,24,35)] hover:text-white text-[rgb(122,24,35)] text-[12.5px] sm:text-[13px] font-bold transition-all duration-200 active:scale-95 group/btn"
                     >
                       <span>{lang === 'es' ? 'Consultar Transitions' : 'Inquire Transitions'}</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
                     </a>
                   </div>
                 </motion.div>
 
-                {/* Tarjeta 3: Protección de Luz azul (Vino Tinto Corporativo) */}
+                {/* Tarjeta 3: Protección de Luz Azul & Antirreflejo */}
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: 0.2 }}
                   whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                  className="rounded-3xl p-8 sm:p-9 text-white bg-[rgb(122,24,35)] flex flex-col items-center text-center shadow-lg shadow-[rgb(122,24,35)]/20 relative overflow-hidden group"
+                  className="bg-white rounded-2xl p-7 sm:p-8 border border-gray-200/80 shadow-xs hover:shadow-xl hover:border-[rgb(122,24,35)]/30 transition-all duration-300 flex flex-col justify-between group"
                 >
-                  <div className="w-20 h-20 rounded-full border-2 border-white/80 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 bg-white/10 backdrop-blur-xs">
-                    <svg className="w-10 h-10 text-white" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M4 24C4 24 11 12 24 12C37 12 44 24 44 24C44 24 37 36 24 36C11 36 4 24 4 24Z" />
-                      <circle cx="24" cy="24" r="6" />
-                      <line x1="38" y1="10" x2="31" y2="16" />
-                      <line x1="42" y1="18" x2="34" y2="20" />
-                      <line x1="36" y1="4" x2="30" y2="11" />
-                    </svg>
+                  <div>
+                    <div className="flex items-center justify-between gap-3 mb-5">
+                      <div className="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center group-hover:scale-105 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-2xs">
+                        <Monitor className="w-6 h-6" />
+                      </div>
+                      <span className="text-[10.5px] font-extrabold uppercase tracking-wider text-blue-700 bg-blue-500/10 px-2.5 py-1 rounded-full">
+                        {lang === 'es' ? 'Filtro Anti-Fatiga Digital' : 'Anti-Digital Fatigue'}
+                      </span>
+                    </div>
+
+                    <h3 className="text-[20px] sm:text-[22px] font-bold text-[#14161B] mb-2 group-hover:text-[rgb(122,24,35)] transition-colors">
+                      {lang === 'es' ? 'Protección de Luz Azul & Antirreflejo' : 'Blue Light Filter & AR Coating'}
+                    </h3>
+
+                    <p className="text-[13.5px] sm:text-[14px] text-[#555963] leading-relaxed mb-5">
+                      {lang === 'es' 
+                        ? 'Filtro selectivo contra la radiación azul-violeta de monitores, tabletas y celulares. Reduce el ardor ocular y mejora el descanso nocturno.'
+                        : 'Selective blocking of high-energy blue-violet rays from screens. Reduces ocular burning, headaches, and sleep disruption.'}
+                    </p>
+
+                    <div className="space-y-2 pt-2 border-t border-gray-100">
+                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
+                        <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                        <span>{lang === 'es' ? 'Menor pesadez, ojo rojo y fatiga al final del día' : 'Less eye strain, redness, and end-of-day fatigue'}</span>
+                      </div>
+                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
+                        <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                        <span>{lang === 'es' ? 'Tratamiento antirreflejo de máxima transparencia' : 'Crystal-clear multi-layer anti-reflective coating'}</span>
+                      </div>
+                      <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
+                        <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                        <span>{lang === 'es' ? 'Ideal para teletrabajo, estudio y conducción nocturna' : 'Ideal for remote work, study, and nighttime driving'}</span>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-[22px] sm:text-[24px] font-bold tracking-tight text-white mb-3">
-                    {lang === 'es' ? 'Protección de Luz azul' : 'Blue Light Protection'}
-                  </h3>
-                  <p className="text-[14px] sm:text-[14.5px] leading-relaxed text-white/90 font-medium">
-                    {lang === 'es' 
-                      ? 'Protección total contra la luz nociva con transparencia máxima para la luz beneficiosa.'
-                      : 'Complete defense against harmful blue rays with high optical clarity.'}
-                  </p>
-                  <div className="mt-6 pt-5 border-t border-white/20 w-full flex justify-center">
+
+                  <div className="mt-7 pt-4 border-t border-gray-100">
                     <a
                       href={`https://wa.me/50672760215?text=${encodeURIComponent(
                         lang === 'es'
-                          ? '¡Hola Dr. Fabio Mora! Quisiera asesoría sobre lentes con protección de luz azul.'
-                          : 'Hello Dr. Fabio Mora, I would like advice on blue light protection lenses.'
+                          ? '¡Hola Dr. Fabio Mora! Quisiera consultar por cristales con filtro de luz azul y antirreflejo.'
+                          : 'Hello Dr. Fabio Mora, I would like advice on blue light and anti-reflective lenses.'
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[12.5px] font-bold text-white/95 hover:text-white group/link transition-all active:scale-95 cursor-pointer"
+                      className="inline-flex items-center justify-between w-full h-10 px-4 rounded-xl bg-gray-50 hover:bg-[rgb(122,24,35)] hover:text-white text-[rgb(122,24,35)] text-[12.5px] sm:text-[13px] font-bold transition-all duration-200 active:scale-95 group/btn"
                     >
                       <span>{lang === 'es' ? 'Consultar filtro azul' : 'Inquire blue filter'}</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
                     </a>
                   </div>
                 </motion.div>
               </div>
-
-              {/* Banner Amplio: Lentes de Contacto Perfectos para Vos (Basado en la Imagen 2) */}
-              <motion.div 
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55 }}
-                className="mt-10 md:mt-14 rounded-3xl bg-gradient-to-r from-[rgb(122,24,35)] via-[rgb(138,28,40)] to-[rgb(112,20,30)] text-white overflow-hidden shadow-2xl relative border border-white/15"
-              >
-                <div className="grid lg:grid-cols-12 items-center">
-                  {/* Contenido Editorial Izquierdo */}
-                  <div className="lg:col-span-7 p-7 sm:p-10 md:p-12 z-10 flex flex-col justify-center">
-                    <span className="text-[11px] sm:text-[12px] uppercase tracking-[0.2em] font-extrabold text-white/85 mb-2.5">
-                      {lang === 'es' ? 'EN ÓPTICAS POPULAR · DR. FABIO MORA' : 'AT OPTICAS POPULAR · DR. FABIO MORA'}
-                    </span>
-                    <h3 className="text-[26px] sm:text-[34px] md:text-[38px] font-bold leading-[1.15] tracking-tight text-white mb-3.5 font-serif">
-                      {lang === 'es' ? (
-                        <>Descubrí los <span className="underline decoration-white/40 decoration-wavy underline-offset-4">lentes de contacto</span> perfectos para vos.</>
-                      ) : (
-                        <>Discover the <span className="underline decoration-white/40 decoration-wavy underline-offset-4">contact lenses</span> made for you.</>
-                      )}
-                    </h3>
-                    <p className="text-[14px] sm:text-[16px] text-white/90 leading-relaxed max-w-xl mb-7">
-                      {lang === 'es'
-                        ? 'Lentes de contacto desechables y reusables esféricos, para astigmatismo y multifocal. Adaptación clínica personalizada, segura y cómoda.'
-                        : 'Daily and reusable spherical, toric for astigmatism, and multifocal contact lenses. Professional, comfortable, and hygienic fitting.'}
-                    </p>
-
-                    <div>
-                      <a
-                        href={`https://wa.me/50672760215?text=${encodeURIComponent(
-                          lang === 'es'
-                            ? '¡Hola Dr. Fabio Mora! Deseo consultar por lentes de contacto y programar mi examen.'
-                            : 'Hello Dr. Fabio Mora, I would like to inquire about contact lenses and book my exam.'
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl bg-[#161B33] hover:bg-[#1E2540] text-white text-[14px] font-bold shadow-xl shadow-black/30 transition-all duration-200 active:scale-95 cursor-pointer group"
-                      >
-                        <Contact className="w-4 h-4 text-rose-300" />
-                        <span>{lang === 'es' ? '¡Programá tu examen hoy!' : 'Book your exam today!'}</span>
-                        <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Imagen Real de Referencia en el Lado Derecho */}
-                  <div className="lg:col-span-5 relative h-full min-h-[260px] sm:min-h-[320px] lg:min-h-[380px] overflow-hidden flex items-end justify-center lg:justify-end">
-                    <img
-                      src="/images/lentes-contacto-banner.png"
-                      alt="Lentes de contacto en Ópticas Popular Dr. Fabio Mora"
-                      className="w-full h-full object-cover object-right-bottom scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[rgb(122,24,35)]/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[rgb(122,24,35)] lg:via-transparent lg:to-transparent" />
-                  </div>
-                </div>
-              </motion.div>
             </div>
           </section>
 
@@ -2236,6 +2237,145 @@ export default function App() {
               </div>
 
 
+            </div>
+          </section>
+
+          {/* Nueva Sección Separada: Contactología Clínica y Lentes de Contacto */}
+          <section id="lentes-contacto" className="w-full py-14 md:py-20 bg-white border-b border-gray-100">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div 
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55 }}
+                className="rounded-3xl bg-gradient-to-br from-[#FAFAFC] via-white to-rose-50/20 border border-gray-200/90 p-7 sm:p-10 md:p-12 shadow-sm relative overflow-hidden"
+              >
+                {/* Acento superior vino tinto sutil */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[rgb(122,24,35)] via-[rgb(180,40,55)] to-[rgb(122,24,35)]" />
+
+                <div className="grid lg:grid-cols-12 gap-8 items-center">
+                  {/* Columna Izquierda: Información Editorial y Opciones */}
+                  <div className="lg:col-span-7 flex flex-col justify-center">
+                    <span className="inline-flex items-center gap-1.5 h-7 px-3.5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold shadow-2xs mb-3.5 w-fit">
+                      <Contact className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
+                      <span>{lang === 'es' ? 'Contactología Clínica · Dr. Fabio Mora' : 'Clinical Contactology · Dr. Fabio Mora'}</span>
+                    </span>
+
+                    <h2 className="text-[26px] sm:text-[32px] md:text-[36px] font-bold leading-tight tracking-tight text-[#14161B] mb-3">
+                      {lang === 'es' ? (
+                        <>Descubrí la libertad visual con <span className="text-[rgb(122,24,35)]">lentes de contacto</span> a tu medida</>
+                      ) : (
+                        <>Discover visual freedom with <span className="text-[rgb(122,24,35)]">tailored contact lenses</span></>
+                      )}
+                    </h2>
+
+                    <p className="text-[14px] sm:text-[15.5px] text-[#555963] leading-relaxed mb-6">
+                      {lang === 'es'
+                        ? 'Adaptación profesional con topografía corneal y prueba lagrimal. Diseñados para responder con total hidratación, descanso y oxigenación para tu estilo de vida.'
+                        : 'Professional fitting with corneal health assessment and tear evaluation. Engineered for maximum hydration, all-day comfort, and high oxygen permeability.'}
+                    </p>
+
+                    {/* Grilla de ventajas clínicas */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-7">
+                      <div className="bg-white rounded-xl p-3.5 border border-gray-200/70 shadow-2xs">
+                        <div className="flex items-center gap-2 font-bold text-[13px] text-[#15171C] mb-1">
+                          <Droplets className="w-4 h-4 text-[rgb(122,24,35)]" />
+                          <span>{lang === 'es' ? 'Desechables Diarios & Mensuales' : 'Daily & Monthly Disposables'}</span>
+                        </div>
+                        <p className="text-[12px] text-[#606573] leading-snug">
+                          {lang === 'es' ? 'Máxima higiene sin soluciones para deporte o uso diario continuo.' : 'Maximum hygiene with no solutions needed for sports or daily wear.'}
+                        </p>
+                      </div>
+
+                      <div className="bg-white rounded-xl p-3.5 border border-gray-200/70 shadow-2xs">
+                        <div className="flex items-center gap-2 font-bold text-[13px] text-[#15171C] mb-1">
+                          <Eye className="w-4 h-4 text-[rgb(122,24,35)]" />
+                          <span>{lang === 'es' ? 'Tóricos para Astigmatismo' : 'Toric Lenses for Astigmatism'}</span>
+                        </div>
+                        <p className="text-[12px] text-[#606573] leading-snug">
+                          {lang === 'es' ? 'Estabilidad rotacional para que el lente no se desplace al parpadear.' : 'Rotational stability ensuring your vision stays razor-sharp.'}
+                        </p>
+                      </div>
+
+                      <div className="bg-white rounded-xl p-3.5 border border-gray-200/70 shadow-2xs">
+                        <div className="flex items-center gap-2 font-bold text-[13px] text-[#15171C] mb-1">
+                          <Glasses className="w-4 h-4 text-[rgb(122,24,35)]" />
+                          <span>{lang === 'es' ? 'Multifocales para Presbicia' : 'Multifocal Contact Lenses'}</span>
+                        </div>
+                        <p className="text-[12px] text-[#606573] leading-snug">
+                          {lang === 'es' ? 'Enfoque claro de cerca, computadora y lejos sin depender de anteojos.' : 'Sharp focus near, intermediate and far without reading glasses.'}
+                        </p>
+                      </div>
+
+                      <div className="bg-white rounded-xl p-3.5 border border-gray-200/70 shadow-2xs">
+                        <div className="flex items-center gap-2 font-bold text-[13px] text-[#15171C] mb-1">
+                          <ShieldCheck className="w-4 h-4 text-[rgb(122,24,35)]" />
+                          <span>{lang === 'es' ? 'Entrenamiento & Prueba Guiada' : 'Hands-on Fitting & Training'}</span>
+                        </div>
+                        <p className="text-[12px] text-[#606573] leading-snug">
+                          {lang === 'es' ? 'Te enseñamos con calma cómo colocártelos y retirártelos con seguridad.' : 'Patient-first guidance on safe insertion, removal, and hygiene.'}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Botonera de Contactología */}
+                    <div className="flex flex-wrap items-center gap-3">
+                      <a
+                        href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                          lang === 'es'
+                            ? '¡Hola Dr. Fabio Mora! Quisiera agendar una cita para valoración y adaptación de lentes de contacto en Plaza Higuerones.'
+                            : 'Hello Dr. Fabio Mora, I would like to schedule a contact lens fitting appointment at Plaza Higuerones.'
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer group"
+                      >
+                        <Contact className="w-4 h-4 text-white" />
+                        <span>{lang === 'es' ? '¡Programá tu adaptación hoy!' : 'Book your lens fitting today!'}</span>
+                        <ArrowRight className="w-4 h-4 ml-0.5 group-hover:translate-x-1 transition-transform" />
+                      </a>
+
+                      <a
+                        href="#consulta"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setCurrentView('consulta');
+                          window.location.hash = '#consulta';
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-white hover:bg-gray-50 text-[#15171C] border border-gray-200 text-[13px] sm:text-[14px] font-bold shadow-2xs transition-all duration-200 active:scale-95 cursor-pointer"
+                      >
+                        <MessageCircle className="w-4 h-4 text-[rgb(122,24,35)]" />
+                        <span>{lang === 'es' ? 'Hacer una consulta' : 'Ask a question'}</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Columna Derecha: Composición Visual Elegante */}
+                  <div className="lg:col-span-5 relative flex items-center justify-center">
+                    <div className="relative w-full max-w-[420px] rounded-2xl overflow-hidden border border-gray-200/80 shadow-md bg-white group">
+                      <img
+                        src="/images/lentes-contacto-banner.png"
+                        alt="Adaptación clínica de lentes de contacto Dr. Fabio Mora"
+                        className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#15171C]/80 via-transparent to-transparent flex items-end p-5">
+                        <div className="text-white">
+                          <p className="text-[11px] font-extrabold uppercase tracking-wider text-rose-300">
+                            {lang === 'es' ? 'Salud Ocular Garantizada' : 'Guaranteed Eye Health'}
+                          </p>
+                          <p className="text-[13.5px] font-bold leading-snug">
+                            {lang === 'es' 
+                              ? '11 años de experiencia clínica en adaptación de lentes de contacto' 
+                              : '11 years of clinical excellence in contact lens fittings'}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </section>
 
