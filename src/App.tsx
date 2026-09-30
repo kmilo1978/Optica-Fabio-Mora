@@ -19,6 +19,7 @@ import {
   Instagram,
   ChevronDown,
   ChevronRight,
+  ChevronLeft,
   ChevronUp,
   HelpCircle,
   ShieldCheck,
@@ -1242,6 +1243,224 @@ function LensTechnologyShowcase({ lang }: { lang: Language }) {
           )}
         </motion.div>
       </AnimatePresence>
+    </div>
+  );
+}
+
+function ContactLensCarouselBanner({ lang }: { lang: Language }) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const slides = [
+    {
+      id: 1,
+      badge: lang === 'es' ? 'Libertad Visual & Confort 24h' : 'Visual Freedom & 24h Comfort',
+      title: lang === 'es' 
+        ? <>Descubrí los <span className="underline decoration-white/40 decoration-wavy underline-offset-4">lentes de contacto</span> perfectos para vos</>
+        : <>Discover the <span className="underline decoration-white/40 decoration-wavy underline-offset-4">contact lenses</span> made for your lifestyle</>,
+      description: lang === 'es'
+        ? 'Fabricados en hidrogel de silicona de última generación con ultra oxigenación corneal. Disfrutá de una visión cristalina, ojos frescos y confort total desde la mañana hasta la noche.'
+        : 'Engineered with premium breathable silicone hydrogel. Enjoy razor-sharp clarity, moisturized eyes, and all-day comfort without bulky eyeglass frames.',
+      image: '/images/lentes-contacto-modelo-1.jpg',
+      imageAlt: lang === 'es' ? 'Mujer sonriente con lente de contacto en la yema del dedo' : 'Smiling woman with contact lens on fingertip',
+      pills: lang === 'es' 
+        ? ['100% Respirables', 'Desechables o Mensuales', 'Sensación Ojo Desnudo']
+        : ['100% Breathable', 'Daily or Monthly', 'Natural Bare-Eye Feel'],
+      ctaText: lang === 'es' ? '¡Programá tu prueba hoy!' : 'Schedule your trial today!',
+      whatsappMsg: lang === 'es'
+        ? '¡Hola Dr. Fabio Mora! Quisiera consultar por la prueba y adaptación de lentes de contacto en Ópticas Popular.'
+        : 'Hello Dr. Fabio Mora, I would like to schedule a contact lens fitting trial.',
+    },
+    {
+      id: 2,
+      badge: lang === 'es' ? 'Astigmatismo & Presbicia' : 'Astigmatism & Presbyopia',
+      title: lang === 'es'
+        ? <>Lentes <span className="underline decoration-white/40 decoration-wavy underline-offset-4">Tóricos y Multifocales</span> de Alta Estabilidad</>
+        : <>High-Precision <span className="underline decoration-white/40 decoration-wavy underline-offset-4">Toric & Multifocal</span> Lenses</>,
+      description: lang === 'es'
+        ? '¿Pensabas que con astigmatismo o vista cansada no podías usar lentes de contacto? Los nuevos diseños se estabilizan con cada parpadeo para darte enfoque perfecto de lejos, intermedio y cerca.'
+        : 'Thought astigmatism or reading blur prevented you from wearing contacts? Modern stabilization technology locks focus sharp at all distances with zero rotational drift.',
+      image: '/images/lentes-contacto-modelo-2.jpg',
+      imageAlt: lang === 'es' ? 'Hombre joven sonriente con lente de contacto' : 'Young man smiling with contact lens',
+      pills: lang === 'es'
+        ? ['Estabilidad al Parpadear', 'Enfoque Multifocal Continuo', 'Calibración Digital']
+        : ['Blink-Stabilized', 'Seamless Multifocal', 'Digital Precision'],
+      ctaText: lang === 'es' ? 'Consultar lentes especializados' : 'Inquire specialized lenses',
+      whatsappMsg: lang === 'es'
+        ? '¡Hola Dr. Fabio Mora! Tengo astigmatismo / presbicia y deseo consultar por lentes de contacto especializados.'
+        : 'Hello Dr. Fabio Mora, I have astigmatism/presbyopia and would like toric contact lens advice.',
+    },
+    {
+      id: 3,
+      badge: lang === 'es' ? 'Atención Clínica Personalizada' : 'Guided Clinical Fitting',
+      title: lang === 'es'
+        ? <>Prueba y Adaptación Guiada <span className="underline decoration-white/40 decoration-wavy underline-offset-4">en Consultorio</span></>
+        : <>In-Clinic Trial & <span className="underline decoration-white/40 decoration-wavy underline-offset-4">Guided Fitting</span></>,
+      description: lang === 'es'
+        ? 'El Dr. Fabio Mora evalúa la curvatura corneal y calidad lagrimal de tus ojos. Te acompañamos paso a paso para que aprendas a colocarlos y retirarlos con total seguridad y sin temor.'
+        : 'Dr. Fabio Mora evaluates your corneal topography and tear film health, patiently guiding you through hygienic insertion and removal for zero-stress wear.',
+      image: '/images/lentes-contacto-modelo-3.jpg',
+      imageAlt: lang === 'es' ? 'Consulta clínica de contactología con el Dr. Fabio Mora' : 'Clinical contact lens fitting consultation',
+      pills: lang === 'es'
+        ? ['Topografía Corneal', 'Acompañamiento Paciente', 'Garantía de Adaptación']
+        : ['Corneal Mapping', 'Gentle Step-by-Step Trial', 'Adaptation Guarantee'],
+      ctaText: lang === 'es' ? 'Agendar valoración con el Dr. Fabio Mora' : 'Book contactology consultation',
+      whatsappMsg: lang === 'es'
+        ? '¡Hola Dr. Fabio Mora! Me gustaría agendar una cita de adaptación y prueba guiada de lentes de contacto en Plaza Higuerones.'
+        : 'Hello Dr. Fabio Mora, I would like to book an in-person contact lens trial and consultation.',
+    },
+  ];
+
+  // Auto-play interval
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [isPaused, slides.length]);
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const current = slides[currentSlide];
+
+  return (
+    <div 
+      className="relative rounded-3xl bg-gradient-to-br from-[rgb(122,24,35)] via-[rgb(105,18,28)] to-[rgb(75,12,20)] text-white overflow-hidden shadow-2xl border border-white/10"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* Elementos decorativos sutiles de fondo */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-black/20 rounded-full blur-2xl pointer-events-none -ml-20 -mb-20" />
+
+      {/* Contenido en Carousel con AnimatePresence */}
+      <div className="relative z-10 p-6 sm:p-9 md:p-12 lg:p-14">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={current.id}
+            initial={{ opacity: 0, x: 25 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -25 }}
+            transition={{ duration: 0.4 }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center"
+          >
+            {/* Lado Izquierdo: Textos y Acciones */}
+            <div className="lg:col-span-7 flex flex-col justify-center">
+              <div className="flex items-center gap-2 mb-3.5">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-white text-[11px] sm:text-[12px] uppercase tracking-wider font-extrabold border border-white/20">
+                  <Contact className="w-3.5 h-3.5 text-white" />
+                  <span>{current.badge}</span>
+                </span>
+                <span className="text-[11px] font-bold text-white/70">
+                  0{currentSlide + 1} / 0{slides.length}
+                </span>
+              </div>
+
+              <h2 className="text-[26px] sm:text-[32px] md:text-[38px] font-bold leading-[1.18] tracking-tight text-white mb-4">
+                {current.title}
+              </h2>
+
+              <p className="text-[14px] sm:text-[15.5px] text-white/90 leading-relaxed max-w-xl mb-6 font-normal">
+                {current.description}
+              </p>
+
+              {/* Píldoras de beneficios clave */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {current.pills.map((pill, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-black/20 backdrop-blur-xs border border-white/15 text-white/95 text-[12px] font-semibold"
+                  >
+                    <CheckCircle2 className="w-3.5 h-3.5 text-white/90" />
+                    <span>{pill}</span>
+                  </span>
+                ))}
+              </div>
+
+              {/* Botón CTA Principal */}
+              <div>
+                <a
+                  href={`https://wa.me/50672760215?text=${encodeURIComponent(current.whatsappMsg)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl bg-white hover:bg-gray-100 text-[rgb(122,24,35)] text-[14px] font-bold shadow-xl transition-all duration-200 active:scale-95 group cursor-pointer"
+                >
+                  <MessageCircle className="w-4 h-4 text-[rgb(122,24,35)]" />
+                  <span>{current.ctaText}</span>
+                  <ArrowRight className="w-4 h-4 text-[rgb(122,24,35)] group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+
+            {/* Lado Derecho: Imagen del Modelo con Marco Moderno */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black/20 aspect-[16/11] sm:aspect-[16/10] md:aspect-[4/3] lg:aspect-[16/11]">
+                <img
+                  src={current.image}
+                  alt={current.imageAlt}
+                  className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                />
+                {/* Degradado sutil inferior para legibilidad */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                
+                {/* Micro sello de calidad */}
+                <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-[10.5px] font-bold text-white flex items-center gap-1.5">
+                  <ShieldCheck className="w-3 h-3 text-white" />
+                  <span>Ópticas Popular · Dr. Fabio Mora</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Controles del Carrusel (Flechas y Paginación) */}
+        <div className="mt-8 pt-5 border-t border-white/15 flex items-center justify-between gap-4">
+          {/* Indicadores de diapositiva (Pestañas/Pills interactivas) */}
+          <div className="flex items-center gap-2">
+            {slides.map((slide, idx) => {
+              const isActive = currentSlide === idx;
+              return (
+                <button
+                  key={slide.id}
+                  onClick={() => setCurrentSlide(idx)}
+                  aria-label={`Ver diapositiva ${idx + 1}`}
+                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    isActive 
+                      ? 'w-10 bg-white shadow-md' 
+                      : 'w-2.5 bg-white/35 hover:bg-white/60'
+                  }`}
+                />
+              );
+            })}
+          </div>
+
+          {/* Flechas Anterior / Siguiente */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={prevSlide}
+              aria-label={lang === 'es' ? 'Diapositiva anterior' : 'Previous slide'}
+              className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition-all active:scale-90 border border-white/20 cursor-pointer shadow-xs"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={nextSlide}
+              aria-label={lang === 'es' ? 'Siguiente diapositiva' : 'Next slide'}
+              className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition-all active:scale-90 border border-white/20 cursor-pointer shadow-xs"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -2631,67 +2850,10 @@ export default function App() {
             </div>
           </section>
 
-          {/* Sección de Lentes de Contacto (Banner Separado y Elegante) */}
+          {/* Sección de Lentes de Contacto (Carrusel Dinámico Moderno) */}
           <section id="lentes-contacto" className="w-full py-10 md:py-16 bg-white border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="relative rounded-3xl bg-[#BF1D2C] text-white overflow-hidden shadow-xl"
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
-                  {/* Contenido Editorial Izquierdo */}
-                  <div className="lg:col-span-7 p-7 sm:p-10 md:p-12 lg:pr-4 z-10 flex flex-col justify-center">
-                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-xs text-white text-[11px] sm:text-[12px] uppercase tracking-wider font-extrabold w-fit mb-3">
-                      <Contact className="w-3.5 h-3.5 text-white" />
-                      <span>{lang === 'es' ? 'En Ópticas Popular · Dr. Fabio Mora' : 'At Ópticas Popular · Dr. Fabio Mora'}</span>
-                    </span>
-
-                    <h2 className="text-[26px] sm:text-[32px] md:text-[38px] font-bold leading-tight tracking-tight text-white mb-3.5">
-                      {lang === 'es' ? (
-                        <>Descubrí los <span className="underline decoration-white/30 decoration-wavy underline-offset-4">lentes de contacto</span> perfectos para vos.</>
-                      ) : (
-                        <>Discover the <span className="underline decoration-white/30 decoration-wavy underline-offset-4">contact lenses</span> made for you.</>
-                      )}
-                    </h2>
-
-                    <p className="text-[14px] sm:text-[15.5px] text-white/90 leading-relaxed max-w-xl mb-7">
-                      {lang === 'es' 
-                        ? 'Lentes de contacto desechables y reusables esféricos, para astigmatismo y multifocal. Adaptación clínica personalizada, segura y cómoda.'
-                        : 'Daily and reusable spherical, toric for astigmatism, and multifocal contact lenses. Professional, comfortable, and hygienic fitting.'}
-                    </p>
-
-                    <div>
-                      <a
-                        href={`https://wa.me/50672760215?text=${encodeURIComponent(
-                          lang === 'es'
-                            ? '¡Hola Dr. Fabio Mora! Quisiera consultar por lentes de contacto y programar mi examen en Plaza Higuerones.'
-                            : 'Hello Dr. Fabio Mora, I would like to inquire about contact lenses and book my appointment.'
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl bg-[#141A2E] hover:bg-[#1E2642] text-white text-[14px] font-bold shadow-lg transition-all duration-200 active:scale-95 group cursor-pointer"
-                      >
-                        <Contact className="w-4 h-4 text-white" />
-                        <span>{lang === 'es' ? '¡Programá tu examen hoy!' : 'Book your exam today!'}</span>
-                        <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Imagen del Paciente en el Lado Derecho */}
-                  <div className="lg:col-span-5 relative flex items-end justify-center lg:justify-end h-full">
-                    <img
-                      src="/images/paciente-lentes-contacto.png"
-                      alt="Adaptación clínica de lentes de contacto en Ópticas Popular"
-                      className="w-full max-w-[380px] lg:max-w-none h-auto object-contain object-bottom"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
-              </motion.div>
+              <ContactLensCarouselBanner lang={lang} />
             </div>
           </section>
 
