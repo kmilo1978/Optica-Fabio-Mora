@@ -14,13 +14,13 @@ import { TRANSLATIONS, Language } from './translations';
 
 interface FooterProps {
   lang: Language;
-  onNavigate?: (view: 'landing' | 'consulta' | 'calificar', hash?: string) => void;
+  onNavigate?: (view: 'landing' | 'consulta' | 'calificar' | 'test-visual', hash?: string) => void;
 }
 
 export default function Footer({ lang, onNavigate }: FooterProps) {
   const t = TRANSLATIONS[lang];
 
-  const handleLinkClick = (e: React.MouseEvent, view: 'landing' | 'consulta' | 'calificar', hash: string) => {
+  const handleLinkClick = (e: React.MouseEvent, view: 'landing' | 'consulta' | 'calificar' | 'test-visual', hash: string) => {
     e.preventDefault();
     if (onNavigate) {
       onNavigate(view, hash);
@@ -177,6 +177,21 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
                   <span className="text-rose-200 group-hover:text-white transition-colors">{t.footer.navInquiry}</span>
                   <span className="px-1.5 py-0.5 rounded text-[9.5px] font-bold bg-[rgb(122,24,35)] text-white uppercase tracking-wider ml-1 border border-white/20">
                     {t.footer.navInquiryBadge}
+                  </span>
+                </a>
+              </li>
+
+              {/* Nueva Subcategoría: Test Visual Online Interactivo */}
+              <li>
+                <a
+                  href="#test-visual"
+                  onClick={(e) => handleLinkClick(e, 'test-visual', '#test-visual')}
+                  className="text-white font-semibold hover:translate-x-1 inline-flex items-center gap-1.5 transition-all group"
+                >
+                  <ChevronRight className="w-3.5 h-3.5 text-rose-400 group-hover:translate-x-0.5 transition-transform" />
+                  <span className="text-rose-200 group-hover:text-white transition-colors">{lang === 'es' ? 'Test Visual Online' : 'Online Vision Test'}</span>
+                  <span className="px-1.5 py-0.5 rounded text-[9.5px] font-bold bg-[rgb(122,24,35)] text-white uppercase tracking-wider ml-1 border border-white/20">
+                    {lang === 'es' ? '3 min' : '3 min'}
                   </span>
                 </a>
               </li>

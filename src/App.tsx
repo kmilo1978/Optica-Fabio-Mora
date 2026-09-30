@@ -46,6 +46,7 @@ import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring 
 import { useRef } from 'react';
 import CalificarPage from './CalificarPage';
 import ConsultaPage from './ConsultaPage';
+import TestVisualPage from './TestVisualPage';
 import Footer from './Footer';
 import { TRANSLATIONS, Language } from './translations';
 
@@ -128,6 +129,17 @@ function getNavigationMenu(lang: Language): NavCategory[] {
             { name: lang === 'es' ? 'Paso a Paso de tu Cita' : 'Exam Step-by-Step', href: '#proceso', desc: lang === 'es' ? 'Cómo te atendemos en tu consulta' : 'What to expect at your appointment', icon: CheckCircle2 },
           ],
         },
+        {
+          title: lang === 'es' ? 'Autoevaluación' : 'Self-Screening',
+          items: [
+            { 
+              name: lang === 'es' ? 'Test Visual Online' : 'Online Vision Test', 
+              href: '#test-visual', 
+              desc: lang === 'es' ? 'Revisá agudeza, astigmatismo y daltonismo en 3 min' : 'Check acuity, astigmatism & color in 3 min', 
+              icon: Sparkles 
+            },
+          ],
+        },
       ],
     },
     {
@@ -171,6 +183,12 @@ function getNavigationMenu(lang: Language): NavCategory[] {
               href: '#consulta', 
               desc: lang === 'es' ? 'Página dedicada para enviar tu mensaje al doctor' : 'Dedicated page to message Dr. Fabio Mora', 
               icon: MessageCircle 
+            },
+            { 
+              name: lang === 'es' ? 'Test Visual Online' : 'Online Vision Test', 
+              href: '#test-visual', 
+              desc: lang === 'es' ? 'Autoevaluación interactiva de 3 minutos' : '3-minute interactive screening', 
+              icon: Sparkles 
             },
           ],
         },
@@ -617,7 +635,7 @@ export default function App() {
     setSelectedSymptom(null);
   };
 
-  const [currentView, setCurrentView] = useState<'home' | 'calificar' | 'consulta'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'calificar' | 'consulta' | 'test-visual'>('home');
 
   useEffect(() => {
     const handleHash = () => {
@@ -627,6 +645,9 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (h === '#consulta' || h === '#formulario-whatsapp') {
         setCurrentView('consulta');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (h === '#test-visual' || h === '#test-vision' || h === '#revisar-vision') {
+        setCurrentView('test-visual');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         setCurrentView('home');
@@ -707,6 +728,48 @@ export default function App() {
           } else if (view === 'calificar') {
             setCurrentView('calificar');
             window.location.hash = '#calificar';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (view === 'test-visual') {
+            setCurrentView('test-visual');
+            window.location.hash = '#test-visual';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }}
+      />
+    );
+  }
+
+  if (currentView === 'test-visual') {
+    return (
+      <TestVisualPage 
+        onBack={() => {
+          window.location.hash = '';
+          setCurrentView('home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }} 
+        lang={lang}
+        onNavigate={(view, hash) => {
+          if (view === 'landing' || view === 'home') {
+            setCurrentView('home');
+            window.location.hash = hash || '';
+            if (hash && hash !== '#inicio') {
+              setTimeout(() => {
+                const el = document.querySelector(hash);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                else window.scrollTo({ top: 0, behavior: 'smooth' });
+              }, 100);
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          } else if (view === 'consulta') {
+            setCurrentView('consulta');
+            window.location.hash = '#consulta';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (view === 'calificar') {
+            setCurrentView('calificar');
+            window.location.hash = '#calificar';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (view === 'test-visual') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }
         }}
@@ -2461,6 +2524,10 @@ export default function App() {
               } else if (view === 'calificar') {
                 setCurrentView('calificar');
                 window.location.hash = '#calificar';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              } else if (view === 'test-visual') {
+                setCurrentView('test-visual');
+                window.location.hash = '#test-visual';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               } else {
                 window.location.hash = hash || '';
