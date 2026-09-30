@@ -13,10 +13,12 @@ import {
 import { Language } from './translations';
 import Footer from './Footer';
 
+import { FooterProps, NavigationView } from './Footer';
+
 interface CalificarPageProps {
   onBack: () => void;
   lang?: Language;
-  onNavigate?: (view: 'landing' | 'consulta' | 'calificar', hash?: string) => void;
+  onNavigate?: (view: NavigationView, hash?: string) => void;
 }
 
 // Emblema de Lentes Oftálmicos para calificación con colores corporativos oficiales
@@ -82,7 +84,7 @@ function GlassesRatingEmblem({ active, hovered }: { active: boolean; hovered: bo
   );
 }
 
-export default function CalificarPage({ onBack, lang = 'es' }: CalificarPageProps) {
+export default function CalificarPage({ onBack, lang = 'es', onNavigate }: CalificarPageProps) {
   const [rating, setRating] = useState<number | null>(null);
   const [hoveredRating, setHoveredRating] = useState<number | null>(null);
   const [nombre, setNombre] = useState('');

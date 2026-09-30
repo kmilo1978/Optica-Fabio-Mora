@@ -31,10 +31,12 @@ import {
 import { Language } from './translations';
 import Footer from './Footer';
 
+import { NavigationView } from './Footer';
+
 interface TestVisualPageProps {
   onBack: () => void;
   lang?: Language;
-  onNavigate?: (view: 'landing' | 'consulta' | 'calificar', hash?: string) => void;
+  onNavigate?: (view: NavigationView, hash?: string) => void;
 }
 
 type TestPhase = 'intro' | 'instructions' | 'test' | 'results';

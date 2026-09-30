@@ -22,10 +22,12 @@ import {
 import { Language } from './translations';
 import Footer from './Footer';
 
+import { NavigationView } from './Footer';
+
 interface ConsultaPageProps {
   onBack: () => void;
   lang?: Language;
-  onNavigate?: (view: 'landing' | 'consulta' | 'calificar', hash?: string) => void;
+  onNavigate?: (view: NavigationView, hash?: string) => void;
 }
 
 export default function ConsultaPage({ onBack, lang = 'es', onNavigate }: ConsultaPageProps) {

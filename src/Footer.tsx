@@ -12,15 +12,17 @@ import {
 } from 'lucide-react';
 import { TRANSLATIONS, Language } from './translations';
 
-interface FooterProps {
+export type NavigationView = 'landing' | 'home' | 'consulta' | 'calificar' | 'test-visual' | 'contacto' | 'tecnologia-cristales';
+
+export interface FooterProps {
   lang: Language;
-  onNavigate?: (view: 'landing' | 'consulta' | 'calificar' | 'test-visual' | 'contacto', hash?: string) => void;
+  onNavigate?: (view: NavigationView, hash?: string) => void;
 }
 
 export default function Footer({ lang, onNavigate }: FooterProps) {
   const t = TRANSLATIONS[lang];
 
-  const handleLinkClick = (e: React.MouseEvent, view: 'landing' | 'consulta' | 'calificar' | 'test-visual' | 'contacto', hash: string) => {
+  const handleLinkClick = (e: React.MouseEvent, view: NavigationView, hash: string) => {
     e.preventDefault();
     if (onNavigate) {
       onNavigate(view, hash);

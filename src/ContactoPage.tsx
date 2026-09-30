@@ -22,16 +22,18 @@ import {
 import { Language } from './translations';
 import Footer from './Footer';
 
+import { NavigationView } from './Footer';
+
 interface ContactoPageProps {
   onBack: () => void;
   lang?: Language;
-  onNavigate?: (view: 'landing' | 'consulta' | 'calificar' | 'test-visual' | 'contacto', hash?: string) => void;
+  onNavigate?: (view: NavigationView, hash?: string) => void;
 }
 
 export default function ContactoPage({ onBack, lang = 'es', onNavigate }: ContactoPageProps) {
   const isEn = lang === 'en';
 
-  const handleFooterNavigate = (view: 'landing' | 'consulta' | 'calificar' | 'test-visual' | 'contacto', hash?: string) => {
+  const handleFooterNavigate = (view: NavigationView, hash?: string) => {
     if (onNavigate) {
       onNavigate(view, hash);
     } else if (view === 'landing') {

@@ -22,10 +22,12 @@ import {
 import { Language } from './translations';
 import Footer from './Footer';
 
+import { NavigationView } from './Footer';
+
 interface TecnologiaCristalesPageProps {
   onBack: () => void;
   lang?: Language;
-  onNavigate?: (view: 'landing' | 'consulta' | 'calificar' | 'test-visual' | 'contacto' | 'tecnologia-cristales', hash?: string) => void;
+  onNavigate?: (view: NavigationView, hash?: string) => void;
 }
 
 export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigate }: TecnologiaCristalesPageProps) {

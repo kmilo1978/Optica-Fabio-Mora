@@ -1,5 +1,14 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect, useRef } from 'react';
+import { 
+  motion, 
+  AnimatePresence, 
+  animate, 
+  useMotionValue, 
+  useTransform, 
+  useInView, 
+  useScroll, 
+  useSpring 
+} from 'motion/react';
 import { 
   Phone, 
   MessageCircle, 
@@ -15,7 +24,6 @@ import {
   Stethoscope, 
   Droplets, 
   Contact,
-  Facebook,
   Instagram,
   ChevronDown,
   ChevronRight,
@@ -46,8 +54,6 @@ import {
   Minus,
   Sun
 } from 'lucide-react';
-import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring } from 'motion/react';
-import { useRef } from 'react';
 import CalificarPage from './CalificarPage';
 import ConsultaPage from './ConsultaPage';
 import TestVisualPage from './TestVisualPage';
@@ -2184,12 +2190,12 @@ export default function App() {
                                     setCurrentView('contacto');
                                     window.location.hash = '#contacto';
                                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                                  } else if (item.href === '#tecnologia-cristales' || item.href === '#cristales') {
-                                                   e.preventDefault();
-                                                   setCurrentView('tecnologia-cristales');
-                                                   window.location.hash = '#tecnologia-cristales';
-                                                   window.scrollTo({ top: 0, behavior: 'smooth' });
-                                                 }
+                                  } else if (cat.href === '#tecnologia-cristales' || cat.href === '#cristales') {
+                                    e.preventDefault();
+                                    setCurrentView('tecnologia-cristales');
+                                    window.location.hash = '#tecnologia-cristales';
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                  }
                                   setIsMenuOpen(false);
                                 }}
                                 className="flex items-center justify-between h-12 px-4 rounded-xl bg-[#F8F9FB] hover:bg-[rgb(122,24,35)] hover:text-white text-[#15171C] text-[13px] font-semibold active:scale-[0.99] transition-all"
