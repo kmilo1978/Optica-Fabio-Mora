@@ -293,7 +293,7 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
       mayoresTitle: 'Adultos Mayores & Abuelos',
       mayoresAge: '60 años en adelante',
       mayoresDesc: 'Evaluación exhaustiva de retina, mácula y cristalino con el respeto, paciencia y chineo que nuestros mayores se merecen.',
-      mayoresBtn: 'Consultar cita para adultos mayores',
+      mayoresBtn: 'Consultar cita mayores',
       mayoresH1Title: 'Detección Oportuna de Cataratas',
       mayoresH1Desc: 'Evaluación de pérdida de nitidez y orientación médica clara, sin enredos.',
       mayoresH2Title: 'Salud de la Mácula y Retina',
