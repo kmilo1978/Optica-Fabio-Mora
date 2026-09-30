@@ -1094,7 +1094,7 @@ export default function App() {
 
           <main id="main-content" role="main">
           {/* Hero Section */}
-          <section id="inicio" className="w-full bg-gradient-to-b from-slate-50/80 via-white to-white py-4 md:py-7">
+          <section id="inicio" className="w-full bg-gradient-to-b from-slate-50/80 via-white to-white py-6 md:py-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -1166,6 +1166,26 @@ export default function App() {
                     </a>
                   </motion.div>
 
+                  {/* Micro-insignias de tranquilidad junto a los botones */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    className="mt-5 pt-3.5 border-t border-gray-200/70 flex flex-wrap items-center justify-center md:justify-start gap-x-3.5 gap-y-2 text-[11.5px] sm:text-[12px] font-semibold text-gray-600"
+                  >
+                    <span className="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-xs px-2.5 py-1 rounded-lg border border-gray-100 shadow-2xs">
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span>{lang === 'es' ? 'Garantía 30 días de adaptación' : '30-Day Adaptation Guarantee'}</span>
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-xs px-2.5 py-1 rounded-lg border border-gray-100 shadow-2xs">
+                      <CreditCard className="w-3.5 h-3.5 text-[rgb(122,24,35)] shrink-0" />
+                      <span>{lang === 'es' ? 'SINPE Móvil y Tasa Cero' : 'SINPE Movil & Zero-Interest'}</span>
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-xs px-2.5 py-1 rounded-lg border border-gray-100 shadow-2xs">
+                      <MapPin className="w-3.5 h-3.5 text-[rgb(122,24,35)] shrink-0" />
+                      <span>{lang === 'es' ? 'Parqueo disponible' : 'Free Parking Available'}</span>
+                    </span>
+                  </motion.div>
 
                 </div>
 
@@ -1176,7 +1196,7 @@ export default function App() {
           </section>
 
           {/* Social Proof */}
-          <section className="w-full py-6 md:py-8 bg-white border-y border-gray-100">
+          <section className="w-full py-8 md:py-12 bg-white border-y border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {[
@@ -1201,7 +1221,7 @@ export default function App() {
           </section>
 
           {/* Urgency Section */}
-          <section className="w-full py-8 md:py-12 bg-slate-50/60">
+          <section className="w-full py-12 md:py-16 bg-slate-50/60">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -1246,7 +1266,7 @@ export default function App() {
           </section>
 
           {/* Why Choose Us Section */}
-          <section id="beneficios" className="w-full py-8 md:py-12 bg-white border-t border-gray-100">
+          <section id="beneficios" className="w-full py-14 md:py-20 bg-white border-t border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center">
               <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#767A84] shadow-sm">
@@ -1282,7 +1302,7 @@ export default function App() {
           </section>
 
           {/* Process & Brands */}
-          <section className="w-full py-10 md:py-14 bg-slate-50/70 border-y border-gray-200/80">
+          <section className="w-full py-14 md:py-20 bg-slate-50/70 border-y border-gray-200/80">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid lg:grid-cols-[0.92fr_1.08fr] gap-5 items-stretch">
                 {/* Columna Proceso Simple */}
@@ -1399,7 +1419,7 @@ export default function App() {
           </section>
 
           {/* Services Section */}
-          <section id="servicios" className="w-full py-8 md:py-12 bg-white">
+          <section id="servicios" className="w-full py-14 md:py-20 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center">
               <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#767A84] shadow-sm">
@@ -1480,7 +1500,7 @@ export default function App() {
           </section>
 
           {/* Cuidado Visual Multigeneracional - Niños, Adultos y Personas Mayores */}
-          <section id="edades" className="w-full py-10 md:py-16 bg-gradient-to-b from-slate-50/70 via-white to-slate-50/70 border-y border-gray-100 relative overflow-hidden">
+          <section id="edades" className="w-full py-14 md:py-20 bg-gradient-to-b from-slate-50/70 via-white to-slate-50/70 border-y border-gray-100 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               {/* Encabezado */}
               <div className="text-center max-w-3xl mx-auto">
@@ -1631,7 +1651,7 @@ export default function App() {
           </section>
 
           {/* Gallery */}
-          <section id="galeria" className="w-full py-8 md:py-12 bg-slate-50/60 border-y border-gray-100">
+          <section id="galeria" className="w-full py-14 md:py-20 bg-slate-50/60 border-y border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -1755,7 +1775,7 @@ export default function App() {
           </section>
 
           {/* Testimonials */}
-          <section id="testimonios" className="w-full py-8 md:py-12 bg-white">
+          <section id="testimonios" className="w-full py-14 md:py-20 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -1941,7 +1961,7 @@ export default function App() {
           </section>
 
           {/* Doctor Section */}
-          <section id="doctor" className="w-full py-8 md:py-12 bg-slate-50/60 border-y border-gray-100">
+          <section id="doctor" className="w-full py-14 md:py-20 bg-slate-50/60 border-y border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, scale: 0.98 }}
@@ -2052,9 +2072,8 @@ export default function App() {
             </div>
           </section>
 
-          {/* Contact Section */}
           {/* FAQ Section */}
-          <section id="faq" className="w-full py-8 md:py-12 bg-slate-50/70 border-y border-gray-100">
+          <section id="faq" className="w-full py-14 md:py-20 bg-slate-50/70 border-y border-gray-100">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center max-w-2xl mx-auto mb-6 md:mb-8">
                 <span className="inline-flex items-center gap-1.5 h-6 px-3.5 rounded-full bg-white text-[9px] uppercase tracking-[0.14em] font-semibold text-[#767A84] shadow-xs border border-gray-200/60 mb-4">
@@ -2162,7 +2181,7 @@ export default function App() {
           </section>
 
           {/* Contact Section */}
-          <section id="contacto" className="w-full py-8 md:py-12 bg-white pb-16 md:pb-16">
+          <section id="contacto" className="w-full py-14 md:py-20 bg-white pb-24 md:pb-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -2389,7 +2408,7 @@ export default function App() {
           </main>
 
           {/* Footer Corporativo de Alto Contraste y Bilingüe */}
-          <footer className="w-full bg-[#0c0e12] text-white pt-14 pb-10 border-t border-white/10 relative overflow-hidden">
+          <footer className="w-full bg-[#0c0e12] text-white pt-14 pb-24 md:pb-14 border-t border-white/10 relative overflow-hidden">
             {/* Línea decorativa superior con degradado rojo vino */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[rgb(122,24,35)] to-transparent opacity-80"></div>
 
@@ -2644,32 +2663,41 @@ export default function App() {
             </div>
           </footer>
 
-          {/* Barra de Navegación Rápida Inferior para Móviles */}
-          <div className="md:hidden fixed bottom-0 inset-x-0 z-40 p-2.5 bg-white/95 backdrop-blur-lg border-t border-gray-200/80 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
-            <div className="grid grid-cols-3 gap-2 max-w-[460px] mx-auto">
+          {/* Barra de Acción Rápida Inferior para Móviles (Mobile Sticky Bar) */}
+          <nav aria-label="Acciones rápidas móviles" className="md:hidden fixed bottom-0 inset-x-0 z-40 px-3 py-2.5 bg-white/95 backdrop-blur-md border-t border-gray-200/90 shadow-[0_-4px_25px_rgba(0,0,0,0.1)]">
+            <div className="grid grid-cols-12 gap-2 max-w-[460px] mx-auto items-center">
               <button
                 onClick={() => setIsMenuOpen(true)}
-                className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[#F3F4F7] text-[#15171C] text-[11px] font-bold active:scale-95 transition-transform"
+                className="col-span-3 inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[#F4F5F8] text-[#15171C] text-[11px] font-bold active:scale-95 transition-all border border-gray-200/60"
+                aria-label="Abrir Menú"
               >
                 <Menu className="w-4 h-4 text-[rgb(122,24,35)] mb-0.5" />
                 <span>Menú</span>
               </button>
+              
               <a
-                href="tel:+50672760215"
-                className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-white border border-[#E3E5EC] text-[#15171C] text-[11px] font-bold active:scale-95 transition-transform shadow-xs"
+                href="https://waze.com/ul?ll=9.8910441,-84.081993&navigate=yes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="col-span-4 inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-white border border-[#D9DDE6] text-[#15171C] text-[12px] font-bold active:scale-95 transition-all shadow-2xs hover:border-[rgb(122,24,35)]"
+                aria-label="Abrir ubicación en Waze"
               >
-                <Phone className="w-4 h-4 text-[rgb(122,24,35)] mb-0.5" />
-                <span>{lang === 'es' ? 'Llamar' : 'Call'}</span>
+                <Navigation className="w-4 h-4 text-[rgb(122,24,35)] shrink-0" />
+                <span>Waze</span>
               </a>
+
               <a
                 href="https://wa.me/50672760215"
-                className="inline-flex flex-col items-center justify-center h-12 rounded-xl bg-[rgb(122,24,35)] text-white text-[11px] font-bold active:scale-95 transition-transform shadow-md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="col-span-5 inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[12px] font-bold active:scale-95 transition-all shadow-md btn-shimmer"
+                aria-label="Agendar cita por WhatsApp"
               >
-                <MessageCircle className="w-4 h-4 mb-0.5" />
-                <span>{lang === 'es' ? 'Cita' : 'Book'}</span>
+                <MessageCircle className="w-4 h-4 shrink-0" />
+                <span>WhatsApp</span>
               </a>
             </div>
-          </div>
+          </nav>
 
         
         {/* Modal Interactivo de Diagnóstico / Test Visual Rápido (a los 5 seg) */}
