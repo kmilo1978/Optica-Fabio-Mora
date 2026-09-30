@@ -1399,7 +1399,7 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
               </p>
 
               {/* Píldoras de beneficios clave */}
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-3.5">
                 {current.pills.map((pill, idx) => (
                   <span
                     key={idx}
@@ -1411,37 +1411,23 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
                 ))}
               </div>
 
-              {/* Fila de Acción con Botón CTA y Paginador de Barras */}
-              <div className="flex flex-wrap items-center gap-4">
-                <a
-                  href={`https://wa.me/50672760215?text=${encodeURIComponent(current.whatsappMsg)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[13px] sm:text-[14px] font-bold shadow-xl border border-white/20 transition-all duration-200 active:scale-95 group cursor-pointer btn-shimmer"
-                >
-                  <MessageCircle className="w-4 h-4 text-white !text-white" />
-                  <span className="text-white !text-white">{current.ctaText}</span>
-                  <ArrowRight className="w-4 h-4 text-white !text-white group-hover:translate-x-1 transition-transform" />
-                </a>
-
-                {/* Paginador de barras sutil al lado del botón */}
-                <div className="flex items-center gap-1.5 ml-auto sm:ml-0">
-                  {slides.map((slide, idx) => {
-                    const isActive = currentSlide === idx;
-                    return (
-                      <button
-                        key={slide.id}
-                        onClick={() => setCurrentSlide(idx)}
-                        aria-label={`Ver diapositiva ${idx + 1}`}
-                        className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                          isActive 
-                            ? 'w-7 bg-white shadow-xs' 
-                            : 'w-2 bg-white/35 hover:bg-white/60'
-                        }`}
-                      />
-                    );
-                  })}
-                </div>
+              {/* Paginador de barras sutil */}
+              <div className="flex items-center gap-1.5 pt-1">
+                {slides.map((slide, idx) => {
+                  const isActive = currentSlide === idx;
+                  return (
+                    <button
+                      key={slide.id}
+                      onClick={() => setCurrentSlide(idx)}
+                      aria-label={`Ver diapositiva ${idx + 1}`}
+                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                        isActive 
+                          ? 'w-7 bg-white shadow-xs' 
+                          : 'w-2 bg-white/35 hover:bg-white/60'
+                      }`}
+                    />
+                  );
+                })}
               </div>
             </div>
 
