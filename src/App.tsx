@@ -1347,78 +1347,116 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-black/20 rounded-full blur-2xl pointer-events-none -ml-20 -mb-20" />
 
       {/* Contenido en Carousel con AnimatePresence */}
-      <div className="relative z-10 p-6 sm:p-9 md:p-12 lg:p-14">
+      <div className="relative z-10 p-5 sm:p-7 md:p-8 lg:p-9">
         <AnimatePresence mode="wait">
           <motion.div
             key={current.id}
-            initial={{ opacity: 0, x: 25 }}
+            initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -25 }}
-            transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center"
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.35 }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center"
           >
-            {/* Lado Izquierdo: Textos y Acciones */}
+            {/* Lado Izquierdo: Textos, Acciones y Controles Integrados */}
             <div className="lg:col-span-7 flex flex-col justify-center">
-              <div className="flex items-center gap-2 mb-3.5">
-                <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-white text-[11px] sm:text-[12px] uppercase tracking-wider font-extrabold border border-white/20">
-                  <Contact className="w-3.5 h-3.5 text-white" />
-                  <span>{current.badge}</span>
-                </span>
-                <span className="text-[11px] font-bold text-white/70">
-                  0{currentSlide + 1} / 0{slides.length}
-                </span>
+              {/* Barra Superior con Badge, Contador y Flechas de Navegación */}
+              <div className="flex items-center justify-between gap-3 mb-2.5">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-white text-[11px] sm:text-[11.5px] uppercase tracking-wider font-extrabold border border-white/20">
+                    <Contact className="w-3.5 h-3.5 text-white" />
+                    <span>{current.badge}</span>
+                  </span>
+                  <span className="text-[11px] font-bold text-white/70">
+                    0{currentSlide + 1} / 0{slides.length}
+                  </span>
+                </div>
+
+                {/* Flechas compactas integradas en el encabezado */}
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={prevSlide}
+                    aria-label={lang === 'es' ? 'Diapositiva anterior' : 'Previous slide'}
+                    className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition-all active:scale-90 border border-white/20 cursor-pointer shadow-xs"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    aria-label={lang === 'es' ? 'Siguiente diapositiva' : 'Next slide'}
+                    className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition-all active:scale-90 border border-white/20 cursor-pointer shadow-xs"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
 
-              <h2 className="text-[26px] sm:text-[32px] md:text-[38px] font-bold leading-[1.18] tracking-tight text-white mb-4">
+              <h2 className="text-[22px] sm:text-[26px] md:text-[30px] font-bold leading-[1.2] tracking-tight text-white mb-2">
                 {current.title}
               </h2>
 
-              <p className="text-[14px] sm:text-[15.5px] text-white/90 leading-relaxed max-w-xl mb-6 font-normal">
+              <p className="text-[13px] sm:text-[14px] text-white/90 leading-relaxed max-w-xl mb-3.5 font-normal">
                 {current.description}
               </p>
 
               {/* Píldoras de beneficios clave */}
-              <div className="flex flex-wrap gap-2 mb-8">
+              <div className="flex flex-wrap gap-2 mb-4">
                 {current.pills.map((pill, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-black/20 backdrop-blur-xs border border-white/15 text-white/95 text-[12px] font-semibold"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-black/25 backdrop-blur-xs border border-white/15 text-white/95 text-[11.5px] font-semibold"
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5 text-white/90" />
+                    <CheckCircle2 className="w-3 h-3 text-white/90" />
                     <span>{pill}</span>
                   </span>
                 ))}
               </div>
 
-              {/* Botón CTA Principal */}
-              <div>
+              {/* Fila de Acción con Botón CTA y Paginador de Barras */}
+              <div className="flex flex-wrap items-center gap-4">
                 <a
                   href={`https://wa.me/50672760215?text=${encodeURIComponent(current.whatsappMsg)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[14px] font-bold shadow-xl border border-white/20 transition-all duration-200 active:scale-95 group cursor-pointer btn-shimmer"
+                  className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[13px] sm:text-[14px] font-bold shadow-xl border border-white/20 transition-all duration-200 active:scale-95 group cursor-pointer btn-shimmer"
                 >
                   <MessageCircle className="w-4 h-4 text-white !text-white" />
                   <span className="text-white !text-white">{current.ctaText}</span>
                   <ArrowRight className="w-4 h-4 text-white !text-white group-hover:translate-x-1 transition-transform" />
                 </a>
+
+                {/* Paginador de barras sutil al lado del botón */}
+                <div className="flex items-center gap-1.5 ml-auto sm:ml-0">
+                  {slides.map((slide, idx) => {
+                    const isActive = currentSlide === idx;
+                    return (
+                      <button
+                        key={slide.id}
+                        onClick={() => setCurrentSlide(idx)}
+                        aria-label={`Ver diapositiva ${idx + 1}`}
+                        className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                          isActive 
+                            ? 'w-7 bg-white shadow-xs' 
+                            : 'w-2 bg-white/35 hover:bg-white/60'
+                        }`}
+                      />
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
-            {/* Lado Derecho: Imagen del Modelo con Marco Moderno */}
+            {/* Lado Derecho: Imagen Panorámica con Marco Moderno */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black/20 aspect-[16/11] sm:aspect-[16/10] md:aspect-[4/3] lg:aspect-[16/11]">
+              <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-xl bg-black/20 aspect-[16/10] max-h-[250px] sm:max-h-[270px] md:max-h-[290px] w-full">
                 <img
                   src={current.image}
                   alt={current.imageAlt}
                   className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                 />
-                {/* Degradado sutil inferior para legibilidad */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none" />
                 
-                {/* Micro sello de calidad */}
-                <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-[10.5px] font-bold text-white flex items-center gap-1.5">
+                <div className="absolute bottom-2.5 left-2.5 bg-black/65 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 text-[10px] font-bold text-white flex items-center gap-1.5">
                   <ShieldCheck className="w-3 h-3 text-white" />
                   <span>Ópticas Popular · Dr. Fabio Mora</span>
                 </div>
@@ -1426,46 +1464,6 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
             </div>
           </motion.div>
         </AnimatePresence>
-
-        {/* Controles del Carrusel (Flechas y Paginación) */}
-        <div className="mt-8 pt-5 border-t border-white/15 flex items-center justify-between gap-4">
-          {/* Indicadores de diapositiva (Pestañas/Pills interactivas) */}
-          <div className="flex items-center gap-2">
-            {slides.map((slide, idx) => {
-              const isActive = currentSlide === idx;
-              return (
-                <button
-                  key={slide.id}
-                  onClick={() => setCurrentSlide(idx)}
-                  aria-label={`Ver diapositiva ${idx + 1}`}
-                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    isActive 
-                      ? 'w-10 bg-white shadow-md' 
-                      : 'w-2.5 bg-white/35 hover:bg-white/60'
-                  }`}
-                />
-              );
-            })}
-          </div>
-
-          {/* Flechas Anterior / Siguiente */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={prevSlide}
-              aria-label={lang === 'es' ? 'Diapositiva anterior' : 'Previous slide'}
-              className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition-all active:scale-90 border border-white/20 cursor-pointer shadow-xs"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={nextSlide}
-              aria-label={lang === 'es' ? 'Siguiente diapositiva' : 'Next slide'}
-              className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition-all active:scale-90 border border-white/20 cursor-pointer shadow-xs"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );
