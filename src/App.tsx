@@ -42,7 +42,8 @@ import {
   Globe,
   ArrowRight,
   Plus,
-  Minus
+  Minus,
+  Sun
 } from 'lucide-react';
 import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring } from 'motion/react';
 import { useRef } from 'react';
@@ -1880,7 +1881,7 @@ export default function App() {
               {/* Encabezado Principal */}
               <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
                 <span className="inline-flex items-center gap-1.5 h-7 px-3.5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold shadow-2xs mb-3 border border-[rgb(122,24,35)]/20">
-                  <Sparkles className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
+                  <Glasses className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
                   <span>{lang === 'es' ? 'Innovación en Cristales & Tratamientos' : 'Lens Technology & Treatments'}</span>
                 </span>
                 <h2 className="text-[28px] sm:text-[34px] md:text-[38px] font-bold text-[#14161B] tracking-tight leading-tight">
@@ -1973,10 +1974,10 @@ export default function App() {
                 >
                   <div>
                     <div className="flex items-center justify-between gap-3 mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center group-hover:scale-105 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300 shadow-2xs">
-                        <Sparkles className="w-6 h-6" />
+                      <div className="w-12 h-12 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center group-hover:scale-105 group-hover:bg-[rgb(122,24,35)] group-hover:text-white transition-all duration-300 shadow-2xs">
+                        <Sun className="w-6 h-6" />
                       </div>
-                      <span className="text-[10.5px] font-extrabold uppercase tracking-wider text-amber-700 bg-amber-500/10 px-2.5 py-1 rounded-full">
+                      <span className="text-[10.5px] font-extrabold uppercase tracking-wider text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10 px-2.5 py-1 rounded-full">
                         {lang === 'es' ? 'Fotocromático Inteligente' : 'Smart Photochromic'}
                       </span>
                     </div>
@@ -1993,15 +1994,15 @@ export default function App() {
 
                     <div className="space-y-2 pt-2 border-t border-gray-100">
                       <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
                         <span>{lang === 'es' ? '100% de protección contra rayos UVA y UVB' : '100% defense against UVA & UVB solar radiation'}</span>
                       </div>
                       <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
                         <span>{lang === 'es' ? 'Activación y aclarado rápido en pocos segundos' : 'Swift indoor fading and outdoor activation'}</span>
                       </div>
                       <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
                         <span>{lang === 'es' ? 'Un solo par de anteojos para todo el día' : 'All-in-one comfort for indoor and outdoor life'}</span>
                       </div>
                     </div>
@@ -2035,10 +2036,10 @@ export default function App() {
                 >
                   <div>
                     <div className="flex items-center justify-between gap-3 mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center group-hover:scale-105 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-2xs">
+                      <div className="w-12 h-12 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center group-hover:scale-105 group-hover:bg-[rgb(122,24,35)] group-hover:text-white transition-all duration-300 shadow-2xs">
                         <Monitor className="w-6 h-6" />
                       </div>
-                      <span className="text-[10.5px] font-extrabold uppercase tracking-wider text-blue-700 bg-blue-500/10 px-2.5 py-1 rounded-full">
+                      <span className="text-[10.5px] font-extrabold uppercase tracking-wider text-[rgb(122,24,35)] bg-[rgb(122,24,35)]/10 px-2.5 py-1 rounded-full">
                         {lang === 'es' ? 'Filtro Anti-Fatiga Digital' : 'Anti-Digital Fatigue'}
                       </span>
                     </div>
@@ -2055,15 +2056,15 @@ export default function App() {
 
                     <div className="space-y-2 pt-2 border-t border-gray-100">
                       <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
                         <span>{lang === 'es' ? 'Menor pesadez, ojo rojo y fatiga al final del día' : 'Less eye strain, redness, and end-of-day fatigue'}</span>
                       </div>
                       <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
                         <span>{lang === 'es' ? 'Tratamiento antirreflejo de máxima transparencia' : 'Crystal-clear multi-layer anti-reflective coating'}</span>
                       </div>
                       <div className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#474B54]">
-                        <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-[rgb(122,24,35)] shrink-0 mt-0.5" />
                         <span>{lang === 'es' ? 'Ideal para teletrabajo, estudio y conducción nocturna' : 'Ideal for remote work, study, and nighttime driving'}</span>
                       </div>
                     </div>
@@ -2100,7 +2101,7 @@ export default function App() {
                   viewport={{ once: true }}
                   className="inline-flex items-center gap-2 h-7 px-3.5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold shadow-2xs border border-[rgb(122,24,35)]/20"
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-[rgb(122,24,35)] animate-pulse" />
+                  <HeartHandshake className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
                   <span>Atención Integral para Toda la Familia</span>
                 </motion.div>
 
@@ -2248,10 +2249,10 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.55 }}
-                className="rounded-3xl bg-gradient-to-br from-[#FAFAFC] via-white to-rose-50/20 border border-gray-200/90 p-7 sm:p-10 md:p-12 shadow-sm relative overflow-hidden"
+                className="rounded-3xl bg-[#FAFAFC] border border-gray-200/90 p-7 sm:p-10 md:p-12 shadow-sm relative overflow-hidden"
               >
                 {/* Acento superior vino tinto sutil */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[rgb(122,24,35)] via-[rgb(180,40,55)] to-[rgb(122,24,35)]" />
+                <div className="absolute top-0 left-0 right-0 h-1 bg-[rgb(122,24,35)]" />
 
                 <div className="grid lg:grid-cols-12 gap-8 items-center">
                   {/* Columna Izquierda: Información Editorial y Opciones */}
@@ -2362,7 +2363,7 @@ export default function App() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#15171C]/80 via-transparent to-transparent flex items-end p-5">
                         <div className="text-white">
-                          <p className="text-[11px] font-extrabold uppercase tracking-wider text-rose-300">
+                          <p className="text-[11px] font-extrabold uppercase tracking-wider text-gray-300">
                             {lang === 'es' ? 'Salud Ocular Garantizada' : 'Guaranteed Eye Health'}
                           </p>
                           <p className="text-[13.5px] font-bold leading-snug">
@@ -2647,7 +2648,7 @@ export default function App() {
                   <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-3">
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white text-[11px] font-bold uppercase tracking-wider backdrop-blur-xs">
-                        <Award className="w-3.5 h-3.5 text-amber-300" /> Compromiso con tu visión
+                        <Award className="w-3.5 h-3.5 text-white/90" /> Compromiso con tu visión
                       </span>
                     </div>
 
@@ -3208,7 +3209,7 @@ export default function App() {
                   <div className="relative z-10 flex items-start justify-between gap-3">
                     <div>
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-xs text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-white">
-                        <Sparkles className="w-3 h-3 text-amber-300" /> Test de Confort Visual
+                        <Eye className="w-3 h-3 text-white/90" /> Test de Confort Visual
                       </span>
                       <h3 className="mt-2 text-[20px] sm:text-[22px] font-bold leading-tight">
                         ¿Cómo sentís tu visión hoy?
