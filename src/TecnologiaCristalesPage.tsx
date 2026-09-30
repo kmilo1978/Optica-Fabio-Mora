@@ -865,7 +865,7 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
               </p>
 
               {/* Píldoras de beneficios tecnológicos */}
-              <div className="flex flex-wrap gap-2 mb-6">
+              <div className="flex flex-wrap gap-2">
                 {[
                   isEn ? '30-Day adaptation warranty' : 'Garantía 30 días de adaptación',
                   isEn ? 'Millimeter pupillary calibration' : 'Calibración pupilar milimétrica',
@@ -880,26 +880,9 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
                   </span>
                 ))}
               </div>
-
-              <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href={`https://wa.me/50672760215?text=${encodeURIComponent(
-                    isEn
-                      ? 'Hello Dr. Fabio Mora, I would like to schedule an exam to quote new precision lenses.'
-                      : '¡Hola Dr. Fabio Mora! Quisiera agendar mi examen de la vista para cotizar mis nuevos cristales con tecnología.'
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl bg-[rgb(142,30,42)] hover:bg-[rgb(162,35,48)] text-white !text-white text-[14px] font-bold shadow-xl border border-white/30 transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer group"
-                >
-                  <MessageCircle className="w-4 h-4 text-white !text-white" />
-                  <span className="text-white !text-white">{isEn ? 'Book Appointment via WhatsApp' : 'Agendar mi cita por WhatsApp'}</span>
-                  <ArrowRight className="w-4 h-4 text-white !text-white group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
             </div>
 
-            {/* Columna Derecha: Tarjeta Fotográfica Dinámica con Personas con Gafas */}
+            {/* Columna Derecha: Tarjeta Fotográfica de Cristales */}
             <div className="lg:col-span-5 relative mt-3 lg:mt-0">
               <div className="relative rounded-2xl overflow-hidden border border-white/25 shadow-2xl bg-black/35 aspect-[16/10] group">
                 <AnimatePresence mode="wait">
@@ -935,38 +918,6 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
                   <span className="text-white/80 font-medium text-[10px] shrink-0 ml-2">
                     {bannerShowcase[bannerPersonaIdx].subtitle}
                   </span>
-                </div>
-              </div>
-
-              {/* Selector interactivo de tecnologías y personas con gafas */}
-              <div className="mt-2.5 flex items-center justify-between gap-1.5 bg-black/35 backdrop-blur-md border border-white/15 rounded-xl p-1.5 shadow-lg">
-                {bannerShowcase.map((item, bIdx) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setBannerPersonaIdx(bIdx)}
-                    className={`flex-1 flex items-center justify-center gap-1 py-1.5 px-2 rounded-lg text-[10.5px] font-bold transition-all cursor-pointer ${
-                      bannerPersonaIdx === bIdx
-                        ? 'bg-[rgb(122,24,35)] text-white shadow-xs border border-white/30'
-                        : 'text-white/70 hover:text-white hover:bg-white/10'
-                    }`}
-                  >
-                    <span>{item.label}</span>
-                  </button>
-                ))}
-              </div>
-
-              {/* Mini credencial de garantía flotante */}
-              <div className="hidden sm:flex absolute -bottom-3 -left-3 bg-[#171920]/95 backdrop-blur-md border border-white/25 rounded-xl px-3 py-2 shadow-2xl items-center gap-2.5 z-20">
-                <div className="w-7 h-7 rounded-lg bg-[rgb(122,24,35)] flex items-center justify-center text-white shrink-0 shadow-xs">
-                  <ShieldCheck className="w-4 h-4 text-white" />
-                </div>
-                <div className="text-left">
-                  <p className="text-[11px] font-bold text-white leading-none">
-                    {isEn ? 'Adaptation Guarantee' : 'Garantía Total de Confort'}
-                  </p>
-                  <p className="text-[9.5px] text-white/70 mt-0.5">
-                    {isEn ? '30 days clinical coverage' : 'Respaldado por el Dr. Fabio Mora'}
-                  </p>
                 </div>
               </div>
             </div>

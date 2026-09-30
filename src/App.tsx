@@ -2456,15 +2456,6 @@ export default function App() {
                       <MessageCircle className="w-4 h-4" />
                       <span>{lang === 'es' ? 'Agendar por WhatsApp' : 'Book via WhatsApp'}</span>
                     </a>
-
-                    <a
-                      href="tel:+50672760215"
-                      className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white text-[#15171C] text-[14px] font-bold border border-[#E3E5EC] cta-secondary w-full sm:w-auto"
-                      title={lang === 'es' ? 'Llamar a la óptica: 2515-0002 / 7276-0215' : 'Call our clinic: 2515-0002 / 7276-0215'}
-                    >
-                      <Phone className="w-4 h-4 text-[rgb(122,24,35)]" />
-                      <span>{lang === 'es' ? 'Llamar al 2515-0002' : 'Call: 2515-0002'}</span>
-                    </a>
                   </motion.div>
 
                   {/* Widget de Testimonios y Avatares con Gafas en el Hero */}
