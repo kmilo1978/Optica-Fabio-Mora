@@ -39,12 +39,13 @@ import {
   HeartHandshake,
   BookOpen,
   Monitor,
-  Globe
+  Globe,
+  ArrowRight
 } from 'lucide-react';
 import { animate, useMotionValue, useTransform, useInView, useScroll, useSpring } from 'motion/react';
 import { useRef } from 'react';
 import CalificarPage from './CalificarPage';
-import WhatsAppFaqForm from './WhatsAppFaqForm';
+import ConsultaPage from './ConsultaPage';
 import { TRANSLATIONS, Language } from './translations';
 
 function AnimatedNumber({ value, duration = 2 }: { value: number; duration?: number }) {
@@ -165,9 +166,9 @@ function getNavigationMenu(lang: Language): NavCategory[] {
               icon: HelpCircle 
             },
             { 
-              name: lang === 'es' ? 'Formulario a WhatsApp' : 'WhatsApp Inquiry Form', 
-              href: '#formulario-whatsapp', 
-              desc: lang === 'es' ? 'Enviá tu consulta directa al Dr. Fabio Mora' : 'Send inquiry directly to Dr. Fabio Mora', 
+              name: lang === 'es' ? 'Formulario de Consulta' : 'WhatsApp Inquiry Page', 
+              href: '#consulta', 
+              desc: lang === 'es' ? 'Página dedicada para enviar tu mensaje al doctor' : 'Dedicated page to message Dr. Fabio Mora', 
               icon: MessageCircle 
             },
           ],
@@ -615,12 +616,16 @@ export default function App() {
     setSelectedSymptom(null);
   };
 
-  const [currentView, setCurrentView] = useState<'home' | 'calificar'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'calificar' | 'consulta'>('home');
 
   useEffect(() => {
     const handleHash = () => {
-      if (window.location.hash === '#calificar') {
+      const h = window.location.hash;
+      if (h === '#calificar') {
         setCurrentView('calificar');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (h === '#consulta' || h === '#formulario-whatsapp') {
+        setCurrentView('consulta');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         setCurrentView('home');
@@ -642,16 +647,27 @@ export default function App() {
 
   if (currentView === 'calificar') {
     return (
-      <>
-        <CalificarPage 
-          onBack={() => {
-            window.location.hash = '';
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }} 
-          lang={lang}
-        />
-      </>
+      <CalificarPage 
+        onBack={() => {
+          window.location.hash = '';
+          setCurrentView('home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }} 
+        lang={lang}
+      />
+    );
+  }
+
+  if (currentView === 'consulta') {
+    return (
+      <ConsultaPage 
+        onBack={() => {
+          window.location.hash = '';
+          setCurrentView('home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }} 
+        lang={lang}
+      />
     );
   }
 
@@ -742,6 +758,12 @@ export default function App() {
                                               e.preventDefault();
                                               setCurrentView('calificar');
                                               window.location.hash = '#calificar';
+                                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                                            } else if (item.href === '#consulta' || item.href === '#formulario-whatsapp') {
+                                              e.preventDefault();
+                                              setCurrentView('consulta');
+                                              window.location.hash = '#consulta';
+                                              window.scrollTo({ top: 0, behavior: 'smooth' });
                                             }
                                             setDesktopDropdown(null);
                                           }}
@@ -998,6 +1020,12 @@ export default function App() {
                                                   e.preventDefault();
                                                   setCurrentView('calificar');
                                                   window.location.hash = '#calificar';
+                                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                                } else if (item.href === '#consulta' || item.href === '#formulario-whatsapp') {
+                                                  e.preventDefault();
+                                                  setCurrentView('consulta');
+                                                  window.location.hash = '#consulta';
+                                                  window.scrollTo({ top: 0, behavior: 'smooth' });
                                                 }
                                                 setIsMenuOpen(false);
                                               }}
@@ -2091,8 +2119,45 @@ export default function App() {
                 })}
               </div>
 
-              {/* Formulario de Consulta Rápida por WhatsApp */}
-              <WhatsAppFaqForm lang={lang} />
+              {/* Invitación a la Página Separada de Consulta */}
+              <div className="mt-10 max-w-3xl mx-auto">
+                <div className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-gray-200/90 shadow-sm text-center flex flex-col items-center">
+                  <div className="w-12 h-12 rounded-2xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center mb-3.5">
+                    <MessageCircle className="w-6 h-6" />
+                  </div>
+                  
+                  <span className="inline-flex items-center gap-1.5 h-6 px-3 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] font-bold uppercase tracking-wider mb-2">
+                    {lang === 'es' ? 'Atención Personalizada' : 'Personalized Support'}
+                  </span>
+
+                  <h3 className="text-[20px] sm:text-[24px] font-bold text-[#14161B]">
+                    {lang === 'es' ? '¿Tenés alguna consulta médica o querés cotizar?' : 'Have a medical question or need a quote?'}
+                  </h3>
+
+                  <p className="mt-2 text-[13.5px] sm:text-[14.5px] text-[#555963] max-w-lg leading-relaxed">
+                    {lang === 'es'
+                      ? 'Accedé a nuestra página dedicada de consulta para preparar tu mensaje clasificado y enviarlo directamente al Dr. Fabio Mora por WhatsApp.'
+                      : 'Open our dedicated inquiry page to format your questions and send them directly to Dr. Fabio Mora via WhatsApp.'}
+                  </p>
+
+                  <div className="mt-6">
+                    <a
+                      href="#consulta"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentView('consulta');
+                        window.location.hash = '#consulta';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-2xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      <span>{lang === 'es' ? 'Abrir Formulario de Consulta' : 'Open Inquiry Page'}</span>
+                      <ArrowRight className="w-4 h-4 ml-1" />
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -2424,9 +2489,18 @@ export default function App() {
                       </a>
                     </li>
                     <li>
-                      <a href="#formulario-whatsapp" className="text-gray-300 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all">
+                      <a
+                        href="#consulta"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setCurrentView('consulta');
+                          window.location.hash = '#consulta';
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="text-gray-300 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
+                      >
                         <ChevronRight className="w-3.5 h-3.5 text-rose-400" />
-                        <span>{lang === 'es' ? 'Consulta a WhatsApp' : 'WhatsApp Inquiry'}</span>
+                        <span>{lang === 'es' ? 'Formulario de Consulta' : 'WhatsApp Inquiry Page'}</span>
                       </a>
                     </li>
                     <li>
