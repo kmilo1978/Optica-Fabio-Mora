@@ -17,6 +17,12 @@ export default defineConfig({
   esbuild: {
     target: 'esnext',
   },
+  optimizeDeps: {
+    target: 'esnext',
+    esbuildOptions: {
+      target: 'esnext',
+    },
+  },
   server: {
     port: 3000,
     host: '0.0.0.0',
