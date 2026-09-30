@@ -1543,21 +1543,21 @@ export default function App() {
   const heroSlides = [
     {
       id: 0,
-      src: '/images/hero-examen-hombre-adulto.jpg',
-      alt: lang === 'es' ? 'Examen visual profesional en adultos con lámpara de hendidura' : 'Adult comprehensive eye examination with slit lamp',
-      label: lang === 'es' ? 'Adultos · Evaluación y confort' : 'Adults · Visual comfort'
+      src: '/images/hero-examen-mujer-mayor.jpg',
+      alt: lang === 'es' ? 'Examen visual integral en adultos mayores con tecnología óptica' : 'Comprehensive eye exam in seniors with modern optometry equipment',
+      label: lang === 'es' ? 'Adultos mayores · Cuidado preventivo' : 'Seniors · Preventive health'
     },
     {
       id: 1,
       src: '/images/hero-examen-nino.jpg',
-      alt: lang === 'es' ? 'Salud visual y examen pediátrico infantil' : 'Pediatric eye exam and vision health',
+      alt: lang === 'es' ? 'Salud visual y examen pediátrico infantil de confianza' : 'Pediatric eye exam and vision health',
       label: lang === 'es' ? 'Niños · Salud visual infantil' : 'Children · Pediatric care'
     },
     {
       id: 2,
-      src: '/images/hero-examen-mujer-mayor.jpg',
-      alt: lang === 'es' ? 'Examen óptico integral y preventivo en adultos mayores' : 'Comprehensive eye exam and preventive health in seniors',
-      label: lang === 'es' ? 'Adultos mayores · Cuidado preventivo' : 'Seniors · Preventive health'
+      src: '/images/hero-examen-hombre-adulto.jpg',
+      alt: lang === 'es' ? 'Examen visual profesional en adultos para confort y graduación' : 'Adult comprehensive eye examination',
+      label: lang === 'es' ? 'Adultos · Evaluación y confort' : 'Adults · Visual comfort'
     }
   ];
 
@@ -2360,8 +2360,8 @@ export default function App() {
                       <img 
                         src={slide.src} 
                         alt={slide.alt}
-                        className={`w-full h-full object-cover object-right md:object-center transition-transform duration-[8000ms] ease-out ${
-                          isActive ? 'scale-105' : 'scale-100'
+                        className={`w-full h-full object-cover object-right transition-transform duration-[8000ms] ease-out ${
+                          isActive ? 'scale-103' : 'scale-100'
                         }`}
                         loading={idx === 0 ? 'eager' : 'lazy'}
                       />
