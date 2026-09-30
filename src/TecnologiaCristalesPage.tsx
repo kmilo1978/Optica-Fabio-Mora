@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowLeft,
@@ -17,7 +17,8 @@ import {
   MapPin,
   Layers,
   Zap,
-  HelpCircle
+  HelpCircle,
+  Star
 } from 'lucide-react';
 import { Language } from './translations';
 import Footer from './Footer';
@@ -64,6 +65,54 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
       category: isEn ? 'Anti-Digital Fatigue' : 'Filtro Anti-Fatiga Digital',
     },
   ];
+
+  const bannerShowcase = [
+    {
+      id: 'progresivas',
+      label: isEn ? 'Progresivos' : 'Progresivos',
+      tag: isEn ? 'Digital Free-Form' : 'Visión Continua',
+      title: isEn ? 'Digital Progressive Lenses' : 'Cristales Progresivos HD',
+      subtitle: isEn ? 'Seamless far, intermediate, and near focus' : 'Enfoque perfecto de lejos a cerca',
+      image: '/images/persona-gafas-progresivas.jpg',
+      alt: isEn ? 'Patient smiling wearing modern digital progressive eyeglasses' : 'Paciente satisfecho usando lentes progresivos de alta precisión',
+    },
+    {
+      id: 'transitions',
+      label: isEn ? 'Transitions®' : 'Transitions®',
+      tag: isEn ? 'Dynamic Sun Protection' : 'Adaptación Solar',
+      title: isEn ? 'Transitions® Dynamic Tint' : 'Transitions® Inteligentes',
+      subtitle: isEn ? 'Darkens outdoors, clear indoors' : 'Oscuros bajo el sol, claros en interiores',
+      image: '/images/persona-gafas-transitions.jpg',
+      alt: isEn ? 'Woman smiling outdoors wearing stylish Transitions photochromic glasses' : 'Mujer en exteriores con lentes fotosensibles Transitions® al sol',
+    },
+    {
+      id: 'luz-azul',
+      label: isEn ? 'Luz Azul HD' : 'Filtro Luz Azul',
+      tag: isEn ? 'Anti-Fatigue' : 'Confort Digital',
+      title: isEn ? 'Blue Light & Anti-Reflective' : 'Luz Azul & Antirreflejo HD',
+      subtitle: isEn ? 'Zero screen glare and eye relaxation' : 'Cero reflejos en pantallas y descanso visual',
+      image: '/images/persona-gafas-luzazul.jpg',
+      alt: isEn ? 'Professional woman working on laptop wearing blue light glasses' : 'Mujer profesional en oficina usando lentes con filtro de luz azul',
+    },
+    {
+      id: 'calibracion',
+      label: isEn ? 'Calibración' : 'Calibración',
+      tag: isEn ? 'Dr. Fabio Mora' : 'Dr. Fabio Mora',
+      title: isEn ? 'Clinical Calibration' : 'Calibración Personalizada',
+      subtitle: isEn ? 'Digital pupillometer precision & 30-day warranty' : 'Medición con pupilómetro y garantía de 30 días',
+      image: '/images/tecnologia-cristales-calibracion.jpg',
+      alt: isEn ? 'Dr. Fabio Mora Medina calibrating progressive lenses with digital pupillometer' : 'Dr. Fabio Mora Medina calibrando cristales con pupilómetro digital',
+    },
+  ];
+
+  const [bannerPersonaIdx, setBannerPersonaIdx] = useState<number>(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBannerPersonaIdx((prev) => (prev + 1) % bannerShowcase.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [bannerShowcase.length]);
 
   return (
     <div className="min-h-screen bg-[#F8F9FC] text-[#15171C] font-sans flex flex-col justify-between selection:bg-[rgb(122,24,35)] selection:text-white">
@@ -805,50 +854,116 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
                   <span className="text-white !text-white">{isEn ? 'Book Appointment via WhatsApp' : 'Agendar mi cita por WhatsApp'}</span>
                   <ArrowRight className="w-4 h-4 text-white !text-white group-hover:translate-x-1 transition-transform" />
                 </a>
+              </div>
 
-                <button
-                  onClick={onBack}
-                  className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white !text-white text-[13.5px] font-bold border border-white/20 transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
-                >
-                  <ArrowLeft className="w-4 h-4 text-white !text-white" />
-                  <span className="text-white !text-white">{isEn ? 'Return to Home' : 'Volver a la página principal'}</span>
-                </button>
+              {/* Componente de Testimonio y Avatares con Gafas (Social Proof) */}
+              <div className="mt-5 pt-4 border-t border-white/15 flex flex-col sm:flex-row sm:items-center gap-4">
+                <div className="flex items-center gap-3">
+                  {/* Stack de 5 avatares reales de pacientes usando gafas */}
+                  <div className="flex items-center -space-x-2.5 overflow-hidden py-1">
+                    {[
+                      { src: '/images/avatars/avatar-gafas-1.jpg', alt: 'Paciente mujer usando aros y cristales Ópticas Popular' },
+                      { src: '/images/avatars/avatar-gafas-2.jpg', alt: 'Paciente hombre usando lentes oftálmicos modernos' },
+                      { src: '/images/avatars/avatar-gafas-3.jpg', alt: 'Paciente mujer con gafas de marco transparente' },
+                      { src: '/images/avatars/avatar-gafas-4.jpg', alt: 'Paciente joven con gafas metálicas circulares' },
+                      { src: '/images/avatars/avatar-gafas-5.jpg', alt: 'Paciente con cristales progresivos de alta definición' },
+                    ].map((av, aIdx) => (
+                      <img
+                        key={aIdx}
+                        src={av.src}
+                        alt={av.alt}
+                        width={40}
+                        height={40}
+                        loading="lazy"
+                        className="inline-block w-9 h-9 sm:w-10 sm:h-10 rounded-full ring-2 ring-white/90 object-cover shadow-md transition-transform duration-200 hover:scale-120 hover:z-20 cursor-pointer"
+                      />
+                    ))}
+                  </div>
+
+                  {/* Estrellas doradas y conteo de reseñas */}
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-1 text-amber-400">
+                      {[...Array(5)].map((_, sIdx) => (
+                        <Star key={sIdx} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      ))}
+                      <span className="text-[12px] font-black text-white ml-1">4.9 / 5.0</span>
+                    </div>
+                    <span className="text-[11px] text-white/80 font-medium">
+                      {isEn ? 'from 128+ verified reviews' : 'más de 128 valoraciones reales'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Mini cita testimonial destacada */}
+                <div className="text-[11.5px] text-white/90 bg-black/25 border border-white/15 rounded-xl px-3.5 py-2 backdrop-blur-xs flex items-center gap-2">
+                  <span className="text-amber-400 font-bold text-sm leading-none">“</span>
+                  <span className="italic leading-snug">
+                    {isEn 
+                      ? 'My progressives adapted on day one, zero computer fatigue.'
+                      : 'Mis cristales se adaptaron el primer día, cero fatiga en la pantalla.'}
+                  </span>
+                </div>
               </div>
             </div>
 
-            {/* Columna Derecha: Tarjeta Fotográfica de Cristales y Calibración */}
-            <div className="lg:col-span-5 relative mt-2 lg:mt-0">
-              <div className="relative rounded-2xl overflow-hidden border border-white/25 shadow-2xl bg-black/25 aspect-[16/10] group">
-                <img
-                  src="/images/tecnologia-cristales-calibracion.jpg"
-                  alt={isEn ? 'Dr. Fabio Mora Medina calibrating progressive and anti-reflective lenses with optical pupillometer' : 'Dr. Fabio Mora Medina calibrando cristales progresivos y antirreflejo con pupilómetro digital'}
-                  width={1376}
-                  height={768}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent pointer-events-none" />
+            {/* Columna Derecha: Tarjeta Fotográfica Dinámica con Personas con Gafas */}
+            <div className="lg:col-span-5 relative mt-3 lg:mt-0">
+              <div className="relative rounded-2xl overflow-hidden border border-white/25 shadow-2xl bg-black/35 aspect-[16/10] group">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={bannerShowcase[bannerPersonaIdx].id}
+                    src={bannerShowcase[bannerPersonaIdx].image}
+                    alt={bannerShowcase[bannerPersonaIdx].alt}
+                    width={1376}
+                    height={768}
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    className="w-full h-full object-cover object-center"
+                    loading="lazy"
+                  />
+                </AnimatePresence>
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
 
                 {/* Sello flotante superior */}
-                <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[10px] font-bold text-white flex items-center gap-1.5 shadow-md">
+                <div className="absolute top-3 right-3 bg-black/65 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[10px] font-bold text-white flex items-center gap-1.5 shadow-md">
                   <Sparkles className="w-3 h-3 text-amber-300" />
-                  <span>{isEn ? 'Free-Form Digital' : 'Tecnología Free-Form'}</span>
+                  <span>{bannerShowcase[bannerPersonaIdx].tag}</span>
                 </div>
 
                 {/* Micro etiqueta tecnológica inferior */}
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[11px] font-bold bg-black/65 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/20 shadow-md">
-                  <span className="flex items-center gap-1.5">
-                    <Glasses className="w-3.5 h-3.5 text-white" />
-                    <span>{isEn ? 'Progressive & Antireflective HD' : 'Cristales Progresivos & Antirreflejo HD'}</span>
-                  </span>
-                  <span className="text-white/85 font-medium text-[10px]">
-                    {isEn ? '100% Calibrated' : 'Precisión Óptica'}
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[11px] font-bold bg-black/70 backdrop-blur-md px-3 py-2 rounded-xl border border-white/20 shadow-md">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <Glasses className="w-3.5 h-3.5 text-white shrink-0" />
+                    <span className="truncate">{bannerShowcase[bannerPersonaIdx].title}</span>
+                  </div>
+                  <span className="text-white/80 font-medium text-[10px] shrink-0 ml-2">
+                    {bannerShowcase[bannerPersonaIdx].subtitle}
                   </span>
                 </div>
               </div>
 
+              {/* Selector interactivo de tecnologías y personas con gafas */}
+              <div className="mt-2.5 flex items-center justify-between gap-1.5 bg-black/35 backdrop-blur-md border border-white/15 rounded-xl p-1.5 shadow-lg">
+                {bannerShowcase.map((item, bIdx) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setBannerPersonaIdx(bIdx)}
+                    className={`flex-1 flex items-center justify-center gap-1 py-1.5 px-2 rounded-lg text-[10.5px] font-bold transition-all cursor-pointer ${
+                      bannerPersonaIdx === bIdx
+                        ? 'bg-[rgb(122,24,35)] text-white shadow-xs border border-white/30'
+                        : 'text-white/70 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                  </button>
+                ))}
+              </div>
+
               {/* Mini credencial de garantía flotante */}
-              <div className="hidden sm:flex absolute -bottom-3 -left-3 bg-[#171920]/95 backdrop-blur-md border border-white/25 rounded-xl px-3 py-2 shadow-2xl items-center gap-2.5">
+              <div className="hidden sm:flex absolute -bottom-3 -left-3 bg-[#171920]/95 backdrop-blur-md border border-white/25 rounded-xl px-3 py-2 shadow-2xl items-center gap-2.5 z-20">
                 <div className="w-7 h-7 rounded-lg bg-[rgb(122,24,35)] flex items-center justify-center text-white shrink-0 shadow-xs">
                   <ShieldCheck className="w-4 h-4 text-white" />
                 </div>
