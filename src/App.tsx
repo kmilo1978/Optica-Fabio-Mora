@@ -2467,6 +2467,52 @@ export default function App() {
                     </a>
                   </motion.div>
 
+                  {/* Widget de Testimonios y Avatares con Gafas en el Hero */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.45 }}
+                    className="mt-4 flex items-center gap-3 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-gray-200/80 shadow-xs w-fit cursor-pointer hover:border-[rgb(122,24,35)]/30 transition-all"
+                    onClick={() => {
+                      const el = document.getElementById('testimonios');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    <div className="flex items-center -space-x-2 overflow-hidden py-0.5">
+                      {[
+                        { src: '/images/avatars/avatar-gafas-1.webp', alt: 'Paciente mujer con aros Ópticas Popular' },
+                        { src: '/images/avatars/avatar-gafas-2.webp', alt: 'Paciente hombre con anteojos modernos' },
+                        { src: '/images/avatars/avatar-gafas-3.webp', alt: 'Paciente mujer con gafas de marco transparente' },
+                        { src: '/images/avatars/avatar-gafas-4.webp', alt: 'Paciente joven con gafas metálicas' },
+                        { src: '/images/avatars/avatar-gafas-5.webp', alt: 'Paciente con cristales progresivos' },
+                      ].map((av, aIdx) => (
+                        <img
+                          key={aIdx}
+                          src={av.src}
+                          alt={av.alt}
+                          width={32}
+                          height={32}
+                          loading="eager"
+                          className="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded-full ring-2 ring-white object-cover shadow-2xs shrink-0"
+                        />
+                      ))}
+                    </div>
+
+                    <div className="flex flex-col justify-center text-left">
+                      <div className="flex items-center gap-1 leading-none">
+                        <div className="flex items-center gap-0.5 text-amber-500">
+                          {[...Array(5)].map((_, sIdx) => (
+                            <Star key={sIdx} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                          ))}
+                        </div>
+                        <span className="text-[12px] font-black text-[#15171C] ml-1">4.9 / 5.0</span>
+                      </div>
+                      <span className="text-[10.5px] sm:text-[11px] text-gray-600 font-semibold tracking-tight mt-0.5 leading-none">
+                        {lang === 'es' ? 'más de 128 valoraciones reales' : 'from 128+ verified reviews'}
+                      </span>
+                    </div>
+                  </motion.div>
+
                   {/* Micro-insignias de tranquilidad junto a los botones */}
                   <motion.div 
                     initial={{ opacity: 0, y: 15 }}

@@ -209,6 +209,48 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
               ? 'High-precision ophthalmic lenses calibrated by Dr. Fabio Mora to provide razor-sharp clarity, screen comfort, and seamless adaptation to changing light.'
               : 'Cristales oftálmicos de alta precisión calibrados por el Dr. Fabio Mora para brindarte una visión nítida, descanso ante pantallas y protección ante los cambios de luz.'}
           </motion.p>
+
+          {/* Social Proof: Widget de Avatares y Reseñas en el Hero */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="mt-5 inline-flex items-center gap-3 bg-white px-3.5 py-1.5 rounded-full border border-gray-200/80 shadow-xs"
+          >
+            <div className="flex items-center -space-x-2 overflow-hidden py-0.5">
+              {[
+                { src: '/images/avatars/avatar-gafas-1.webp', alt: 'Paciente mujer con aros Ópticas Popular' },
+                { src: '/images/avatars/avatar-gafas-2.webp', alt: 'Paciente hombre con anteojos modernos' },
+                { src: '/images/avatars/avatar-gafas-3.webp', alt: 'Paciente mujer con gafas de marco transparente' },
+                { src: '/images/avatars/avatar-gafas-4.webp', alt: 'Paciente joven con gafas metálicas circulares' },
+                { src: '/images/avatars/avatar-gafas-5.webp', alt: 'Paciente con cristales progresivos de alta definición' },
+              ].map((av, aIdx) => (
+                <img
+                  key={aIdx}
+                  src={av.src}
+                  alt={av.alt}
+                  width={30}
+                  height={30}
+                  loading="eager"
+                  className="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded-full ring-2 ring-white object-cover shadow-2xs shrink-0"
+                />
+              ))}
+            </div>
+
+            <div className="flex flex-col justify-center text-left">
+              <div className="flex items-center gap-1 leading-none">
+                <div className="flex items-center gap-0.5 text-amber-500">
+                  {[...Array(5)].map((_, sIdx) => (
+                    <Star key={sIdx} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <span className="text-[12px] font-black text-[#15171C] ml-1">4.9 / 5.0</span>
+              </div>
+              <span className="text-[10.5px] sm:text-[11px] text-gray-600 font-semibold tracking-tight mt-0.5 leading-none">
+                {isEn ? 'from 128+ verified reviews' : 'más de 128 valoraciones reales'}
+              </span>
+            </div>
+          </motion.div>
         </div>
 
         {/* 1. Selector Superior Interactivo (Segmented Tabs) */}
@@ -854,54 +896,6 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
                   <span className="text-white !text-white">{isEn ? 'Book Appointment via WhatsApp' : 'Agendar mi cita por WhatsApp'}</span>
                   <ArrowRight className="w-4 h-4 text-white !text-white group-hover:translate-x-1 transition-transform" />
                 </a>
-              </div>
-
-              {/* Componente de Testimonio y Avatares con Gafas (Social Proof) */}
-              <div className="mt-5 pt-4 border-t border-white/15 flex flex-col sm:flex-row sm:items-center gap-4">
-                <div className="inline-flex items-center gap-3.5 bg-black/25 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-white/15 shadow-sm">
-                  {/* Stack de 5 avatares reales de pacientes usando gafas */}
-                  <div className="flex items-center -space-x-2 overflow-hidden py-0.5">
-                    {[
-                      { src: '/images/avatars/avatar-gafas-1.webp', alt: 'Paciente mujer con aros Ópticas Popular' },
-                      { src: '/images/avatars/avatar-gafas-2.webp', alt: 'Paciente hombre con anteojos modernos' },
-                      { src: '/images/avatars/avatar-gafas-3.webp', alt: 'Paciente mujer con gafas de marco transparente' },
-                      { src: '/images/avatars/avatar-gafas-4.webp', alt: 'Paciente joven con gafas metálicas circulares' },
-                      { src: '/images/avatars/avatar-gafas-5.webp', alt: 'Paciente con cristales progresivos de alta definición' },
-                    ].map((av, aIdx) => (
-                      <img
-                        key={aIdx}
-                        src={av.src}
-                        alt={av.alt}
-                        width={32}
-                        height={32}
-                        loading="lazy"
-                        className="inline-block w-8 h-8 rounded-full ring-2 ring-white/95 object-cover shadow-sm transition-transform duration-200 hover:scale-125 hover:z-20 cursor-pointer shrink-0"
-                      />
-                    ))}
-                  </div>
-
-                  {/* Estrellas doradas y conteo de reseñas exactamente estilo referencia */}
-                  <div className="flex flex-col justify-center">
-                    <div className="flex items-center gap-0.5 text-amber-400 leading-none">
-                      {[...Array(5)].map((_, sIdx) => (
-                        <Star key={sIdx} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    <span className="text-[11px] text-white/90 font-medium tracking-tight mt-1 leading-none">
-                      {isEn ? 'from 128+ reviews' : 'más de 128 opiniones'}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Mini cita testimonial destacada */}
-                <div className="text-[11.5px] text-white/90 bg-black/25 border border-white/15 rounded-xl px-3.5 py-2 backdrop-blur-xs flex items-center gap-2">
-                  <span className="text-amber-400 font-bold text-sm leading-none">“</span>
-                  <span className="italic leading-snug">
-                    {isEn 
-                      ? 'My progressives adapted on day one, zero computer fatigue.'
-                      : 'Mis cristales se adaptaron el primer día, cero fatiga en la pantalla.'}
-                  </span>
-                </div>
               </div>
             </div>
 
