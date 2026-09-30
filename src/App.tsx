@@ -1274,7 +1274,7 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
         ? 'Fabricados en hidrogel de silicona de última generación con ultra oxigenación corneal. Disfrutá de una visión cristalina, ojos frescos y confort total desde la mañana hasta la noche.'
         : 'Engineered with premium breathable silicone hydrogel. Enjoy razor-sharp clarity, moisturized eyes, and all-day comfort without bulky eyeglass frames.',
       image: '/images/optica-lentes-contacto-1.jpg',
-      imageAlt: lang === 'es' ? 'Optometrista guiando a paciente en prueba de lentes de contacto en óptica' : 'Optometrist guiding patient with contact lens trial in optical clinic',
+      imageAlt: lang === 'es' ? 'Dr. Fabio Mora Medina guiando a paciente en prueba de lentes de contacto' : 'Dr. Fabio Mora Medina guiding patient with contact lens trial in optical clinic',
       pills: lang === 'es' 
         ? ['100% Respirables', 'Desechables o Mensuales', 'Sensación Ojo Desnudo']
         : ['100% Breathable', 'Daily or Monthly', 'Natural Bare-Eye Feel'],
@@ -1293,7 +1293,7 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
         ? '¿Pensabas que con astigmatismo o vista cansada no podías usar lentes de contacto? Los nuevos diseños se estabilizan con cada parpadeo para darte enfoque perfecto de lejos, intermedio y cerca.'
         : 'Thought astigmatism or reading blur prevented you from wearing contacts? Modern stabilization technology locks focus sharp at all distances with zero rotational drift.',
       image: '/images/optica-lentes-contacto-2.jpg',
-      imageAlt: lang === 'es' ? 'Examen visual con lámpara de hendidura y forópter en clínica óptica' : 'Slit lamp and phoropter eye examination in optometry clinic',
+      imageAlt: lang === 'es' ? 'Dr. Fabio Mora Medina realizando examen visual con lámpara de hendidura' : 'Dr. Fabio Mora Medina performing slit lamp eye examination in clinic',
       pills: lang === 'es'
         ? ['Estabilidad al Parpadear', 'Enfoque Multifocal Continuo', 'Calibración Digital']
         : ['Blink-Stabilized', 'Seamless Multifocal', 'Digital Precision'],
@@ -1312,7 +1312,7 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
         ? 'El Dr. Fabio Mora evalúa la curvatura corneal y calidad lagrimal de tus ojos. Te acompañamos paso a paso para que aprendas a colocarlos y retirarlos con total seguridad y sin temor.'
         : 'Dr. Fabio Mora evaluates your corneal topography and tear film health, patiently guiding you through hygienic insertion and removal for zero-stress wear.',
       image: '/images/optica-lentes-contacto-3.jpg',
-      imageAlt: lang === 'es' ? 'Asesoría de contactología en mostrador de boutique óptica' : 'Contact lens consultation at optical dispensary counter',
+      imageAlt: lang === 'es' ? 'Dr. Fabio Mora Medina brindando asesoría personalizada de contactología' : 'Dr. Fabio Mora Medina providing personalized contact lens consultation',
       pills: lang === 'es'
         ? ['Topografía Corneal', 'Acompañamiento Paciente', 'Garantía de Adaptación']
         : ['Corneal Mapping', 'Gentle Step-by-Step Trial', 'Adaptation Guarantee'],
@@ -3099,10 +3099,12 @@ export default function App() {
                   className="group relative rounded-2xl overflow-hidden min-h-[320px] md:min-h-[360px] pro-card shadow-md cursor-pointer"
                 >
                   <img
-                    src="https://content.pancake.vn/web-media-262/0a/72/2c/cd/859ae20a5707f68e7b103f3d02920717fdcd8ed948237733db5ab183-w:700-h:467-l:39011-t:image/jpeg.jpeg"
-                    alt="Evaluación visual profesional"
+                    src="/images/dr-fabio-mora-examen.jpg"
+                    alt="Dr. Fabio Mora Medina realizando evaluación visual profesional con biomicroscopio"
+                    width={1376}
+                    height={768}
+                    loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover blur-[2px] md:blur-[2.5px] scale-[1.02] group-hover:blur-none group-hover:scale-[1.06] transition-[filter,transform] duration-700 ease-out"
-                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
                   <div className="absolute left-0 right-0 bottom-0 p-5 md:p-6 transform transition-transform duration-500 group-hover:-translate-y-1">
@@ -3110,7 +3112,7 @@ export default function App() {
                       Atención visual
                     </div>
                     <h3 className="mt-3 max-w-[24ch] text-[20px] sm:text-[22px] md:text-[24px] leading-[1.1] tracking-tight font-bold text-white">
-                      Evaluación visual integral con acompañamiento profesional
+                      Evaluación visual integral con el Dr. Fabio Mora
                     </h3>
                   </div>
                 </motion.article>
@@ -3124,10 +3126,12 @@ export default function App() {
                     className="group relative rounded-2xl overflow-hidden min-h-[173px] pro-card shadow-md cursor-pointer"
                   >
                     <img
-                      src="https://content.pancake.vn/web-media-262/3d/24/a3/d4/3a74f769e1ca5261250f65e2e9911c8164ad0022ef125ae3dd451852-w:1200-h:675-l:106469-t:image/jpeg.jpeg"
-                      alt="Tecnología para diagnóstico visual"
+                      src="/images/tecnologia-diagnostico.jpg"
+                      alt="Tecnología para diagnóstico visual de alta precisión"
+                      width={1200}
+                      height={675}
+                      loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover blur-[2px] md:blur-[2.5px] scale-[1.02] group-hover:blur-none group-hover:scale-[1.06] transition-[filter,transform] duration-700 ease-out"
-                      referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
                     <div className="absolute left-0 right-0 bottom-0 p-4 transform transition-transform duration-500 group-hover:-translate-y-1">
@@ -3146,15 +3150,17 @@ export default function App() {
                       className="group relative rounded-2xl overflow-hidden min-h-[173px] pro-card shadow-md cursor-pointer"
                     >
                       <img
-                        src="https://content.pancake.vn/web-media-262/2f/b0/37/cd/56114753eecc12cb63eefa879704d4bf40e014559f4c14139c87d036-w:297-h:400-l:19848-t:image/jpeg.jpeg"
-                        alt="Atención profesional personalizada"
+                        src="/images/dr-fabio-mora-ninos.jpg"
+                        alt="Dr. Fabio Mora Medina en consulta de optometría pediátrica"
+                        width={297}
+                        height={400}
+                        loading="lazy"
                         className="absolute inset-0 w-full h-full object-cover blur-[2px] md:blur-[2.5px] scale-[1.02] group-hover:blur-none group-hover:scale-[1.06] transition-[filter,transform] duration-700 ease-out"
-                        referrerPolicy="no-referrer"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
                       <div className="absolute left-0 right-0 bottom-0 p-4 transform transition-transform duration-500 group-hover:-translate-y-1">
                         <h3 className="max-w-[12ch] text-[14px] sm:text-[15px] md:text-[16px] leading-[1.15] tracking-tight font-bold text-white">
-                          Atención cercana
+                          Atención infantil y familiar
                         </h3>
                       </div>
                     </motion.article>
@@ -3167,10 +3173,12 @@ export default function App() {
                       className="group relative rounded-2xl overflow-hidden min-h-[173px] pro-card shadow-md cursor-pointer"
                     >
                       <img
-                        src="https://content.pancake.vn/web-media-262/4f/26/e9/07/5c5601a47c49055462953a64179c907190bdb5f17135f2be2b99eb10-w:297-h:400-l:16706-t:image/jpeg.jpeg"
-                        alt="Recomendación de soluciones visuales"
+                        src="/images/dr-fabio-mora-adultos.jpg"
+                        alt="Dr. Fabio Mora Medina explicando diagnóstico de patología visual a adultos mayores"
+                        width={297}
+                        height={400}
+                        loading="lazy"
                         className="absolute inset-0 w-full h-full object-cover blur-[2px] md:blur-[2.5px] scale-[1.02] group-hover:blur-none group-hover:scale-[1.06] transition-[filter,transform] duration-700 ease-out"
-                        referrerPolicy="no-referrer"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
                       <div className="absolute left-0 right-0 bottom-0 p-4 transform transition-transform duration-500 group-hover:-translate-y-1">
@@ -3412,11 +3420,12 @@ export default function App() {
               <div className="relative z-10 flex flex-col md:flex-row items-stretch">
                 <div className="w-full md:w-[38%] lg:w-[32%] min-h-[340px] md:min-h-[480px] relative overflow-hidden group/doctor cursor-help">
                   <img 
-                    src="https://content.pancake.vn/web-media-262/f8/7a/8c/db/28a595fabedd02a19921777a0ab62c9a2d54e3e34ae3176dbb60cc55-w:1760-h:2370-l:7142028-t:image/png.png" 
+                    src="/images/dr-fabio-mora.webp" 
                     alt="Dr. Fabio Mora Medina - Optometrista en Ópticas Popular Desamparados"
+                    width={800}
+                    height={1077}
                     loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover object-top transition-[filter,transform] duration-[1200ms] ease-in-out blur-0 md:blur-0 md:group-hover/doctor:blur-[12px] md:scale-100 md:group-hover/doctor:scale-110"
-                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-x-0 bottom-6 p-5 flex justify-center transition-all duration-500 opacity-100 translate-y-0 md:opacity-0 md:translate-y-4 md:group-hover/doctor:opacity-100 md:group-hover/doctor:translate-y-0 pointer-events-none">
                     <div className="bg-white px-5 py-4 rounded-[12px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-gray-100 w-full max-w-[240px] relative z-20">

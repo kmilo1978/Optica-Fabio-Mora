@@ -820,8 +820,10 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
             <div className="lg:col-span-5 relative mt-2 lg:mt-0">
               <div className="relative rounded-2xl overflow-hidden border border-white/25 shadow-2xl bg-black/25 aspect-[16/10] group">
                 <img
-                  src="/images/tecnologia-cristales-laboratorio.jpg"
-                  alt={isEn ? 'Precision progressive lens calibration in optical lab' : 'Calibración de cristales progresivos y antirreflejo en laboratorio'}
+                  src="/images/tecnologia-cristales-calibracion.jpg"
+                  alt={isEn ? 'Dr. Fabio Mora Medina calibrating progressive and anti-reflective lenses with optical pupillometer' : 'Dr. Fabio Mora Medina calibrando cristales progresivos y antirreflejo con pupilómetro digital'}
+                  width={1376}
+                  height={768}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                 />
