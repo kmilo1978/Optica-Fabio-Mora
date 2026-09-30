@@ -748,49 +748,117 @@ export default function TecnologiaCristalesPage({ onBack, lang = 'es', onNavigat
           </div>
         </div>
 
-        {/* Banner Final de Cita Médica con Botón Blanco Text Shimmer */}
-        <div className="mt-14 md:mt-20 rounded-3xl bg-[rgb(122,24,35)] text-white p-7 sm:p-10 md:p-12 shadow-xl border border-white/10 relative overflow-hidden">
-          <div className="relative z-10 max-w-2xl">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-white text-[11px] sm:text-[12px] uppercase tracking-wider font-extrabold mb-3">
-              <ShieldCheck className="w-3.5 h-3.5 text-white" />
-              <span>{isEn ? 'Precision Vision Guarantee' : 'Calibración Ocular Personalizada'}</span>
-            </span>
+        {/* Banner Final de Cita Médica con Fotografía Tecnológica de Cristales */}
+        <div className="mt-14 md:mt-20 rounded-3xl bg-gradient-to-br from-[rgb(122,24,35)] via-[rgb(112,20,30)] to-[#15171C] text-white p-6 sm:p-9 md:p-11 shadow-2xl border border-white/15 relative overflow-hidden">
+          {/* Luz ambiental sutil */}
+          <div className="absolute top-0 right-1/4 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none" />
 
-            <h2 className="text-[24px] sm:text-[30px] md:text-[34px] font-bold leading-tight tracking-tight text-white mb-3">
-              {isEn 
-                ? 'Get your eyes evaluated and choose the right lenses with Dr. Fabio Mora'
-                : 'Valorá tu visión y elegí los cristales adecuados con el Dr. Fabio Mora'}
-            </h2>
+          <div className="relative z-10 grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            {/* Columna Izquierda: Información y Acciones */}
+            <div className="lg:col-span-7">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-white text-[11px] sm:text-[12px] uppercase tracking-wider font-extrabold mb-3 border border-white/20">
+                <ShieldCheck className="w-3.5 h-3.5 text-white" />
+                <span>{isEn ? 'Precision Vision Guarantee' : 'Calibración Ocular Personalizada'}</span>
+              </span>
 
-            <p className="text-[14px] sm:text-[15px] text-white/90 leading-relaxed mb-6 font-normal">
-              {isEn
-                ? 'Visit us at Plaza Higuerones, San Rafael Abajo de Desamparados. Personalized examination, pupillary measurement, and 30-day adaptation guarantee.'
-                : 'Visitanos en Plaza Higuerones, San Rafael Abajo de Desamparados. Examen visual computarizado, medición milimétrica de alturas focales y garantía total de confort.'}
-            </p>
+              <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold leading-tight tracking-tight text-white mb-3">
+                {isEn 
+                  ? 'Get your eyes evaluated and choose the right lenses with Dr. Fabio Mora'
+                  : 'Valorá tu visión y elegí los cristales adecuados con el Dr. Fabio Mora'}
+              </h2>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href={`https://wa.me/50672760215?text=${encodeURIComponent(
-                  isEn
-                    ? 'Hello Dr. Fabio Mora, I would like to schedule an exam to quote new precision lenses.'
-                    : '¡Hola Dr. Fabio Mora! Quisiera agendar mi examen de la vista para cotizar mis nuevos cristales con tecnología.'
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl bg-[rgb(142,30,42)] hover:bg-[rgb(162,35,48)] text-white !text-white text-[14px] font-bold shadow-xl border border-white/30 transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer group"
-              >
-                <MessageCircle className="w-4 h-4 text-white" />
-                <span className="text-white">{isEn ? 'Book Appointment via WhatsApp' : 'Agendar mi cita por WhatsApp'}</span>
-                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
-              </a>
+              <p className="text-[13.5px] sm:text-[14.5px] text-white/90 leading-relaxed mb-4 font-normal">
+                {isEn
+                  ? 'Visit us at Plaza Higuerones, San Rafael Abajo de Desamparados. Personalized examination, pupillary measurement, and 30-day adaptation guarantee.'
+                  : 'Visitanos en Plaza Higuerones, San Rafael Abajo de Desamparados. Examen visual computarizado, medición milimétrica de alturas focales y garantía total de confort.'}
+              </p>
 
-              <button
-                onClick={onBack}
-                className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white !text-white text-[13.5px] font-bold border border-white/20 transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
-              >
-                <ArrowLeft className="w-4 h-4 text-white !text-white" />
-                <span className="text-white !text-white">{isEn ? 'Return to Home' : 'Volver a la página principal'}</span>
-              </button>
+              {/* Píldoras de beneficios tecnológicos */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {[
+                  isEn ? '30-Day adaptation warranty' : 'Garantía 30 días de adaptación',
+                  isEn ? 'Millimeter pupillary calibration' : 'Calibración pupilar milimétrica',
+                  isEn ? 'HD Blue Light & Anti-Reflective' : 'Antirreflejo y Luz Azul HD'
+                ].map((item, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/25 backdrop-blur-xs border border-white/15 text-white/95 text-[11.5px] font-semibold"
+                  >
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>{item}</span>
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                    isEn
+                      ? 'Hello Dr. Fabio Mora, I would like to schedule an exam to quote new precision lenses.'
+                      : '¡Hola Dr. Fabio Mora! Quisiera agendar mi examen de la vista para cotizar mis nuevos cristales con tecnología.'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl bg-[rgb(142,30,42)] hover:bg-[rgb(162,35,48)] text-white !text-white text-[14px] font-bold shadow-xl border border-white/30 transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer group"
+                >
+                  <MessageCircle className="w-4 h-4 text-white !text-white" />
+                  <span className="text-white !text-white">{isEn ? 'Book Appointment via WhatsApp' : 'Agendar mi cita por WhatsApp'}</span>
+                  <ArrowRight className="w-4 h-4 text-white !text-white group-hover:translate-x-1 transition-transform" />
+                </a>
+
+                <button
+                  onClick={onBack}
+                  className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white !text-white text-[13.5px] font-bold border border-white/20 transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
+                >
+                  <ArrowLeft className="w-4 h-4 text-white !text-white" />
+                  <span className="text-white !text-white">{isEn ? 'Return to Home' : 'Volver a la página principal'}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Columna Derecha: Tarjeta Fotográfica de Cristales y Calibración */}
+            <div className="lg:col-span-5 relative mt-2 lg:mt-0">
+              <div className="relative rounded-2xl overflow-hidden border border-white/25 shadow-2xl bg-black/25 aspect-[16/10] group">
+                <img
+                  src="/images/tecnologia-cristales-laboratorio.jpg"
+                  alt={isEn ? 'Precision progressive lens calibration in optical lab' : 'Calibración de cristales progresivos y antirreflejo en laboratorio'}
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent pointer-events-none" />
+
+                {/* Sello flotante superior */}
+                <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[10px] font-bold text-white flex items-center gap-1.5 shadow-md">
+                  <Sparkles className="w-3 h-3 text-amber-300" />
+                  <span>{isEn ? 'Free-Form Digital' : 'Tecnología Free-Form'}</span>
+                </div>
+
+                {/* Micro etiqueta tecnológica inferior */}
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[11px] font-bold bg-black/65 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/20 shadow-md">
+                  <span className="flex items-center gap-1.5">
+                    <Glasses className="w-3.5 h-3.5 text-white" />
+                    <span>{isEn ? 'Progressive & Antireflective HD' : 'Cristales Progresivos & Antirreflejo HD'}</span>
+                  </span>
+                  <span className="text-white/85 font-medium text-[10px]">
+                    {isEn ? '100% Calibrated' : 'Precisión Óptica'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Mini credencial de garantía flotante */}
+              <div className="hidden sm:flex absolute -bottom-3 -left-3 bg-[#171920]/95 backdrop-blur-md border border-white/25 rounded-xl px-3 py-2 shadow-2xl items-center gap-2.5">
+                <div className="w-7 h-7 rounded-lg bg-[rgb(122,24,35)] flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <ShieldCheck className="w-4 h-4 text-white" />
+                </div>
+                <div className="text-left">
+                  <p className="text-[11px] font-bold text-white leading-none">
+                    {isEn ? 'Adaptation Guarantee' : 'Garantía Total de Confort'}
+                  </p>
+                  <p className="text-[9.5px] text-white/70 mt-0.5">
+                    {isEn ? '30 days clinical coverage' : 'Respaldado por el Dr. Fabio Mora'}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
