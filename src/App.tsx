@@ -603,8 +603,13 @@ function VisualAccessibilityWidget({ lang }: { lang: Language }) {
   };
 
   return (
-    <div 
-      className="fixed z-40 bottom-[74px] right-3.5 md:bottom-[90px] md:right-6 md:w-14 flex flex-col items-center select-none pointer-events-none"
+    <aside 
+      className="fixed z-[9990] top-1/2 -translate-y-1/2 right-3.5 md:right-6 md:w-14 flex flex-col items-center select-none pointer-events-none"
+      style={{
+        position: 'fixed',
+        top: '50%',
+        transform: 'translateY(-50%)',
+      }}
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
       role="region"
@@ -668,7 +673,7 @@ function VisualAccessibilityWidget({ lang }: { lang: Language }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </aside>
   );
 }
 
