@@ -1470,7 +1470,12 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
 export default function App() {
   const [lang, setLang] = useState<Language>(() => {
     try {
-      return (localStorage.getItem('optica_lang') as Language) || 'es';
+      const saved = localStorage.getItem('optica_lang') as Language;
+      if (saved === 'en' || saved === 'es') return saved;
+      if (typeof navigator !== 'undefined' && navigator.language && navigator.language.startsWith('en')) {
+        return 'en';
+      }
+      return 'es';
     } catch (e) {
       return 'es';
     }
@@ -1547,6 +1552,72 @@ export default function App() {
   };
 
   const [currentView, setCurrentView] = useState<'home' | 'calificar' | 'consulta' | 'test-visual' | 'contacto' | 'tecnologia-cristales'>('home');
+
+  const handleNavigate = (href?: string) => {
+    if (!href) return;
+    setIsMenuOpen(false);
+    setDesktopDropdown(null);
+    try {
+      document.body.style.overflow = '';
+    } catch (e) {}
+
+    if (href === '#contacto') {
+      setCurrentView('contacto');
+      window.location.hash = '#contacto';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (href === '#tecnologia-cristales' || href === '#cristales') {
+      setCurrentView('tecnologia-cristales');
+      window.location.hash = '#tecnologia-cristales';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (href === '#consulta' || href === '#formulario-whatsapp') {
+      setCurrentView('consulta');
+      window.location.hash = '#consulta';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (href === '#test-visual') {
+      setCurrentView('test-visual');
+      window.location.hash = '#test-visual';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (href === '#calificar') {
+      setCurrentView('calificar');
+      window.location.hash = '#calificar';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (currentView !== 'home') {
+      setCurrentView('home');
+    }
+
+    if (href === '#inicio' || href === '#' || href === '') {
+      window.location.hash = '#inicio';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const targetId = href.replace(/^#/, '');
+    window.location.hash = href;
+
+    setTimeout(() => {
+      const el = document.getElementById(targetId);
+      if (el) {
+        const headerOffset = 85;
+        const elementPosition = el.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 120);
+  };
 
   // Carrusel dinámico del Hero con imágenes clínicas (adultos, niños y adultos mayores)
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
@@ -1893,12 +1964,8 @@ export default function App() {
                         key={cat.id}
                         href={cat.href}
                         onClick={(e) => {
-                          if (cat.href === '#contacto') {
-                            e.preventDefault();
-                            setCurrentView('contacto');
-                            window.location.hash = '#contacto';
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                          }
+                          e.preventDefault();
+                          handleNavigate(cat.href);
                         }}
                         className="px-3.5 py-2 rounded-xl text-[13px] md:text-[14px] font-semibold text-[#1C1D21] hover:text-[rgb(122,24,35)] hover:bg-black/5 transition-all"
                       >
@@ -1952,35 +2019,10 @@ export default function App() {
                                         <a
                                           key={iIdx}
                                           href={item.href}
-                                          onClick={(e) => {
-                                            if (item.href === '#calificar') {
+                                            onClick={(e) => {
                                               e.preventDefault();
-                                              setCurrentView('calificar');
-                                              window.location.hash = '#calificar';
-                                              window.scrollTo({ top: 0, behavior: 'smooth' });
-                                            } else if (item.href === '#consulta' || item.href === '#formulario-whatsapp') {
-                                              e.preventDefault();
-                                              setCurrentView('consulta');
-                                              window.location.hash = '#consulta';
-                                              window.scrollTo({ top: 0, behavior: 'smooth' });
-                                            } else if (item.href === '#test-visual') {
-                                              e.preventDefault();
-                                              setCurrentView('test-visual');
-                                              window.location.hash = '#test-visual';
-                                              window.scrollTo({ top: 0, behavior: 'smooth' });
-                                            } else if (item.href === '#contacto') {
-                                              e.preventDefault();
-                                              setCurrentView('contacto');
-                                              window.location.hash = '#contacto';
-                                              window.scrollTo({ top: 0, behavior: 'smooth' });
-                                            } else if (item.href === '#tecnologia-cristales' || item.href === '#cristales') {
-                                              e.preventDefault();
-                                              setCurrentView('tecnologia-cristales');
-                                              window.location.hash = '#tecnologia-cristales';
-                                              window.scrollTo({ top: 0, behavior: 'smooth' });
-                                            }
-                                            setDesktopDropdown(null);
-                                          }}
+                                              handleNavigate(item.href);
+                                            }}
                                           className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#F3F4F7] transition-all cursor-pointer"
                                         >
                                           {ItemIcon ? (
@@ -2053,25 +2095,26 @@ export default function App() {
 
 
 
+                {/* Botón de Llamar visible en móvil y mucho más grande y destacado en escritorio */}
                 <a
                   href="tel:+50672760215"
-                  className="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-[8px] bg-white border border-[#E3E5EC] hover:bg-gray-50 text-[#15171C] text-[12px] font-bold shadow-2xs hover:shadow-xs transition-all duration-200 active:scale-95 cursor-pointer hover:border-[rgb(122,24,35)]"
-                  title={lang === 'es' ? 'Llamar a la óptica: 2515-0002 / 7276-0215' : 'Call our clinic: 2515-0002 / 7276-0215'}
+                  className="inline-flex items-center justify-center h-10 sm:h-11 px-3.5 sm:px-5 rounded-xl bg-white border-2 border-[rgb(122,24,35)] hover:bg-[rgb(122,24,35)] text-[rgb(122,24,35)] hover:text-white text-[13px] sm:text-[14px] font-black shadow-xs hover:shadow-md transition-all duration-200 active:scale-95 cursor-pointer group shrink-0"
+                  title={lang === 'es' ? 'Llamar a la Óptica: 2515-0002 / 7276-0215' : 'Call our clinic: 2515-0002 / 7276-0215'}
                 >
-                  <Phone className="w-3.5 h-3.5 mr-1.5 text-[rgb(122,24,35)]" />
-                  <span>{lang === 'es' ? 'Llamar' : 'Call'}</span>
+                  <Phone className="w-4 h-4 mr-1.5 sm:mr-2 text-[rgb(122,24,35)] group-hover:text-white transition-colors" />
+                  <span className="tracking-wide">{lang === 'es' ? 'Llamar' : 'Call'}</span>
                 </a>
 
                 {/* Botón Menú Hamburguesa para Móviles - Destacado y Visual */}
                 <button
                   onClick={() => setIsMenuOpen(true)}
-                  aria-label="Abrir menú de navegación"
+                  aria-label={lang === 'es' ? 'Abrir menú de navegación' : 'Open navigation menu'}
                   className="lg:hidden inline-flex items-center gap-2 h-10 px-3 rounded-xl bg-white border-2 border-[rgb(122,24,35)]/20 text-[#15171C] font-bold text-[12px] shadow-2xs hover:border-[rgb(122,24,35)] hover:bg-[#FDF6F7] active:scale-95 transition-all cursor-pointer shrink-0"
                 >
                   <div className="w-6 h-6 rounded-lg bg-[rgb(122,24,35)] text-white flex items-center justify-center shadow-xs">
                     <Menu className="w-3.5 h-3.5" />
                   </div>
-                  <span className="text-[11.5px] font-bold tracking-wider uppercase text-[rgb(122,24,35)]">Menú</span>
+                  <span className="text-[11.5px] font-bold tracking-wider uppercase text-[rgb(122,24,35)]">{lang === 'es' ? 'Menú' : 'Menu'}</span>
                 </button>
               </div>
             </div>
@@ -2177,7 +2220,7 @@ export default function App() {
                       </div>
 
                       <p className="text-[11px] font-bold uppercase tracking-widest text-[#767A84] px-1">
-                        Navegación por categorías
+                        {lang === 'es' ? 'Navegación por categorías' : 'Browse by Category'}ón por categorías
                       </p>
 
                       <div className="space-y-2">
@@ -2191,18 +2234,8 @@ export default function App() {
                                 key={cat.id}
                                 href={cat.href}
                                 onClick={(e) => {
-                                  if (cat.href === '#contacto') {
-                                    e.preventDefault();
-                                    setCurrentView('contacto');
-                                    window.location.hash = '#contacto';
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                  } else if (cat.href === '#tecnologia-cristales' || cat.href === '#cristales') {
-                                    e.preventDefault();
-                                    setCurrentView('tecnologia-cristales');
-                                    window.location.hash = '#tecnologia-cristales';
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                  }
-                                  setIsMenuOpen(false);
+                                  e.preventDefault();
+                                  handleNavigate(cat.href);
                                 }}
                                 className="flex items-center justify-between h-12 px-4 rounded-xl bg-[#F8F9FB] hover:bg-[rgb(122,24,35)] hover:text-white text-[#15171C] text-[13px] font-semibold active:scale-[0.99] transition-all"
                               >
@@ -2233,7 +2266,7 @@ export default function App() {
                                   <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${
                                     isExpanded ? 'bg-white/20 text-white !text-white' : 'bg-gray-200 text-gray-700'
                                   }`}>
-                                    {totalItems} opciones
+                                    {totalItems} {lang === 'es' ? 'opciones' : 'options'}
                                   </span>
                                 </div>
                                 <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180 text-white !text-white' : 'text-gray-400'}`} />
@@ -2254,28 +2287,8 @@ export default function App() {
                                               key={iIdx}
                                               href={item.href}
                                               onClick={(e) => {
-                                                if (item.href === '#calificar') {
-                                                  e.preventDefault();
-                                                  setCurrentView('calificar');
-                                                  window.location.hash = '#calificar';
-                                                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                                                } else if (item.href === '#consulta' || item.href === '#formulario-whatsapp') {
-                                                  e.preventDefault();
-                                                  setCurrentView('consulta');
-                                                  window.location.hash = '#consulta';
-                                                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                                                } else if (item.href === '#test-visual') {
-                                                  e.preventDefault();
-                                                  setCurrentView('test-visual');
-                                                  window.location.hash = '#test-visual';
-                                                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                                                } else if (item.href === '#contacto') {
-                                                  e.preventDefault();
-                                                  setCurrentView('contacto');
-                                                  window.location.hash = '#contacto';
-                                                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                                                }
-                                                setIsMenuOpen(false);
+                                                e.preventDefault();
+                                                handleNavigate(item.href);
                                               }}
                                               className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-[#F3F4F7] active:bg-gray-200 transition-all cursor-pointer"
                                             >
@@ -2305,9 +2318,9 @@ export default function App() {
                       <div className="mt-4 p-3.5 rounded-xl bg-gray-50 border border-gray-100 text-left space-y-1.5">
                         <div className="flex items-center gap-2 text-[11px] font-bold text-[#15171C]">
                           <MapPin className="w-3.5 h-3.5 text-[rgb(122,24,35)] shrink-0" />
-                          <span>Plaza Higuerones, Local 23</span>
+                          <span>{lang === 'es' ? 'Plaza Higuerones, Local 23' : 'Plaza Higuerones, Suite 23'}</span>
                         </div>
-                        <p className="text-[10px] text-gray-500 pl-5.5">San Rafael Abajo de Desamparados</p>
+                        <p className="text-[10px] text-gray-500 pl-5.5">{lang === 'es' ? 'San Rafael Abajo de Desamparados' : 'San Rafael Abajo, Desamparados'}</p>
                         <div className="flex items-center gap-2 text-[10px] text-gray-600 pl-5.5 pt-1">
                           <Clock className="w-3 h-3 text-[rgb(122,24,35)]" />
                           <span>Lun a Sáb: 9:00 AM - 6:00 PM</span>
@@ -2320,11 +2333,11 @@ export default function App() {
                       <div className="grid grid-cols-2 gap-2">
                         <a
                           href="tel:+50672760215"
-                          className="inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-white hover:bg-gray-50 border border-[#E3E5EC] text-[#15171C] text-[12px] font-bold shadow-xs active:scale-95 transition-all duration-200 cursor-pointer"
+                          className="inline-flex items-center justify-center gap-2 h-14 rounded-xl bg-white hover:bg-gray-50 border-2 border-[rgb(122,24,35)] text-[rgb(122,24,35)] text-[14px] font-black shadow-xs active:scale-95 transition-all duration-200 cursor-pointer"
                           title="2515-0002 / 7276-0215"
                         >
-                          <Phone className="w-4 h-4 text-[rgb(122,24,35)]" />
-                          <span>{lang === 'es' ? 'Llamar' : 'Call'}</span>
+                          <Phone className="w-4.5 h-4.5 text-[rgb(122,24,35)]" />
+                          <span>{lang === 'es' ? 'Llamar al 2515-0002' : 'Call 2515-0002'}</span>
                         </a>
                         <a
                           href={`https://wa.me/50672760215?text=${encodeURIComponent(
@@ -2538,10 +2551,22 @@ export default function App() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {[
-                { title: <><span className="text-[rgb(122,24,35)]">+</span><AnimatedNumber value={18} /></>, desc: 'años de trayectoria' },
-                { title: 'Integral', desc: 'evaluación completa y clara' },
-                { title: 'Familia', desc: 'atención para todas las edades' },
-                { title: 'Directo', desc: 'contacto por llamada o WhatsApp' },
+                { 
+                  title: <><span className="text-[rgb(122,24,35)]">+</span><AnimatedNumber value={18} /></>, 
+                  desc: lang === 'es' ? 'años de trayectoria' : 'years of clinical experience' 
+                },
+                { 
+                  title: lang === 'es' ? 'Integral' : 'Thorough', 
+                  desc: lang === 'es' ? 'evaluación completa y clara' : 'clear and complete evaluation' 
+                },
+                { 
+                  title: lang === 'es' ? 'Familia' : 'Family', 
+                  desc: lang === 'es' ? 'atención para todas las edades' : 'dedicated care for all ages' 
+                },
+                { 
+                  title: lang === 'es' ? 'Directo' : 'Direct', 
+                  desc: lang === 'es' ? 'contacto por llamada o WhatsApp' : 'reach us via phone or WhatsApp' 
+                },
               ].map((item, i) => (
                 <motion.article 
                   key={i}
@@ -2570,7 +2595,7 @@ export default function App() {
               <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
                 <div className="p-5 md:p-6 border-b lg:border-b-0 lg:border-r border-[#E7EAF1]">
                   <span className="inline-flex items-center h-7 px-3.5 rounded-full bg-[#F2F3F7] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B]">
-                    Urgencia
+                    {lang === 'es' ? 'Urgencia' : 'Timely Care'}
                   </span>
                   <h2 className="mt-4 max-w-xl text-[28px] sm:text-[32px] md:text-[36px] leading-tight tracking-tight font-bold text-[#15171C]">
                     {lang === 'es' ? <>Esperar demasiado puede hacer que el problema afecte más <span className="text-[rgb(122,24,35)]">tu rutina</span></> : <>Waiting too long can allow vision issues to disrupt <span className="text-[rgb(122,24,35)]">your daily routine</span></>}
@@ -2582,9 +2607,22 @@ export default function App() {
 
                 <div className="p-5 md:p-6 grid sm:grid-cols-3 gap-3">
                   {[
-                    { title: 'Visión borrosa', desc: 'Si forzás la vista para enfocar, es buen momento para revisar.', icon: Eye },
-                    { title: 'Cansancio ocular', desc: 'Molestias con pantallas o lectura prolongada no deberían normalizarse.', icon: Clock },
-                    { title: 'Actuá hoy', desc: 'Agendá tu examen y resolvé tus dudas con atención profesional.', icon: CheckCircle2, dark: true },
+                    { 
+                      title: lang === 'es' ? 'Visión borrosa' : 'Blurred Vision', 
+                      desc: lang === 'es' ? 'Si forzás la vista para enfocar, es buen momento para revisar.' : 'Straining your eyes to focus is a sign it is time for a check-up.', 
+                      icon: Eye 
+                    },
+                    { 
+                      title: lang === 'es' ? 'Cansancio ocular' : 'Eye Strain', 
+                      desc: lang === 'es' ? 'Molestias con pantallas o lectura prolongada no deberían normalizarse.' : 'Discomfort from screens or extended reading should not be normalized.', 
+                      icon: Clock 
+                    },
+                    { 
+                      title: lang === 'es' ? 'Actuá hoy' : 'Act Today', 
+                      desc: lang === 'es' ? 'Agendá tu examen y resolvé tus dudas con atención profesional.' : 'Schedule your examination and resolve concerns with professional clinical care.', 
+                      icon: CheckCircle2, 
+                      dark: true 
+                    },
                   ].map((item, i) => (
                     <article 
                       key={i} 
@@ -2958,7 +2996,7 @@ export default function App() {
                   className="inline-flex items-center gap-2 h-7 px-3.5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold shadow-2xs border border-[rgb(122,24,35)]/20"
                 >
                   <HeartHandshake className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
-                  <span>Atención Integral para Toda la Familia</span>
+                  <span>{lang === 'es' ? 'Atención Integral para Toda la Familia' : 'Comprehensive Eye Care for the Whole Family'}</span>
                 </motion.div>
 
                 <motion.h2 
@@ -2968,7 +3006,7 @@ export default function App() {
                   transition={{ delay: 0.1 }}
                   className="mt-4 text-[28px] sm:text-[34px] md:text-[38px] lg:text-[42px] leading-tight tracking-tight font-bold text-[#14161B]"
                 >
-                  Cuidado visual especializado para <span className="text-[rgb(122,24,35)]">cada etapa de tu vida</span>
+                  {lang === 'es' ? <>Cuidado visual especializado para <span className="text-[rgb(122,24,35)]">cada etapa de tu vida</span></> : <>Specialized eye care for <span className="text-[rgb(122,24,35)]">every stage of life</span></>}
                 </motion.h2>
 
                 <motion.p 
@@ -2978,7 +3016,7 @@ export default function App() {
                   transition={{ delay: 0.2 }}
                   className="mt-3.5 text-[15px] sm:text-[16px] text-[#555963] leading-relaxed"
                 >
-                  Las necesidades de los ojos cambian con los años. El Dr. Fabio Mora adapta cada examen con tecnología de vanguardia, paciencia y un enfoque clínico cercano: desde el desarrollo escolar en la infancia, hasta el confort digital en adultos y la salud ocular preventiva en personas mayores.
+                  {lang === 'es' ? 'Las necesidades de los ojos cambian con los años. El Dr. Fabio Mora adapta cada examen con tecnología de vanguardia, paciencia y un enfoque clínico cercano: desde el desarrollo escolar en la infancia, hasta el confort digital en adultos y la salud ocular preventiva en personas mayores.' : 'Eye care needs evolve over a lifetime. Dr. Fabio Mora adapts every examination with modern clinical technology, patience, and attentive care: from school-age vision development in children, to digital ergonomics for adults and preventive ocular health for seniors.'}
                 </motion.p>
               </div>
 
@@ -3369,7 +3407,7 @@ export default function App() {
 
                   <div className="mt-6 pt-4 border-t border-gray-200/80 flex items-center justify-between text-[#7C808B] text-[12px]">
                     <span className="font-medium">Duración estimada: 30 a 40 minutos</span>
-                    <span className="text-[rgb(122,24,35)] font-bold">Atención 100% personalizada</span>
+                <span className="text-[rgb(122,24,35)] font-bold">{lang === 'es' ? 'Atención 100% personalizada' : '100% Personalized Care'}</span>
                   </div>
                 </motion.article>
 
@@ -3483,10 +3521,10 @@ export default function App() {
                   <div className="absolute inset-x-0 bottom-6 p-5 flex justify-center transition-all duration-500 opacity-100 translate-y-0 md:opacity-0 md:translate-y-4 md:group-hover/doctor:opacity-100 md:group-hover/doctor:translate-y-0 pointer-events-none">
                     <div className="bg-white px-5 py-4 rounded-[12px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-gray-100 w-full max-w-[240px] relative z-20">
                       <p className="text-[15px] font-black text-[rgb(122,24,35)] text-center leading-tight uppercase tracking-wider">
-                        ¿Me ves borroso?
+                        {lang === 'es' ? '¿Me ves borroso?' : 'Blurry vision?'}
                       </p>
                       <p className="mt-2 text-[11px] font-bold text-[#1F2937] text-center leading-tight">
-                        Es momento de agendar tu revisión visual profesional
+                        {lang === 'es' ? 'Es momento de agendar tu revisión visual profesional' : 'Time to book your comprehensive vision exam'}
                       </p>
                     </div>
                   </div>
@@ -3630,7 +3668,7 @@ export default function App() {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center max-w-2xl mx-auto mb-6 md:mb-8">
                 <span className="inline-flex items-center gap-1.5 h-6 px-3.5 rounded-full bg-white text-[9px] uppercase tracking-[0.14em] font-semibold text-[#767A84] shadow-xs border border-gray-200/60 mb-4">
-                  <HelpCircle className="w-3.5 h-3.5 text-[rgb(122,24,35)]" /> Preguntas frecuentes
+                  <HelpCircle className="w-3.5 h-3.5 text-[rgb(122,24,35)]" /> {lang === 'es' ? 'Preguntas frecuentes' : 'Frequently Asked Questions'}
                 </span>
                 <h2 className="text-[28px] sm:text-[34px] md:text-[40px] leading-tight tracking-tight font-bold text-[#14161B]">
                   Resolvé tus <span className="text-[rgb(122,24,35)]">dudas</span>
@@ -3822,7 +3860,7 @@ export default function App() {
                   <div className="relative z-10 flex items-start justify-between gap-3">
                     <div>
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-xs text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-white">
-                        <Eye className="w-3 h-3 text-white/90" /> Test de Confort Visual
+                        <Eye className="w-3 h-3 text-white/90" /> {lang === 'es' ? 'Test de Confort Visual' : 'Visual Comfort Screening'}
                       </span>
                       <h3 className="mt-2 text-[20px] sm:text-[22px] font-bold leading-tight">
                         ¿Cómo sentís tu visión hoy?
@@ -3859,27 +3897,27 @@ export default function App() {
                         {[
                           {
                             id: 'borroso',
-                            title: 'Visión borrosa o dificultad para enfocar',
-                            desc: 'Me cuesta enfocar de lejos, al manejar o hacia el final del día.',
-                            badge: 'Enfoque'
+                            title: lang === 'es' ? 'Visión borrosa o dificultad para enfocar' : 'Blurry vision or difficulty focusing',
+                            desc: lang === 'es' ? 'Me cuesta enfocar de lejos, al manejar o hacia el final del día.' : 'Trouble focusing at distance, while driving, or at the end of the day.',
+                            badge: lang === 'es' ? 'Enfoque' : 'Focus'
                           },
                           {
                             id: 'pantallas',
-                            title: 'Fatiga o pesadez por pantallas',
-                            desc: 'Paso muchas horas en computadora o celular y siento ojos cansados o secos.',
-                            badge: 'Digital'
+                            title: lang === 'es' ? 'Fatiga o pesadez por pantallas' : 'Screen fatigue or eye strain',
+                            desc: lang === 'es' ? 'Paso muchas horas en computadora o celular y siento ojos cansados o secos.' : 'Long hours on computer or phone leaving eyes tired or dry.',
+                            badge: lang === 'es' ? 'Digital' : 'Digital'
                           },
                           {
                             id: 'lentes',
-                            title: 'Mis lentes ya tienen más de 1 año',
-                            desc: 'Siento que mi graduación cambió o mis aros están rayados y deteriorados.',
-                            badge: 'Actualización'
+                            title: lang === 'es' ? 'Mis lentes ya tienen más de 1 año' : 'My glasses are over 1 year old',
+                            desc: lang === 'es' ? 'Siento que mi graduación cambió o mis aros están rayados y deteriorados.' : 'Prescription feels outdated or frames and lenses are scratched.',
+                            badge: lang === 'es' ? 'Actualización' : 'Renewal'
                           },
                           {
                             id: 'preventivo',
-                            title: 'Solo deseo mi chequeo preventivo anual',
-                            desc: 'Quiero verificar la salud de mis ojos con atención profesional del Dr. Fabio Mora.',
-                            badge: 'Prevención'
+                            title: lang === 'es' ? 'Solo deseo mi chequeo preventivo anual' : 'Just want my annual preventive exam',
+                            desc: lang === 'es' ? 'Quiero verificar la salud de mis ojos con atención profesional del Dr. Fabio Mora.' : 'Check my general ocular health with professional care from Dr. Fabio Mora.',
+                            badge: lang === 'es' ? 'Prevención' : 'Prevention'
                           }
                         ].map((opt) => (
                           <button
