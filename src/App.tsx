@@ -602,13 +602,13 @@ function VisualAccessibilityWidget({ lang }: { lang: Language }) {
 
   return (
     <div 
-      className="fixed z-40 bottom-[74px] right-3.5 md:bottom-[92px] md:right-[32px] flex flex-col items-center select-none"
+      className="fixed z-40 bottom-[74px] right-3.5 md:bottom-[90px] md:right-6 md:w-14 flex flex-col items-center select-none pointer-events-none"
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
       role="region"
       aria-label={lang === 'es' ? 'Control de tamaño visual' : 'Visual size controls'}
     >
-      <div className="bg-white/95 backdrop-blur-md border border-gray-200 shadow-xl rounded-2xl p-1 flex flex-col items-center gap-1 transition-all duration-300 hover:shadow-2xl hover:border-[rgb(122,24,35)]/40">
+      <div className="pointer-events-auto bg-white/95 backdrop-blur-md border border-gray-200 shadow-xl rounded-2xl p-1 flex flex-col items-center gap-1 transition-all duration-300 hover:shadow-2xl hover:border-[rgb(122,24,35)]/40">
         {/* Indicador de salud visual / reset */}
         <button 
           onClick={handleReset}
@@ -659,7 +659,7 @@ function VisualAccessibilityWidget({ lang }: { lang: Language }) {
             initial={{ opacity: 0, x: 8 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 8 }}
-            className="hidden md:flex absolute right-12 top-1/2 -translate-y-1/2 bg-[#15171C]/95 text-white text-[11px] font-medium py-1.5 px-3 rounded-xl whitespace-nowrap shadow-xl pointer-events-none items-center gap-1.5 border border-white/10"
+            className="hidden md:flex absolute right-16 top-1/2 -translate-y-1/2 bg-[#15171C]/95 text-white text-[11px] font-medium py-1.5 px-3 rounded-xl whitespace-nowrap shadow-xl pointer-events-none items-center gap-1.5 border border-white/10"
           >
             <Eye className="w-3.5 h-3.5 text-[rgb(180,40,55)]" />
             <span>{lang === 'es' ? 'Ajustar tamaño de lectura (+ / -)' : 'Adjust reading size (+ / -)'}</span>
