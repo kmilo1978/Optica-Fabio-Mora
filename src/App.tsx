@@ -1262,8 +1262,8 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
       id: 1,
       badge: lang === 'es' ? 'Libertad Visual & Confort 24h' : 'Visual Freedom & 24h Comfort',
       title: lang === 'es' 
-        ? <>Descubrí los <span className="underline decoration-white/40 decoration-wavy underline-offset-4">lentes de contacto</span> perfectos para vos</>
-        : <>Discover the <span className="underline decoration-white/40 decoration-wavy underline-offset-4">contact lenses</span> made for your lifestyle</>,
+        ? <>Descubrí los lentes de contacto perfectos para vos</>
+        : <>Discover the contact lenses made for your lifestyle</>,
       description: lang === 'es'
         ? 'Fabricados en hidrogel de silicona de última generación con ultra oxigenación corneal. Disfrutá de una visión cristalina, ojos frescos y confort total desde la mañana hasta la noche.'
         : 'Engineered with premium breathable silicone hydrogel. Enjoy razor-sharp clarity, moisturized eyes, and all-day comfort without bulky eyeglass frames.',
@@ -1281,8 +1281,8 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
       id: 2,
       badge: lang === 'es' ? 'Astigmatismo & Presbicia' : 'Astigmatism & Presbyopia',
       title: lang === 'es'
-        ? <>Lentes <span className="underline decoration-white/40 decoration-wavy underline-offset-4">Tóricos y Multifocales</span> de Alta Estabilidad</>
-        : <>High-Precision <span className="underline decoration-white/40 decoration-wavy underline-offset-4">Toric & Multifocal</span> Lenses</>,
+        ? <>Lentes Tóricos y Multifocales de Alta Estabilidad</>
+        : <>High-Precision Toric & Multifocal Lenses</>,
       description: lang === 'es'
         ? '¿Pensabas que con astigmatismo o vista cansada no podías usar lentes de contacto? Los nuevos diseños se estabilizan con cada parpadeo para darte enfoque perfecto de lejos, intermedio y cerca.'
         : 'Thought astigmatism or reading blur prevented you from wearing contacts? Modern stabilization technology locks focus sharp at all distances with zero rotational drift.',
@@ -1300,8 +1300,8 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
       id: 3,
       badge: lang === 'es' ? 'Atención Clínica Personalizada' : 'Guided Clinical Fitting',
       title: lang === 'es'
-        ? <>Prueba y Adaptación Guiada <span className="underline decoration-white/40 decoration-wavy underline-offset-4">en Consultorio</span></>
-        : <>In-Clinic Trial & <span className="underline decoration-white/40 decoration-wavy underline-offset-4">Guided Fitting</span></>,
+        ? <>Prueba y Adaptación Guiada en Consultorio</>
+        : <>In-Clinic Trial & Guided Fitting</>,
       description: lang === 'es'
         ? 'El Dr. Fabio Mora evalúa la curvatura corneal y calidad lagrimal de tus ojos. Te acompañamos paso a paso para que aprendas a colocarlos y retirarlos con total seguridad y sin temor.'
         : 'Dr. Fabio Mora evaluates your corneal topography and tear film health, patiently guiding you through hygienic insertion and removal for zero-stress wear.',
