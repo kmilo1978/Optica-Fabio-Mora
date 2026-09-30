@@ -52,6 +52,7 @@ import CalificarPage from './CalificarPage';
 import ConsultaPage from './ConsultaPage';
 import TestVisualPage from './TestVisualPage';
 import ContactoPage from './ContactoPage';
+import TecnologiaCristalesPage from './TecnologiaCristalesPage';
 import Footer from './Footer';
 import { TRANSLATIONS, Language } from './translations';
 
@@ -126,7 +127,7 @@ function getNavigationMenu(lang: Language): NavCategory[] {
             { name: lang === 'es' ? 'Valoración de Cataratas' : 'Cataract Assessment', href: '#servicios', desc: lang === 'es' ? 'Evaluación y orientación médica' : 'Evaluation & medical guidance', icon: Stethoscope },
             { name: lang === 'es' ? 'Evaluación de Ojo Seco' : 'Dry Eye Evaluation', href: '#servicios', desc: lang === 'es' ? 'Alivio de resequedad y ardor' : 'Relief for irritation and dryness', icon: Droplets },
             { name: lang === 'es' ? 'Lentes de Contacto' : 'Contact Lenses', href: '#lentes-contacto', desc: lang === 'es' ? 'Adaptación clínica y prueba guiada' : 'Clinical fitting & hands-on trial', icon: Contact },
-            { name: lang === 'es' ? 'Tecnología en Cristales' : 'Lens Technology', href: '#tecnologia-visual', desc: lang === 'es' ? 'Progresivos, Transitions y Filtro Azul' : 'Progressives, Transitions & Blue Light', icon: Glasses },
+            { name: lang === 'es' ? 'Tecnología en Cristales' : 'Lens Technology', href: '#tecnologia-cristales', desc: lang === 'es' ? 'Simulador de Progresivos, Transitions y Filtro Azul' : 'Simulator: Progressives, Transitions & Blue Light', icon: Glasses },
           ],
         },
         {
@@ -1390,11 +1391,11 @@ function ContactLensCarouselBanner({ lang }: { lang: Language }) {
                   href={`https://wa.me/50672760215?text=${encodeURIComponent(current.whatsappMsg)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl bg-white hover:bg-gray-100 text-[rgb(122,24,35)] text-[14px] font-bold shadow-xl transition-all duration-200 active:scale-95 group cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[14px] font-bold shadow-xl border border-white/20 transition-all duration-200 active:scale-95 group cursor-pointer btn-shimmer"
                 >
-                  <MessageCircle className="w-4 h-4 text-[rgb(122,24,35)]" />
-                  <span>{current.ctaText}</span>
-                  <ArrowRight className="w-4 h-4 text-[rgb(122,24,35)] group-hover:translate-x-1 transition-transform" />
+                  <MessageCircle className="w-4 h-4 text-white !text-white" />
+                  <span className="text-white !text-white">{current.ctaText}</span>
+                  <ArrowRight className="w-4 h-4 text-white !text-white group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
             </div>
@@ -1544,7 +1545,7 @@ export default function App() {
     setSelectedSymptom(null);
   };
 
-  const [currentView, setCurrentView] = useState<'home' | 'calificar' | 'consulta' | 'test-visual' | 'contacto'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'calificar' | 'consulta' | 'test-visual' | 'contacto' | 'tecnologia-cristales'>('home');
 
   useEffect(() => {
     const handleHash = () => {
@@ -1560,6 +1561,9 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (h === '#contacto' || h === '#ubicacion' || h === '#horarios') {
         setCurrentView('contacto');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (h === '#tecnologia-cristales' || h === '#cristales' || h === '#tecnologia-visual') {
+        setCurrentView('tecnologia-cristales');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         setCurrentView('home');
@@ -1763,6 +1767,59 @@ export default function App() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             } else if (view === 'contacto') {
               window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if ((view as string) === 'tecnologia-cristales') {
+              setCurrentView('tecnologia-cristales');
+              window.location.hash = '#tecnologia-cristales';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+        />
+        <VisualAccessibilityWidget lang={lang} />
+      </>
+    );
+  }
+
+  if (currentView === 'tecnologia-cristales') {
+    return (
+      <>
+        <TecnologiaCristalesPage 
+          onBack={() => {
+            window.location.hash = '';
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }} 
+          lang={lang}
+          onNavigate={(view, hash) => {
+            if (view === 'landing' || view === 'home') {
+              setCurrentView('home');
+              window.location.hash = hash || '';
+              if (hash && hash !== '#inicio') {
+                setTimeout(() => {
+                  const el = document.querySelector(hash);
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  else window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            } else if (view === 'consulta') {
+              setCurrentView('consulta');
+              window.location.hash = '#consulta';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'calificar') {
+              setCurrentView('calificar');
+              window.location.hash = '#calificar';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'test-visual') {
+              setCurrentView('test-visual');
+              window.location.hash = '#test-visual';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'contacto') {
+              setCurrentView('contacto');
+              window.location.hash = '#contacto';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'tecnologia-cristales') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             }
           }}
         />
@@ -1881,6 +1938,11 @@ export default function App() {
                                               e.preventDefault();
                                               setCurrentView('contacto');
                                               window.location.hash = '#contacto';
+                                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                                            } else if (item.href === '#tecnologia-cristales' || item.href === '#cristales') {
+                                              e.preventDefault();
+                                              setCurrentView('tecnologia-cristales');
+                                              window.location.hash = '#tecnologia-cristales';
                                               window.scrollTo({ top: 0, behavior: 'smooth' });
                                             }
                                             setDesktopDropdown(null);
@@ -2100,7 +2162,12 @@ export default function App() {
                                     setCurrentView('contacto');
                                     window.location.hash = '#contacto';
                                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                                  }
+                                  } else if (item.href === '#tecnologia-cristales' || item.href === '#cristales') {
+                                                   e.preventDefault();
+                                                   setCurrentView('tecnologia-cristales');
+                                                   window.location.hash = '#tecnologia-cristales';
+                                                   window.scrollTo({ top: 0, behavior: 'smooth' });
+                                                 }
                                   setIsMenuOpen(false);
                                 }}
                                 className="flex items-center justify-between h-12 px-4 rounded-xl bg-[#F8F9FB] hover:bg-[rgb(122,24,35)] hover:text-white text-[#15171C] text-[13px] font-semibold active:scale-[0.99] transition-all"
@@ -2695,7 +2762,78 @@ export default function App() {
               </div>
 
               {/* Presentación Dinámica e Interactiva de Innovación en Cristales */}
-              <LensTechnologyShowcase lang={lang} />
+                            {/* Tarjeta Banner de Presentación y Acceso a la Nueva Página Dedicada */}
+              <div className="bg-white rounded-2xl p-6 sm:p-8 md:p-10 border border-gray-200 shadow-xl relative overflow-hidden">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  <div className="p-5 rounded-xl bg-[#F8F9FB] border border-gray-100 hover:border-[rgb(122,24,35)]/30 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center mb-3">
+                      <Glasses className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-[16px] font-bold text-[#14161B] mb-1">
+                      {lang === 'es' ? 'Progresivas Digitales' : 'Digital Progressives'}
+                    </h3>
+                    <p className="text-[12.5px] text-gray-600 leading-relaxed">
+                      {lang === 'es' 
+                        ? 'Simulador de campo visual para visión nítida a toda distancia (lejos, intermedio y cerca) sin saltos.' 
+                        : 'Visual corridor simulation for sharp multi-distance focus (near, intermediate, far).'}
+                    </p>
+                  </div>
+
+                  <div className="p-5 rounded-xl bg-[#F8F9FB] border border-gray-100 hover:border-[rgb(122,24,35)]/30 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center mb-3">
+                      <Sun className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-[16px] font-bold text-[#14161B] mb-1">
+                      {lang === 'es' ? 'Transitions® Inteligentes' : 'Smart Transitions®'}
+                    </h3>
+                    <p className="text-[12.5px] text-gray-600 leading-relaxed">
+                      {lang === 'es' 
+                        ? 'Prueba interactiva de oscurecimiento solar automático con 100% de protección UV al instante.' 
+                        : 'Interactive light adaptation demo: clear indoors and dark outdoors with 100% UV protection.'}
+                    </p>
+                  </div>
+
+                  <div className="p-5 rounded-xl bg-[#F8F9FB] border border-gray-100 hover:border-[rgb(122,24,35)]/30 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center mb-3">
+                      <Monitor className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-[16px] font-bold text-[#14161B] mb-1">
+                      {lang === 'es' ? 'Filtro Luz Azul & Antirreflejo' : 'Blue Light & AR Shield'}
+                    </h3>
+                    <p className="text-[12.5px] text-gray-600 leading-relaxed">
+                      {lang === 'es' 
+                        ? 'Demostración de contraste y descanso ante monitores, celulares y luces nocturnas.' 
+                        : 'Contrast enhancement demo and visual relaxation under screens, smartphones, and headlights.'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-gray-100">
+                  <div className="text-left">
+                    <p className="text-[14px] font-bold text-[#14161B]">
+                      {lang === 'es' ? '¿Deseas probar los simuladores ópticos interactivos?' : 'Want to try our interactive optical simulators?'}
+                    </p>
+                    <p className="text-[12px] text-gray-500">
+                      {lang === 'es' ? 'Explora cada cristal en detalle con calibraciones visuales en tiempo real.' : 'Explore each lens design in detail with real-time visual calibrations.'}
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setCurrentView('tecnologia-cristales');
+                      window.location.hash = '#tecnologia-cristales';
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[13.5px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer whitespace-nowrap"
+                  >
+                    <Glasses className="w-4 h-4 text-white !text-white" />
+                    <span className="text-white !text-white">
+                      {lang === 'es' ? 'Abrir Simuladores de Cristales' : 'Open Lens Simulators'}
+                    </span>
+                    <ArrowRight className="w-4 h-4 text-white !text-white" />
+                  </button>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -2834,11 +2972,11 @@ export default function App() {
                       <div className="mt-6 pt-5 border-t border-gray-100 flex flex-col gap-2">
                         <a
                           href={`https://wa.me/50672760215?text=${encodeURIComponent(group.waMessage)}`}
-                          className="w-full inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-white text-[rgb(122,24,35)] hover:bg-[rgb(122,24,35)]/5 border-2 border-[rgb(122,24,35)] text-[13.5px] sm:text-[14px] font-bold shadow-xs hover:shadow-md transition-all duration-200 active:scale-95 cursor-pointer"
+                          className="w-full inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[13.5px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
                         >
-                          <MessageCircle className="w-4 h-4 text-[rgb(122,24,35)]" />
-                          <span>{group.buttonText}</span>
-                          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-[rgb(122,24,35)]" />
+                          <MessageCircle className="w-4 h-4 text-white !text-white" />
+                          <span className="text-white !text-white">{group.buttonText}</span>
+                          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-white !text-white" />
                         </a>
                       </div>
                     </motion.article>
@@ -3180,9 +3318,9 @@ export default function App() {
 
                     <a
                       href="https://wa.me/50672760215"
-                      className="inline-flex items-center justify-center h-11 px-7 rounded-xl bg-white text-[rgb(122,24,35)] text-[13px] sm:text-[14px] font-bold shadow-md hover:bg-gray-100 transition-all active:scale-95 btn-shimmer shrink-0"
+                      className="inline-flex items-center justify-center h-11 px-7 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white !text-white text-[13px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 btn-shimmer shrink-0 border border-white/25"
                     >
-                      Quiero agendar mi cita
+                      <span className="text-white !text-white">{lang === 'es' ? 'Quiero agendar mi cita' : 'Book my appointment'}</span>
                     </a>
                   </div>
                 </motion.article>
@@ -3504,9 +3642,9 @@ export default function App() {
                         href="https://waze.com/ul?ll=9.8910441,-84.081993&navigate=yes"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[#33CCFF]/15 hover:bg-[#33CCFF]/25 text-[#007099] border border-[#33CCFF]/35 text-[13px] sm:text-[14px] font-bold shadow-2xs transition-all duration-200 active:scale-95"
+                        className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[#1E232A] hover:bg-[#15171C] text-white !text-white border border-gray-700 text-[13px] sm:text-[14px] font-bold shadow-md transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
                       >
-                        <Navigation className="w-4 h-4 text-[#007099]" />
+                        <Navigation className="w-4 h-4 text-white !text-white" />
                         <span>{lang === 'es' ? 'Ruta Waze' : 'Waze Route'}</span>
                       </a>
 
