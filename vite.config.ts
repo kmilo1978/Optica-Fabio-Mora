@@ -18,7 +18,6 @@ export default defineConfig({
     target: 'esnext',
   },
   optimizeDeps: {
-    target: 'esnext',
     esbuildOptions: {
       target: 'esnext',
     },

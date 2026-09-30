@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { TRANSLATIONS, Language } from './translations';
 
-export type NavigationView = 'landing' | 'home' | 'consulta' | 'calificar' | 'test-visual' | 'contacto' | 'tecnologia-cristales';
+export type NavigationView = 'landing' | 'home' | 'consulta' | 'calificar' | 'test-visual' | 'contacto' | 'tecnologia-cristales' | 'testimonios-page';
 
 export interface FooterProps {
   lang: Language;
@@ -155,6 +155,19 @@ export default function Footer({ lang, onNavigate }: FooterProps) {
                 >
                   <ChevronRight className="w-3.5 h-3.5 text-rose-400" />
                   <span>{t.footer.navTestimonials}</span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#testimonios-google" 
+                  onClick={(e) => handleLinkClick(e, 'testimonios-page', '#testimonios-google')}
+                  className="text-white font-semibold hover:translate-x-1 inline-flex items-center gap-1.5 transition-all group"
+                >
+                  <ChevronRight className="w-3.5 h-3.5 text-rose-400 group-hover:translate-x-0.5 transition-transform" />
+                  <span className="text-amber-200 group-hover:text-amber-100 transition-colors">{lang === 'es' ? 'Muro Reseñas Google' : 'Google Reviews Wall'}</span>
+                  <span className="px-1.5 py-0.5 rounded text-[9.5px] font-bold bg-amber-500/20 text-amber-300 uppercase tracking-wider ml-1 border border-amber-500/30">
+                    4.9 ★
+                  </span>
                 </a>
               </li>
               <li>

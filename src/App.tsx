@@ -59,6 +59,7 @@ import ConsultaPage from './ConsultaPage';
 import TestVisualPage from './TestVisualPage';
 import ContactoPage from './ContactoPage';
 import TecnologiaCristalesPage from './TecnologiaCristalesPage';
+import TestimoniosPage from './TestimoniosPage';
 import Footer from './Footer';
 import { TRANSLATIONS, Language } from './translations';
 
@@ -172,7 +173,13 @@ function getNavigationMenu(lang: Language): NavCategory[] {
           items: [
             { name: t.facilities, href: '#galeria', desc: t.facilitiesDesc, icon: Camera },
             { name: t.testimonials, href: '#testimonios', desc: t.testimonialsDesc, icon: Users },
-            { name: t.rate, href: '#calificar', desc: t.rateDesc, icon: Star },
+            { 
+              name: lang === 'es' ? 'Muro Reseñas Google' : 'Google Reviews Wall', 
+              href: '#testimonios-google', 
+              desc: lang === 'es' ? 'Muro interactivo con 4.9 estrellas y opiniones reales' : 'Interactive masonry wall with 4.9 stars & reviews', 
+              icon: Star 
+            },
+            { name: t.rate, href: '#calificar', desc: t.rateDesc, icon: Award },
           ],
         },
       ],
@@ -190,6 +197,12 @@ function getNavigationMenu(lang: Language): NavCategory[] {
               href: '#faq', 
               desc: lang === 'es' ? 'Respuestas sobre exámenes, pagos y garantía' : 'Answers on exams, payments & guarantee', 
               icon: HelpCircle 
+            },
+            { 
+              name: lang === 'es' ? 'Reseñas de Pacientes en Google' : 'Patient Reviews on Google', 
+              href: '#testimonios-google', 
+              desc: lang === 'es' ? 'Muro interactivo con opiniones 100% verificadas' : 'Interactive masonry wall with verified reviews', 
+              icon: Star 
             },
             { 
               name: lang === 'es' ? 'Formulario de Consulta' : 'WhatsApp Inquiry Page', 
@@ -1551,7 +1564,7 @@ export default function App() {
     setSelectedSymptom(null);
   };
 
-  const [currentView, setCurrentView] = useState<'home' | 'calificar' | 'consulta' | 'test-visual' | 'contacto' | 'tecnologia-cristales'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'calificar' | 'consulta' | 'test-visual' | 'contacto' | 'tecnologia-cristales' | 'testimonios-page'>('home');
 
   const handleNavigate = (href?: string) => {
     if (!href) return;
@@ -1561,6 +1574,12 @@ export default function App() {
       document.body.style.overflow = '';
     } catch (e) {}
 
+    if (href === '#testimonios-google' || href === '#resenas-google' || href === '#opiniones') {
+      setCurrentView('testimonios-page');
+      window.location.hash = '#testimonios-google';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     if (href === '#contacto') {
       setCurrentView('contacto');
       window.location.hash = '#contacto';
@@ -1670,6 +1689,9 @@ export default function App() {
       } else if (h === '#tecnologia-cristales' || h === '#cristales' || h === '#tecnologia-visual') {
         setCurrentView('tecnologia-cristales');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (h === '#testimonios-google' || h === '#resenas-google' || h === '#opiniones') {
+        setCurrentView('testimonios-page');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         setCurrentView('home');
       }
@@ -1737,6 +1759,10 @@ export default function App() {
               setCurrentView('contacto');
               window.location.hash = '#contacto';
               window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'testimonios-page') {
+              setCurrentView('testimonios-page');
+              window.location.hash = '#testimonios-google';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             }
           }}
         />
@@ -1782,6 +1808,10 @@ export default function App() {
               setCurrentView('contacto');
               window.location.hash = '#contacto';
               window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'testimonios-page') {
+              setCurrentView('testimonios-page');
+              window.location.hash = '#testimonios-google';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             }
           }}
         />
@@ -1826,6 +1856,10 @@ export default function App() {
             } else if (view === 'contacto') {
               setCurrentView('contacto');
               window.location.hash = '#contacto';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'testimonios-page') {
+              setCurrentView('testimonios-page');
+              window.location.hash = '#testimonios-google';
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }
           }}
@@ -1876,6 +1910,10 @@ export default function App() {
               setCurrentView('tecnologia-cristales');
               window.location.hash = '#tecnologia-cristales';
               window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'testimonios-page') {
+              setCurrentView('testimonios-page');
+              window.location.hash = '#testimonios-google';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             }
           }}
         />
@@ -1924,6 +1962,63 @@ export default function App() {
               window.location.hash = '#contacto';
               window.scrollTo({ top: 0, behavior: 'smooth' });
             } else if (view === 'tecnologia-cristales') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'testimonios-page') {
+              setCurrentView('testimonios-page');
+              window.location.hash = '#testimonios-google';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+        />
+        <VisualAccessibilityWidget lang={lang} />
+      </>
+    );
+  }
+
+  if (currentView === 'testimonios-page') {
+    return (
+      <>
+        <TestimoniosPage 
+          onBack={() => {
+            window.location.hash = '';
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }} 
+          lang={lang}
+          onNavigate={(view, hash) => {
+            if (view === 'landing' || view === 'home') {
+              setCurrentView('home');
+              window.location.hash = hash || '';
+              if (hash && hash !== '#inicio') {
+                setTimeout(() => {
+                  const el = document.querySelector(hash);
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  else window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            } else if (view === 'consulta') {
+              setCurrentView('consulta');
+              window.location.hash = '#consulta';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'calificar') {
+              setCurrentView('calificar');
+              window.location.hash = '#calificar';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'test-visual') {
+              setCurrentView('test-visual');
+              window.location.hash = '#test-visual';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'contacto') {
+              setCurrentView('contacto');
+              window.location.hash = '#contacto';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'tecnologia-cristales') {
+              setCurrentView('tecnologia-cristales');
+              window.location.hash = '#tecnologia-cristales';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'testimonios-page') {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }
           }}
@@ -3301,6 +3396,17 @@ export default function App() {
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2.5 shrink-0 self-start md:self-center">
+                  <button
+                    onClick={() => {
+                      setCurrentView('testimonios-page');
+                      window.location.hash = '#testimonios-google';
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="inline-flex items-center justify-center gap-1.5 h-11 px-4.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-900 text-[13px] font-bold shadow-2xs transition-all active:scale-95 cursor-pointer"
+                  >
+                    <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
+                    <span>{lang === 'es' ? 'Muro Reseñas Google (128+)' : 'Google Reviews Wall (128+)'}</span>
+                  </button>
                   <a 
                     href="#calificar" 
                     onClick={() => {
