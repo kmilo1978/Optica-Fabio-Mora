@@ -2858,34 +2858,33 @@ export default function App() {
           </section>
 
           {/* Contact Section - Editorial Invitation to Dedicated Contact Page */}
-          <section id="contacto" className="w-full py-14 md:py-20 bg-white pb-24 md:pb-24">
+          <section id="contacto" className="w-full py-12 md:py-16 bg-[#FAFAFC] border-t border-gray-100 pb-20 md:pb-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1C1D21] via-[#242730] to-[#15171C] text-white p-7 sm:p-10 md:p-12 shadow-2xl border border-gray-800"
+                className="relative overflow-hidden rounded-3xl bg-white p-7 sm:p-10 md:p-12 shadow-sm border border-gray-200/80"
               >
-                {/* Decorative background glow */}
-                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-[rgb(122,24,35)]/20 blur-3xl pointer-events-none" />
-                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-rose-500/10 blur-3xl pointer-events-none" />
+                {/* Subtle refined accent bar on top */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[rgb(122,24,35)] via-[rgb(180,40,55)] to-[rgb(122,24,35)]" />
 
                 <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
                   <div className="lg:col-span-7">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-rose-300 text-[11px] font-bold uppercase tracking-wider mb-4">
-                      <MapPin className="w-3.5 h-3.5 text-rose-400" />
+                    <span className="inline-flex items-center gap-1.5 h-7 px-3.5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] sm:text-[12px] font-bold uppercase tracking-wider mb-4">
+                      <MapPin className="w-3.5 h-3.5 text-[rgb(122,24,35)]" />
                       <span>{lang === 'es' ? 'Sede Plaza Higuerones' : 'Plaza Higuerones Clinic'}</span>
-                    </div>
+                    </span>
 
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                    <h2 className="text-[26px] sm:text-[32px] md:text-[36px] font-bold text-[#15171C] tracking-tight leading-[1.2]">
                       {lang === 'es' ? (
-                        <>No te quedés sin <span className="text-rose-400">tu cita</span> ni tu valoración visual</>
+                        <>No te quedés sin <span className="text-[rgb(122,24,35)]">tu cita</span> ni tu valoración visual</>
                       ) : (
-                        <>Do not miss your <span className="text-rose-400">visual appointment</span> with us</>
+                        <>Do not miss your <span className="text-[rgb(122,24,35)]">visual appointment</span> with us</>
                       )}
                     </h2>
 
-                    <p className="mt-3 text-sm sm:text-base text-gray-300 leading-relaxed max-w-xl">
+                    <p className="mt-3 text-[14px] sm:text-[15px] text-[#555963] leading-[1.65] max-w-xl">
                       {lang === 'es' 
                         ? 'Visitanos en San Rafael Abajo de Desamparados. Accedé a nuestra página dedicada de Contacto con mapa interactivo en pantalla completa, rutas en Waze, horarios y canales directos.'
                         : 'Visit us in San Rafael Abajo, Desamparados. Access our dedicated Contact page with full-screen interactive maps, Waze navigation, hours, and direct channels.'}
@@ -2898,9 +2897,9 @@ export default function App() {
                           window.location.hash = '#contacto';
                           window.scrollTo({ top: 0, behavior: 'smooth' });
                         }}
-                        className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(145,28,42)] text-white text-[13px] font-bold shadow-lg shadow-black/30 transition-all active:scale-95 group cursor-pointer"
+                        className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer group"
                       >
-                        <MapPin className="w-4 h-4 text-rose-300 group-hover:scale-110 transition-transform" />
+                        <MapPin className="w-4 h-4 text-white/90 group-hover:scale-110 transition-transform" />
                         <span>{lang === 'es' ? 'Ver Ubicación, Horarios y Waze' : 'View Location, Hours & Waze'}</span>
                         <ArrowRight className="w-4 h-4 ml-0.5 group-hover:translate-x-1 transition-transform" />
                       </button>
@@ -2909,9 +2908,9 @@ export default function App() {
                         href="https://waze.com/ul?ll=9.8910441,-84.081993&navigate=yes"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#33CCFF] hover:bg-[#28b8e6] text-[#0b3340] text-[13px] font-bold shadow-md transition-all active:scale-95"
+                        className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[#33CCFF]/15 hover:bg-[#33CCFF]/25 text-[#007099] border border-[#33CCFF]/35 text-[13px] sm:text-[14px] font-bold shadow-2xs transition-all duration-200 active:scale-95"
                       >
-                        <Navigation className="w-4 h-4 text-[#0b3340]" />
+                        <Navigation className="w-4 h-4 text-[#007099]" />
                         <span>{lang === 'es' ? 'Ruta Waze' : 'Waze Route'}</span>
                       </a>
 
@@ -2919,43 +2918,43 @@ export default function App() {
                         href="https://wa.me/50672760215"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-[13px] font-bold border border-white/20 transition-all active:scale-95"
+                        className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#128C7E] border border-[#25D366]/30 text-[13px] sm:text-[14px] font-bold shadow-2xs transition-all duration-200 active:scale-95"
                       >
-                        <MessageCircle className="w-4 h-4 text-emerald-400" />
+                        <MessageCircle className="w-4 h-4 text-[#25D366]" />
                         <span>WhatsApp</span>
                       </a>
                     </div>
                   </div>
 
                   <div className="lg:col-span-5">
-                    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 space-y-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/40 flex items-center justify-center text-rose-300 shrink-0">
+                    <div className="bg-[#F8F9FB] rounded-2xl p-6 border border-gray-200/80 shadow-xs space-y-4">
+                      <div className="flex items-center gap-3.5">
+                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/10 flex items-center justify-center text-[rgb(122,24,35)] shrink-0 shadow-2xs">
                           <Clock className="w-5 h-5" />
                         </div>
                         <div>
-                          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{lang === 'es' ? 'Horario de Atención' : 'Working Hours'}</p>
-                          <p className="text-[13.5px] font-semibold text-white">{lang === 'es' ? 'Lunes a Sábado bajo cita' : 'Mon to Sat by appointment'}</p>
+                          <p className="text-[11px] font-bold text-[#7C808B] uppercase tracking-wider">{lang === 'es' ? 'Horario de Atención' : 'Working Hours'}</p>
+                          <p className="text-[13.5px] font-bold text-[#15171C]">{lang === 'es' ? 'Lunes a Sábado bajo cita' : 'Mon to Sat by appointment'}</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/40 flex items-center justify-center text-rose-300 shrink-0">
+                      <div className="flex items-center gap-3.5">
+                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/10 flex items-center justify-center text-[rgb(122,24,35)] shrink-0 shadow-2xs">
                           <Phone className="w-5 h-5" />
                         </div>
                         <div>
-                          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{lang === 'es' ? 'Teléfonos Directos' : 'Direct Phone'}</p>
-                          <p className="text-[13.5px] font-semibold text-white">+506 2515-0002 / +506 7276-0215</p>
+                          <p className="text-[11px] font-bold text-[#7C808B] uppercase tracking-wider">{lang === 'es' ? 'Teléfonos Directos' : 'Direct Phone'}</p>
+                          <p className="text-[13.5px] font-bold text-[#15171C]">+506 2515-0002 / +506 7276-0215</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/40 flex items-center justify-center text-rose-300 shrink-0">
+                      <div className="flex items-center gap-3.5">
+                        <div className="w-10 h-10 rounded-xl bg-[rgb(122,24,35)]/10 flex items-center justify-center text-[rgb(122,24,35)] shrink-0 shadow-2xs">
                           <ShieldCheck className="w-5 h-5" />
                         </div>
                         <div>
-                          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{lang === 'es' ? 'Facilidades' : 'Amenities'}</p>
-                          <p className="text-[13.5px] font-semibold text-white">{lang === 'es' ? 'SINPE Móvil, Tarjetas y Parqueo' : 'SINPE Móvil, Cards & Free Parking'}</p>
+                          <p className="text-[11px] font-bold text-[#7C808B] uppercase tracking-wider">{lang === 'es' ? 'Facilidades' : 'Amenities'}</p>
+                          <p className="text-[13.5px] font-bold text-[#15171C]">{lang === 'es' ? 'SINPE Móvil, Tarjetas y Parqueo' : 'SINPE Móvil, Cards & Free Parking'}</p>
                         </div>
                       </div>
                     </div>
