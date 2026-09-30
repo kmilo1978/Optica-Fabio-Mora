@@ -1027,18 +1027,25 @@ export default function App() {
 
                 <a
                   href="tel:+50672760215"
-                  className="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-[8px] bg-white border border-[#E3E5EC] text-[#15171C] text-[11px] font-bold hover:bg-gray-50 transition-colors shadow-sm"
+                  className="hidden sm:inline-flex items-center justify-center h-9 px-3.5 rounded-[8px] bg-white border border-[#E3E5EC] hover:bg-gray-50 text-[#15171C] text-[11px] font-bold shadow-2xs hover:shadow-xs transition-all duration-200 active:scale-95 cursor-pointer"
+                  title={lang === 'es' ? 'Llamar a la óptica: 2515-0002 / 7276-0215' : 'Call our clinic: 2515-0002 / 7276-0215'}
                 >
-                  <Phone className="w-3.5 h-3.5 mr-2 text-[rgb(122,24,35)]" />
-                  Llamar
+                  <Phone className="w-3.5 h-3.5 mr-1.5 text-[rgb(122,24,35)]" />
+                  <span>2515-0002</span>
                 </a>
 
                 <a
-                  href="https://wa.me/50672760215"
-                  className="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[11px] font-bold whitespace-nowrap hover:bg-[rgb(142,30,42)] shadow-md transition-all btn-shimmer"
+                  href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                    lang === 'es' 
+                      ? '¡Hola Dr. Fabio Mora! Quisiera agendar una cita de valoración visual en Ópticas Popular.' 
+                      : 'Hello Dr. Fabio Mora, I would like to schedule an eye examination at Opticas Popular.'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-[8px] bg-[rgb(122,24,35)] text-white text-[11px] font-bold whitespace-nowrap hover:bg-[rgb(142,30,42)] shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
                 >
-                  <MessageCircle className="w-3.5 h-3.5 mr-2" />
-                  Agendar
+                  <MessageCircle className="w-3.5 h-3.5 mr-1.5" />
+                  <span>{lang === 'es' ? 'Agendar' : 'Book Exam'}</span>
                 </a>
 
                 {/* Botón Menú Hamburguesa para Móviles */}
@@ -1276,17 +1283,23 @@ export default function App() {
                       <div className="grid grid-cols-2 gap-2">
                         <a
                           href="tel:+50672760215"
-                          className="inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-white border border-[#E3E5EC] text-[#15171C] text-[12px] font-bold shadow-xs active:scale-95 transition-transform"
+                          className="inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-white hover:bg-gray-50 border border-[#E3E5EC] text-[#15171C] text-[12px] font-bold shadow-xs active:scale-95 transition-all duration-200 cursor-pointer"
                         >
                           <Phone className="w-4 h-4 text-[rgb(122,24,35)]" />
-                          Llamar
+                          <span>2515-0002</span>
                         </a>
                         <a
-                          href="https://wa.me/50672760215"
-                          className="inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-[rgb(122,24,35)] text-white text-[12px] font-bold shadow-md active:scale-95 transition-transform"
+                          href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                            lang === 'es' 
+                              ? '¡Hola Dr. Fabio Mora! Quisiera agendar una cita de valoración visual en Ópticas Popular.' 
+                              : 'Hello Dr. Fabio Mora, I would like to schedule an eye examination at Opticas Popular.'
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[12px] font-bold shadow-md active:scale-95 transition-all duration-200 cursor-pointer btn-shimmer"
                         >
                           <MessageCircle className="w-4 h-4" />
-                          WhatsApp
+                          <span>WhatsApp</span>
                         </a>
                       </div>
                     </div>
@@ -1356,17 +1369,26 @@ export default function App() {
                     className="mt-6 flex flex-col sm:flex-row sm:flex-wrap gap-3 w-full sm:w-auto max-w-[440px] justify-center md:justify-start"
                   >
                     <a
-                      href="https://wa.me/50672760215"
-                      className="inline-flex items-center justify-center h-12 px-7 rounded-xl bg-[rgb(122,24,35)] text-white text-[14px] font-bold cta-primary btn-shimmer w-full sm:w-auto transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                        lang === 'es'
+                          ? '¡Hola Dr. Fabio Mora! Deseo agendar mi examen visual en Plaza Higuerones.'
+                          : 'Hello Dr. Fabio Mora, I would like to book my eye exam at Plaza Higuerones.'
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-xl bg-[rgb(122,24,35)] text-white text-[14px] font-bold cta-primary btn-shimmer w-full sm:w-auto"
                     >
-                      {lang === 'es' ? 'Agendar por WhatsApp' : 'Book via WhatsApp'}
+                      <MessageCircle className="w-4 h-4" />
+                      <span>{lang === 'es' ? 'Agendar por WhatsApp' : 'Book via WhatsApp'}</span>
                     </a>
 
                     <a
                       href="tel:+50672760215"
-                      className="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-white text-[#15171C] text-[14px] font-bold border border-[#E3E5EC] cta-secondary w-full sm:w-auto transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                      className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white text-[#15171C] text-[14px] font-bold border border-[#E3E5EC] cta-secondary w-full sm:w-auto"
+                      title={lang === 'es' ? 'Llamar a la óptica: 2515-0002 / 7276-0215' : 'Call our clinic: 2515-0002 / 7276-0215'}
                     >
-                      {lang === 'es' ? 'Llamar ahora' : 'Call now'}
+                      <Phone className="w-4 h-4 text-[rgb(122,24,35)]" />
+                      <span>{lang === 'es' ? 'Llamar al 2515-0002' : 'Call: 2515-0002'}</span>
                     </a>
                   </motion.div>
 
@@ -1693,13 +1715,237 @@ export default function App() {
                     {service.description}
                   </p>
 
-                  <a href="https://wa.me/50672760215" className="inline-flex items-center gap-2 mt-4 text-[13px] sm:text-[14px] font-bold text-[#15171C] group-hover/link:text-[rgb(122,24,35)] hover:text-[rgb(122,24,35)] transition-colors group/link">
-                    <span>Reservar cita</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
+                  <a 
+                    href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                      lang === 'es'
+                        ? `Hola Dr. Fabio Mora, deseo consultar por el servicio de ${service.title} y coordinar mi cita en Ópticas Popular.`
+                        : `Hello Dr. Fabio Mora, I would like to inquire about ${service.title} and book an appointment at Opticas Popular.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 mt-4 text-[13px] sm:text-[14px] font-bold text-[#15171C] group-hover/link:text-[rgb(122,24,35)] hover:text-[rgb(122,24,35)] transition-all duration-200 active:scale-95 group/link cursor-pointer"
+                  >
+                    <span>{lang === 'es' ? 'Reservar cita' : 'Book appointment'}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
                   </a>
                 </motion.article>
               ))}
             </div>
+            </div>
+          </section>
+
+          {/* Nueva Sección: Tecnología Visual (Lentes Progresivas, Transitions, Filtro Azul & Lentes de Contacto) */}
+          <section id="tecnologia-visual" className="w-full py-14 md:py-20 bg-slate-50/70 border-y border-gray-200/80">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Encabezado Principal */}
+              <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+                <span className="inline-flex items-center justify-center h-7 px-3.5 rounded-full bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] text-[11px] sm:text-[12px] uppercase tracking-wider font-bold shadow-2xs mb-3 border border-[rgb(122,24,35)]/20">
+                  {lang === 'es' ? 'Innovación en Cristales & Soluciones' : 'Lens Technology & Solutions'}
+                </span>
+                <h2 className="text-[28px] sm:text-[36px] md:text-[40px] font-bold text-[#14161B] tracking-tight leading-tight">
+                  {lang === 'es' ? 'Tecnología Visual' : 'Visual Technology'}
+                </h2>
+                <div className="w-16 h-1 bg-[rgb(122,24,35)] mx-auto mt-3 rounded-full" />
+                <p className="mt-3.5 text-[14.5px] sm:text-[15.5px] text-[#555963] leading-relaxed">
+                  {lang === 'es' 
+                    ? 'Cristales de alta gama diseñados para responder con nitidez, descanso y comodidad ante las exigencias de tu vida diaria.'
+                    : 'High-end ophthalmic lenses engineered for precision, eye comfort, and seamless adaptation to your daily routine.'}
+                </p>
+              </div>
+
+              {/* 3 Tarjetas Visuales (Fieles al diseño: 2 Vino Tinto y 1 Azul Marino en el centro) */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7">
+                {/* Tarjeta 1: Lentes Progresivas (Vino Tinto Corporativo) */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45 }}
+                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                  className="rounded-3xl p-8 sm:p-9 text-white bg-[rgb(122,24,35)] flex flex-col items-center text-center shadow-lg shadow-[rgb(122,24,35)]/20 relative overflow-hidden group"
+                >
+                  <div className="w-20 h-20 rounded-full border-2 border-white/80 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 bg-white/10 backdrop-blur-xs">
+                    <svg className="w-10 h-10 text-white" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="8" y="8" width="32" height="32" rx="4" opacity="0.2" fill="white" />
+                      <circle cx="17" cy="27" r="6.5" />
+                      <circle cx="31" cy="27" r="6.5" />
+                      <path d="M23.5 27h1" />
+                      <path d="M10.5 25l-2.5-2M37.5 25l2.5-2" />
+                      <line x1="15" y1="16" x2="33" y2="16" />
+                      <line x1="15" y1="20" x2="25" y2="20" />
+                    </svg>
+                  </div>
+                  <h3 className="text-[22px] sm:text-[24px] font-bold tracking-tight text-white mb-3">
+                    {lang === 'es' ? 'Lentes Progresivas' : 'Progressive Lenses'}
+                  </h3>
+                  <p className="text-[14px] sm:text-[14.5px] leading-relaxed text-white/90 font-medium">
+                    {lang === 'es' 
+                      ? 'Gafas personalizadas para visión cómoda en todas las distancias y uso diario.'
+                      : 'Customized lenses for comfortable vision at every distance and daily use.'}
+                  </p>
+                  <div className="mt-6 pt-5 border-t border-white/20 w-full flex justify-center">
+                    <a
+                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                        lang === 'es'
+                          ? '¡Hola Dr. Fabio Mora! Quisiera consultar por lentes progresivos personalizados en Ópticas Popular.'
+                          : 'Hello Dr. Fabio Mora, I would like to inquire about progressive lenses at Opticas Popular.'
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[12.5px] font-bold text-white/95 hover:text-white group/link transition-all active:scale-95 cursor-pointer"
+                    >
+                      <span>{lang === 'es' ? 'Consultar progresivos' : 'Inquire progressives'}</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                    </a>
+                  </div>
+                </motion.div>
+
+                {/* Tarjeta 2: Lentes Transitions (Midnight Navy) */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: 0.1 }}
+                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                  className="rounded-3xl p-8 sm:p-9 text-white bg-[#161B33] flex flex-col items-center text-center shadow-xl shadow-black/15 relative overflow-hidden group border border-white/10"
+                >
+                  <div className="w-20 h-20 rounded-full border-2 border-white/80 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 bg-white/10 backdrop-blur-xs">
+                    <svg className="w-10 h-10 text-white" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="16" cy="24" r="9" />
+                      <circle cx="32" cy="24" r="9" />
+                      <path d="M25 24h-2" />
+                      <path d="M24 15v-5M24 33v5" />
+                      <path d="M7 24H3M45 24h-4" />
+                      <circle cx="16" cy="24" r="4" fill="white" opacity="0.3" />
+                      <circle cx="32" cy="24" r="4" fill="white" opacity="0.8" />
+                    </svg>
+                  </div>
+                  <h3 className="text-[22px] sm:text-[24px] font-bold tracking-tight text-white mb-3">
+                    {lang === 'es' ? 'Lentes Transitions' : 'Transitions Lenses'}
+                  </h3>
+                  <p className="text-[14px] sm:text-[14.5px] leading-relaxed text-white/90 font-medium">
+                    {lang === 'es' 
+                      ? 'Adaptación inteligente a la luz, oscureciéndose afuera y aclarándose adentro.'
+                      : 'Intelligent light adaptation, darkening outdoors and clearing up indoors.'}
+                  </p>
+                  <div className="mt-6 pt-5 border-t border-white/20 w-full flex justify-center">
+                    <a
+                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                        lang === 'es'
+                          ? '¡Hola Dr. Fabio Mora! Deseo información sobre lentes Transitions fotosensibles.'
+                          : 'Hello Dr. Fabio Mora, I would like information about Transitions lenses.'
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[12.5px] font-bold text-white/95 hover:text-white group/link transition-all active:scale-95 cursor-pointer"
+                    >
+                      <span>{lang === 'es' ? 'Consultar Transitions' : 'Inquire Transitions'}</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                    </a>
+                  </div>
+                </motion.div>
+
+                {/* Tarjeta 3: Protección de Luz azul (Vino Tinto Corporativo) */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: 0.2 }}
+                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                  className="rounded-3xl p-8 sm:p-9 text-white bg-[rgb(122,24,35)] flex flex-col items-center text-center shadow-lg shadow-[rgb(122,24,35)]/20 relative overflow-hidden group"
+                >
+                  <div className="w-20 h-20 rounded-full border-2 border-white/80 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 bg-white/10 backdrop-blur-xs">
+                    <svg className="w-10 h-10 text-white" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4 24C4 24 11 12 24 12C37 12 44 24 44 24C44 24 37 36 24 36C11 36 4 24 4 24Z" />
+                      <circle cx="24" cy="24" r="6" />
+                      <line x1="38" y1="10" x2="31" y2="16" />
+                      <line x1="42" y1="18" x2="34" y2="20" />
+                      <line x1="36" y1="4" x2="30" y2="11" />
+                    </svg>
+                  </div>
+                  <h3 className="text-[22px] sm:text-[24px] font-bold tracking-tight text-white mb-3">
+                    {lang === 'es' ? 'Protección de Luz azul' : 'Blue Light Protection'}
+                  </h3>
+                  <p className="text-[14px] sm:text-[14.5px] leading-relaxed text-white/90 font-medium">
+                    {lang === 'es' 
+                      ? 'Protección total contra la luz nociva con transparencia máxima para la luz beneficiosa.'
+                      : 'Complete defense against harmful blue rays with high optical clarity.'}
+                  </p>
+                  <div className="mt-6 pt-5 border-t border-white/20 w-full flex justify-center">
+                    <a
+                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                        lang === 'es'
+                          ? '¡Hola Dr. Fabio Mora! Quisiera asesoría sobre lentes con protección de luz azul.'
+                          : 'Hello Dr. Fabio Mora, I would like advice on blue light protection lenses.'
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[12.5px] font-bold text-white/95 hover:text-white group/link transition-all active:scale-95 cursor-pointer"
+                    >
+                      <span>{lang === 'es' ? 'Consultar filtro azul' : 'Inquire blue filter'}</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                    </a>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Banner Amplio: Lentes de Contacto Perfectos para Vos (Basado en la Imagen 2) */}
+              <motion.div 
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55 }}
+                className="mt-10 md:mt-14 rounded-3xl bg-gradient-to-r from-[rgb(122,24,35)] via-[rgb(138,28,40)] to-[rgb(112,20,30)] text-white overflow-hidden shadow-2xl relative border border-white/15"
+              >
+                <div className="grid lg:grid-cols-12 items-center">
+                  {/* Contenido Editorial Izquierdo */}
+                  <div className="lg:col-span-7 p-7 sm:p-10 md:p-12 z-10 flex flex-col justify-center">
+                    <span className="text-[11px] sm:text-[12px] uppercase tracking-[0.2em] font-extrabold text-white/85 mb-2.5">
+                      {lang === 'es' ? 'EN ÓPTICAS POPULAR · DR. FABIO MORA' : 'AT OPTICAS POPULAR · DR. FABIO MORA'}
+                    </span>
+                    <h3 className="text-[26px] sm:text-[34px] md:text-[38px] font-bold leading-[1.15] tracking-tight text-white mb-3.5 font-serif">
+                      {lang === 'es' ? (
+                        <>Descubrí los <span className="underline decoration-white/40 decoration-wavy underline-offset-4">lentes de contacto</span> perfectos para vos.</>
+                      ) : (
+                        <>Discover the <span className="underline decoration-white/40 decoration-wavy underline-offset-4">contact lenses</span> made for you.</>
+                      )}
+                    </h3>
+                    <p className="text-[14px] sm:text-[16px] text-white/90 leading-relaxed max-w-xl mb-7">
+                      {lang === 'es'
+                        ? 'Lentes de contacto desechables y reusables esféricos, para astigmatismo y multifocal. Adaptación clínica personalizada, segura y cómoda.'
+                        : 'Daily and reusable spherical, toric for astigmatism, and multifocal contact lenses. Professional, comfortable, and hygienic fitting.'}
+                    </p>
+
+                    <div>
+                      <a
+                        href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                          lang === 'es'
+                            ? '¡Hola Dr. Fabio Mora! Deseo consultar por lentes de contacto y programar mi examen.'
+                            : 'Hello Dr. Fabio Mora, I would like to inquire about contact lenses and book my exam.'
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl bg-[#161B33] hover:bg-[#1E2540] text-white text-[14px] font-bold shadow-xl shadow-black/30 transition-all duration-200 active:scale-95 cursor-pointer group"
+                      >
+                        <Contact className="w-4 h-4 text-rose-300" />
+                        <span>{lang === 'es' ? '¡Programá tu examen hoy!' : 'Book your exam today!'}</span>
+                        <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Imagen Real de Referencia en el Lado Derecho */}
+                  <div className="lg:col-span-5 relative h-full min-h-[260px] sm:min-h-[320px] lg:min-h-[380px] overflow-hidden flex items-end justify-center lg:justify-end">
+                    <img
+                      src="/images/lentes-contacto-banner.png"
+                      alt="Lentes de contacto en Ópticas Popular Dr. Fabio Mora"
+                      className="w-full h-full object-cover object-right-bottom scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[rgb(122,24,35)]/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[rgb(122,24,35)] lg:via-transparent lg:to-transparent" />
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </section>
 
@@ -1873,7 +2119,19 @@ export default function App() {
                   </h2>
                 </div>
 
-                <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start md:self-center btn-shimmer">{lang === 'es' ? 'Agendar valoración' : 'Book appointment'}</a>
+                <a 
+                  href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                    lang === 'es'
+                      ? '¡Hola Dr. Fabio Mora! Vi las instalaciones de la clínica y deseo agendar una valoración en Plaza Higuerones.'
+                      : 'Hello Dr. Fabio Mora, I saw your clinic facilities and would like to book an appointment at Plaza Higuerones.'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold whitespace-nowrap shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer shrink-0 self-start md:self-center btn-shimmer"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>{lang === 'es' ? 'Agendar valoración' : 'Book appointment'}</span>
+                </a>
               </div>
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-[1.08fr_0.92fr] gap-3">
@@ -2008,7 +2266,19 @@ export default function App() {
                   >
                     <span>{lang === 'es' ? 'Calificar experiencia' : 'Rate experience'}</span>
                   </a>
-                  <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 btn-shimmer">Agendar valoración</a>
+                  <a 
+                    href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                      lang === 'es'
+                        ? '¡Hola Dr. Fabio Mora! Leí las opiniones de sus pacientes y me gustaría agendar una valoración con usted.'
+                        : 'Hello Dr. Fabio Mora, I read the patient testimonials and would like to schedule an eye evaluation.'
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold whitespace-nowrap shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>{lang === 'es' ? 'Agendar valoración' : 'Book appointment'}</span>
+                  </a>
                 </div>
               </div>
 
@@ -2206,41 +2476,98 @@ export default function App() {
 
                 <div className="flex-1 px-5 md:px-10 py-10 md:py-12 flex flex-col justify-center text-center md:text-left">
                   <div className="flex justify-center md:justify-start">
-                    <span className="inline-flex items-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[#7C808B] shadow-sm">
-                      Confianza profesional
+                    <span className="inline-flex items-center h-7 px-3.5 rounded-full bg-white text-[11px] sm:text-[12px] uppercase tracking-wider font-bold text-[rgb(122,24,35)] shadow-sm border border-[rgb(122,24,35)]/15">
+                      {lang === 'es' ? 'Optometrista Clínico · Patología Ocular' : 'Clinical Optometrist · Ocular Pathology'}
                     </span>
                   </div>
 
-                  <h2 className="mt-6 md:mt-4 text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] leading-[1.1] tracking-tight font-bold text-[#15171C]">
+                  <h2 className="mt-4 text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-[1.1] tracking-tight font-bold text-[#15171C]">
                     Dr. Fabio Mora Medina
                   </h2>
 
-                  <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3 gap-3 max-w-[760px] md:mx-0">
+                  <p className="mt-2 text-[13px] sm:text-[14px] font-semibold text-[rgb(122,24,35)]">
+                    {lang === 'es' 
+                      ? 'Licenciado en Optometría con Honores (U. Latina) · Máster en Atención Optométrica en Patología Ocular (Universitat de València, España)'
+                      : 'B.S. in Optometry with Honors (U. Latina) · M.S. in Ocular Pathology Optometric Care (Universitat de València, Spain)'}
+                  </p>
+
+                  {/* Cita Destacada de Confianza y Comunidad */}
+                  <div className="mt-5 p-4 sm:p-5 rounded-2xl bg-white border-l-4 border-[rgb(122,24,35)] shadow-xs">
+                    <p className="text-[13px] sm:text-[14px] italic text-[#474B54] leading-relaxed">
+                      {lang === 'es' 
+                        ? '«En la Óptica celebramos 11 años de dedicación al cuidado visual de las familias, construyendo un sólido vínculo de confianza a lo largo del tiempo. Cada paciente que recibimos es una historia de confianza por la atención que le brindamos. A lo largo de los años, nos hemos convertido en parte de la comunidad.»'
+                        : '"At our clinic, we celebrate 11 years of dedicated eye care for local families, building enduring trust over time. Every patient we welcome is a story of trust earned through attentive care. Over the years, we have become an integral part of this community."'}
+                    </p>
+                  </div>
+
+                  {/* Grid de 6 Hitos y Credenciales de Alto Impacto */}
+                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                     {[
-                      { title: 'Formación', desc: 'Licenciado en Optometría y Máster en Atención Optométrica en Patología Ocular.' },
-                      { title: 'Experiencia', desc: <>Más de <span className="text-[rgb(122,24,35)] font-bold"><AnimatedNumber value={18} /></span> años dedicados al cuidado visual de familias y experiencia clínica comprobada.</> },
-                      { title: 'Respaldo', desc: 'Miembro de Canadian Vision Care y trayectoria académica y humanitaria internacional.' },
+                      { 
+                        title: lang === 'es' ? 'Graduado con Honores' : 'Graduated with Honors', 
+                        desc: lang === 'es' ? 'Licenciado en Optometría por la Universidad Latina de Costa Rica con máxima distinción académica.' : 'B.S. in Optometry with top academic honors from Universidad Latina.' 
+                      },
+                      { 
+                        title: lang === 'es' ? 'Máster en Patología Ocular' : 'Master in Ocular Pathology', 
+                        desc: lang === 'es' ? 'Universitat de València (España), con alta especialización en el manejo clínico de patologías oculares.' : 'Universitat de València (Spain), specialized in clinical ocular pathology.' 
+                      },
+                      { 
+                        title: lang === 'es' ? '+5 Años Clínica Oftalmológica' : '+5 Yrs Ophthalmology Clinic', 
+                        desc: lang === 'es' ? 'Experiencia con la Dra. Olga Montoya, ampliando criterios médicos y quirúrgicos oftalmológicos.' : 'Clinical experience with Dr. Olga Montoya, expanding ophthalmic medical scope.' 
+                      },
+                      { 
+                        title: lang === 'es' ? 'Docencia Universitaria' : 'University Teaching', 
+                        desc: lang === 'es' ? 'Ha ejercido como profesor universitario, formando con ética y rigor a nuevas generaciones.' : 'Former university professor, training future generations of optometrists.' 
+                      },
+                      { 
+                        title: lang === 'es' ? 'Canadian Vision Care' : 'Canadian Vision Care', 
+                        desc: lang === 'es' ? 'Misiones humanitarias sin fines de lucro donando servicios de salud visual en Guatemala y Jamaica.' : 'Non-profit humanitarian eye care missions in Guatemala and Jamaica.' 
+                      },
+                      { 
+                        title: lang === 'es' ? '11 Años con la Comunidad' : '11 Years in Community', 
+                        desc: lang === 'es' ? 'Dedicación continua a las familias en Plaza Higuerones, cuidando la visión de varias generaciones.' : 'Dedicated visual care for families in Plaza Higuerones across generations.' 
+                      },
                     ].map((item, i) => (
                       <motion.article 
                         key={i} 
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: i * 0.1 + 0.3 }}
+                        transition={{ duration: 0.4, delay: i * 0.05 }}
                         viewport={{ once: true }}
                         whileHover={{ y: -3, transition: { duration: 0.2 } }}
-                        className="bg-white rounded-[12px] px-4 py-5 text-left pro-card shadow-sm border border-gray-100 transition-all hover:shadow-md"
+                        className="bg-white rounded-xl p-3.5 text-left pro-card shadow-2xs border border-gray-100 hover:border-[rgb(122,24,35)]/20 transition-all hover:shadow-sm"
                       >
-                        <h3 className="text-[15px] sm:text-[16px] font-bold text-[#15171C]">{item.title}</h3>
-                        <p className="mt-2 text-[13px] sm:text-[13.5px] leading-[1.55] text-[#555963]">
+                        <h4 className="text-[14px] font-bold text-[#15171C]">{item.title}</h4>
+                        <p className="mt-1 text-[12px] sm:text-[12.5px] leading-[1.5] text-[#555963]">
                           {item.desc}
                         </p>
                       </motion.article>
                     ))}
                   </div>
 
-                  <div className="mt-8 flex justify-center md:justify-start">
-                    <a href="https://wa.me/50672760215" className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold cta-primary btn-shimmer shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0">
-                      Agendá tu examen hoy
+                  {/* Botones de Acción */}
+                  <div className="mt-7 flex flex-wrap items-center justify-center md:justify-start gap-3">
+                    <a 
+                      href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                        lang === 'es' 
+                          ? '¡Hola Dr. Fabio Mora! Le escribo desde su página web para coordinar una consulta con usted en Plaza Higuerones.' 
+                          : 'Hello Dr. Fabio Mora, I am writing to schedule an appointment with you at Plaza Higuerones.'
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13.5px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer btn-shimmer"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      <span>{lang === 'es' ? 'Agendá cita con el Dr. Mora' : 'Book with Dr. Mora'}</span>
+                    </a>
+
+                    <a 
+                      href="tel:+50672760215"
+                      className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white hover:bg-gray-50 border border-gray-200 text-[#15171C] text-[13.5px] sm:text-[14px] font-bold shadow-2xs hover:shadow-xs transition-all duration-200 active:scale-95 cursor-pointer"
+                      title={lang === 'es' ? 'Llamar: 2515-0002 / 7276-0215' : 'Call: 2515-0002 / 7276-0215'}
+                    >
+                      <Phone className="w-4 h-4 text-[rgb(122,24,35)]" />
+                      <span>{lang === 'es' ? 'Llamar: 2515-0002' : 'Call: 2515-0002'}</span>
                     </a>
                   </div>
                 </div>
@@ -2267,10 +2594,17 @@ export default function App() {
                 </p>
               </div>
               <a 
-                href="https://wa.me/50672760215" 
-                className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13px] sm:text-[14px] font-semibold whitespace-nowrap shadow-sm hover:shadow-md transition-all active:scale-95 shrink-0 self-start lg:self-center"
+                href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                  lang === 'es'
+                    ? '¡Hola Dr. Fabio Mora! Deseo coordinar una consulta de valoración visual en Ópticas Popular.'
+                    : 'Hello Dr. Fabio Mora, I would like to arrange an eye examination at Opticas Popular.'
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[13px] sm:text-[14px] font-bold whitespace-nowrap shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer shrink-0 self-start lg:self-center btn-shimmer"
               >
-                Agendá por WhatsApp
+                <MessageCircle className="w-4 h-4" />
+                <span>{lang === 'es' ? 'Agendá por WhatsApp' : 'Book via WhatsApp'}</span>
               </a>
             </motion.div>
             </div>
@@ -2547,10 +2881,14 @@ export default function App() {
               </a>
 
               <a
-                href="https://wa.me/50672760215"
+                href={`https://wa.me/50672760215?text=${encodeURIComponent(
+                  lang === 'es'
+                    ? '¡Hola Dr. Fabio Mora! Deseo agendar una cita en Ópticas Popular Plaza Higuerones.'
+                    : 'Hello Dr. Fabio Mora, I would like to book an appointment at Opticas Popular Plaza Higuerones.'
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="col-span-5 inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[12px] font-bold active:scale-95 transition-all shadow-md btn-shimmer"
+                className="col-span-5 inline-flex items-center justify-center gap-1.5 h-12 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,30,42)] text-white text-[12px] font-bold active:scale-95 transition-all duration-200 shadow-md btn-shimmer cursor-pointer"
                 aria-label="Agendar cita por WhatsApp"
               >
                 <MessageCircle className="w-4 h-4 shrink-0" />

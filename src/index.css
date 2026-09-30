@@ -22,10 +22,13 @@
     @apply transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[rgb(122,24,35)]/8 hover:border-[rgb(122,24,35)]/25;
   }
   .cta-primary {
-    @apply relative overflow-hidden transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[rgb(122,24,35)]/25 active:translate-y-0 active:scale-[0.98];
+    @apply relative overflow-hidden transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[rgb(122,24,35)]/25 active:translate-y-0 active:scale-95 cursor-pointer;
   }
   .cta-secondary {
-    @apply transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-gray-50/90 hover:border-gray-300 hover:shadow-sm active:translate-y-0 active:scale-[0.98];
+    @apply transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-gray-50/90 hover:border-gray-300 hover:shadow-sm active:translate-y-0 active:scale-95 cursor-pointer;
+  }
+  .btn-navy {
+    @apply inline-flex items-center justify-center font-bold bg-[#161B33] hover:bg-[#1E2540] text-white shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer;
   }
 
   /* Shimmer luxury effect on primary CTAs */
