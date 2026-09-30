@@ -317,7 +317,7 @@ Me gustaría que me asesoren o coordinar una cita de valoración en consultorio 
                   </div>
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>11 años de trayectoria en Plaza Higuerones, Desamparados</span>
+                    <span>18 años de trayectoria en Plaza Higuerones, Desamparados</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-sky-400 shrink-0" />

@@ -2096,7 +2096,7 @@ export default function App() {
                           Dr. Fabio Mora Medina
                         </p>
                         <p className="text-[10px] text-gray-500">
-                          {lang === 'es' ? 'Plaza Higuerones · 11 años de trayectoria' : 'Plaza Higuerones · 11 years of trust'}
+                          {lang === 'es' ? 'Plaza Higuerones · 18 años de trayectoria' : 'Plaza Higuerones · 18 years of trust'}
                         </p>
                       </div>
                       <span className="text-[9.5px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[rgb(122,24,35)] text-white shadow-2xs">
@@ -3389,8 +3389,8 @@ export default function App() {
                   {/* Resumen Conciso y Cálido */}
                   <p className="mt-3.5 text-[14px] sm:text-[15px] text-[#474B54] leading-relaxed max-w-2xl">
                     {lang === 'es' 
-                      ? 'Más de 11 años dedicados al cuidado visual de las familias en Desamparados, combinando rigor clínico, tecnología avanzada y un trato cercano.'
-                      : 'Over 11 years dedicated to family eye care in Desamparados, blending clinical precision, modern technology, and personal attention.'}
+                      ? 'Más de 18 años dedicados al cuidado visual de las familias en Desamparados, combinando rigor clínico, tecnología avanzada y un trato cercano.'
+                      : 'Over 18 years dedicated to family eye care in Desamparados, blending clinical precision, modern technology, and personal attention.'}
                   </p>
 
                   {/* 4 Credenciales Clave Sintetizadas */}
