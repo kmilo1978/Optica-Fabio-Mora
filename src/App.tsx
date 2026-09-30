@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   motion, 
   AnimatePresence, 
@@ -15,6 +15,7 @@ import {
   Menu, 
   X, 
   Eye, 
+  User, 
   Clock, 
   Users, 
   CheckCircle2, 
@@ -1562,6 +1563,9 @@ export default function App() {
   const [showDiagnosticModal, setShowDiagnosticModal] = useState(false);
   const [diagnosticStep, setDiagnosticStep] = useState<'question' | 'scanning' | 'result'>('question');
   const [selectedSymptom, setSelectedSymptom] = useState<string | null>(null);
+  const [diagnosticName, setDiagnosticName] = useState('');
+  const [diagnosticPhone, setDiagnosticPhone] = useState('');
+  const [diagnosticSent, setDiagnosticSent] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -1585,6 +1589,53 @@ export default function App() {
   const handleResetDiagnostic = () => {
     setDiagnosticStep('question');
     setSelectedSymptom(null);
+    setDiagnosticName('');
+    setDiagnosticPhone('');
+    setDiagnosticSent(false);
+  };
+
+  const handleDiagnosticSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!diagnosticName.trim() || !diagnosticPhone.trim()) return;
+
+    const symptomLabels: Record<string, { es: string; en: string }> = {
+      borroso: {
+        es: 'Visión borrosa o dificultad para enfocar',
+        en: 'Blurry vision or difficulty focusing'
+      },
+      pantallas: {
+        es: 'Fatiga o pesadez por pantallas',
+        en: 'Screen fatigue or eye strain'
+      },
+      lentes: {
+        es: 'Lentes con más de 1 año o desactualizados',
+        en: 'Glasses over 1 year old or outdated prescription'
+      },
+      preventivo: {
+        es: 'Chequeo preventivo anual de salud visual',
+        en: 'Annual preventive eye exam'
+      }
+    };
+
+    const symptomObj = selectedSymptom ? symptomLabels[selectedSymptom] : null;
+    const symptomText = symptomObj 
+      ? (lang === 'es' ? symptomObj.es : symptomObj.en) 
+      : (lang === 'es' ? 'Valoración general' : 'General assessment');
+
+    const message = lang === 'es'
+      ? `¡Hola Dr. Fabio Mora! Realicé el test rápido de confort visual en su página web:\n\n` +
+        `• Nombre: ${diagnosticName.trim()}\n` +
+        `• WhatsApp / Teléfono: ${diagnosticPhone.trim()}\n` +
+        `• Molestia evaluada: ${symptomText}\n\n` +
+        `Deseo recibir su orientación profesional y coordinar una cita en Ópticas Popular (Plaza Higuerones).`
+      : `Hello Dr. Fabio Mora, I completed the visual comfort screening on your website:\n\n` +
+        `• Name: ${diagnosticName.trim()}\n` +
+        `• WhatsApp / Phone: ${diagnosticPhone.trim()}\n` +
+        `• Evaluated vision issue: ${symptomText}\n\n` +
+        `I would like to receive your professional advice and book an appointment at Opticas Popular (Plaza Higuerones).`;
+
+    window.open(`https://wa.me/50625150002?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    setDiagnosticSent(true);
   };
 
   const [currentView, setCurrentView] = useState<'home' | 'calificar' | 'consulta' | 'test-visual' | 'contacto' | 'tecnologia-cristales' | 'testimonios-page'>('home');
@@ -4070,34 +4121,80 @@ export default function App() {
                         </div>
                       </div>
 
-                      <a
-                        href={`https://wa.me/50625150002?text=${encodeURIComponent(
-                          `Hola Dr. Fabio Mora, realicé el test de confort visual en su web (${
-                            selectedSymptom === 'borroso' ? 'dificultad para enfocar' :
-                            selectedSymptom === 'pantallas' ? 'fatiga por pantallas' :
-                            selectedSymptom === 'lentes' ? 'lentes desactualizados' : 'chequeo preventivo anual'
-                          }) y me gustaría agendar mi examen visual.`
-                        )}`}
-                        className="w-full inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 btn-shimmer"
-                      >
-                        <MessageCircle className="w-4 h-4 text-white !text-white" />
-                        <span className="text-white !text-white">Agendar examen con el Dr. Fabio Mora</span>
-                      </a>
+                      {/* Formulario de contacto: Nombre y WhatsApp */}
+                      <form onSubmit={handleDiagnosticSubmit} className="space-y-3 pt-1">
+                        <div>
+                          <label className="block text-[11px] font-bold text-gray-700 uppercase tracking-wider mb-1">
+                            {lang === 'es' ? 'Tu Nombre Completo *' : 'Your Full Name *'}
+                          </label>
+                          <div className="relative">
+                            <User className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                            <input
+                              type="text"
+                              required
+                              value={diagnosticName}
+                              onChange={(e) => setDiagnosticName(e.target.value)}
+                              placeholder={lang === 'es' ? 'Ej: Laura Castro' : 'e.g. Laura Castro'}
+                              className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-[rgb(122,24,35)] focus:ring-2 focus:ring-[rgb(122,24,35)]/15 text-[13.5px] text-[#15171C] outline-hidden transition-all bg-white"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-[11px] font-bold text-gray-700 uppercase tracking-wider mb-1">
+                            {lang === 'es' ? 'Tu Número de WhatsApp *' : 'Your WhatsApp Number *'}
+                          </label>
+                          <div className="relative">
+                            <Phone className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                            <input
+                              type="tel"
+                              required
+                              value={diagnosticPhone}
+                              onChange={(e) => setDiagnosticPhone(e.target.value)}
+                              placeholder={lang === 'es' ? 'Ej: 8888-8888 o +506...' : 'e.g. +506 8888-8888'}
+                              className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-[rgb(122,24,35)] focus:ring-2 focus:ring-[rgb(122,24,35)]/15 text-[13.5px] text-[#15171C] outline-hidden transition-all bg-white"
+                            />
+                          </div>
+                        </div>
+
+                        <button
+                          type="submit"
+                          className="w-full inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-[rgb(122,24,35)] hover:bg-[rgb(142,28,41)] text-white text-[13.5px] sm:text-[14px] font-bold shadow-md hover:shadow-lg transition-all active:scale-95 btn-shimmer cursor-pointer mt-1"
+                        >
+                          <MessageCircle className="w-4 h-4 text-white !text-white" />
+                          <span className="text-white !text-white">
+                            {lang === 'es' ? 'Recibir resultado y agendar por WhatsApp' : 'Get result & book via WhatsApp'}
+                          </span>
+                        </button>
+                      </form>
+
+                      {diagnosticSent && (
+                        <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-[12px] flex items-center gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                          <span>
+                            {lang === 'es'
+                              ? '¡Listo! Se abrió WhatsApp para enviar tu consulta y agendar directamente con el Dr. Fabio Mora.'
+                              : 'Done! WhatsApp opened to send your inquiry directly to Dr. Fabio Mora.'}
+                          </span>
+                        </div>
+                      )}
 
                       <div className="flex items-center justify-between pt-1">
                         <button
+                          type="button"
                           onClick={handleResetDiagnostic}
                           className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-gray-500 hover:text-[rgb(122,24,35)] transition-colors cursor-pointer"
                         >
                           <RotateCcw className="w-3.5 h-3.5" />
-                          <span>Repetir test</span>
+                          <span>{lang === 'es' ? 'Repetir test' : 'Restart test'}</span>
                         </button>
 
                         <button
+                          type="button"
                           onClick={handleCloseDiagnostic}
                           className="text-[12px] text-gray-400 hover:text-gray-700 underline cursor-pointer"
                         >
-                          Continuar navegando
+                          {lang === 'es' ? 'Continuar navegando' : 'Continue browsing'}
                         </button>
                       </div>
                     </motion.div>
