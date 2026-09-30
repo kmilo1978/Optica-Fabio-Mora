@@ -3386,57 +3386,53 @@ export default function App() {
                       : 'B.S. in Optometry with Honors (U. Latina) · M.S. in Ocular Pathology Optometric Care (Universitat de València, Spain)'}
                   </p>
 
-                  {/* Cita Destacada de Confianza y Comunidad */}
-                  <div className="mt-5 p-4 sm:p-5 rounded-2xl bg-white border-l-4 border-[rgb(122,24,35)] shadow-xs">
-                    <p className="text-[13px] sm:text-[14px] italic text-[#474B54] leading-relaxed">
-                      {lang === 'es' 
-                        ? '«En la Óptica celebramos 11 años de dedicación al cuidado visual de las familias, construyendo un sólido vínculo de confianza a lo largo del tiempo. Cada paciente que recibimos es una historia de confianza por la atención que le brindamos. A lo largo de los años, nos hemos convertido en parte de la comunidad.»'
-                        : '"At our clinic, we celebrate 11 years of dedicated eye care for local families, building enduring trust over time. Every patient we welcome is a story of trust earned through attentive care. Over the years, we have become an integral part of this community."'}
-                    </p>
-                  </div>
+                  {/* Resumen Conciso y Cálido */}
+                  <p className="mt-3.5 text-[14px] sm:text-[15px] text-[#474B54] leading-relaxed max-w-2xl">
+                    {lang === 'es' 
+                      ? 'Más de 11 años dedicados al cuidado visual de las familias en Desamparados, combinando rigor clínico, tecnología avanzada y un trato cercano.'
+                      : 'Over 11 years dedicated to family eye care in Desamparados, blending clinical precision, modern technology, and personal attention.'}
+                  </p>
 
-                  {/* Grid de 6 Hitos y Credenciales de Alto Impacto */}
-                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {/* 4 Credenciales Clave Sintetizadas */}
+                  <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {[
                       { 
+                        icon: Award,
                         title: lang === 'es' ? 'Graduado con Honores' : 'Graduated with Honors', 
-                        desc: lang === 'es' ? 'Licenciado en Optometría por la Universidad Latina de Costa Rica con máxima distinción académica.' : 'B.S. in Optometry with top academic honors from Universidad Latina.' 
+                        desc: lang === 'es' ? 'Universidad Latina de Costa Rica' : 'Universidad Latina de Costa Rica' 
                       },
                       { 
+                        icon: ShieldCheck,
                         title: lang === 'es' ? 'Máster en Patología Ocular' : 'Master in Ocular Pathology', 
-                        desc: lang === 'es' ? 'Universitat de València (España), con alta especialización en el manejo clínico de patologías oculares.' : 'Universitat de València (Spain), specialized in clinical ocular pathology.' 
+                        desc: lang === 'es' ? 'Universitat de València (España)' : 'Universitat de València (Spain)' 
                       },
                       { 
-                        title: lang === 'es' ? '+5 Años Clínica Oftalmológica' : '+5 Yrs Ophthalmology Clinic', 
-                        desc: lang === 'es' ? 'Experiencia con la Dra. Olga Montoya, ampliando criterios médicos y quirúrgicos oftalmológicos.' : 'Clinical experience with Dr. Olga Montoya, expanding ophthalmic medical scope.' 
+                        icon: Stethoscope,
+                        title: lang === 'es' ? '+5 Años en Oftalmología' : '+5 Yrs Ophthalmology Scope', 
+                        desc: lang === 'es' ? 'Criterio médico-quirúrgico avanzado' : 'Advanced surgical-medical criteria' 
                       },
                       { 
-                        title: lang === 'es' ? 'Docencia Universitaria' : 'University Teaching', 
-                        desc: lang === 'es' ? 'Ha ejercido como profesor universitario, formando con ética y rigor a nuevas generaciones.' : 'Former university professor, training future generations of optometrists.' 
-                      },
-                      { 
+                        icon: HeartHandshake,
                         title: lang === 'es' ? 'Canadian Vision Care' : 'Canadian Vision Care', 
-                        desc: lang === 'es' ? 'Misiones humanitarias sin fines de lucro donando servicios de salud visual en Guatemala y Jamaica.' : 'Non-profit humanitarian eye care missions in Guatemala and Jamaica.' 
-                      },
-                      { 
-                        title: lang === 'es' ? '11 Años con la Comunidad' : '11 Years in Community', 
-                        desc: lang === 'es' ? 'Dedicación continua a las familias en Plaza Higuerones, cuidando la visión de varias generaciones.' : 'Dedicated visual care for families in Plaza Higuerones across generations.' 
+                        desc: lang === 'es' ? 'Misiones humanitarias de salud visual' : 'Humanitarian eye health missions' 
                       },
                     ].map((item, i) => (
-                      <motion.article 
+                      <motion.div 
                         key={i} 
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: i * 0.05 }}
+                        transition={{ duration: 0.3, delay: i * 0.05 }}
                         viewport={{ once: true }}
-                        whileHover={{ y: -3, transition: { duration: 0.2 } }}
-                        className="bg-white rounded-xl p-3.5 text-left pro-card shadow-2xs border border-gray-100 hover:border-[rgb(122,24,35)]/20 transition-all hover:shadow-sm"
+                        className="bg-white rounded-xl p-3 flex items-center gap-3 shadow-2xs border border-gray-100 hover:border-[rgb(122,24,35)]/20 transition-all hover:shadow-xs"
                       >
-                        <h4 className="text-[14px] font-bold text-[#15171C]">{item.title}</h4>
-                        <p className="mt-1 text-[12px] sm:text-[12.5px] leading-[1.5] text-[#555963]">
-                          {item.desc}
-                        </p>
-                      </motion.article>
+                        <div className="w-8 h-8 rounded-lg bg-[rgb(122,24,35)]/10 text-[rgb(122,24,35)] flex items-center justify-center shrink-0">
+                          <item.icon className="w-4 h-4" />
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className="text-[13px] font-bold text-[#15171C] leading-snug">{item.title}</h4>
+                          <p className="text-[11px] text-[#6B7280] truncate">{item.desc}</p>
+                        </div>
+                      </motion.div>
                     ))}
                   </div>
 
